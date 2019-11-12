@@ -1,0 +1,270 @@
+package com.nfdw.section.controller;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletResponse;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.nfdw.base.controller.BaseController;
+import com.nfdw.common.ResultCodes;
+import com.nfdw.entity.PageData;
+import com.nfdw.pojo.EchartsBasicBean;
+import com.nfdw.pojo.EchartsMapBean;
+import com.nfdw.service.ScreenHomeService;
+import com.nfdw.util.JsonUtil;
+import com.nfdw.util.StringUtils;
+
+import lombok.extern.slf4j.Slf4j;
+
+/**
+ * 首页管理
+ */
+//@Api(value="user")
+@Slf4j
+@Controller
+@RequestMapping(value = "/home")
+public class HomeController extends BaseController {
+
+	private static final Logger log = LoggerFactory.getLogger(HomeController.class);
+    //private static final Logger
+	@Resource
+	private ScreenHomeService screenHomeService;
+	
+	@RequestMapping(value = "showHomeModel")
+    public String showHome(Model model) {
+        return "/home/newHomeShow";
+    }
+    //总卡数
+	@RequestMapping(value = "/getCountCard")
+	public void getCountCard(HttpServletResponse response) throws Exception{
+		PageData pd = this.getPageData();
+		PageData countCard=screenHomeService.getCountCard(pd);
+	    writeJson(response, countCard);
+	}
+
+	/**
+     * 获取设备告警数量（严重）
+     * @param department
+     * @param role
+     * @return
+     */
+    @PostMapping(value = "getWarningDatas")
+    @ResponseBody
+    public JsonUtil getWarningDatas() {
+    	
+    	PageData pd=this.getPageData();
+    	
+        JsonUtil jsonUtil = new JsonUtil();
+        jsonUtil.setFlag(false);
+        
+        try {
+        	PageData warningDatasPd = screenHomeService.getWarningDatas(pd);
+            
+            jsonUtil.setFlag(true);
+            jsonUtil.setMsg("获取设备告警数量（严重）成功！");
+            jsonUtil.setData(warningDatasPd);
+        } catch (Exception e) {
+            log.error("获取设备告警数量（严重）失败！", e);
+        }
+        
+        return jsonUtil;
+    }
+    
+    /**
+     * 获取设备告警数量（一般）
+     * @param department
+     * @param role
+     * @return
+     */
+    @PostMapping(value = "getGeneralWarningDatas")
+    @ResponseBody
+    public JsonUtil getGeneralWarningDatas() {
+    	
+    	PageData pd=this.getPageData();
+    	
+        JsonUtil jsonUtil = new JsonUtil();
+        jsonUtil.setFlag(false);
+        
+        try {
+        	PageData warningDatasPd = screenHomeService.getGeneralWarningDatas(pd);
+            
+            jsonUtil.setFlag(true);
+            jsonUtil.setMsg("获取设备告警数量（一般）成功！");
+            jsonUtil.setData(warningDatasPd);
+        } catch (Exception e) {
+            log.error("获取设备告警数量（一般）失败！", e);
+        }
+        
+        return jsonUtil;
+    }
+    
+    /**
+     * 获取设备正常（非告警）数量
+     * @param department
+     * @param role
+     * @return
+     */
+    @PostMapping(value = "getTermianlUnWarningDatas")
+    @ResponseBody
+    public JsonUtil getTermianlUnWarningDatas() {
+    	
+    	PageData pd=this.getPageData();
+    	
+        JsonUtil jsonUtil = new JsonUtil();
+        jsonUtil.setFlag(false);
+        
+        try {
+        	PageData warningDatasPd = screenHomeService.getTermianlUnWarningDatas(pd);
+            
+            jsonUtil.setFlag(true);
+            jsonUtil.setMsg("获取设备正常（非告警）数量成功！");
+            jsonUtil.setData(warningDatasPd);
+        } catch (Exception e) {
+            log.error("获取设备正常（非告警）数量失败！", e);
+        }
+        
+        return jsonUtil;
+    }
+    
+    /**
+     * 获取设备不在线数量
+     * @param department
+     * @param role
+     * @return
+     */
+    @PostMapping(value = "getTermianlOutLineDatas")
+    @ResponseBody
+    public JsonUtil getTermianlOutLineDatas() {
+    	
+    	PageData pd=this.getPageData();
+    	
+        JsonUtil jsonUtil = new JsonUtil();
+        jsonUtil.setFlag(false);
+        
+        try {
+        	PageData warningDatasPd = screenHomeService.getTermianlOutLineDatas(pd);
+            
+            jsonUtil.setFlag(true);
+            jsonUtil.setMsg("获取设备不在线数量成功！");
+            jsonUtil.setData(warningDatasPd);
+        } catch (Exception e) {
+            log.error("获取设备不在线数量失败！", e);
+        }
+        
+        return jsonUtil;
+    }
+
+	@ResponseBody
+	@RequestMapping(value = "/getEquipmentBusinesstypeCount")
+	public PageData getEquipmentBusinesstypeCount(){
+		PageData pd=screenHomeService.selectEquipmentBusinesstypeCount();
+		return pd;
+	}
+
+	/**
+	 * 各区域设备在线率（实时）
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/getOnlineRateOfRegion", method=RequestMethod.POST)
+	public void getOnlineRateOfRegion(HttpServletResponse response) {
+		
+		EchartsMapBean echartsMapBean = null;
+		try {
+			PageData requestPd = this.getPageData();
+			echartsMapBean = screenHomeService.getOnlineRateOfRegion(requestPd);
+			
+			if (null != echartsMapBean) {
+				writeJson(response, echartsMapBean, ResultCodes.successCode, "获取各厂家告警数量（实时）成功！");
+			} else {
+				writeJson(response, echartsMapBean, ResultCodes.exceptionResult, "获取各厂家告警数量（实时）为空！");
+			}
+		} catch (Exception e) {
+			log.error("获取各厂家告警数量（实时）失败！", e);
+
+			writeJson(response, echartsMapBean, ResultCodes.exceptionResult, "服务异常，请稍后再试！");
+		}
+		
+	}
+	/**
+	 * 区域设备or 卡数 or 告警数
+	 */
+	@RequestMapping(value = "/getMapInfoNum")
+	public void getMapInfoNum(HttpServletResponse response) throws Exception{
+		PageData pd = this.getPageData();
+		PageData countCard=screenHomeService.getMapInfoNum(pd);
+	    writeJson(response, countCard);
+	}
+	/**
+	 * 根据设备厂家统计告警数
+	 */
+	@RequestMapping(value = "/getFactoryCode", method=RequestMethod.POST)
+	public void getFactoryCode(HttpServletResponse response) throws Exception{
+		PageData pd = this.getPageData();
+		EchartsBasicBean countCard = null;
+		try {
+			PageData requestPd = this.getPageData();
+			countCard=screenHomeService.getFactoryCode(pd);
+			
+			if (null != countCard) {
+				writeJson(response, countCard, ResultCodes.successCode, "获取各厂家设备不在线台数（实时）成功！");
+			} else {
+				writeJson(response, countCard, ResultCodes.exceptionResult, "获取各厂家设备不在线台数（实时）为空！");
+			}
+		} catch (Exception e) {
+			log.error("获取各厂家设备不在线台数（实时）失败！", e);
+
+			writeJson(response, countCard, ResultCodes.exceptionResult, "服务异常，请稍后再试！");
+		}
+	}
+	// 卡流量按运营商统计
+	@RequestMapping(value = "/findCardFlowData", method=RequestMethod.POST)
+	private void findCardFlowData3(HttpServletResponse response)
+			throws Exception {
+		PageData pd = this.getPageData();
+		List<PageData> flowDate = screenHomeService.findCardFlowData(pd);
+		Map<String, Long> scopeMap = new HashMap<String, Long>();
+		scopeMap.put("maxValue", 0l);
+
+		for (int i = 0; i < flowDate.size(); i++) {
+			Long maxValue = scopeMap.get("maxValue");
+
+			PageData pds = flowDate.get(i);
+			String dayflow= pds.get("dayflow")+"";
+			dayflow=(String) ("null".equals(dayflow)?"0":dayflow);
+			pds.put("date", pds.get("day"));
+			Double used_flow = (double) Math.round(Double.valueOf(dayflow) / 1024 / 1024 * 100) / 100;
+			pds.put("used_flow", used_flow);
+
+			if (maxValue < used_flow) {
+				scopeMap.put(
+						"maxValue",
+						(Long.valueOf(dayflow) / 1024 / 1024 / 10) * 10 + 100);
+			}
+		}
+
+		JSONObject jb = new JSONObject();
+		jb.put("data", flowDate);
+		jb.put("maxValue", scopeMap.get("maxValue"));
+		jb.put("minValue", 0);
+
+		String jsonString = jb.toJSONString();
+
+		writePlainText(response, jsonString);
+	}
+}

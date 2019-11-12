@@ -1,0 +1,15 @@
+package com.nfdw.mapper;
+
+import com.nfdw.entity.PageData;
+import com.sun.tools.javac.comp.Check;
+
+import java.util.List;
+import java.util.Map;
+
+public interface CheckMapper {
+
+	public List<Check> selectCheck(Check check);
+	public boolean addCheck(Check check);
+	public List<PageData> getCheckView(PageData pd);
+	public List<Map<String, Object>> exportCheckList(PageData pd) throws Exception;
+}

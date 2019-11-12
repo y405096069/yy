@@ -1,0 +1,16 @@
+package com.nfdw.dto;
+
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
+
+@Data
+@Component
+public class Callback {
+
+    @Value("${nfdw.oa.verification}")
+    private String oaVerification;
+
+    @Value("${nfdw.oa.main}")
+    private String oaMain;
+}

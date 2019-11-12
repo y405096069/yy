@@ -1,0 +1,201 @@
+package com.nfdw.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.nfdw.base.dao.impl.BaseService;
+import com.nfdw.entity.PageData;
+import com.nfdw.pojo.EchartsBasicBean;
+import com.nfdw.pojo.EchartsMapBean;
+import com.nfdw.pojo.EchartsMapData;
+import com.nfdw.service.ScreenHomeService;
+import com.nfdw.util.CollectionUtils;
+import com.nfdw.util.StringUtils;
+
+@Service
+@Transactional
+public class ScreenHomeServiceImpl extends BaseService implements ScreenHomeService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ScreenHomeServiceImpl.class);
+
+
+
+
+
+    @Override
+    public PageData getCountCard(PageData pd) {
+        PageData pageData = null;
+        try {
+            pageData = (PageData) dao.findForObject("screenHomeMapper.getCountCard", pd);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pageData;
+    }
+
+    /**
+     * 获取设备告警数量（严重）
+     */
+    @Override
+    public PageData getWarningDatas(PageData pd) throws Exception {
+
+        PageData pdResult = (PageData) dao.findForObject("screenHomeMapper.selectSeriousWarningDatas", pd);
+
+        return pdResult;
+    }
+
+    /**
+     * 获取设备告警数量（一般）
+     */
+    @Override
+    public PageData getGeneralWarningDatas(PageData pd) throws Exception {
+        PageData pdResult = (PageData) dao.findForObject("screenHomeMapper.selectGeneralWarningDatas", pd);
+        return pdResult;
+    }
+
+    /**
+     * 获取设备正常（非告警）数量
+     */
+    @Override
+    public PageData getTermianlUnWarningDatas(PageData pd) throws Exception {
+        PageData pdResult = (PageData) dao.findForObject("screenHomeMapper.selectUnWarningDatas", pd);
+
+        return pdResult;
+    }
+
+    /**
+     * 获取设备不在线数量
+     */
+    @Override
+    public PageData getTermianlOutLineDatas(PageData pd) throws Exception {
+        PageData pdResult = (PageData) dao.findForObject("screenHomeMapper.selectOutLineDatas", pd);
+
+        return pdResult;
+    }
+
+    @Override
+    public PageData selectEquipmentBusinesstypeCount() {
+        PageData pageData = null;
+        try {
+            pageData = (PageData) dao.findForObject("screenHomeMapper.selectEquipmentBusinesstypeCount", pageData);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pageData;
+    }
+
+    /**
+     * 各区域设备在线率（实时）
+     */
+    @Override
+    public EchartsMapBean getOnlineRateOfRegion(PageData requestPd) throws Exception {
+        EchartsMapBean echartsMapBean = null;
+        List<PageData> outlineNumOfRegionList = (List<PageData>) dao.findForList("screenHomeMapper.selectOutlineNumOfRegion", requestPd);
+
+        if (CollectionUtils.isEmptyCollection(outlineNumOfRegionList)) {
+            LOGGER.error("从数据库获取各区域设备在线率（实时）数据为空！");
+            return echartsMapBean;
+        }
+
+        echartsMapBean = new EchartsMapBean();
+        List<EchartsMapData> mapDataList = new ArrayList<EchartsMapData>();
+
+        for (PageData pdFromDb : outlineNumOfRegionList) {
+            String regionName = pdFromDb.getString("regionName");
+            if (regionName.equals("黔西")) {
+                regionName = "黔西南布依族苗族自治州";
+            } else if (regionName.equals("黔东")) {
+                regionName = "黔东南苗族侗族自治州";
+            } else if (regionName.equals("黔南")) {
+                regionName = "黔南布依族苗族自治州";
+            }
+            Long outlineNum = (Long) pdFromDb.get("outlineNum");
+            Long onlineNum = (Long) pdFromDb.get("onlineNum");
+            Integer regionId = Integer.valueOf(pdFromDb.get("regionId") + "");
+            if (StringUtils.isNotBlank(regionName) && null != outlineNum && null != onlineNum) {
+                EchartsMapData echartsMapData = new EchartsMapData();
+                echartsMapData.setName(regionName);
+
+                double outlineNumD = (double) outlineNum;
+                double onlineNumD = (double) onlineNum;
+                double onlineRate = onlineNumD / (outlineNumD + onlineNumD);
+                onlineRate = (double) Math.round(onlineRate * 100) / 100 * 100;
+
+                echartsMapData.setValue(Double.toString(onlineRate));
+                echartsMapData.setSetValueto(regionId);
+                mapDataList.add(echartsMapData);
+            }
+
+        }
+
+        echartsMapBean.setMapDataList(mapDataList);
+
+        return echartsMapBean;
+    }
+
+    /**
+     * 区域设备or 卡数 or 告警数
+     */
+    @Override
+    public PageData getMapInfoNum(PageData pd) {
+        PageData pageData = new PageData();
+        try {
+            int termnnum = (int) dao.findForObject("screenHomeMapper.selectTerminalNum", pd);
+            int cardnum = (int) dao.findForObject("screenHomeMapper.selectCardNum", pd);
+            int mldnum = (int) dao.findForObject("screenHomeMapper.selectWarningMldNum", pd);
+            pageData.put("termnnum", termnnum);
+            pageData.put("cardnum", cardnum);
+            pageData.put("mldnum", mldnum);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return pageData;
+    }
+
+    /**
+     * 各厂家设备告警数
+     */
+    @Override
+    public EchartsBasicBean getFactoryCode(PageData pd) throws Exception {
+        EchartsBasicBean echartsBasicBean = null;
+        List<PageData> Factorycodelist = (List<PageData>) dao.findForList("screenHomeMapper.selectFactorycodeGroup", pd);
+        if (CollectionUtils.isEmptyCollection(Factorycodelist)) {
+            LOGGER.error("从数据库获取各厂家设备告警数数据为空！");
+            return echartsBasicBean;
+        }
+
+        echartsBasicBean = new EchartsBasicBean();
+        List<Object> xList = new ArrayList<Object>();
+        List<Object> yList = new ArrayList<Object>();
+
+        for (PageData pdFromDb : Factorycodelist) {
+            String factoryName = pdFromDb.getString("dvalue");
+            Object codenum = pdFromDb.get("codenum");
+
+            if (StringUtils.isNotBlank(factoryName) && null != codenum) {
+                xList.add(factoryName);
+                yList.add(codenum);
+            }
+
+        }
+        echartsBasicBean.setTitleName("各厂家设备告警数");
+        echartsBasicBean.setXaxisList(xList);
+        echartsBasicBean.setYaxisList(yList);
+
+        return echartsBasicBean;
+    }
+
+    @Override
+    public List<PageData> findCardFlowData(PageData pd) throws Exception {
+        List<PageData> list = (List<PageData>) dao.findForList("screenHomeMapper.findCardFlowData", pd);
+        return list;
+    }
+
+}

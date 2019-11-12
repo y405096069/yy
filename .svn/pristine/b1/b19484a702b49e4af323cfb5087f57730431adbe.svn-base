@@ -1,0 +1,1114 @@
+<#-- Created by IntelliJ IDEA.
+ User: Administrator
+ Date: 2017/12/6
+ Time: 14:00
+ To change this template use File | Settings | File Templates.
+ 切片管理-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>切片管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+    <link rel="stylesheet" href="${re.contextPath}/ftl/section/layui/css/layui.css">
+    <script type="text/javascript" src="${re.contextPath}/plugin/jquery/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="${re.contextPath}/plugin/tools/tool.js"></script>
+    <script type="text/javascript" src="${re.contextPath}/plugin/common/js/echarts.js"></script>
+    <script type="text/javascript" src="${re.contextPath}/ftl/section/layui/layui.js"
+            charset="utf-8"></script>
+
+
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+        }
+
+        table th {
+            background-color: #00A0B5;
+            color: #ffffff;
+        }
+
+        .layadmin-backlog-body {
+            display: block;
+            padding: 10px 15px;
+            background-color: #f2f2f2;
+            color: #999;
+            border-radius: 2px;
+            transition: all .3s;
+            -webkit-transition: all .3s;
+        }
+
+        .layadmin-backlog-body p cite {
+            font-style: normal;
+            font-size: 25px;
+            font-weight: 300;
+            color: #009688;
+        }
+
+        .layadmin-carousel .layui-col-space10 {
+            margin: 0;
+        }
+
+        .layadmin-backlog-body h3 {
+            padding-bottom: 10px;
+            font-size: 12px;
+        }
+
+        #layadmin-shortcut {
+            text-align: center;
+        }
+
+        #layadmin-shortcut i {
+            display: inline-block;
+            width: 100%;
+            height: 90%;
+            line-height: 80px;
+            text-align: center;
+            border-radius: 2px;
+            font-size: 30px;
+            color: #333;
+            transition: all .3s;
+            -webkit-transition: all .3s;
+        }
+
+        .ulcc li {
+            float: left;
+            width: 40%;
+        }
+
+        #layadmin-shortcut cite {
+            position: relative;
+            top: 2px;
+            display: block;
+            color: #666;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body style="background-color:#f2f2f2;">
+<div class="layui-row">
+    <div class="layui-col-md5" style="margin-right: 1%;width: 49%;margin-top: 1%;">
+        <div class="layui-card">
+            <div class="layui-card-header"><font color="#00A0B5" size="2">网办系统</font>
+                <button class="layui-btn layui-btn-xs" style="float: right;position: relative;top: 25%;">进入</button>
+            </div>
+            <div class="layui-card-body" style="height: 150px;overflow: auto;">
+                <div carousel-item="">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md5" style="background-color: #ffffff;width: 49%;margin-right: 1%;margin-top: 1%;">
+        <div class="layui-card">
+            <div class="layui-card-header"><font color="#00A0B5" size="2">OA系统</font> <button class="layui-btn layui-btn-xs" style="float: right;position: relative;top: 25%;">进入</button></div>
+            <div class="layui-card-body" style="height: 150px;">
+                <div id="main5" style="height:100%;width: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md5" style="background-color: #ffffff;width: 49%;margin-right: 1%;margin-top: 1%;">
+        <div class="layui-card">
+            <div class="layui-card-header"><font color="#00A0B5" size="2">廉政风险防控系统</font> <button class="layui-btn layui-btn-xs" style="float: right;position: relative;top: 25%;">进入</button></div>
+            <div class="layui-card-body" style="height: 150px;">
+                <div id="main5" style="height:100%;width: 100%"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-col-md5" style="background-color: #ffffff;width: 49%;margin-top: 1%;">
+        <div class="layui-card">
+            <div class="layui-card-header"><font color="#00A0B5" size="2">信息发布</font> <button class="layui-btn layui-btn-xs" style="float: right;position: relative;top: 25%;">进入</button></div>
+            <div class="layui-card-body" style="height:150px;">
+            </div>
+        </div>
+    </div>
+
+
+    <div class="layui-row">
+        <div class="layui-col-md12">
+
+        </div>
+        <div style="display: none;" id="tck">
+            <ul style="color: #ffffff;height: 130px;width: 170px;">
+                <li style="line-height:30px;" id="3"><span class="cccc">设备在线率：<span id="terminalLv"></span></span></li>
+                <li style="line-height:30px;" id="1"><span class="cccc" style="margin-left: 35px;">设备数：<span
+                        id="termiNum"></span></span></li>
+                <li style="line-height:30px;" id="2"><span class="cccc" style="margin-left: 35px;">卡数：<span
+                        id="cardNum"></span></span></li>
+                <li style="line-height:30px;" id="3"><span class="cccc" style="margin-left: 20px;">告警数：<span
+                        id="warningNum"></span></span></li>
+            </ul>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function openMode(cardType, value) {
+            var url = "/nfdw-admin/card/showCard";
+            var name = '无线通信卡管理';
+            // top.location.href=url
+            top.$("#type").val('0');
+            top.$("#name").val(name);
+            top.$("#url").val(url);
+            top.$("#cardType").val(cardType);
+            top.$("#cardValue").val(value);
+            var timestamp = Date.parse(new Date());
+            top.$("#tokendate").val(timestamp);
+            //   top.$("#openform").attr("action", "${re.contextPath}/domain").submit();
+        }
+
+        var layer
+        layui.use('layer', function () { //独立版的layer无需执行这一句
+            layer = layui.layer;
+        });
+        layui.use('carousel', function () {
+            var carousel = layui.carousel;
+            var carousel1 = layui.carousel;
+            //建造实例
+            carousel.render({
+                elem: '#test1'
+                , width: '100%' //设置容器宽度
+                , arrow: 'always' //始终显示箭头
+                //,anim: 'updown' //切换动画方式
+            });
+            carousel1.render({
+                elem: '#test2'
+                , width: '100%' //设置容器宽度
+                , arrow: 'always' //始终显示箭头
+                , autoplay: false
+                //,anim: 'updown' //切换动画方式
+            });
+        });
+        layui.use('element', function () {
+            var element = layui.element;
+        });
+
+        function shuaxin() {
+            //	alert(top.$("#container").find("iframe").attr('src'));
+            window.location.reload();
+        }
+    </script>
+</body>
+<script>
+    $(function () {
+        getEquipmentBusinesstypeCount();
+        applyGYYSYLL();
+        applyMapBasic();
+        lunbo3();
+        shiyan();
+        cardCond();
+        getCtWarningTotalNum();
+        getGeneralWarningDatas();
+        getTermianlUnWarningDatas();
+        getTermianlOutLineDatas();
+        applySbgjsBasic();
+    });
+
+    // 获取告警总数和严重告警数
+    function getCtWarningTotalNum() {
+        getTermianlWarningsDatasAjax('getWarningDatas');
+    }
+
+    // 获取一般告警数
+    function getGeneralWarningDatas() {
+        getTermianlWarningsDatasAjax('getGeneralWarningDatas');
+    }
+
+    // 获取不告警数
+    function getTermianlUnWarningDatas() {
+        getTermianlWarningsDatasAjax('getTermianlUnWarningDatas');
+    }
+
+    // 获取不在线设备数（即紧急告警数）
+    function getTermianlOutLineDatas() {
+        getTermianlWarningsDatasAjax('getTermianlOutLineDatas');
+    }
+
+    function getTermianlWarningsDatasAjax(uri) {
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: '${re.contextPath}/home/' + uri,
+            data: {},
+            success: function (result) {
+
+                if (result.flag) {
+                    $.each(result.data, function (idx, obj) {
+                        $("#" + idx).html(obj);
+                    });
+                } else {
+
+                }
+
+            }
+        });
+    }
+
+    function getEquipmentBusinesstypeCount() {
+        $.ajax({
+            url: "${re.contextPath}/home/getEquipmentBusinesstypeCount",
+            traditional: true,
+            success: function (data) {
+                $("#zs").text(data.total);
+                $("#pw").text(data.peiwang);
+                $("#sd").text(data.sd);
+                $("#cd").text(data.cdz);
+                $("#jl").text(data.jiliang);
+                $("#dy").text(data.dy);
+                $("#jc").text(data.jc);
+                $("#fc").text(data.fc);
+                $("#pb").text(data.pb);
+
+            },
+            error: function () {
+
+            },
+            dataType: 'json'
+        });
+    }
+
+    function cardCond() {
+        $.ajax({
+            type: "POST",
+            dataType: "JSON",
+            url: '${re.contextPath}/home/getCountCard',
+            data: {},
+            success: function (result) {
+                $.each(result, function (idx, obj) {
+                    $("#" + idx).html(obj);
+                });
+            }
+        });
+    }
+
+    function applySbgjsBasic() {
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            dataType: "JSON",
+            url: '${re.contextPath}/home/getFactoryCode',
+            success: function (result) {
+                var code = result.code;
+                if ('0000' == code) {
+                    var resultData = result.data;
+                    var xList = resultData.xaxisList;
+                    var yList = resultData.yaxisList;
+
+                    lunbo(xList, yList, resultData.titleName);
+                }
+            },
+            error: function () {
+                lunbo(xList, yList, resultData.titleName);
+            },
+            timeout: 60000
+        });
+
+    }
+
+    //当天各运营商卡已使用流量
+    function applyGYYSYLL() {
+        $.post('${re.contextPath}/home/findCardFlowData', {}, function (result) {
+            var info = JSON.parse(result);
+            var maxValue = info.maxValue;
+            var minValue = info.minValue;
+
+            var flowArr = new Array();
+            var operatorArr = new Array();
+
+            $.each(info.data, function (i, obj) {
+                flowArr[i] = obj.used_flow;
+                operatorArr[i] = obj.operator;
+            });
+            lunbo2(flowArr, operatorArr, maxValue, minValue);
+        });
+    }
+
+    //基础apply方法（地图）
+    function applyMapBasic(mianId, figure_type, urlStr) {
+
+        var defaultDateArr = [{"name": "从化市", "value": "0"}, {"name": "南沙区", "value": "0"}, {
+            "name": "增城市",
+            "value": "0"
+        }, {"name": "天河区", "value": "0"}, {"name": "海珠区", "value": "0"}, {"name": "番禺区", "value": "0"}, {
+            "name": "白云区",
+            "value": "0"
+        }, {"name": "花都区", "value": "0"}, {"name": "荔湾区", "value": "0"}, {"name": "萝岗区", "value": "0"}, {
+            "name": "越秀区",
+            "value": "0"
+        }, {"name": "黄埔区", "value": "0"}];
+
+        $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            dataType: "JSON",
+            url: '${re.contextPath}/home/getOnlineRateOfRegion',
+            success: function (result) {
+                var code = result.code;
+                if ('0000' == code) {
+                    var resultData = result.data;
+                    var mapDataList = resultData.mapDataList;
+
+                    doquery5(mapDataList);
+                }
+            },
+            error: function () {
+                doquery5(defaultDateArr);
+            },
+            timeout: 60000
+        });
+
+    }
+
+    function shiyan() {
+        var dom = document.getElementById("u2_div");
+        dom.style.width = $("#aaa").width() + 'px';
+        dom.style.height = $("#aaa").height() + 'px';
+        var myChart = echarts.init(dom);
+
+        option = null;
+        option = {
+            title: {
+                text: '服务性能',
+                textStyle: {
+                    fontSize: 12,              //标题颜色
+                    color: '#FFFFFF'
+                },
+                backgroundColor: 'rgb(0,160,181)',
+                borderColor: 'rgb(0,160,181)',//标题边框颜色
+                borderWidth: 1,//标签线框
+                borderRadius: 5,//边框切圆角
+                top: '20px',//组件离上边的距离middle,top,bottom*/ //此二者的优先级高于x吗?答案：是
+                left: '10px'
+            }, legend: {//图例信息
+                data: ['CPU', '内存', '磁盘'],
+                icon: 'rectangle',
+                itemWidth: 25,
+                itemHeight: 8,
+                itemGap: 8,
+                textStyle: {
+                    fontSize: 8,              //标题颜色
+                    color: '#00cad8'
+                },
+
+                orient: 'horizontal',  //垂直显示
+                y: 'top',    //延Y轴居中
+                x: 'right' //居右显示
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['09:42:30', '09:42:32', '09:42:34', '09:42:36', '09:42:38', '09:42:42', '09:42:44', '09:42:46', '09:42:48', '09:42:50', '09:42:52'
+                    , '09:42:54', '09:42:56', '09:42:58', '09:42:60', '09:42:62', '09:42:64', '09:42:66'],
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: '#00A0B5'
+                    }
+                },
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    textStyle: {
+                        color: '#00A0B5'
+                    }
+                }
+            },
+
+            series: [
+                {
+                    name: 'CPU',
+                    type: 'line',
+                    stack: '占比',
+                    data: [0, 35, 30, 31, 35, 25, 10, 25, 35, 33, 30, 10, 33, 30, 25, 10, 25, 35, 33, 30, 10]
+                },
+                {
+                    name: '内存',
+                    type: 'line',
+                    stack: '总量',
+                    data: [25, 18, 19, 23, 29, 33, 31, 35, 20, 12, 32, 10, 33, 30, 10, 33, 31, 35, 33, 30, 10]
+                },
+                {
+                    name: '磁盘',
+                    type: 'line',
+                    stack: '总量',
+                    data: [25, 18, 19, 23, 29, 33, 31, 35, 20, 12, 32, 10, 33, 30, 10, 33, 31, 35, 33, 30, 10]
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    }
+
+    function hexing() {
+        //第二个
+        var dom = document.getElementById("u4_div");
+        var myChart = echarts.init(dom);
+        dom.style.width = $(".layui-col-md3").clientWidth + 'px';
+        option = null;
+        var app = {};
+        option = null;
+        var posList = [
+            'left', 'right', 'top', 'bottom',
+            'inside',
+            'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+            'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+        ];
+
+        app.configParameters = {
+            rotate: {
+                min: -90,
+                max: 90
+            },
+            align: {
+                options: {
+                    left: 'left',
+                    center: 'center',
+                    right: 'right'
+                }
+            },
+            verticalAlign: {
+                options: {
+                    top: 'top',
+                    middle: 'middle',
+                    bottom: 'bottom'
+                }
+            },
+            position: {
+                options: echarts.util.reduce(posList, function (map, pos) {
+                    map[pos] = pos;
+                    return map;
+                }, {})
+            },
+            distance: {
+                min: 0,
+                max: 100
+            }
+        };
+
+        app.config = {
+            rotate: 90,
+            align: 'left',
+            verticalAlign: 'middle',
+            position: 'insideBottom',
+            distance: 15,
+            onChange: function () {
+                var labelOption = {
+                    normal: {
+                        rotate: app.config.rotate,
+                        align: app.config.align,
+                        verticalAlign: app.config.verticalAlign,
+                        position: app.config.position,
+                        distance: app.config.distance
+                    }
+                };
+                myChart.setOption({
+                    series: [{
+                        label: labelOption
+                    }, {
+                        label: labelOption
+                    }, {
+                        label: labelOption
+                    }, {
+                        label: labelOption
+                    }]
+                });
+            }
+        };
+
+
+        var labelOption = {
+            normal: {
+                show: true,
+                position: app.config.position,
+                distance: app.config.distance,
+                align: app.config.align,
+                verticalAlign: app.config.verticalAlign,
+                rotate: app.config.rotate,
+                formatter: '{c}  {name|{a}}',
+                fontSize: 12,
+                rich: {}
+            }
+        };
+
+        option = {
+            title: {
+                text: '设备在线率',
+                textStyle: {
+                    fontSize: 12,              //标题颜色
+                    color: '#FFFFFF'
+                },
+                backgroundColor: 'rgb(0,160,181)',
+                borderColor: 'rgb(0,160,181)',//标题边框颜色
+                borderWidth: 1,//标签线框
+                borderRadius: 5,//边框切圆角
+                top: '20px',//组件离上边的距离middle,top,bottom*/ //此二者的优先级高于x吗?答案：是
+                left: '10px'
+            },
+            color: ['#F17B22', '#18EED3', '#D6F065'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            legend: {
+                data: ['CPU', 'SMF', 'UDF'],
+                itemWidth: 25,
+                itemHeight: 5,
+                itemGap: 8,
+                textStyle: {
+                    fontSize: 8,              //标题颜色
+                    color: '#00cad8'
+                },
+
+                orient: 'horizontal',  //垂直显示
+                y: 'top',    //延Y轴居中
+                x: 'right' //居右显示
+            },
+
+            calculable: true,
+            xAxis: [
+                {
+                    type: 'category',
+                    axisTick: {show: false},
+                    data: ['友方', '苪智', '韦德', '沅鹏', '中移物联'],
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#00A0B5'
+                        }
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        textStyle: {
+                            color: '#00A0B5'
+                        }
+                    }
+                },
+
+            ],
+            series: [
+
+                {
+                    name: '告警数',
+                    type: 'bar',
+                    barWidth: 10,
+                    data: [40, 50, 30, 40, 30],
+                    itemStyle: {
+                        //柱形图圆角，鼠标移上去效果
+                        emphasis: {
+                            barBorderRadius: [20, 20, 20, 20]
+                        },
+
+                        normal: {
+                            //柱形图圆角，初始化效果
+                            barBorderRadius: [20, 20, 20, 20]
+                        }
+                    },
+
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    }
+
+    function lunbo2(flowArr, operatorArr, maxValue, minValue) {
+        //第三个
+        var dom = document.getElementById("u217_div");
+        dom.style.width = $("#aaa").width() + 'px';
+        dom.style.height = $("#aaa").height() + 'px';
+        var myChart = echarts.init(dom);
+        option = null;
+        var app = {};
+        option = null;
+        var posList = [
+            'left', 'right', 'top', 'bottom',
+            'inside',
+            'insideTop', 'insideLeft', 'insideRight', 'insideBottom',
+            'insideTopLeft', 'insideTopRight', 'insideBottomLeft', 'insideBottomRight'
+        ];
+
+        app.configParameters = {
+            rotate: {
+                min: -90,
+                max: 90
+            },
+            align: {
+                options: {
+                    left: 'left',
+                    center: 'center',
+                    right: 'right'
+                }
+            },
+            verticalAlign: {
+                options: {
+                    top: 'top',
+                    middle: 'middle',
+                    bottom: 'bottom'
+                }
+            },
+            position: {
+                options: echarts.util.reduce(posList, function (map, pos) {
+                    map[pos] = pos;
+                    return map;
+                }, {})
+            },
+            distance: {
+                min: 0,
+                max: 100
+            }
+        };
+
+        app.config = {
+            rotate: 90,
+            align: 'left',
+            verticalAlign: 'middle',
+            position: 'insideBottom',
+            distance: 15,
+            onChange: function () {
+                var labelOption = {
+                    normal: {
+                        rotate: app.config.rotate,
+                        align: app.config.align,
+                        verticalAlign: app.config.verticalAlign,
+                        position: app.config.position,
+                        distance: app.config.distance
+                    }
+                };
+                myChart.setOption({
+                    series: [{
+                        label: labelOption
+                    }, {
+                        label: labelOption
+                    }, {
+                        label: labelOption
+                    }, {
+                        label: labelOption
+                    }]
+                });
+            }
+        };
+
+
+        var labelOption = {
+            normal: {
+                show: true,
+                position: app.config.position,
+                distance: app.config.distance,
+                align: app.config.align,
+                verticalAlign: app.config.verticalAlign,
+                rotate: app.config.rotate,
+                formatter: '{c}  {name|{a}}',
+                fontSize: 12,
+                rich: {}
+            }
+        };
+
+        option = {
+            title: {
+                text: '当天各运营商卡已使用流量(单位：M)',
+                textStyle: {
+                    fontSize: 12,              //标题颜色
+                    color: '#FFFFFF'
+                },
+                backgroundColor: 'rgb(0,160,181)',
+                borderColor: 'rgb(0,160,181)',//标题边框颜色
+                borderWidth: 1,//标签线框
+                borderRadius: 5,//边框切圆角
+                top: '20px',//组件离上边的距离middle,top,bottom*/ //此二者的优先级高于x吗?答案：是
+                left: '10px'
+            },
+            color: ['#F17B22', '#18EED3', '#D6F065'],
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: {
+                    type: 'shadow'
+                }
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+
+            calculable: true,
+            xAxis: [
+                {
+                    type: 'category',
+                    axisTick: {show: false},
+                    data: operatorArr,
+                    axisLabel: {
+                        show: true,
+                        textStyle: {
+                            color: '#666'
+                        }
+                    }
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLabel: {
+                        textStyle: {
+                            color: '#D6F065'
+                        }
+                    },
+                    max: maxValue,
+                    min: minValue,
+                    splitNumber: 10
+                },
+
+            ],
+            series: [
+
+                {
+                    name: '卡已使用流量',
+                    type: 'bar',
+                    barWidth: 30,
+                    data: flowArr,
+                    itemStyle: {
+                        //柱形图圆角，鼠标移上去效果
+                        emphasis: {
+                            barBorderRadius: [20, 20, 20, 20]
+                        },
+
+                        normal: {
+                            //柱形图圆角，初始化效果
+                            barBorderRadius: [20, 20, 20, 20],
+                            color: function (params) {
+                                var colorList = ['#C33531', '#EFE42A', '#64BD3D', '#EE9201', '#29AAE3', '#B74AE5', '#0AAF9F', '#E89589', '#16A085', '#4A235A', '#C39BD3 ', '#F9E79F', '#BA4A00', '#ECF0F1', '#616A6B', '#EAF2F8', '#4A235A', '#3498DB'];
+                                return colorList[params.dataIndex]
+                            }
+                        }
+                    },
+
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    }
+
+    function lunbo(dateArr, dataArr, titleName) {
+        var dom = document.getElementById("u216_div");
+        dom.style.width = $("#aaa").width() + 'px';
+        dom.style.height = $("#aaa").height() + 'px';
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+
+        option = {
+            title: {
+                text: titleName,
+                textStyle: {
+                    fontSize: 12,              //标题颜色
+                    color: '#FFFFFF'
+                },
+                backgroundColor: 'rgb(0,160,181)',
+                borderColor: 'rgb(0,160,181)',//标题边框颜色
+                borderWidth: 1,//标签线框
+                borderRadius: 5,//边框切圆角
+                top: '20px',//组件离上边的距离middle,top,bottom*/ //此二者的优先级高于x吗?答案：是
+                left: '10px'
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            toolbox: {
+                show: false,
+            },
+            calculable: true,
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: [
+                {
+                    type: 'category',
+                    axisLine: {
+                        lineStyle: {
+                            color: '#0095ca',
+                        }
+                    },
+                    boundaryGap: true,
+                    axisLabel: {
+                        textStyle: {
+                            color: "#0095ca", //刻度颜色
+                            fontSize: 10  //刻度大小
+                        },
+                        interval: 'auto'
+                    },
+                    data: dateArr
+                }
+            ],
+            yAxis: [
+                {
+                    type: 'value',
+                    axisLine: {
+                        lineStyle: {
+                            color: '#0095ca',
+                        }
+                    },
+                    splitLine: {show: false},
+                    axisLabel: {
+                        formatter: '{value}'
+                    }
+                }
+            ],
+            series: [
+                {
+                    name: '告警数',
+                    type: 'line',
+                    barWidth: 30,
+                    smooth: true,
+                    data: dataArr,
+                    itemStyle: {
+                        //柱形图圆角，鼠标移上去效果
+                        emphasis: {
+                            barBorderRadius: [20, 20, 20, 20]
+                        },
+
+                        normal: {
+                            //柱形图圆角，初始化效果
+                            barBorderRadius: [20, 20, 20, 20],
+                            color: function (params) {
+                                var colorList = ['#C33531', '#EFE42A', '#64BD3D', '#EE9201', '#29AAE3', '#B74AE5', '#0AAF9F', '#E89589', '#16A085', '#4A235A', '#C39BD3 ', '#F9E79F', '#BA4A00', '#ECF0F1', '#616A6B', '#EAF2F8', '#4A235A', '#3498DB'];
+                                return colorList[params.dataIndex]
+                            }
+                        }
+                    },
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    }
+
+    function doquery5(mapDataList) {
+        $.get('${re.contextPath}/plugin/common/js/guangzou.json', function (yCjson) {
+            echarts.registerMap('广州', yCjson);
+            var chart = echarts.init(document.getElementById('main5'));
+
+            option5 = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}<br/>在线率{c}%'
+                },
+
+                dataRange: {
+                    x: 'left',
+                    y: 'bottom',
+                    min: 0,
+                    max: 100,
+                    textStyle: {color: "#666"},
+                    splitList: [
+                        {start: 90, end: 100, color: '#009688'},
+                        {start: 70, end: 89.99, color: 'rgb(255,184,0)'},
+                        {start: 0, end: 69.99, color: 'rgb(213,58,53)'},
+                    ],
+                },
+                series: [
+                    {
+                        name: '设备在线率',
+                        type: 'map',
+                        map: '广州',
+                        zoom: 1.2,
+                        mapLocation: {
+                            x: 'center'
+                        },
+                        label: {
+                            normal: {
+                                show: true,
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {color: "#fff"},
+                            }
+                        },
+                        itemStyle: {
+                            normal: {
+                                label: {
+                                    show: true,
+                                    formatter: '{c}',
+                                    color: "#fff"
+                                },
+                                borderWidth: 2,
+                                borderColor: '#9A9A9A',
+                            },
+                            emphasis: {// 也是选中样式
+                                borderWidth: 1,
+                                areaColor: '#9A9A9A',
+                                label: {
+                                    show: true,
+                                    textStyle: {
+                                        color: '#fff'
+                                    }
+                                }
+                            }
+
+                        },
+                        data: mapDataList,
+                    }
+                ],
+
+            };
+            chart.setOption(option5);
+            chart.on('click', function (params) {
+                $.ajax({
+                    type: "POST",
+                    dataType: "JSON",
+                    url: '${re.contextPath}/home/getMapInfoNum',
+                    data: {regionids: params.data.setValueto},
+                    success: function (result) {
+                        $("#terminalLv").html(params.data.value + "%");
+                        $("#termiNum").html(result.termnnum);
+                        $("#cardNum").html(result.cardnum)
+                        $("#warningNum").html(result.mldnum)
+                        var tckhtml = $("#tck").html();
+                        layer.msg(tckhtml, {
+                            time: 20000, //20s后自动关闭
+                            btn: ['确定', '取消']
+                        });
+                    }
+                });
+            });
+        })
+    }
+
+    function lunbo3() {
+        //第三个
+        var dom = document.getElementById("u3_div");
+        dom.style.width = $("#aaa").width() + 'px';
+        dom.style.height = $("#aaa").height() + 'px';
+        var myChart = echarts.init(dom);
+        option = {
+            title: {
+                text: '服务性能',
+                textStyle: {
+                    fontSize: 12,              //标题颜色
+                    color: '#FFFFFF'
+                },
+                backgroundColor: 'rgb(0,160,181)',
+                borderColor: 'rgb(0,160,181)',//标题边框颜色
+                borderWidth: 1,//标签线框
+                borderRadius: 5,//边框切圆角
+                top: '20px',//组件离上边的距离middle,top,bottom*/ //此二者的优先级高于x吗?答案：是
+                left: '10px'
+            }, legend: {//图例信息
+                data: ['CPU', '内存', '磁盘'],
+                icon: 'rectangle',
+                itemWidth: 25,
+                itemHeight: 8,
+                itemGap: 8,
+                textStyle: {
+                    fontSize: 8,              //标题颜色
+                    color: '#00cad8'
+                },
+
+                orient: 'horizontal',  //垂直显示
+                y: 'top',    //延Y轴居中
+                x: 'right' //居右显示
+            },
+            tooltip: {
+                trigger: 'axis'
+            },
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
+            xAxis: {
+                type: 'category',
+                boundaryGap: false,
+                data: ['09:42:30', '09:42:32', '09:42:34', '09:42:36', '09:42:38', '09:42:42', '09:42:44', '09:42:46', '09:42:48', '09:42:50', '09:42:52'
+                    , '09:42:54', '09:42:56', '09:42:58', '09:42:60', '09:42:62', '09:42:64', '09:42:66'],
+                axisLabel: {
+                    show: true,
+                    textStyle: {
+                        color: '#00A0B5'
+                    }
+                },
+            },
+            yAxis: {
+                type: 'value',
+                axisLabel: {
+                    textStyle: {
+                        color: '#00A0B5'
+                    }
+                }
+            },
+
+            series: [
+                {
+                    name: 'CPU',
+                    type: 'line',
+                    stack: '占比',
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: '#00FF00'
+                            }
+                        }
+                    },
+                    data: [0, 35, 30, 31, 35, 25, 10, 25, 35, 33, 30, 10, 33, 30, 25, 10, 25, 35, 33, 30, 10]
+                },
+                {
+                    name: '内存',
+                    type: 'line',
+                    stack: '总量',
+                    itemStyle: {
+                        normal: {
+                            lineStyle: {
+                                color: 'red'
+                            }
+                        }
+                    },
+                    data: [25, 18, 19, 23, 29, 33, 31, 35, 20, 12, 32, 10, 33, 30, 10, 33, 31, 35, 33, 30, 10]
+                },
+                {
+                    name: '磁盘',
+                    type: 'line',
+                    stack: '总量',
+                    data: [25, 18, 19, 23, 29, 33, 31, 35, 20, 12, 32, 10, 33, 30, 10, 33, 31, 35, 33, 30, 10]
+                }
+            ]
+        };
+
+        myChart.setOption(option);
+    }
+</script>
+</html>
