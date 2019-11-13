@@ -153,6 +153,7 @@ public class MenuController extends BaseController {
         //存在角色绑定不能删除
         if (count > 0) {
             json.setMsg("本菜单存在绑定角色,请先解除绑定!");
+
             return json;
         }
         //存在下级菜单 不能解除

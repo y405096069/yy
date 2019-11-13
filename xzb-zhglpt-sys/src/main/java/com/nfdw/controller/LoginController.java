@@ -6,6 +6,7 @@ import com.nfdw.core.shiro.ShiroUtil;
 import com.nfdw.entity.CurrentUser;
 import com.nfdw.entity.SysMenu;
 import com.nfdw.entity.SysUser;
+import com.nfdw.entity.User;
 import com.nfdw.service.MenuService;
 import com.nfdw.service.SysUserService;
 import com.nfdw.util.VerifyCodeUtils;
@@ -52,10 +53,12 @@ public class LoginController extends BaseLoginController {
     @GetMapping(value = "")
     public String loginInit() {
         return loginCheck();
+
     }
 
     @GetMapping(value = "goLogin")
     public String goLogin(Model model, ServletRequest request) {
+        System.out.println("333333333333333333333333333");
         Subject sub = SecurityUtils.getSubject();
         if (sub.isAuthenticated()) {
             return "/main/main";
@@ -67,10 +70,14 @@ public class LoginController extends BaseLoginController {
 
     @GetMapping(value = "/login")
     public String loginCheck() {
+        System.out.println("1111111111111111111111111111111111111111111");
+
         Subject sub = SecurityUtils.getSubject();
         Boolean flag2 = sub.isRemembered();
+        String userId = (String)sub.getPrincipal();
         boolean flag = sub.isAuthenticated() || flag2;
         Session session = sub.getSession();
+
         if (flag) {
             return "/main/main";
         }
@@ -89,6 +96,10 @@ public class LoginController extends BaseLoginController {
     @Log(desc = "登录用户")
     @Override
     public String login(SysUser user, String code, Model model, HttpServletRequest request) {
+
+        System.out.println("22222222222222222222222222222222");
+
+
         return super.login(user, code, model, request);
     }
 
