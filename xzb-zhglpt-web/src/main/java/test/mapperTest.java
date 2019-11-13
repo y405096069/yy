@@ -5,8 +5,10 @@ package test;/**
 
 import com.nfdw.Application;
 import com.nfdw.entity.*;
+import com.nfdw.mapper.AdministratoraccountMapper;
 import com.nfdw.mapper.DataManageMapper;
 import com.nfdw.pojo.Condition;
+import com.nfdw.pojo.Examination;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +27,17 @@ import java.util.List;
 @SpringBootTest(classes = Application.class)// 就是你springboot的启动类
 public class mapperTest {
     @Autowired
-    DataManageMapper dataManageMapper;
+    AdministratoraccountMapper administratoraccountMapper;
 
     @Test
     public void test() {
-        Condition condition = new Condition();
-        condition.kelei = "高数";
-        List<Student> students = dataManageMapper.selectUseIf(condition);
-        System.out.println(students);
+        Examination examination = new Examination();
+
+        List<Examinationstatistics> examinationstatistics = administratoraccountMapper.Examinationstatisticsimpl();
+        System.out.println(examinationstatistics);
     }
+
+
 
 
 }
