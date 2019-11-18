@@ -32,13 +32,13 @@ public class DepartmentApplyController extends BaseController {
 	    @GetMapping(value = "showDeparApplyList")
 	    @RequiresPermissions("section:show")
 	    public String showDeparApplyList(Model model) {
-	    	log.info("返回电网业务部门申请表查询View=====>");
+	    	//log.info("返回电网业务部门申请表查询View=====>");
 	        return "/section/departmentApply/deparApplyList";
 	    }
 	
       /**
        * 
-       * @param 查询列表
+       * @param model
        * @param departmentApply
        * @param page 1
        * @param limit 0,10
@@ -48,7 +48,7 @@ public class DepartmentApplyController extends BaseController {
 	    @ResponseBody
 	    @RequiresPermissions("section:show")
 	    public ReType departmentApply(Model model, DepartmentApply departmentApply, String page, String limit) {
-	    	log.info("正在查询电网业务部门申请表,请稍后");
+	    	//log.info("正在查询电网业务部门申请表,请稍后");
 	        return departmentAppayService.show(departmentApply, Integer.valueOf(page), Integer.valueOf(limit));
 	    }
 	    

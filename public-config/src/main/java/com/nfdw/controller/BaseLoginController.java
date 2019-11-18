@@ -7,15 +7,16 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 
 public abstract class BaseLoginController {
-
     @PostMapping(value = "/login")
-    public String login(SysUser user, String code, Model model, HttpServletRequest request) {
+    public String login(SysUser user, String code, Model model, HttpServletRequest request,String type) {
+
         String codeMsg = (String) request.getSession().getAttribute("_code");
         if (null != code && !code.toLowerCase().equals(codeMsg)) {
             model.addAttribute("message", "验证码错误");
@@ -27,9 +28,14 @@ public abstract class BaseLoginController {
         String msg = null;
         try {
             subject.login(token);
-            //subject.hasRole("admin");
             if (subject.isAuthenticated()) {
-                return "redirect:/main";
+                if(user.getUser_type().equals("0")){
+                    return "redirect:/main";
+                }if(user.getUser_type().equals("1")){
+                    return "redirect:/studentIndex";
+                }else{
+                    return "/addStudentUser";
+                }
             }
         } catch (UnknownAccountException e) {
             msg = e.getMessage();

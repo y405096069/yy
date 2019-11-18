@@ -29,4 +29,51 @@ public class SysDepartment {
     @Transient
     private List<SysUser> users;
 
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getDepartmentName() {
+        return departmentName;
+    }
+
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    public String getCreater() {
+        return creater;
+    }
+
+    public void setCreater(String creater) {
+        this.creater = creater;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getGzarea() {
+        return gzarea;
+    }
+
+    public void setGzarea(String gzarea) {
+        this.gzarea = gzarea;
+    }
+
+    public List<SysUser> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<SysUser> users) {
+        this.users = users;
+    }
 }

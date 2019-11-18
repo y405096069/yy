@@ -32,19 +32,19 @@ public class DataSourceJobThread extends Thread {
     public void run() {
         try {
             Thread.sleep(1000);
-            log.info("---------线程启动---------");
+            //log.info("---------线程启动---------");
             JobTask jobTask =(JobTask) SpringUtil.getBean("jobTask");
             SysJob job = new SysJob();
             job.setStatus(true);
             List<SysJob> jobList = jobService.selectListByPage(job);
             //开启任务
             jobList.forEach(jobs -> {
-                        log.info("---任务[" + jobs.getId() + "]系统 init--开始启动---------");
+                        //log.info("---任务[" + jobs.getId() + "]系统 init--开始启动---------");
                         jobTask.startJob(jobs);
                     }
             );
             if (jobList.size() == 0) {
-                log.info("---数据库暂无启动的任务---------");
+               // log.info("---数据库暂无启动的任务---------");
             } else
                 System.out.println("---任务启动完毕---------");
         } catch (InterruptedException e) {

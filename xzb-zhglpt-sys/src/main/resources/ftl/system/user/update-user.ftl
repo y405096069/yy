@@ -187,6 +187,7 @@ To change this template use File | Settings | File Templates.-->
                     </div>
                 </div>
             </#if>
+        </div>
     </form>
 </div>
 <script>

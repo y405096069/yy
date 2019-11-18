@@ -77,8 +77,8 @@ public class MenuController extends BaseController {
             return jsonUtil;
         }
 
-        if (StringUtils.isEmpty(sysMenu.getPId())) {
-            sysMenu.setPId(null);
+        if (StringUtils.isEmpty(sysMenu.getpId())) {
+            sysMenu.setpId(null);
         }
         if (StringUtils.isEmpty(sysMenu.getUrl())) {
             sysMenu.setUrl(null);
@@ -119,8 +119,8 @@ public class MenuController extends BaseController {
         JSONArray ja = menuService.getMenuJsonList();
         model.addAttribute("menus", ja.toJSONString());
         model.addAttribute("sysMenu", sysMenu);
-        if (null != sysMenu.getPId()) {
-            SysMenu pSysMenu = menuService.selectByPrimaryKey(sysMenu.getPId());
+        if (null != sysMenu.getpId()) {
+            SysMenu pSysMenu = menuService.selectByPrimaryKey(sysMenu.getpId());
             model.addAttribute("pName", pSysMenu.getName());
         }
         return "/system/menu/update-menu";
@@ -158,7 +158,7 @@ public class MenuController extends BaseController {
         }
         //存在下级菜单 不能解除
         SysMenu sysMenu = new SysMenu();
-        sysMenu.setPId(id);
+        sysMenu.setpId(id);
         if (menuService.selectCount(sysMenu) > 0) {
             json.setMsg("存在子菜单,请先删除子菜单!");
             return json;

@@ -112,14 +112,14 @@ public class RetryLimitCredentialsMatcher extends HashedCredentialsMatcher {
         } else {
             AtomicInteger retryCount = loginRetryCache.get(username) == null
                     ? new AtomicInteger(0) : loginRetryCache.get(username);
-            log.info("retryCount:{}, username:{}", retryCount, username);
+            //log.info("retryCount:{}, username:{}", retryCount, username);
             if (retryCount.incrementAndGet() >= this.maxRetryCount) {
                 publicUserService.updateByUserName(DateUtils.addSeconds(new Date(), this.timeToIdleSeconds), username);
-                log.warn("username: {} tried to login more than {} times in perid", username, this.maxRetryCount);
+                //log.warn("username: {} tried to login more than {} times in perid", username, this.maxRetryCount);
                 throw new ExcessiveAttemptsException(StrUtil.format("账号错误{}次已被锁定，请找管理员解锁或者等待{}分钟!", this.maxRetryCount, this.timeToIdleSeconds / 60));
             }
             loginRetryCache.put(username, retryCount);
-            log.info(String.valueOf(retryCount.get()));
+            //log.info(String.valueOf(retryCount.get()));
         }
         return matches;
     }

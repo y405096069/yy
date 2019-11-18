@@ -52,7 +52,7 @@ public class LogController extends BaseController {
         try {
             tList = logMapper.selectListByPage(sysLog);
         } catch (MyException e) {
-            log.error("class:LogController ->method:showLog->message:" + e.getMessage());
+            //log.error("class:LogController ->method:showLog->message:" + e.getMessage());
             e.printStackTrace();
         }
         long total = tPage.getTotal();
@@ -76,7 +76,7 @@ public class LogController extends BaseController {
             }
         } catch (MyException e) {
             msg = "删除失败";
-            log.error(msg + e.getMessage());
+            //log.error(msg + e.getMessage());
         }
         j.setMsg(msg);
         return j;

@@ -7,6 +7,7 @@ import com.nfdw.entity.SysRoleUser;
 import com.nfdw.entity.SysUser;
 import com.nfdw.util.Checkbox;
 import com.nfdw.util.JsonUtil;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -79,4 +80,14 @@ public interface SysUserService extends BaseService<SysUser,String> {
 
 
     CurrentUser selectUser(String username);
+
+    //新学生注册
+    int addSysUser(SysUser sysUser);
+
+    //查询账户验证码状态
+    int getPhoneStatus(String phone);
+
+    //激活学生账号验证码，修改状态
+    int updatePhoneStatus(String phone,int status);
+    String getStudentType(String phone);
 }

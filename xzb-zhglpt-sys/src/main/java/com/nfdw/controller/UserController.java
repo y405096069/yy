@@ -3,6 +3,7 @@ package com.nfdw.controller;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.nfdw.base.controller.BaseController;
+import com.nfdw.common.SendSms;
 import com.nfdw.core.annotation.Log;
 import com.nfdw.core.annotation.Log.LOG_TYPE;
 import com.nfdw.core.quartz.JobTask;
@@ -15,6 +16,8 @@ import com.nfdw.entity.SysUser;
 import com.nfdw.exception.MyException;
 import com.nfdw.service.*;
 import com.nfdw.util.*;
+import com.nfdw.utils.ShiroKitUtils;
+import com.nfdw.utils.ToolUtil;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -28,6 +31,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.UUID;
 
@@ -148,6 +153,77 @@ public class UserController extends BaseController {
             e.printStackTrace();
         }
         return j;
+    }
+    @ApiOperation(value = "/addSysUser", httpMethod = "POST", notes = "添加新学生用户")
+    @Log(desc = "添加新学生用户")
+    @PostMapping(value = "addSysUser")
+    @ResponseBody
+    public JsonUtil addSysUser(SysUser user, String[] role, HttpServletRequest request) {
+        if (user == null) {
+            return JsonUtil.error("获取数据失败");
+        }
+        if (StringUtils.isBlank(user.getUsername())) {
+            return JsonUtil.error("用户名不能为空");
+        }
+        if (StringUtils.isBlank(user.getPassword())) {
+            return JsonUtil.error("密码不能为空");
+        }
+        if (StringUtils.isBlank(user.getVerifyPassword())) {
+            return JsonUtil.error("重复密码不能为空");
+        }
+        int result = userService.checkUser(user.getUsername());
+        if (result > 0) {
+            return JsonUtil.error("用户名已存在");
+        }
+        JsonUtil j = new JsonUtil();
+        try {
+            user.setId(UUID.randomUUID().toString().replaceAll("\\-", ""));
+//            user.setPhoto("".equals(user.getPhoto()) ? null : user.getPhoto());
+//            if (StringUtils.isNotEmpty(user.getPhoto())) {
+//                user.setPhoto(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/images/" + user.getPhoto());
+//            }
+
+            user.setUser_type("1");
+            user.setStatus(1);
+            userService.addSysUser(user);
+            SysRoleUser sysRoleUser = new SysRoleUser();
+            sysRoleUser.setUserId(user.getId());
+            for (String r : role) {
+                sysRoleUser.setRoleId(r);
+                roleUserService.insertSelective(sysRoleUser);
+            }
+            j.setMsg("注册成功");
+        } catch (MyException e) {
+            j.setMsg("注册失败");
+            j.setFlag(false);
+            e.printStackTrace();
+        }
+        return j;
+    }
+    @ApiOperation(value = "/validateVerifyCode", httpMethod = "POST", notes = "校验手机验证码")
+    @Log(desc = "校验手机验证码")
+    @PostMapping(value = "validateVerifyCode")
+    @ResponseBody
+    public JsonUtil validateVerifyCode(String verifyCode,String phone) {
+        if (StringUtils.isBlank(phone)) {
+            return JsonUtil.error("手机号码不能为空");
+        }
+        //验证码不能为空
+        if(StringUtils.isBlank(verifyCode)){
+            return JsonUtil.error("验证码不能为空");
+        }
+        //验证码是否失效
+        if(ShiroKitUtils.getSession().getAttribute(phone)==null){
+            return JsonUtil.error("验证码已经失效，请重新发送短信");
+        }
+        //对比验证码
+        if(verifyCode.equals(ShiroKitUtils.getSession().getAttribute(phone))){
+            userService.updatePhoneStatus(phone,0);
+            return JsonUtil.sucess("激活成功！");
+        }else{
+            return JsonUtil.error("验证码不匹配，请重新输入");
+        }
+
     }
 
     @GetMapping(value = "updateUser")

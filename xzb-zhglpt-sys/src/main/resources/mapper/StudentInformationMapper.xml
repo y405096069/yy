@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.StudentInformationMapper">
+  <insert id="addStudentInformation" parameterType="com.nfdw.entity.StudentInformation">
+    insert into j_student_information(student_id,student_userid,certificate_type,certificate_number,name,sex,nation,birthdate,street,recipient,phone,
+    postal_code,email,examinee_type,examinee_education,examinee_province,politics_status,graduate_type,graduate_middle,examinee_number,subject_type,
+    member_name,member_relationship,member_occupation,member_work,member_phone,photograph)
+    values (#{student_id},#{student_userid},#{certificate_type},#{certificate_number},#{name},#{sex},#{nation},#{birthdate}
+    ,#{street},#{recipient},#{phone},#{postal_code},#{email},#{examinee_type},#{examinee_education},#{examinee_province},#{politics_status}
+    ,#{graduate_type},#{graduate_middle},#{examinee_number},#{subject_type},#{member_name},#{member_relationship},#{member_relationship},
+    #{member_work},#{member_phone},#{photograph})
+  </insert>
+  <select id="getUserIDByStudentInformation" resultType="com.nfdw.entity.StudentInformation">
+    select * from j_student_information where name=#{name}
+  </select>
+</mapper>

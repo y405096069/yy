@@ -66,7 +66,7 @@ public abstract class BaseController<T> {
             try {
                 message = URLEncoder.encode(message, "utf-8");
             } catch (UnsupportedEncodingException e) {
-                log.error("BaseController：" + e.getMessage());
+                //log.error("BaseController：" + e.getMessage());
                 e.printStackTrace();
             }
             return "redirect:/error/403?message=" + message;

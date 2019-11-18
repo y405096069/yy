@@ -29,6 +29,18 @@
             margin: 0px;
             border-radius: 3px;
         }
+        .login .layui-form #register_box {
+            display: inline-block;
+            font-size: 11px;
+            line-height: 14px;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            cursor: pointer;
+            margin: 0px;
+            padding: 12px 24px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body class="login-bg">
@@ -36,11 +48,14 @@
     <div class="message">广州大学考试管理系统</div>
     <div id="darkbannerwrap"></div>
 
-    <form method="post" action="${re.contextPath}/login" class="layui-form">
+    <form class="layui-form">
         <input name="username" placeholder="用户名" autocomplete="off" type="text" lay-verify="username"
                class="layui-input">
         <hr class="hr15">
         <input name="password" lay-verify="password" placeholder="密码" autocomplete="off" type="password"
+               class="layui-input">
+        <hr class="hr15">
+        <input name="password" lay-verify="password" placeholder="确认密码" autocomplete="off" type="password"
                class="layui-input">
         <hr class="hr15">
         <div class="layui-inline">
@@ -49,63 +64,46 @@
                 <input type="text" name="code" style="width:150px;height:35px;" autocomplete="off" lay-verify="code"
                        class="layui-input">
             </div>
-            <div class="layui-input-inline">
-                <img src="" id="code">
+            <div class="layui-input-inline" style="margin-left: 38px;">
+                <#--  <button  class="layui-btn layui-btn-primary">发送验证码</button>  -->
+                <#--  <input id="register" lay-submit lay-filter="login" value="发送验证码" style="width:150px;height:35px;">  -->
+                <input type="button" id="register_box" value="发送验证码" onclick="sendemail()" />
             </div>
-
         </div>
         <hr class="hr15">
-         <div style="display: flex;justify-content: space-between;">
-               <input value="登录" lay-submit lay-filter="login" style="width:45%;" type="submit">
-               <button id="register"  class="layui-btn layui-btn-primary" type="button" onclick="window.location.href='${re.contextPath}/login?type=1'">注册</button>
-            <#--  <input id="register" style="background-color: #fff;width:45%;color: #333;border: 1px solid #333;" value="注册" lay-submit lay-filter="register">  -->
-         </div>
+        <div style="display: flex;justify-content: space-between;">
+            <input value="注册" lay-submit lay-filter="login" style="width:45%;" type="submit">
+            <button id="register"  class="layui-btn layui-btn-primary">返回登录</button>
+        </div>
         <hr class="hr20">
     </form>
 </div>
 
+
 <script>
-    var layer;
-    $(function () {
-        layui.use(['form', 'layer'], function () {
-            var form = layui.form;
-            form.verify({
-                username: function (v) {
-                    if (v.trim() == '') {
-                        return "用户名不能为空";
-                    }
-                }
-                , password: function (v) {
-                    if (v.trim() == '') {
-                        return "密码不能为空";
-                    }
-                }, code: function (v) {
-                    if (v.trim() == '') {
-                        return '验证码不能为空';
-                    }
-                }
-            });
 
-            form.render();
-        });
-        layer = layui.layer;
-        var msg = '${message}';
-        if (msg.trim() != "") {
-            layer.msg(msg, {icon: 5, anim: 6, offset: 't'});
-        }
-        $("#code").click(function () {
-            var url = "${re.contextPath}/getCode?" + new Date().getTime();
-            this.src = url;
-        }).click().show();
-        $('#code').on('mouseover', function () {
-            layer.tips('点击刷新验证码', this, {time: 1000});
-        });
-    })
+    var countdown=60;
+    function sendemail(){
+        var obj = $("#register_box");
+        settime(obj);
 
-    if (window != top){
-        top.location.href = location.href;
     }
-
+    function settime(obj) { //发送验证码倒计时
+        if (countdown == 0) {
+            obj.attr('disabled',false);
+            //obj.removeattr("disabled");
+            obj.val("发送验证码");
+            countdown = 60;
+            return;
+        } else {
+            obj.attr('disabled',true);
+            obj.val("已发送(" + countdown + ")");
+            countdown--;
+        }
+        setTimeout(function() {
+                settime(obj) }
+            ,1000)
+    }
 </script>
 
 

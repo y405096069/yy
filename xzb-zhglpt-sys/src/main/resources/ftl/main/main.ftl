@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
@@ -165,6 +164,7 @@
             请稍等...
         </div>
     </div>
+</div>
     <script>
         $("#rePass").click(function () {
             addOpen('user-rePwd', '修改密码', 'user/goRePass?id=${curentUser.id}', 500, 350);
