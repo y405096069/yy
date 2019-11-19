@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.AchievementMapper">
+
+
+
+    <resultMap id="BaseResultMap" type="com.nfdw.entity.Examination">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <id column="certificate" jdbcType="INTEGER" property="certificate" />
+        <id column="grade" jdbcType="INTEGER" property="grade" />
+        <id column="grade2" jdbcType="INTEGER" property="grade2" />
+        <id column="status" jdbcType="INTEGER" property="status" />
+        <id column="types" jdbcType="INTEGER" property="types" />
+        <id column="current1" jdbcType="INTEGER" property="current1" />
+        <id column="college_id" jdbcType="INTEGER" property="college_id" />
+        <!--<id column="crade_id" jdbcType="INTEGER" property="crade_id" />-->
+        <id column="report_setting" jdbcType="INTEGER" property="report_setting" />
+
+        <id column="exam" jdbcType="VARCHAR" property="exam" />
+        <id column="number_limitation" jdbcType="VARCHAR" property="number_limitation" />
+        <id column="specialty_id" jdbcType="VARCHAR" property="specialty_id" />
+        <id column="specialty_name" jdbcType="VARCHAR" property="specialty_name" />
+        <id column="subject_id" jdbcType="VARCHAR" property="subject_id" />
+        <id column="father_id" jdbcType="VARCHAR" property="father_id" />
+        <id column="province_id" jdbcType="VARCHAR" property="province_id" />
+        <id column="gathering_id" jdbcType="INTEGER" property="gathering_id" />
+        <id column="crade" jdbcType="INTEGER" property="crade" />
+        <id column="subject_stint" jdbcType="VARCHAR" property="subject_stint" />
+        <!--<id column="first_test" jdbcType="VARCHAR" property="first_test" />
+        <id column="total_score" jdbcType="VARCHAR" property="total_score" />-->
+        <id column="prologue" jdbcType="VARCHAR" property="prologue" />
+        <id column="version1" jdbcType="VARCHAR" property="version1" />
+        <id column="create_enclosure" jdbcType="VARCHAR" property="create_enclosure" />
+        <id column="create_disclaimer" jdbcType="VARCHAR" property="create_disclaimer" />
+        <id column="create_watermark" jdbcType="VARCHAR" property="create_watermark" />
+        <id column="remarks" jdbcType="VARCHAR" property="remarks" />
+        <!--<id column="total_ratio" jdbcType="VARCHAR" property="total_ratio" />-->
+        <id column="build" jdbcType="VARCHAR" property="build" />
+        <id column="people_num" jdbcType="VARCHAR" property="people_num" />
+
+        <id column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+        <id column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+        <id column="exam_time" jdbcType="TIMESTAMP" property="exam_time" />
+        <id column="end_time" jdbcType="TIMESTAMP" property="end_time" />
+        <id column="create_start_time" jdbcType="VARCHAR" property="create_start_time" />
+        <id column="create_end_time" jdbcType="VARCHAR" property="create_end_time" />
+
+        <id column="prcie" jdbcType="DOUBLE" property="prcie" />
+        <id column="retestPrcie" jdbcType="DOUBLE" property="retestPrcie" />
+
+        <id column="subject_q_fen" jdbcType="INTEGER" property="subject_q_fen" />
+        <id column="father_q_fen" jdbcType="INTEGER" property="father_q_fen" />
+        <id column="subject_q_fen_child" jdbcType="VARCHAR" property="subject_q_fen_child" />
+        <id column="father_q_fen_child" jdbcType="VARCHAR" property="father_q_fen_child" />
+        <id column="subject_k_d_zong" jdbcType="VARCHAR" property="subject_k_d_zong" />
+        <id column="father_k_d_zong" jdbcType="VARCHAR" property="father_k_d_zong" />
+
+    </resultMap>
+
+
+    <select id="selectListByPage" parameterType="com.nfdw.entity.Examination" resultMap="BaseResultMap">
+        select * from crea_exam where 1=1
+        <if test="id !=null and id != 0">
+            and id = #{id}
+        </if>
+        <if test="specialty_id !=null and specialty_id != 0">
+            and specialty_id = #{specialty_id}
+        </if>
+        <if test="grade !=null and grade != ''">
+            and grade = #{grade}
+        </if>
+        <if test="province_id!=null and province_id !='0'">
+            and grade = #{grade}
+        </if>
+        <if test="exam != null and exam != ''">
+            and exam like CONCAT('%',#{exam},'%')
+        </if>
+    </select>
+
+    <update id="updateGrade_switch">
+        update crea_exam set grade=#{grade} where id=#{id}
+    </update>
+
+    <insert id="addFirstGrade">
+        insert into achievement_summary(exam_id,id_card,name,gender,high_province,examinee_num,ticket_num
+        ,wl_subject,professional_code,professional_name,national_rankings,national_same_name,provincial_ranking
+        ,provincial_same_name,qualified_mark,qualified_line
+        ,first_subjects_total,complex_subjects_total,total_score,remarks
+        ,first_subjects_id1,first_subjects_name1,first_subjects_achieve1,first_subjects_achieve_ex1
+        ,first_subjects_id2,first_subjects_name2,first_subjects_achieve2,first_subjects_achieve_ex2
+        ,first_subjects_id3,first_subjects_name3,first_subjects_achieve3,first_subjects_achieve_ex3
+        ,first_subjects_id4,first_subjects_name4,first_subjects_achieve4,first_subjects_achieve_ex4
+        ,first_subjects_id5,first_subjects_name5,first_subjects_achieve5,first_subjects_achieve_ex5
+        ,first_subjects_id6,first_subjects_name6,first_subjects_achieve6,first_subjects_achieve_ex6
+        ,complex_subjects_id1,complex_subjects_name1,complex_subjects_achieve1,complex_subjects_achieve_ex1
+        ,complex_subjects_id2,complex_subjects_name2,complex_subjects_achieve2,complex_subjects_achieve_ex2
+        ,complex_subjects_id3,complex_subjects_name3,complex_subjects_achieve3,complex_subjects_achieve_ex3
+        ,complex_subjects_id4,complex_subjects_name4,complex_subjects_achieve4,complex_subjects_achieve_ex4
+        ,complex_subjects_id5,complex_subjects_name5,complex_subjects_achieve5,complex_subjects_achieve_ex5
+        ,complex_subjects_id6,complex_subjects_name6,complex_subjects_achieve6,complex_subjects_achieve_ex6)
+        values(#{exam_id},#{id_card},#{name},#{gender},#{high_province},#{examinee_num},#{ticket_num},#{wl_subject}
+        ,#{professional_code},#{professional_name},#{national_rankings},#{national_same_name},#{provincial_ranking}
+        ,#{provincial_same_name},#{qualified_mark},#{qualified_line}
+        ,#{first_subjects_total},#{complex_subjects_total},#{total_score},#{remarks}
+        ,#{first_subjects_id1},#{first_subjects_name1},#{first_subjects_achieve1},#{first_subjects_achieve_ex1}
+        ,#{first_subjects_id2},#{first_subjects_name2},#{first_subjects_achieve2},#{first_subjects_achieve_ex2}
+        ,#{first_subjects_id3},#{first_subjects_name3},#{first_subjects_achieve3},#{first_subjects_achieve_ex3}
+        ,#{first_subjects_id4},#{first_subjects_name4},#{first_subjects_achieve4},#{first_subjects_achieve_ex4}
+        ,#{first_subjects_id5},#{first_subjects_name5},#{first_subjects_achieve5},#{first_subjects_achieve_ex5}
+        ,#{first_subjects_id6},#{first_subjects_name6},#{first_subjects_achieve6},#{first_subjects_achieve_ex6}
+        ,#{complex_subjects_id1},#{complex_subjects_name1},#{complex_subjects_achieve1},#{complex_subjects_achieve_ex1}
+        ,#{complex_subjects_id2},#{complex_subjects_name2},#{complex_subjects_achieve2},#{complex_subjects_achieve_ex2}
+        ,#{complex_subjects_id3},#{complex_subjects_name3},#{complex_subjects_achieve3},#{complex_subjects_achieve_ex3}
+        ,#{complex_subjects_id4},#{complex_subjects_name4},#{complex_subjects_achieve4},#{complex_subjects_achieve_ex4}
+        ,#{complex_subjects_id5},#{complex_subjects_name5},#{complex_subjects_achieve5},#{complex_subjects_achieve_ex5}
+        ,#{complex_subjects_id6},#{complex_subjects_name6},#{complex_subjects_achieve6},#{complex_subjects_achieve_ex6})
+    </insert>
+
+    <delete id="delFirstGradeByEId">
+        delete from achievement_summary where exam_id=#{id}
+    </delete>
+
+
+</mapper>
