@@ -96,6 +96,7 @@ public class SysUser {
 
     @Transient
     private String gzarea;
+    @Column(name = "user_type")
     private String user_type;
 
     public String getUser_type() {
