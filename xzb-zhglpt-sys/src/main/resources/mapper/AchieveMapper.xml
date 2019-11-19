@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.AchieveMapper">
+
+
+
+    <resultMap id="BaseResultMap" type="com.nfdw.entity.Achievement_Summary">
+
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <id column="exam_id" jdbcType="INTEGER" property="exam_id" />
+        <id column="id_card" jdbcType="VARCHAR" property="id_card" />
+        <id column="name" jdbcType="VARCHAR" property="name" />
+        <id column="gender" jdbcType="VARCHAR" property="gender" />
+        <id column="high_province" jdbcType="VARCHAR" property="high_province" />
+        <id column="examinee_num" jdbcType="VARCHAR" property="examinee_num" />
+        <id column="ticket_num" jdbcType="VARCHAR" property="ticket_num" />
+        <id column="wl_subject" jdbcType="VARCHAR" property="wl_subject" />
+        <id column="professional_code" jdbcType="VARCHAR" property="professional_code" />
+        <id column="professional_name" jdbcType="VARCHAR" property="professional_name" />
+        <id column="national_rankings" jdbcType="INTEGER" property="national_rankings" />
+        <id column="national_same_name" jdbcType="VARCHAR" property="national_same_name" />
+        <id column="provincial_ranking" jdbcType="INTEGER" property="provincial_ranking" />
+        <id column="provincial_same_name" jdbcType="VARCHAR" property="provincial_same_name" />
+        <id column="qualified_mark" jdbcType="VARCHAR" property="qualified_mark" />
+        <id column="qualified_line" jdbcType="VARCHAR" property="qualified_line" />
+        <id column="first_subjects_total" jdbcType="DOUBLE" property="first_subjects_total" />
+        <id column="complex_subjects_total" jdbcType="DOUBLE" property="complex_subjects_total" />
+        <id column="total_score" jdbcType="DOUBLE" property="total_score" />
+        <id column="remarks" jdbcType="VARCHAR" property="remarks" />
+
+
+        <id column="first_subjects_id1" jdbcType="INTEGER" property="first_subjects_id1" />
+        <id column="first_subjects_id2" jdbcType="INTEGER" property="first_subjects_id2" />
+        <id column="first_subjects_id3" jdbcType="INTEGER" property="first_subjects_id3" />
+        <id column="first_subjects_id4" jdbcType="INTEGER" property="first_subjects_id4" />
+        <id column="first_subjects_id5" jdbcType="INTEGER" property="first_subjects_id5" />
+        <id column="first_subjects_id6" jdbcType="INTEGER" property="first_subjects_id6" />
+
+        <id column="first_subjects_name1" jdbcType="VARCHAR" property="first_subjects_name1" />
+        <id column="first_subjects_name2" jdbcType="VARCHAR" property="first_subjects_name2" />
+        <id column="first_subjects_name3" jdbcType="VARCHAR" property="first_subjects_name3" />
+        <id column="first_subjects_name4" jdbcType="VARCHAR" property="first_subjects_name4" />
+        <id column="first_subjects_name5" jdbcType="VARCHAR" property="first_subjects_name5" />
+        <id column="first_subjects_name6" jdbcType="VARCHAR" property="first_subjects_name6" />
+
+        <id column="first_subjects_achieve1" jdbcType="DOUBLE" property="first_subjects_achieve1" />
+        <id column="first_subjects_achieve2" jdbcType="DOUBLE" property="first_subjects_achieve2" />
+        <id column="first_subjects_achieve3" jdbcType="DOUBLE" property="first_subjects_achieve3" />
+        <id column="first_subjects_achieve4" jdbcType="DOUBLE" property="first_subjects_achieve4" />
+        <id column="first_subjects_achieve5" jdbcType="DOUBLE" property="first_subjects_achieve5" />
+        <id column="first_subjects_achieve6" jdbcType="DOUBLE" property="first_subjects_achieve6" />
+
+        <id column="first_subjects_achieve_ex1" jdbcType="VARCHAR" property="first_subjects_achieve_ex1" />
+        <id column="first_subjects_achieve_ex2" jdbcType="VARCHAR" property="first_subjects_achieve_ex2" />
+        <id column="first_subjects_achieve_ex3" jdbcType="VARCHAR" property="first_subjects_achieve_ex3" />
+        <id column="first_subjects_achieve_ex4" jdbcType="VARCHAR" property="first_subjects_achieve_ex4" />
+        <id column="first_subjects_achieve_ex5" jdbcType="VARCHAR" property="first_subjects_achieve_ex5" />
+        <id column="first_subjects_achieve_ex6" jdbcType="VARCHAR" property="first_subjects_achieve_ex6" />
+
+        <id column="complex_subjects_id1" jdbcType="INTEGER" property="complex_subjects_id1" />
+        <id column="complex_subjects_id2" jdbcType="INTEGER" property="complex_subjects_id2" />
+        <id column="complex_subjects_id3" jdbcType="INTEGER" property="complex_subjects_id3" />
+        <id column="complex_subjects_id4" jdbcType="INTEGER" property="complex_subjects_id4" />
+        <id column="complex_subjects_id5" jdbcType="INTEGER" property="complex_subjects_id5" />
+        <id column="complex_subjects_id6" jdbcType="INTEGER" property="complex_subjects_id6" />
+
+        <id column="complex_subjects_name1" jdbcType="VARCHAR" property="complex_subjects_name1" />
+        <id column="complex_subjects_name2" jdbcType="VARCHAR" property="complex_subjects_name2" />
+        <id column="complex_subjects_name3" jdbcType="VARCHAR" property="complex_subjects_name3" />
+        <id column="complex_subjects_name4" jdbcType="VARCHAR" property="complex_subjects_name4" />
+        <id column="complex_subjects_name5" jdbcType="VARCHAR" property="complex_subjects_name5" />
+        <id column="complex_subjects_name6" jdbcType="VARCHAR" property="complex_subjects_name6" />
+
+        <id column="complex_subjects_achieve1" jdbcType="DOUBLE" property="complex_subjects_achieve1" />
+        <id column="complex_subjects_achieve2" jdbcType="DOUBLE" property="complex_subjects_achieve2" />
+        <id column="complex_subjects_achieve3" jdbcType="DOUBLE" property="complex_subjects_achieve3" />
+        <id column="complex_subjects_achieve4" jdbcType="DOUBLE" property="complex_subjects_achieve4" />
+        <id column="complex_subjects_achieve5" jdbcType="DOUBLE" property="complex_subjects_achieve5" />
+        <id column="complex_subjects_achieve6" jdbcType="DOUBLE" property="complex_subjects_achieve6" />
+
+        <id column="complex_subjects_achieve_ex1" jdbcType="VARCHAR" property="complex_subjects_achieve_ex1" />
+        <id column="complex_subjects_achieve_ex2" jdbcType="VARCHAR" property="complex_subjects_achieve_ex2" />
+        <id column="complex_subjects_achieve_ex3" jdbcType="VARCHAR" property="complex_subjects_achieve_ex3" />
+        <id column="complex_subjects_achieve_ex4" jdbcType="VARCHAR" property="complex_subjects_achieve_ex4" />
+        <id column="complex_subjects_achieve_ex5" jdbcType="VARCHAR" property="complex_subjects_achieve_ex5" />
+        <id column="complex_subjects_achieve_ex6" jdbcType="VARCHAR" property="complex_subjects_achieve_ex6" />
+
+    </resultMap>
+
+
+    <select id="selectListByPage" parameterType="com.nfdw.entity.Achievement_Summary" resultMap="BaseResultMap">
+        select * from achievement_summary where exam_id=#{ex_id}
+        <!--<if test="id !=null and id != 0">
+            and id = #{id}
+        </if>
+        <if test="specialty_id !=null and specialty_id != 0">
+            and specialty_id = #{specialty_id}
+        </if>
+        <if test="grade !=null and grade != ''">
+            and grade = #{grade}
+        </if>
+        <if test="province_id!=null and province_id !='0'">
+            and grade = #{grade}
+        </if>
+        <if test="exam != null and exam != ''">
+            and exam like CONCAT('%',#{exam},'%')
+        </if>-->
+
+    </select>
+
+
+</mapper>
