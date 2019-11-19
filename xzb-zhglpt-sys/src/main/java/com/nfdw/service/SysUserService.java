@@ -90,4 +90,6 @@ public interface SysUserService extends BaseService<SysUser,String> {
     //激活学生账号验证码，修改状态
     int updatePhoneStatus(String phone,int status);
     String getStudentType(String phone);
+    //用户名查询用户
+    SysUser getSysUserByUsername(String name);
 }

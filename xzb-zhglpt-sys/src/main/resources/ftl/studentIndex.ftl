@@ -243,9 +243,9 @@
                         </div>
                         <p>网上报考</p>
                     </div>
-                    <div class="main-seek" onclick="location.href='${re.contextPath}/studentInformation/getBasicInformation';">
+                    <div class="main-seek" onclick="location.href='${re.contextPath}/studentInformation/getExamQuary';">
                         <div class="main-img">
-                            <i class="layui-icon">&#xe60f;</i> 
+                            <i class="layui-icon">&#xe60f;</i>
                         <!-- 图标选择 -->
                         <#--  <img src="./img/u15.png" alt />  -->
                         </div>

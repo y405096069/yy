@@ -60,7 +60,7 @@ public class StudentInformation {
     private String graduate_middle;
     //考生号码
     private String examinee_number;
-    //文理科
+    //文理科1
     private String subject_type;
     //家庭联络员姓名
     private String member_name;

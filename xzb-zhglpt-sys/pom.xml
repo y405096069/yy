@@ -99,33 +99,44 @@
     </dependencies>
 
 
-    <!-- <build>
-      <resources>
-        <resource>
-          <directory>src/main/java</directory>
-          <includes>
-            <include>**/*.xml</include>
-          </includes>
-        </resource>
-        <resource>
-          <directory>src/main/resources</directory>
-          <includes>
-            <include>**.*</include>
-            <include>**/*.*</include>
-            <include>**/*/*.*</include>
-          </includes>
-        </resource>
-      </resources>
-    </build>
+<!--    <build>-->
+<!--      <resources>-->
+<!--        <resource>-->
+<!--          <directory>src/main/java</directory>-->
+<!--          <includes>-->
+<!--            <include>**/*.*</include>-->
+<!--          </includes>-->
+<!--        </resource>-->
+<!--        <resource>-->
+<!--          <directory>src/main/resources</directory>-->
+<!--          <includes>-->
+<!--            <include>**.*</include>-->
+<!--            <include>**/*.*</include>-->
+<!--            <include>**/*/*.*</include>-->
+<!--          </includes>-->
+<!--        </resource>-->
+<!--      </resources>-->
+<!--    </build>-->
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <fork>true</fork>
-                </configuration>
             </plugin>
         </plugins>
-    </build>-->
+        <resources>
+            <resource>
+                <directory>src/man/java</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
 </project>

@@ -66,4 +66,6 @@ public interface SysUserMapper extends com.nfdw.base.BaseMapper<SysUser, String>
     //激活学生账号验证码，修改状态
     int updatePhoneStatus(@Param("phone") String phone, @Param("status") int status);
     String getStudentType(String phone);
+    //ID查询用户类
+    SysUser getSysUserByUsername(@Param("username") String username);
 }
