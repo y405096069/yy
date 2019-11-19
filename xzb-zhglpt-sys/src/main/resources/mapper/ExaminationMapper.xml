@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.ExaminationMapper">
+    <resultMap id="BaseResultMap" type="com.nfdw.entity.Examination">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="certificate" jdbcType="INTEGER" property="certificate"/>
+        <id column="grade" jdbcType="INTEGER" property="grade"/>
+        <id column="status" jdbcType="INTEGER" property="status"/>
+        <id column="types" jdbcType="INTEGER" property="types"/>
+        <id column="current1" jdbcType="INTEGER" property="current1"/>
+        <id column="college_id" jdbcType="INTEGER" property="college_id"/>
+        <!--<id column="crade_id" jdbcType="INTEGER" property="crade_id" />-->
+        <id column="report_setting" jdbcType="INTEGER" property="report_setting"/>
+
+        <id column="exam" jdbcType="VARCHAR" property="exam"/>
+        <id column="number_limitation" jdbcType="VARCHAR" property="number_limitation"/>
+        <id column="specialty_id" jdbcType="VARCHAR" property="specialty_id"/>
+        <id column="specialty_name" jdbcType="VARCHAR" property="specialty_name"/>
+        <id column="subject_id" jdbcType="VARCHAR" property="subject_id"/>
+        <id column="father_id" jdbcType="VARCHAR" property="father_id"/>
+        <id column="province_id" jdbcType="VARCHAR" property="province_id"/>
+        <id column="gathering_id" jdbcType="INTEGER" property="gathering_id"/>
+        <id column="crade" jdbcType="INTEGER" property="crade"/>
+        <id column="subject_stint" jdbcType="VARCHAR" property="subject_stint"/>
+        <!--<id column="first_test" jdbcType="VARCHAR" property="first_test" />
+        <id column="total_score" jdbcType="VARCHAR" property="total_score" />-->
+        <id column="prologue" jdbcType="VARCHAR" property="prologue"/>
+        <id column="version1" jdbcType="VARCHAR" property="version1"/>
+        <id column="create_enclosure" jdbcType="VARCHAR" property="create_enclosure"/>
+        <id column="create_disclaimer" jdbcType="VARCHAR" property="create_disclaimer"/>
+        <id column="create_watermark" jdbcType="VARCHAR" property="create_watermark"/>
+        <id column="remarks" jdbcType="VARCHAR" property="remarks"/>
+        <!--<id column="total_ratio" jdbcType="VARCHAR" property="total_ratio" />-->
+        <id column="build" jdbcType="VARCHAR" property="build"/>
+        <id column="people_num" jdbcType="VARCHAR" property="people_num"/>
+
+
+        <id column="create_time" jdbcType="TIMESTAMP" property="create_time"/>
+        <id column="update_time" jdbcType="TIMESTAMP" property="update_time"/>
+        <id column="exam_time" jdbcType="TIMESTAMP" property="exam_time"/>
+        <id column="end_time" jdbcType="TIMESTAMP" property="end_time"/>
+        <id column="create_start_time" jdbcType="VARCHAR" property="create_start_time"/>
+        <id column="create_end_time" jdbcType="VARCHAR" property="create_end_time"/>
+
+
+        <id column="prcie" jdbcType="DOUBLE" property="prcie"/>
+        <id column="retestPrcie" jdbcType="DOUBLE" property="retestPrcie"/>
+
+
+        <id column="subject_q_fen" jdbcType="INTEGER" property="subject_q_fen"/>
+        <id column="father_q_fen" jdbcType="INTEGER" property="father_q_fen"/>
+        <id column="subject_q_fen_child" jdbcType="VARCHAR" property="subject_q_fen_child"/>
+        <id column="father_q_fen_child" jdbcType="VARCHAR" property="father_q_fen_child"/>
+        <id column="subject_k_d_zong" jdbcType="VARCHAR" property="subject_k_d_zong"/>
+        <id column="father_k_d_zong" jdbcType="VARCHAR" property="father_k_d_zong"/>
+
+        <id column="huchi" jdbcType="INTEGER" property="huchi"/>
+        <id column="check_pay" jdbcType="INTEGER" property="check_pay"/>
+        <id column="retest_type" jdbcType="INTEGER" property="retest_type"/>
+        <id column="grade2" jdbcType="INTEGER" property="grade2"/>
+        <id column="prologue_tem" jdbcType="VARCHAR" property="prologue_tem"/>
+        <id column="prologue_remarks" jdbcType="VARCHAR" property="prologue_remarks"/>
+
+
+    </resultMap>
+
+    <sql id="examColumn">
+        <trim suffix="" suffixOverrides=",">
+            <if test="id!=null">
+                id,
+            </if>
+            <if test="certificate!=null">
+                certificate,
+            </if>
+            <if test="grade!=null">
+                grade,
+            </if>
+            <if test="status!=null">
+                status,
+            </if>
+            <if test="types!=null">
+                types,
+            </if>
+            <if test="current1 != null">
+                current1,
+            </if>
+            <if test="college_id != null">
+                college_id,
+            </if>
+            <!--<if test="crade_id != null">
+                crade_id,
+            </if>-->
+            <if test="report_setting != null">
+                report_setting,
+            </if>
+            <if test="exam != null">
+                exam,
+            </if>
+            <if test="number_limitation != null">
+                number_limitation,
+            </if>
+            <if test="specialty_id != null">
+                specialty_id,
+            </if>
+            <if test="specialty_name != null">
+                specialty_name,
+            </if>
+            <if test="subject_id != null">
+                subject_id,
+            </if>
+            <if test="father_id != null">
+                father_id,
+            </if>
+            <if test="province_id != null">
+                province_id,
+            </if>
+            <if test="gathering_id != null">
+                gathering_id,
+            </if>
+            <if test="crade != null">
+                crade,
+            </if>
+            <if test="subject_stint != null">
+                subject_stint,
+            </if>
+            <!--<if test="first_test != null">
+                first_test,
+            </if>
+            <if test="total_score != null">
+                total_score,
+            </if>-->
+            <if test="prologue != null">
+                prologue,
+            </if>
+            <if test="version1 != null">
+                version1,
+            </if>
+            <if test="create_enclosure != null">
+                create_enclosure,
+            </if>
+            <if test="create_disclaimer != null">
+                create_disclaimer,
+            </if>
+            <if test="create_watermark != null">
+                create_watermark,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <!--<if test="total_ratio != null">
+                total_ratio,
+            </if>-->
+            <if test="build != null">
+                build,
+            </if>
+            <if test="create_time != null">
+                create_time,
+            </if>
+            <if test="update_time != null">
+                update_time,
+            </if>
+            <if test="exam_time != null">
+                exam_time,
+            </if>
+            <if test="end_time != null">
+                end_time,
+            </if>
+            <if test="create_start_time != null">
+                create_start_time,
+            </if>
+            <if test="create_end_time != null">
+                create_end_time,
+            </if>
+
+            <if test="prcie != null">
+                prcie,
+            </if>
+            <if test="retestPrcie != null">
+                retestPrcie,
+            </if>
+            <if test="people_num != null">
+                people_num,
+            </if>
+            <if test="subject_q_fen != null">
+                subject_q_fen,
+            </if>
+            <if test="father_q_fen != null">
+                father_q_fen,
+            </if>
+            <if test="subject_q_fen_child != null">
+                subject_q_fen_child,
+            </if>
+            <if test="father_q_fen_child != null">
+                father_q_fen_child,
+            </if>
+            <if test="subject_k_d_zong != null">
+                subject_k_d_zong,
+            </if>
+            <if test="father_k_d_zong != null">
+                father_k_d_zong,
+            </if>
+
+            <if test="huchi != null">
+                huchi,
+            </if>
+            <if test="check_pay != null">
+                check_pay,
+            </if>
+            <if test="retest_type != null">
+                retest_type,
+            </if>
+            <if test="grade2 != null">
+                grade2,
+            </if>
+            <if test="prologue_tem != null">
+                prologue_tem,
+            </if>
+             <if test="prologue_remarks != null">
+                 prologue_remarks,
+            </if>
+
+        </trim>
+    </sql>
+
+    <sql id="examValue">
+        <trim suffix="" suffixOverrides=",">
+            <if test="id!=null">
+                #{id},
+            </if>
+            <if test="certificate!=null">
+                #{certificate} ,
+            </if>
+            <if test="grade!=null">
+                #{grade} ,
+            </if>
+            <if test="status!=null">
+                #{status} ,
+            </if>
+            <if test="types!=null">
+                #{types},
+            </if>
+            <if test="current1 != null">
+                #{current1},
+            </if>
+            <if test="college_id != null">
+                #{college_id},
+            </if>
+            <!--<if test="crade_id != null">
+                #{crade_id},
+            </if>-->
+            <if test="report_setting != null">
+                #{report_setting} ,
+            </if>
+            <if test="exam != null">
+                #{exam} ,
+            </if>
+            <if test="number_limitation != null">
+                #{number_limitation} ,
+            </if>
+            <if test="specialty_id != null">
+                #{specialty_id},
+            </if>
+            <if test="specialty_name != null">
+                #{specialty_name} ,
+            </if>
+            <if test="subject_id != null">
+                #{subject_id},
+            </if>
+            <if test="father_id != null">
+                #{father_id},
+            </if>
+            <if test="province_id != null">
+                #{province_id},
+            </if>
+            <if test="gathering_id != null">
+                #{gathering_id} ,
+            </if>
+            <if test="crade != null">
+                #{crade},
+            </if>
+            <if test="subject_stint != null">
+                #{subject_stint} ,
+            </if>
+            <!--  <if test="first_test != null">
+                  #{first_test},
+              </if>-->
+            <!-- <if test="total_score != null">
+                 #{total_score},
+             </if>-->
+            <if test="prologue != null">
+                #{prologue},
+            </if>
+            <if test="version1 != null">
+                #{version1},
+            </if>
+            <if test="create_enclosure != null">
+                #{create_enclosure} ,
+            </if>
+            <if test="create_disclaimer != null">
+                #{create_disclaimer},
+            </if>
+            <if test="create_watermark != null">
+                #{create_watermark},
+            </if>
+            <if test="remarks != null">
+                #{remarks} ,
+            </if>
+            <!--<if test="total_ratio != null">
+                #{total_ratio},
+            </if>-->
+            <if test="build != null">
+                #{build} ,
+            </if>
+            <if test="create_time != null">
+                #{create_time},
+            </if>
+            <if test="update_time != null">
+                #{update_time},
+            </if>
+            <if test="exam_time != null">
+                #{exam_time} ,
+            </if>
+            <if test="end_time != null">
+                #{end_time} ,
+            </if>
+            <if test="create_start_time != null">
+                #{create_start_time} ,
+            </if>
+            <if test="create_end_time != null">
+                #{create_end_time} ,
+            </if>
+
+            <if test="prcie != null">
+                #{prcie} ,
+            </if>
+            <if test="retestPrcie != null">
+                #{retestPrcie} ,
+            </if>
+            <if test="people_num != null">
+                #{people_num} ,
+            </if>
+
+            <if test="subject_q_fen != null">
+                #{subject_q_fen},
+            </if>
+            <if test="father_q_fen != null">
+                #{father_q_fen},
+            </if>
+            <if test="subject_q_fen_child != null">
+                #{subject_q_fen_child},
+            </if>
+            <if test="father_q_fen_child != null">
+                #{father_q_fen_child},
+            </if>
+            <if test="subject_k_d_zong != null">
+                #{subject_k_d_zong},
+            </if>
+            <if test="father_k_d_zong != null">
+                #{father_k_d_zong},
+            </if>
+            <if test="huchi != null">
+                #{huchi},
+            </if>
+            <if test="check_pay != null">
+                #{check_pay},
+            </if>
+            <if test="retest_type != null">
+                #{retest_type},
+            </if>
+
+            <if test="grade2 != null">
+                #{grade2},
+            </if>
+            <if test="prologue_tem != null">
+                #{prologue_tem},
+            </if>
+             <if test="prologue_remarks != null">
+                #{prologue_remarks},
+            </if>
+        </trim>
+    </sql>
+
+    <select id="selectListByPage" parameterType="com.nfdw.entity.Examination" resultMap="BaseResultMap">
+        SELECT *
+        from crea_exam where 1 = 1
+        <!--   <where>
+               del_flag=0
+               <if test="username!=null and username!=''">and username like '%${username}%'</if>
+               <if test="email!=null and email!=''">and email like '%${email}%'</if>
+           </where>-->
+    </select>
+
+    <select id="count" resultType="java.lang.Integer">
+    select count(*) from crea_exam
+    </select>
+
+    <insert id="addExamination" parameterType="com.nfdw.entity.Examination">
+        insert into crea_exam(
+        <include refid="examColumn"/>
+        ) values (
+        <include refid="examValue"/>
+        )
+    </insert>
+
+    <select id="queryInfoById" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select * from crea_exam where id=#{id,javaType=String,jdbcType=VARCHAR};
+  </select>
+<!--
+    <update id="uplateById" parameterType="java.lang.String">
+        update crea_exam set <include refid="examColumn"/><include refid="examValue"/> where id = #{id};
+    </update>-->
+
+
+    <delete id="deleteById" parameterType="java.lang.String">
+    delete from crea_exam where id=#{id}
+    </delete>
+
+    <select id="selectInforById" resultType="com.nfdw.entity.Infor_collection">
+        select * from infor_collection
+    </select>
+
+    <!--专业管理表-->
+    <select id="selectBySpec" resultType="com.nfdw.entity.SpecManagement">
+
+      select * from spec_management
+
+    </select>
+
+    <!--查询科目-->
+    <select id="selectBySubject" resultType="com.nfdw.entity.Subject">
+        select * from subject
+    </select>
+
+</mapper>

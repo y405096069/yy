@@ -12,7 +12,7 @@ import java.util.Date;
 
 /**
  * @Auther: EagleJunBin
- * @Date: 2019/11/17
+ * @Date: 2019/11/12
  * @Description: 考试管理
  */
 
@@ -40,10 +40,10 @@ public class Examination {
     private String province_id;//生源地限制 省ID 多个用逗号隔开 <list>
 
     @Column(name = "gathering_id")
-    private int gathering_id;//信息采集模板
+    private Integer gathering_id;//信息采集模板
 
     @Column(name = "crade")
-    private int crade;//入围分数
+    private Integer crade;//入围分数
 
     @Column(name = "subject_stint")
     private String subject_stint;//科目限制
@@ -58,18 +58,22 @@ public class Examination {
     private Integer certificate;//合格证  0- 未开启 1- 开启
 
     @Column(name = "grade")
-    private Integer grade; //初始成绩查询状态  0 - 关闭  1- 开启
+    private Integer grade; //成绩查询状态  0 - 关闭  1- 开启
 
     @Column(name = "grade2")
     private Integer grade2; //复试成绩查询状态  0 - 关闭  1- 开启
-
-
 
     @Column(name = "status")
     private Integer status;//考试状态  0 - 暂存  1- 开启
 
     @Column(name = "prologue")
     private String prologue;//准考证前序
+
+    @Column(name = "prologue_tem")
+    private String prologue_tem;//准考证模板
+
+    @Column(name = "prologue_remarks")
+    private String prologue_remarks;//准考证备注
 
     @Column(name = "version1")
     private String version1;//招生简章
@@ -79,6 +83,9 @@ public class Examination {
 
     @Column(name = "retestPrcie")
     private Double retestPrcie;//复试报名费
+
+    @Column(name = "retest_type")
+    private int retest_type; //复试报名费 0：开 1：关
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -146,6 +153,9 @@ public class Examination {
     @Column(name = "report_setting")
     private Integer report_setting;//兼报设置 0是 1否
 
+    @Column(name = "huchi")
+    private Integer huchi;//互斥设置 0是 1否
+
 
     @Column(name = "subject_id")
     private String subject_id;//初试科目ID 多个   list
@@ -154,17 +164,21 @@ public class Examination {
     private String father_id;//复试科目ID多个     list
 
 
+    @Column(name = "check_pay")
+    private Integer check_pay;//审核费用 0:交费钱 1：交费后
+
+
 
 
 
 
     //初试科目权重分值
     @Column(name = "subject_q_fen")
-    private int subject_q_fen;
+    private Integer subject_q_fen;
 
     //复试科目权重分值
     @Column(name = "father_q_fen")
-    private int father_q_fen;
+    private Integer father_q_fen;
 
     //科目权重占比（初试）（子） list
     @Column(name = "subject_q_fen_child")
