@@ -4005,3 +4005,926 @@
 2019-11-19 13:33:51.418 DEBUG 5160 --- [https-jsse-nio-4430-exec-6] com.nfdw.mapper.SysLogMapper.insert      : <==    Updates: 1
 2019-11-19 13:33:51.420  INFO 5160 --- [https-jsse-nio-4430-exec-6] com.nfdw.config.ZBeanFactory             : 对象---studentIndex---初始化开始
 2019-11-19 13:33:51.420  INFO 5160 --- [https-jsse-nio-4430-exec-6] com.nfdw.config.ZBeanFactory             : 对象---studentIndex---初始化成功
+2019-11-19 20:01:42.930  INFO 68752 --- [main] o.a.shiro.cache.ehcache.EhCacheManager   : Using existing EHCache named [loginRetryCache]
+2019-11-19 20:01:43.880  WARN 68752 --- [main] t.m.m.m.resolve.DefaultEntityResolve     : 通用 Mapper 警告信息: <[EntityColumn{table=sys_user, property='delFlag', column='del_flag', javaType=int, jdbcType=null, typeHandler=null, id=false, identity=false, blob=false, generator='null', orderBy='null', insertable=true, updatable=true, order=DEFAULT}]> 使用了基本类型，基本类型在动态 SQL 中由于存在默认值，因此任何时候都不等于 null，建议修改基本类型为对应的包装类型!
+2019-11-19 20:01:44.571  INFO 68752 --- [main] o.a.shiro.cache.ehcache.EhCacheManager   : Cache with name 'com.nfdw.core.shiro.LoginRealm.authorizationCache' does not yet exist.  Creating now.
+2019-11-19 20:01:44.602  INFO 68752 --- [main] o.a.shiro.cache.ehcache.EhCacheManager   : Added EhCache named [com.nfdw.core.shiro.LoginRealm.authorizationCache]
+2019-11-19 20:01:45.571  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---application---初始化开始
+2019-11-19 20:01:45.571  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---application---初始化成功
+2019-11-19 20:01:45.665  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---httpConnector---初始化开始
+2019-11-19 20:01:45.743  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---httpConnector---初始化成功
+2019-11-19 20:01:45.774  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tomcatServletWebServerFactory---初始化开始
+2019-11-19 20:01:45.790  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration$TomcatWebSocketConfiguration---初始化开始
+2019-11-19 20:01:45.790  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration$TomcatWebSocketConfiguration---初始化成功
+2019-11-19 20:01:45.805  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---websocketContainerCustomizer---初始化开始
+2019-11-19 20:01:45.805  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---websocketContainerCustomizer---初始化成功
+2019-11-19 20:01:45.805  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration---初始化开始
+2019-11-19 20:01:45.805  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.ServletWebServerFactoryAutoConfiguration---初始化成功
+2019-11-19 20:01:45.837  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---server-org.springframework.boot.autoconfigure.web.ServerProperties---初始化开始
+2019-11-19 20:01:45.837  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---server-org.springframework.boot.autoconfigure.web.ServerProperties---初始化成功
+2019-11-19 20:01:45.837  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---servletWebServerFactoryCustomizer---初始化开始
+2019-11-19 20:01:45.837  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---servletWebServerFactoryCustomizer---初始化成功
+2019-11-19 20:01:45.852  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tomcatServletWebServerFactoryCustomizer---初始化开始
+2019-11-19 20:01:45.852  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tomcatServletWebServerFactoryCustomizer---初始化成功
+2019-11-19 20:01:45.852  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration$TomcatWebServerFactoryCustomizerConfiguration---初始化开始
+2019-11-19 20:01:45.852  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration$TomcatWebServerFactoryCustomizerConfiguration---初始化成功
+2019-11-19 20:01:45.868  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tomcatWebServerFactoryCustomizer---初始化开始
+2019-11-19 20:01:45.868  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tomcatWebServerFactoryCustomizer---初始化成功
+2019-11-19 20:01:45.883  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.http.encoding-org.springframework.boot.autoconfigure.http.HttpEncodingProperties---初始化开始
+2019-11-19 20:01:45.883  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.http.encoding-org.springframework.boot.autoconfigure.http.HttpEncodingProperties---初始化成功
+2019-11-19 20:01:45.883  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration---初始化开始
+2019-11-19 20:01:45.899  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.HttpEncodingAutoConfiguration---初始化成功
+2019-11-19 20:01:45.899  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---localeCharsetMappingsCustomizer---初始化开始
+2019-11-19 20:01:45.899  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---localeCharsetMappingsCustomizer---初始化成功
+2019-11-19 20:01:45.930  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---customErrorViewResolver---初始化开始
+2019-11-19 20:01:45.930  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---customErrorViewResolver---初始化成功
+2019-11-19 20:01:45.946  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.resources-org.springframework.boot.autoconfigure.web.ResourceProperties---初始化开始
+2019-11-19 20:01:45.946  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.resources-org.springframework.boot.autoconfigure.web.ResourceProperties---初始化成功
+2019-11-19 20:01:45.961  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration$DefaultErrorViewResolverConfiguration---初始化开始
+2019-11-19 20:01:45.961  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration$DefaultErrorViewResolverConfiguration---初始化成功
+2019-11-19 20:01:45.977  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---conventionErrorViewResolver---初始化开始
+2019-11-19 20:01:45.977  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---conventionErrorViewResolver---初始化成功
+2019-11-19 20:01:45.977  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration---初始化开始
+2019-11-19 20:01:45.977  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration---初始化成功
+2019-11-19 20:01:45.993  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---errorPageCustomizer---初始化开始
+2019-11-19 20:01:45.993  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---errorPageCustomizer---初始化成功
+2019-11-19 20:01:46.071  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tomcatServletWebServerFactory---初始化成功
+2019-11-19 20:01:46.258  INFO 68752 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-11-19 20:01:46.258  INFO 68752 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/8.5.29
+2019-11-19 20:01:46.258  INFO 68752 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : Loaded APR based Apache Tomcat Native library [1.2.16] using APR version [1.6.3].
+2019-11-19 20:01:46.258  INFO 68752 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2019-11-19 20:01:46.258  INFO 68752 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2019-11-19 20:01:47.327  INFO 68752 --- [localhost-startStop-1] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.0.2m  2 Nov 2017]
+2019-11-19 20:01:47.523  INFO 68752 --- [localhost-startStop-1] o.a.c.c.C.[.[localhost].[/xzb-zhglpt]    : Initializing Spring embedded WebApplicationContext
+2019-11-19 20:01:47.555  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---filterRegistrationBean---初始化开始
+2019-11-19 20:01:47.571  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---filterRegistrationBean---初始化成功
+2019-11-19 20:01:47.602  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---druidServlet---初始化开始
+2019-11-19 20:01:47.636  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---druidServlet---初始化成功
+2019-11-19 20:01:47.646  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---spring.mvc-org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties---初始化开始
+2019-11-19 20:01:47.646  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---spring.mvc-org.springframework.boot.autoconfigure.web.servlet.WebMvcProperties---初始化成功
+2019-11-19 20:01:47.646  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---spring.servlet.multipart-org.springframework.boot.autoconfigure.web.servlet.MultipartProperties---初始化开始
+2019-11-19 20:01:47.646  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---spring.servlet.multipart-org.springframework.boot.autoconfigure.web.servlet.MultipartProperties---初始化成功
+2019-11-19 20:01:47.662  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration---初始化开始
+2019-11-19 20:01:47.662  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.MultipartAutoConfiguration---初始化成功
+2019-11-19 20:01:47.678  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---multipartConfigElement---初始化开始
+2019-11-19 20:01:47.678  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---multipartConfigElement---初始化成功
+2019-11-19 20:01:47.678  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration$DispatcherServletRegistrationConfiguration---初始化开始
+2019-11-19 20:01:47.678  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration$DispatcherServletRegistrationConfiguration---初始化成功
+2019-11-19 20:01:47.693  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration$DispatcherServletConfiguration---初始化开始
+2019-11-19 20:01:47.693  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration$DispatcherServletConfiguration---初始化成功
+2019-11-19 20:01:47.724  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---dispatcherServlet---初始化开始
+2019-11-19 20:01:47.849  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---dispatcherServlet---初始化成功
+2019-11-19 20:01:47.881  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---dispatcherServletRegistration---初始化开始
+2019-11-19 20:01:47.896  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---dispatcherServletRegistration---初始化成功
+2019-11-19 20:01:47.896  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---com.alibaba.druid.spring.boot.autoconfigure.stat.DruidStatViewServletConfiguration---初始化开始
+2019-11-19 20:01:47.896  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---com.alibaba.druid.spring.boot.autoconfigure.stat.DruidStatViewServletConfiguration---初始化成功
+2019-11-19 20:01:47.896  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---statViewServletRegistrationBean---初始化开始
+2019-11-19 20:01:47.912  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---statViewServletRegistrationBean---初始化成功
+2019-11-19 20:01:47.927  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---com.alibaba.druid.spring.boot.autoconfigure.stat.DruidWebStatFilterConfiguration---初始化开始
+2019-11-19 20:01:47.927  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---com.alibaba.druid.spring.boot.autoconfigure.stat.DruidWebStatFilterConfiguration---初始化成功
+2019-11-19 20:01:47.927  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---webStatFilterRegistrationBean---初始化开始
+2019-11-19 20:01:47.943  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---webStatFilterRegistrationBean---初始化成功
+2019-11-19 20:01:48.006  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---shiroFilter---初始化成功
+2019-11-19 20:01:48.037  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---characterEncodingFilter---初始化开始
+2019-11-19 20:01:48.052  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---characterEncodingFilter---初始化成功
+2019-11-19 20:01:48.068  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---myServletContextListener---初始化开始
+2019-11-19 20:01:48.068  INFO 68752 --- [localhost-startStop-1] com.nfdw.config.ZBeanFactory             : 对象---myServletContextListener---初始化成功
+2019-11-19 20:01:48.162  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.context.event.internalEventListenerProcessor---初始化开始
+2019-11-19 20:01:48.177  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.context.event.internalEventListenerProcessor---初始化成功
+2019-11-19 20:01:48.177  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.context.event.internalEventListenerFactory---初始化开始
+2019-11-19 20:01:48.177  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.context.event.internalEventListenerFactory---初始化成功
+2019-11-19 20:01:48.193  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---beanFactoryImpl---初始化开始
+2019-11-19 20:01:48.193  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---beanFactoryImpl---初始化成功
+2019-11-19 20:01:48.193  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---beanName---初始化开始
+2019-11-19 20:01:48.193  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---beanName---初始化成功
+2019-11-19 20:01:48.209  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---freeMarkerConfig---初始化开始
+2019-11-19 20:01:48.209  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---freeMarkerConfig---初始化成功
+2019-11-19 20:01:48.224  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.freemarker-org.springframework.boot.autoconfigure.freemarker.FreeMarkerProperties---初始化开始
+2019-11-19 20:01:48.240  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.freemarker-org.springframework.boot.autoconfigure.freemarker.FreeMarkerProperties---初始化成功
+2019-11-19 20:01:48.256  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.freemarker.FreeMarkerServletWebConfiguration---初始化开始
+2019-11-19 20:01:48.256  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.freemarker.FreeMarkerServletWebConfiguration---初始化成功
+2019-11-19 20:01:48.358  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---freemarkerConfig---初始化开始
+2019-11-19 20:01:48.358  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---freemarkerConfig---初始化成功
+2019-11-19 20:01:48.398  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---freeMarkerConfiguration---初始化开始
+2019-11-19 20:01:48.467  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---freeMarkerConfiguration---初始化成功
+2019-11-19 20:01:48.483  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---freemarkerShiroConfig---初始化开始
+2019-11-19 20:01:48.499  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---freemarkerShiroConfig---初始化成功
+2019-11-19 20:01:48.499  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---logConfig---初始化开始
+2019-11-19 20:01:48.499  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---logConfig---初始化成功
+2019-11-19 20:01:48.499  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---OAConfig---初始化开始
+2019-11-19 20:01:48.514  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---OAConfig---初始化成功
+2019-11-19 20:01:48.514  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerConfig---初始化开始
+2019-11-19 20:01:48.514  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerConfig---初始化成功
+2019-11-19 20:01:48.530  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---webMvcConfig---初始化开始
+2019-11-19 20:01:48.546  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---webMvcConfig---初始化成功
+2019-11-19 20:01:48.561  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---oaDataSource---初始化开始
+2019-11-19 20:01:48.733  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker---初始化开始
+2019-11-19 20:01:48.749  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker---初始化成功
+2019-11-19 20:01:48.910  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---oaDataSource---初始化成功
+2019-11-19 20:01:48.926  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---oaSqlSessionFactory---初始化开始
+2019-11-19 20:01:48.926  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---oaSqlSessionFactory---初始化成功
+2019-11-19 20:01:48.941  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sqlSessionTemplete---初始化开始
+2019-11-19 20:01:48.941  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sqlSessionTemplete---初始化成功
+2019-11-19 20:01:48.941  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---daoSupport---初始化开始
+2019-11-19 20:01:48.973  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---daoSupport---初始化成功
+2019-11-19 20:01:48.988  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dictionaryMapper---初始化开始
+2019-11-19 20:01:49.035  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dictionaryMapper---初始化成功
+2019-11-19 20:01:49.051  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dictionaryMapper---初始化成功
+2019-11-19 20:01:49.051  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dictionaryServiceImpl---初始化开始
+2019-11-19 20:01:49.113  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dictionaryServiceImpl---初始化成功
+2019-11-19 20:01:49.129  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springUtil---初始化开始
+2019-11-19 20:01:49.129  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springUtil---初始化成功
+2019-11-19 20:01:49.129  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---uploadUtil---初始化开始
+2019-11-19 20:01:49.129  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---uploadUtil---初始化成功
+2019-11-19 20:01:49.160  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysDepartmentMapper---初始化开始
+2019-11-19 20:01:49.191  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysDepartmentMapper---初始化成功
+2019-11-19 20:01:49.207  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysDepartmentMapper---初始化成功
+2019-11-19 20:01:49.207  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---departmentServiceImpl---初始化开始
+2019-11-19 20:01:49.285  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---departmentServiceImpl---初始化成功
+2019-11-19 20:01:49.301  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---authenticationMapper---初始化开始
+2019-11-19 20:01:49.358  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---authenticationMapper---初始化成功
+2019-11-19 20:01:49.358  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---authenticationMapper---初始化成功
+2019-11-19 20:01:49.358  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---authenticationServiceImpl---初始化开始
+2019-11-19 20:01:49.420  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---authenticationServiceImpl---初始化成功
+2019-11-19 20:01:49.420  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---authenticationController---初始化开始
+2019-11-19 20:01:49.451  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---authenticationController---初始化成功
+2019-11-19 20:01:49.467  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blacklisMapper---初始化开始
+2019-11-19 20:01:49.514  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blacklisMapper---初始化成功
+2019-11-19 20:01:49.514  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blacklisMapper---初始化成功
+2019-11-19 20:01:49.514  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blacklisServicImpl---初始化开始
+2019-11-19 20:01:49.561  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blacklisServicImpl---初始化成功
+2019-11-19 20:01:49.561  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blacklistController---初始化开始
+2019-11-19 20:01:49.576  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blacklistController---初始化成功
+2019-11-19 20:01:49.592  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---configController---初始化开始
+2019-11-19 20:01:49.592  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---configController---初始化成功
+2019-11-19 20:01:49.623  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataManageMapper---初始化开始
+2019-11-19 20:01:49.623  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataManageMapper---初始化成功
+2019-11-19 20:01:49.623  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataManageMapper---初始化成功
+2019-11-19 20:01:49.623  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataManagementServiceImpl---初始化开始
+2019-11-19 20:01:49.638  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataManagementServiceImpl---初始化成功
+2019-11-19 20:01:49.654  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataManagementController---初始化开始
+2019-11-19 20:01:49.654  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataManagementController---初始化成功
+2019-11-19 20:01:49.669  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---departmentController---初始化开始
+2019-11-19 20:01:49.685  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---departmentController---初始化成功
+2019-11-19 20:01:49.701  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dictionaryController---初始化开始
+2019-11-19 20:01:49.716  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dictionaryController---初始化成功
+2019-11-19 20:01:49.716  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---errorController---初始化开始
+2019-11-19 20:01:49.716  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---errorController---初始化成功
+2019-11-19 20:01:49.748  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---informationPublishMapper---初始化开始
+2019-11-19 20:01:49.794  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---informationPublishMapper---初始化成功
+2019-11-19 20:01:49.810  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---informationPublishMapper---初始化成功
+2019-11-19 20:01:49.810  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---informationPublishServiceImpl---初始化开始
+2019-11-19 20:01:49.873  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---informationPublishServiceImpl---初始化成功
+2019-11-19 20:01:49.888  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---fileMapper---初始化开始
+2019-11-19 20:01:49.951  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---fileMapper---初始化成功
+2019-11-19 20:01:49.951  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---fileMapper---初始化成功
+2019-11-19 20:01:49.951  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---fileServiceImpl---初始化开始
+2019-11-19 20:01:50.013  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---fileServiceImpl---初始化成功
+2019-11-19 20:01:50.029  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration$JdbcStoreTypeConfiguration---初始化开始
+2019-11-19 20:01:50.029  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration$JdbcStoreTypeConfiguration---初始化成功
+2019-11-19 20:01:50.029  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.quartz-org.springframework.boot.autoconfigure.quartz.QuartzProperties---初始化开始
+2019-11-19 20:01:50.044  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.quartz-org.springframework.boot.autoconfigure.quartz.QuartzProperties---初始化成功
+2019-11-19 20:01:50.044  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---quartzDataSourceInitializer---初始化开始
+2019-11-19 20:01:50.442  INFO 68752 --- [main] com.alibaba.druid.pool.DruidDataSource   : {dataSource-1} inited
+2019-11-19 20:01:50.442  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---quartzDataSourceInitializer---初始化成功
+2019-11-19 20:01:50.474  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---myJobFactory---初始化开始
+2019-11-19 20:01:50.474  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---myJobFactory---初始化成功
+2019-11-19 20:01:50.474  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mySchedulerListener---初始化开始
+2019-11-19 20:01:50.474  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mySchedulerListener---初始化成功
+2019-11-19 20:01:50.505  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---schedulerFactoryBean---初始化开始
+2019-11-19 20:01:50.536  INFO 68752 --- [main] org.quartz.impl.StdSchedulerFactory      : Using default implementation for ThreadExecutor
+2019-11-19 20:01:50.536  INFO 68752 --- [main] org.quartz.simpl.SimpleThreadPool        : Job execution threads will use class loader of thread: main
+2019-11-19 20:01:50.552  INFO 68752 --- [main] org.quartz.core.SchedulerSignalerImpl    : Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+2019-11-19 20:01:50.552  INFO 68752 --- [main] org.quartz.core.QuartzScheduler          : Quartz Scheduler v.2.3.0 created.
+2019-11-19 20:01:50.552  INFO 68752 --- [main] org.quartz.simpl.RAMJobStore             : RAMJobStore initialized.
+2019-11-19 20:01:50.567  INFO 68752 --- [main] org.quartz.core.QuartzScheduler          : Scheduler meta-data: Quartz Scheduler (v2.3.0) 'schedulerFactoryBean' with instanceId 'NON_CLUSTERED'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 20 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+2019-11-19 20:01:50.567  INFO 68752 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler 'schedulerFactoryBean' initialized from an externally provided properties instance.
+2019-11-19 20:01:50.567  INFO 68752 --- [main] org.quartz.impl.StdSchedulerFactory      : Quartz scheduler version: 2.3.0
+2019-11-19 20:01:50.567  INFO 68752 --- [main] org.quartz.core.QuartzScheduler          : JobFactory set to: com.nfdw.core.quartz.MyJobFactory@2e426dd2
+2019-11-19 20:01:50.599  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---schedulerFactoryBean---初始化成功
+2019-11-19 20:01:50.599  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jobTask---初始化开始
+2019-11-19 20:01:50.599  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jobTask---初始化成功
+2019-11-19 20:01:50.599  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---informationPublishController---初始化开始
+2019-11-19 20:01:50.630  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---informationPublishController---初始化成功
+2019-11-19 20:01:50.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysJobMapper---初始化开始
+2019-11-19 20:01:50.708  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysJobMapper---初始化成功
+2019-11-19 20:01:50.708  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysJobMapper---初始化成功
+2019-11-19 20:01:50.708  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jobServiceImpl---初始化开始
+2019-11-19 20:01:50.771  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jobServiceImpl---初始化成功
+2019-11-19 20:01:50.771  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jobController---初始化开始
+2019-11-19 20:01:50.786  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jobController---初始化成功
+2019-11-19 20:01:50.802  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysLogMapper---初始化开始
+2019-11-19 20:01:50.849  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysLogMapper---初始化成功
+2019-11-19 20:01:50.864  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysLogMapper---初始化成功
+2019-11-19 20:01:50.864  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---logController---初始化开始
+2019-11-19 20:01:50.864  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---logController---初始化成功
+2019-11-19 20:01:50.880  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---loginController---初始化开始
+2019-11-19 20:01:50.896  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---loginController---初始化成功
+2019-11-19 20:01:50.911  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---roleMenuServiceImpl---初始化开始
+2019-11-19 20:01:50.974  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---roleMenuServiceImpl---初始化成功
+2019-11-19 20:01:50.989  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---menuController---初始化开始
+2019-11-19 20:01:51.005  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---menuController---初始化成功
+2019-11-19 20:01:51.036  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysPositionMapper---初始化开始
+2019-11-19 20:01:51.099  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysPositionMapper---初始化成功
+2019-11-19 20:01:51.114  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysPositionMapper---初始化成功
+2019-11-19 20:01:51.114  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---positionServiceImpl---初始化开始
+2019-11-19 20:01:51.255  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---positionServiceImpl---初始化成功
+2019-11-19 20:01:51.270  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---positionController---初始化开始
+2019-11-19 20:01:51.286  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---positionController---初始化成功
+2019-11-19 20:01:51.325  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysMembersMapper---初始化开始
+2019-11-19 20:01:51.378  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysMembersMapper---初始化成功
+2019-11-19 20:01:51.387  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sysMembersMapper---初始化成功
+2019-11-19 20:01:51.389  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---receptionServiceIpml---初始化开始
+2019-11-19 20:01:51.438  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---receptionServiceIpml---初始化成功
+2019-11-19 20:01:51.454  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---toExcleMapper---初始化开始
+2019-11-19 20:01:51.501  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---toExcleMapper---初始化成功
+2019-11-19 20:01:51.501  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---toExcleMapper---初始化成功
+2019-11-19 20:01:51.501  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---toExcleServiceImpl---初始化开始
+2019-11-19 20:01:51.555  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---toExcleServiceImpl---初始化成功
+2019-11-19 20:01:51.555  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---receptionController---初始化开始
+2019-11-19 20:01:51.570  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---receptionController---初始化成功
+2019-11-19 20:01:51.586  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---roleController---初始化开始
+2019-11-19 20:01:51.601  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---roleController---初始化成功
+2019-11-19 20:01:51.633  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---studentInformationMapper---初始化开始
+2019-11-19 20:01:51.633  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---studentInformationMapper---初始化成功
+2019-11-19 20:01:51.633  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---studentInformationMapper---初始化成功
+2019-11-19 20:01:51.633  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---studentInformationServiceImpl---初始化开始
+2019-11-19 20:01:51.648  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---studentInformationServiceImpl---初始化成功
+2019-11-19 20:01:51.648  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---studentInformationController---初始化开始
+2019-11-19 20:01:51.664  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---studentInformationController---初始化成功
+2019-11-19 20:01:51.679  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blackListMapper---初始化开始
+2019-11-19 20:01:51.730  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blackListMapper---初始化成功
+2019-11-19 20:01:51.746  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blackListMapper---初始化成功
+2019-11-19 20:01:51.746  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blackListServiceImpl---初始化开始
+2019-11-19 20:01:51.793  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---blackListServiceImpl---初始化成功
+2019-11-19 20:01:51.808  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---userController---初始化开始
+2019-11-19 20:01:51.824  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---userController---初始化成功
+2019-11-19 20:01:51.840  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---logAspect---初始化开始
+2019-11-19 20:01:51.840  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---logAspect---初始化成功
+2019-11-19 20:01:51.855  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pageHelperAspect---初始化开始
+2019-11-19 20:01:51.855  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pageHelperAspect---初始化成功
+2019-11-19 20:01:51.855  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataSourceJobThread---初始化开始
+2019-11-19 20:01:51.871  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataSourceJobThread---初始化成功
+2019-11-19 20:01:51.871  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---myApplicationListener---初始化开始
+2019-11-19 20:01:51.871  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---myApplicationListener---初始化成功
+2019-11-19 20:01:51.871  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataSchdule---初始化开始
+2019-11-19 20:01:51.886  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataSchdule---初始化成功
+2019-11-19 20:01:51.902  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---departmentApplyMapper---初始化开始
+2019-11-19 20:01:51.933  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---departmentApplyMapper---初始化成功
+2019-11-19 20:01:51.949  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---departmentApplyMapper---初始化成功
+2019-11-19 20:01:51.949  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---departmentAppayServiceImpl---初始化开始
+2019-11-19 20:01:51.965  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---departmentAppayServiceImpl---初始化成功
+2019-11-19 20:01:51.965  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---demandScheduleController---初始化开始
+2019-11-19 20:01:51.980  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---demandScheduleController---初始化成功
+2019-11-19 20:01:51.996  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---departmentApplyController---初始化开始
+2019-11-19 20:01:51.996  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---departmentApplyController---初始化成功
+2019-11-19 20:01:52.011  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operaChargesQueryController---初始化开始
+2019-11-19 20:01:52.027  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operaChargesQueryController---初始化成功
+2019-11-19 20:01:52.027  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operatorDemandController---初始化开始
+2019-11-19 20:01:52.043  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operatorDemandController---初始化成功
+2019-11-19 20:01:52.043  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sectionController---初始化开始
+2019-11-19 20:01:52.058  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sectionController---初始化成功
+2019-11-19 20:01:52.074  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sliceRescourceQueryController---初始化开始
+2019-11-19 20:01:52.074  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---sliceRescourceQueryController---初始化成功
+2019-11-19 20:01:52.089  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---callBack---初始化开始
+2019-11-19 20:01:52.089  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---callBack---初始化成功
+2019-11-19 20:01:52.105  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---homeMapper---初始化开始
+2019-11-19 20:01:52.105  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---homeMapper---初始化成功
+2019-11-19 20:01:52.121  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---homeMapper---初始化成功
+2019-11-19 20:01:52.121  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---OAMapper---初始化开始
+2019-11-19 20:01:52.121  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---OAMapper---初始化成功
+2019-11-19 20:01:52.136  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---OAMapper---初始化成功
+2019-11-19 20:01:52.136  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---homeServiceImpl---初始化开始
+2019-11-19 20:01:52.152  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---homeServiceImpl---初始化成功
+2019-11-19 20:01:52.152  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---homeController---初始化开始
+2019-11-19 20:01:52.152  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---homeController---初始化成功
+2019-11-19 20:01:52.152  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---retryLimitCredentialsMatcher---初始化开始
+2019-11-19 20:01:52.183  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---retryLimitCredentialsMatcher---初始化成功
+2019-11-19 20:01:52.183  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---licenseMapperImpl---初始化开始
+2019-11-19 20:01:52.183  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---licenseMapperImpl---初始化成功
+2019-11-19 20:01:52.199  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---modelMapperImpl---初始化开始
+2019-11-19 20:01:52.199  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---modelMapperImpl---初始化成功
+2019-11-19 20:01:52.214  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterMapperImpl---初始化开始
+2019-11-19 20:01:52.214  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterMapperImpl---初始化成功
+2019-11-19 20:01:52.230  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---securityMapperImpl---初始化开始
+2019-11-19 20:01:52.230  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---securityMapperImpl---初始化成功
+2019-11-19 20:01:52.261  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---vendorExtensionsMapperImpl---初始化开始
+2019-11-19 20:01:52.261  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---vendorExtensionsMapperImpl---初始化成功
+2019-11-19 20:01:52.261  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---serviceModelToSwagger2MapperImpl---初始化开始
+2019-11-19 20:01:52.261  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---serviceModelToSwagger2MapperImpl---初始化成功
+2019-11-19 20:01:52.277  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiDescriptionLookup---初始化开始
+2019-11-19 20:01:52.277  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiDescriptionLookup---初始化成功
+2019-11-19 20:01:52.329  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---documentationPluginRegistry---初始化开始
+2019-11-19 20:01:52.335  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---documentationPluginRegistry---初始化成功
+2019-11-19 20:01:52.350  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---documentationPluginRegistry---初始化成功
+2019-11-19 20:01:52.350  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingBuilderPluginRegistry---初始化开始
+2019-11-19 20:01:52.366  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.381  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.381  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterBuilderPluginRegistry---初始化开始
+2019-11-19 20:01:52.398  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.411  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.411  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---expandedParameterBuilderPluginRegistry---初始化开始
+2019-11-19 20:01:52.411  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---expandedParameterBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.427  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---expandedParameterBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.427  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationBuilderPluginRegistry---初始化开始
+2019-11-19 20:01:52.443  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.458  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.458  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---resourceGroupingStrategyRegistry---初始化开始
+2019-11-19 20:01:52.458  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---resourceGroupingStrategyRegistry---初始化成功
+2019-11-19 20:01:52.474  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---resourceGroupingStrategyRegistry---初始化成功
+2019-11-19 20:01:52.474  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationModelsProviderPluginRegistry---初始化开始
+2019-11-19 20:01:52.474  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationModelsProviderPluginRegistry---初始化成功
+2019-11-19 20:01:52.490  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationModelsProviderPluginRegistry---初始化成功
+2019-11-19 20:01:52.505  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultsProviderPluginRegistry---初始化开始
+2019-11-19 20:01:52.505  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultsProviderPluginRegistry---初始化成功
+2019-11-19 20:01:52.521  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultsProviderPluginRegistry---初始化成功
+2019-11-19 20:01:52.521  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pathDecoratorRegistry---初始化开始
+2019-11-19 20:01:52.536  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pathDecoratorRegistry---初始化成功
+2019-11-19 20:01:52.552  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pathDecoratorRegistry---初始化成功
+2019-11-19 20:01:52.552  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingScannerPluginRegistry---初始化开始
+2019-11-19 20:01:52.552  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingScannerPluginRegistry---初始化成功
+2019-11-19 20:01:52.568  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingScannerPluginRegistry---初始化成功
+2019-11-19 20:01:52.568  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---documentationPluginsManager---初始化开始
+2019-11-19 20:01:52.568  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---documentationPluginsManager---初始化成功
+2019-11-19 20:01:52.583  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---cachingOperationNameGenerator---初始化开始
+2019-11-19 20:01:52.583  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---cachingOperationNameGenerator---初始化成功
+2019-11-19 20:01:52.583  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiOperationReader---初始化开始
+2019-11-19 20:01:52.583  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiOperationReader---初始化成功
+2019-11-19 20:01:52.644  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---cachingOperationReader---初始化开始
+2019-11-19 20:01:52.645  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---cachingOperationReader---初始化成功
+2019-11-19 20:01:52.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiDescriptionReader---初始化开始
+2019-11-19 20:01:52.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiDescriptionReader---初始化成功
+2019-11-19 20:01:52.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingReferenceScanner---初始化开始
+2019-11-19 20:01:52.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingReferenceScanner---初始化成功
+2019-11-19 20:01:52.678  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springfox.documentation.schema.configuration.ModelsConfiguration---初始化开始
+2019-11-19 20:01:52.678  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springfox.documentation.schema.configuration.ModelsConfiguration---初始化成功
+2019-11-19 20:01:52.678  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---typeResolver---初始化开始
+2019-11-19 20:01:52.678  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---typeResolver---初始化成功
+2019-11-19 20:01:52.709  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---accessorsProvider---初始化开始
+2019-11-19 20:01:52.709  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---accessorsProvider---初始化成功
+2019-11-19 20:01:52.709  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---fieldProvider---初始化开始
+2019-11-19 20:01:52.709  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---fieldProvider---初始化成功
+2019-11-19 20:01:52.724  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---factoryMethodProvider---初始化开始
+2019-11-19 20:01:52.724  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---factoryMethodProvider---初始化成功
+2019-11-19 20:01:52.724  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---objectMapperBeanPropertyNamingStrategy---初始化开始
+2019-11-19 20:01:52.724  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---objectMapperBeanPropertyNamingStrategy---初始化成功
+2019-11-19 20:01:52.740  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---modelPropertyBuilderPluginRegistry---初始化开始
+2019-11-19 20:01:52.740  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---modelPropertyBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.764  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---modelPropertyBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.765  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---modelBuilderPluginRegistry---初始化开始
+2019-11-19 20:01:52.769  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---modelBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.779  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---modelBuilderPluginRegistry---初始化成功
+2019-11-19 20:01:52.779  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---schemaPluginsManager---初始化开始
+2019-11-19 20:01:52.779  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---schemaPluginsManager---初始化成功
+2019-11-19 20:01:52.779  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---typeNameProviderPluginRegistry---初始化开始
+2019-11-19 20:01:52.795  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---typeNameProviderPluginRegistry---初始化成功
+2019-11-19 20:01:52.810  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---typeNameProviderPluginRegistry---初始化成功
+2019-11-19 20:01:52.810  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---typeNameExtractor---初始化开始
+2019-11-19 20:01:52.810  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---typeNameExtractor---初始化成功
+2019-11-19 20:01:52.810  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---optimized---初始化开始
+2019-11-19 20:01:52.826  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---optimized---初始化成功
+2019-11-19 20:01:52.826  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---cachingModelPropertiesProvider---初始化开始
+2019-11-19 20:01:52.826  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---cachingModelPropertiesProvider---初始化成功
+2019-11-19 20:01:52.842  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultModelDependencyProvider---初始化开始
+2019-11-19 20:01:52.842  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultModelDependencyProvider---初始化成功
+2019-11-19 20:01:52.842  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---cachingModelDependencyProvider---初始化开始
+2019-11-19 20:01:52.842  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---cachingModelDependencyProvider---初始化成功
+2019-11-19 20:01:52.857  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultModelProvider---初始化开始
+2019-11-19 20:01:52.857  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultModelProvider---初始化成功
+2019-11-19 20:01:52.857  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---cachingModelProvider---初始化开始
+2019-11-19 20:01:52.857  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---cachingModelProvider---初始化成功
+2019-11-19 20:01:52.857  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiModelReader---初始化开始
+2019-11-19 20:01:52.857  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiModelReader---初始化成功
+2019-11-19 20:01:52.873  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingScanner---初始化开始
+2019-11-19 20:01:52.873  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingScanner---初始化成功
+2019-11-19 20:01:52.873  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiDocumentationScanner---初始化开始
+2019-11-19 20:01:52.873  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiDocumentationScanner---初始化成功
+2019-11-19 20:01:52.873  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingReader---初始化开始
+2019-11-19 20:01:52.873  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiListingReader---初始化成功
+2019-11-19 20:01:52.888  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mediaTypeReader---初始化开始
+2019-11-19 20:01:52.888  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mediaTypeReader---初始化成功
+2019-11-19 20:01:52.904  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultOperationReader---初始化开始
+2019-11-19 20:01:52.904  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultOperationReader---初始化成功
+2019-11-19 20:01:52.904  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultTagsProvider---初始化开始
+2019-11-19 20:01:52.920  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultTagsProvider---初始化成功
+2019-11-19 20:01:52.920  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationDeprecatedReader---初始化开始
+2019-11-19 20:01:52.920  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationDeprecatedReader---初始化成功
+2019-11-19 20:01:52.935  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationModelsProvider---初始化开始
+2019-11-19 20:01:52.935  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationModelsProvider---初始化成功
+2019-11-19 20:01:52.951  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationParameterHeadersConditionReader---初始化开始
+2019-11-19 20:01:52.951  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationParameterHeadersConditionReader---初始化成功
+2019-11-19 20:01:52.967  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---modelAttributeParameterExpander---初始化开始
+2019-11-19 20:01:52.967  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---modelAttributeParameterExpander---初始化成功
+2019-11-19 20:01:52.967  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationParameterReader---初始化开始
+2019-11-19 20:01:52.967  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationParameterReader---初始化成功
+2019-11-19 20:01:52.982  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationParameterRequestConditionReader---初始化开始
+2019-11-19 20:01:52.982  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationParameterRequestConditionReader---初始化成功
+2019-11-19 20:01:52.982  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationResponseClassReader---初始化开始
+2019-11-19 20:01:52.982  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationResponseClassReader---初始化成功
+2019-11-19 20:01:52.998  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationTagsReader---初始化开始
+2019-11-19 20:01:52.998  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationTagsReader---初始化成功
+2019-11-19 20:01:52.998  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---responseMessagesReader---初始化开始
+2019-11-19 20:01:52.998  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---responseMessagesReader---初始化成功
+2019-11-19 20:01:53.013  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---expandedParameterBuilder---初始化开始
+2019-11-19 20:01:53.013  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---expandedParameterBuilder---初始化成功
+2019-11-19 20:01:53.013  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterDataTypeReader---初始化开始
+2019-11-19 20:01:53.029  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterDataTypeReader---初始化成功
+2019-11-19 20:01:53.029  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springfox.documentation.spring.web.SpringfoxWebMvcConfiguration---初始化开始
+2019-11-19 20:01:53.029  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springfox.documentation.spring.web.SpringfoxWebMvcConfiguration---初始化成功
+2019-11-19 20:01:53.045  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---descriptionResolver---初始化开始
+2019-11-19 20:01:53.045  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---descriptionResolver---初始化成功
+2019-11-19 20:01:53.045  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterDefaultReader---初始化开始
+2019-11-19 20:01:53.045  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterDefaultReader---初始化成功
+2019-11-19 20:01:53.060  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterMultiplesReader---初始化开始
+2019-11-19 20:01:53.060  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterMultiplesReader---初始化成功
+2019-11-19 20:01:53.060  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterNameReader---初始化开始
+2019-11-19 20:01:53.076  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterNameReader---初始化成功
+2019-11-19 20:01:53.076  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterRequiredReader---初始化开始
+2019-11-19 20:01:53.076  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterRequiredReader---初始化成功
+2019-11-19 20:01:53.092  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterTypeReader---初始化开始
+2019-11-19 20:01:53.092  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterTypeReader---初始化成功
+2019-11-19 20:01:53.123  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---interceptor---初始化开始
+2019-11-19 20:01:53.138  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---interceptor---初始化成功
+2019-11-19 20:01:53.154  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcConversionService---初始化开始
+2019-11-19 20:01:53.154  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcConversionService---初始化成功
+2019-11-19 20:01:53.170  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcResourceUrlProvider---初始化开始
+2019-11-19 20:01:53.170  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcResourceUrlProvider---初始化成功
+2019-11-19 20:01:53.185  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcContentNegotiationManager---初始化开始
+2019-11-19 20:01:53.185  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcContentNegotiationManager---初始化成功
+2019-11-19 20:01:53.217  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---requestMappingHandlerMapping---初始化开始
+2019-11-19 20:01:53.422  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---requestMappingHandlerMapping---初始化成功
+2019-11-19 20:01:53.438  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---webMvcRequestHandlerProvider---初始化开始
+2019-11-19 20:01:53.438  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---webMvcRequestHandlerProvider---初始化成功
+2019-11-19 20:01:53.438  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---resourceGroupCache---初始化开始
+2019-11-19 20:01:53.438  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---resourceGroupCache---初始化成功
+2019-11-19 20:01:53.469  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaults---初始化开始
+2019-11-19 20:01:53.469  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaults---初始化成功
+2019-11-19 20:01:53.469  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---documentationPluginsBootstrapper---初始化开始
+2019-11-19 20:01:53.485  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---documentationPluginsBootstrapper---初始化成功
+2019-11-19 20:01:53.485  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationPathDecorator---初始化开始
+2019-11-19 20:01:53.485  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationPathDecorator---初始化成功
+2019-11-19 20:01:53.485  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pathMappingDecorator---初始化开始
+2019-11-19 20:01:53.485  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pathMappingDecorator---初始化成功
+2019-11-19 20:01:53.501  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pathSanitizer---初始化开始
+2019-11-19 20:01:53.501  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pathSanitizer---初始化成功
+2019-11-19 20:01:53.501  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---queryStringUriTemplateDecorator---初始化开始
+2019-11-19 20:01:53.501  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---queryStringUriTemplateDecorator---初始化成功
+2019-11-19 20:01:53.501  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiModelBuilder---初始化开始
+2019-11-19 20:01:53.501  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiModelBuilder---初始化成功
+2019-11-19 20:01:53.516  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiModelPropertyPropertyBuilder---初始化开始
+2019-11-19 20:01:53.516  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiModelPropertyPropertyBuilder---初始化成功
+2019-11-19 20:01:53.516  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiModelTypeNameProvider---初始化开始
+2019-11-19 20:01:53.532  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiModelTypeNameProvider---初始化成功
+2019-11-19 20:01:53.532  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationAuthReader---初始化开始
+2019-11-19 20:01:53.532  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationAuthReader---初始化成功
+2019-11-19 20:01:53.532  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationHiddenReader---初始化开始
+2019-11-19 20:01:53.532  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationHiddenReader---初始化成功
+2019-11-19 20:01:53.532  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationHttpMethodReader---初始化开始
+2019-11-19 20:01:53.547  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationHttpMethodReader---初始化成功
+2019-11-19 20:01:53.547  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationImplicitParameterReader---初始化开始
+2019-11-19 20:01:53.547  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationImplicitParameterReader---初始化成功
+2019-11-19 20:01:53.547  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationImplicitParametersReader---初始化开始
+2019-11-19 20:01:53.547  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationImplicitParametersReader---初始化成功
+2019-11-19 20:01:53.563  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationNicknameIntoUniqueIdReader---初始化开始
+2019-11-19 20:01:53.563  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationNicknameIntoUniqueIdReader---初始化成功
+2019-11-19 20:01:53.563  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationNotesReader---初始化开始
+2019-11-19 20:01:53.563  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationNotesReader---初始化成功
+2019-11-19 20:01:53.563  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationPositionReader---初始化开始
+2019-11-19 20:01:53.579  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationPositionReader---初始化成功
+2019-11-19 20:01:53.579  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationSummaryReader---初始化开始
+2019-11-19 20:01:53.579  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---operationSummaryReader---初始化成功
+2019-11-19 20:01:53.579  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerMediaTypeReader---初始化开始
+2019-11-19 20:01:53.579  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerMediaTypeReader---初始化成功
+2019-11-19 20:01:53.594  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerOperationModelsProvider---初始化开始
+2019-11-19 20:01:53.594  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerOperationModelsProvider---初始化成功
+2019-11-19 20:01:53.594  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerOperationResponseClassReader---初始化开始
+2019-11-19 20:01:53.594  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerOperationResponseClassReader---初始化成功
+2019-11-19 20:01:53.594  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerOperationTagsReader---初始化开始
+2019-11-19 20:01:53.594  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerOperationTagsReader---初始化成功
+2019-11-19 20:01:53.610  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerResponseMessageReader---初始化开始
+2019-11-19 20:01:53.610  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerResponseMessageReader---初始化成功
+2019-11-19 20:01:53.610  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---vendorExtensionsReader---初始化开始
+2019-11-19 20:01:53.610  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---vendorExtensionsReader---初始化成功
+2019-11-19 20:01:53.626  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerParameterDescriptionReader---初始化开始
+2019-11-19 20:01:53.626  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerParameterDescriptionReader---初始化成功
+2019-11-19 20:01:53.626  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerExpandedParameterBuilder---初始化开始
+2019-11-19 20:01:53.626  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerExpandedParameterBuilder---初始化成功
+2019-11-19 20:01:53.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---inMemorySwaggerResourcesProvider---初始化开始
+2019-11-19 20:01:53.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---inMemorySwaggerResourcesProvider---初始化成功
+2019-11-19 20:01:53.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiResourceController---初始化开始
+2019-11-19 20:01:53.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---apiResourceController---初始化成功
+2019-11-19 20:01:53.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---classOrApiAnnotationResourceGrouping---初始化开始
+2019-11-19 20:01:53.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---classOrApiAnnotationResourceGrouping---初始化成功
+2019-11-19 20:01:53.662  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerApiListingReader---初始化开始
+2019-11-19 20:01:53.662  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swaggerApiListingReader---初始化成功
+2019-11-19 20:01:53.662  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.transaction.config.internalTransactionalEventListenerFactory---初始化开始
+2019-11-19 20:01:53.662  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.transaction.config.internalTransactionalEventListenerFactory---初始化成功
+2019-11-19 20:01:53.678  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---getDruidStatInterceptor---初始化开始
+2019-11-19 20:01:53.678  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---getDruidStatInterceptor---初始化成功
+2019-11-19 20:01:53.678  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---administratoraccountMapper---初始化开始
+2019-11-19 20:01:53.693  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---administratoraccountMapper---初始化成功
+2019-11-19 20:01:53.693  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---equipmentMapper---初始化开始
+2019-11-19 20:01:53.693  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---equipmentMapper---初始化成功
+2019-11-19 20:01:53.725  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---viewResolverFtl---初始化开始
+2019-11-19 20:01:53.771  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---viewResolverFtl---初始化成功
+2019-11-19 20:01:53.787  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---viewResolverHtml---初始化开始
+2019-11-19 20:01:53.850  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---viewResolverHtml---初始化成功
+2019-11-19 20:01:53.850  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration---初始化开始
+2019-11-19 20:01:53.850  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springfox.documentation.swagger2.configuration.Swagger2DocumentationConfiguration---初始化成功
+2019-11-19 20:01:53.881  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swagger2Module---初始化开始
+2019-11-19 20:01:53.881  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swagger2Module---初始化成功
+2019-11-19 20:01:53.896  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jsonSerializer---初始化开始
+2019-11-19 20:01:53.896  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jsonSerializer---初始化成功
+2019-11-19 20:01:53.912  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springfox.documentation.swagger.configuration.SwaggerCommonConfiguration---初始化开始
+2019-11-19 20:01:53.912  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springfox.documentation.swagger.configuration.SwaggerCommonConfiguration---初始化成功
+2019-11-19 20:01:53.943  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swagger2ControllerMapping---初始化开始
+2019-11-19 20:01:54.053  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---swagger2ControllerMapping---初始化成功
+2019-11-19 20:01:54.084  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---createRestApi---初始化开始
+2019-11-19 20:01:54.084  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---createRestApi---初始化成功
+2019-11-19 20:01:54.084  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---responseBodyConverter---初始化开始
+2019-11-19 20:01:54.099  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---responseBodyConverter---初始化成功
+2019-11-19 20:01:54.115  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---resolver---初始化开始
+2019-11-19 20:01:54.115  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---resolver---初始化成功
+2019-11-19 20:01:54.131  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcPathMatcher---初始化开始
+2019-11-19 20:01:54.131  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcPathMatcher---初始化成功
+2019-11-19 20:01:54.131  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcUrlPathHelper---初始化开始
+2019-11-19 20:01:54.131  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcUrlPathHelper---初始化成功
+2019-11-19 20:01:54.146  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---viewControllerHandlerMapping---初始化开始
+2019-11-19 20:01:54.178  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---viewControllerHandlerMapping---初始化成功
+2019-11-19 20:01:54.193  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---beanNameHandlerMapping---初始化开始
+2019-11-19 20:01:54.240  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---beanNameHandlerMapping---初始化成功
+2019-11-19 20:01:54.271  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---resourceHandlerMapping---初始化开始
+2019-11-19 20:01:54.327  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---resourceHandlerMapping---初始化成功
+2019-11-19 20:01:54.342  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultServletHandlerMapping---初始化开始
+2019-11-19 20:01:54.358  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultServletHandlerMapping---初始化成功
+2019-11-19 20:01:54.400  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcValidator---初始化开始
+2019-11-19 20:01:54.437  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcValidator---初始化成功
+2019-11-19 20:01:54.453  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---requestMappingHandlerAdapter---初始化开始
+2019-11-19 20:01:54.609  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---requestMappingHandlerAdapter---初始化成功
+2019-11-19 20:01:54.625  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcUriComponentsContributor---初始化开始
+2019-11-19 20:01:54.625  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcUriComponentsContributor---初始化成功
+2019-11-19 20:01:54.625  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---httpRequestHandlerAdapter---初始化开始
+2019-11-19 20:01:54.625  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---httpRequestHandlerAdapter---初始化成功
+2019-11-19 20:01:54.625  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---simpleControllerHandlerAdapter---初始化开始
+2019-11-19 20:01:54.625  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---simpleControllerHandlerAdapter---初始化成功
+2019-11-19 20:01:54.656  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---handlerExceptionResolver---初始化开始
+2019-11-19 20:01:54.656  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---handlerExceptionResolver---初始化成功
+2019-11-19 20:01:54.672  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcViewResolver---初始化开始
+2019-11-19 20:01:54.672  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mvcViewResolver---初始化成功
+2019-11-19 20:01:54.672  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration---初始化开始
+2019-11-19 20:01:54.687  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration---初始化成功
+2019-11-19 20:01:54.703  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration---初始化开始
+2019-11-19 20:01:54.703  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.context.PropertyPlaceholderAutoConfiguration---初始化成功
+2019-11-19 20:01:54.703  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration---初始化开始
+2019-11-19 20:01:54.703  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.websocket.servlet.WebSocketServletAutoConfiguration---初始化成功
+2019-11-19 20:01:54.719  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration---初始化开始
+2019-11-19 20:01:54.719  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration---初始化成功
+2019-11-19 20:01:54.719  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration---初始化开始
+2019-11-19 20:01:54.734  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.validation.ValidationAutoConfiguration---初始化成功
+2019-11-19 20:01:54.750  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultValidator---初始化开始
+2019-11-19 20:01:54.765  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---defaultValidator---初始化成功
+2019-11-19 20:01:54.781  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration---初始化开始
+2019-11-19 20:01:54.781  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration$WhitelabelErrorViewConfiguration---初始化成功
+2019-11-19 20:01:54.797  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---error---初始化开始
+2019-11-19 20:01:54.797  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---error---初始化成功
+2019-11-19 20:01:54.812  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---beanNameViewResolver---初始化开始
+2019-11-19 20:01:54.812  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---beanNameViewResolver---初始化成功
+2019-11-19 20:01:54.828  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---errorAttributes---初始化开始
+2019-11-19 20:01:54.828  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---errorAttributes---初始化成功
+2019-11-19 20:01:54.844  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---basicErrorController---初始化开始
+2019-11-19 20:01:54.844  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---basicErrorController---初始化成功
+2019-11-19 20:01:54.844  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---advice---初始化开始
+2019-11-19 20:01:54.844  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---advice---初始化成功
+2019-11-19 20:01:54.844  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---com.alibaba.druid.spring.boot.autoconfigure.stat.DruidFilterConfiguration---初始化开始
+2019-11-19 20:01:54.859  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---com.alibaba.druid.spring.boot.autoconfigure.stat.DruidFilterConfiguration---初始化成功
+2019-11-19 20:01:54.890  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---statFilter---初始化开始
+2019-11-19 20:01:55.493  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---statFilter---初始化成功
+2019-11-19 20:01:55.508  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure---初始化开始
+2019-11-19 20:01:55.508  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure---初始化成功
+2019-11-19 20:01:55.529  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.metadata.DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration---初始化开始
+2019-11-19 20:01:55.531  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.metadata.DataSourcePoolMetadataProvidersConfiguration$HikariPoolDataSourceMetadataProviderConfiguration---初始化成功
+2019-11-19 20:01:55.536  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---hikariPoolDataSourceMetadataProvider---初始化开始
+2019-11-19 20:01:55.543  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---hikariPoolDataSourceMetadataProvider---初始化成功
+2019-11-19 20:01:55.550  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.metadata.DataSourcePoolMetadataProvidersConfiguration---初始化开始
+2019-11-19 20:01:55.551  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.metadata.DataSourcePoolMetadataProvidersConfiguration---初始化成功
+2019-11-19 20:01:55.557  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.DataSourceInitializationConfiguration---初始化开始
+2019-11-19 20:01:55.559  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.DataSourceInitializationConfiguration---初始化成功
+2019-11-19 20:01:55.564  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration---初始化开始
+2019-11-19 20:01:55.564  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration---初始化成功
+2019-11-19 20:01:55.564  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration$RestartConfiguration---初始化开始
+2019-11-19 20:01:55.564  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration$RestartConfiguration---初始化成功
+2019-11-19 20:01:55.580  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mapperCacheDisabler---初始化开始
+2019-11-19 20:01:55.580  INFO 68752 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.util.MsUtil CLASS_CACHE cache.
+2019-11-19 20:01:55.580  INFO 68752 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.genid.GenIdUtil CACHE cache.
+2019-11-19 20:01:55.580  INFO 68752 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear tk.mybatis.mapper.version.VersionUtil CACHE cache.
+2019-11-19 20:01:55.580  INFO 68752 --- [main] t.m.m.autoconfigure.MapperCacheDisabler  : Clear EntityHelper entityTableMap cache.
+2019-11-19 20:01:55.580  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mapperCacheDisabler---初始化成功
+2019-11-19 20:01:55.580  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration$MapperScannerRegistrarNotFoundConfiguration---初始化开始
+2019-11-19 20:01:55.580  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration$MapperScannerRegistrarNotFoundConfiguration---初始化成功
+2019-11-19 20:01:55.611  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mybatis-tk.mybatis.mapper.autoconfigure.MybatisProperties---初始化开始
+2019-11-19 20:01:55.611  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mybatis-tk.mybatis.mapper.autoconfigure.MybatisProperties---初始化成功
+2019-11-19 20:01:55.627  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration---初始化开始
+2019-11-19 20:01:55.627  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---tk.mybatis.mapper.autoconfigure.MapperAutoConfiguration---初始化成功
+2019-11-19 20:01:55.627  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$MapperScannerRegistrarNotFoundConfiguration---初始化开始
+2019-11-19 20:01:55.627  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$MapperScannerRegistrarNotFoundConfiguration---初始化成功
+2019-11-19 20:01:55.647  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mybatis-org.mybatis.spring.boot.autoconfigure.MybatisProperties---初始化开始
+2019-11-19 20:01:55.647  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mybatis-org.mybatis.spring.boot.autoconfigure.MybatisProperties---初始化成功
+2019-11-19 20:01:55.662  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration---初始化开始
+2019-11-19 20:01:55.662  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration---初始化成功
+2019-11-19 20:01:55.678  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pagehelper-com.github.pagehelper.autoconfigure.PageHelperProperties---初始化开始
+2019-11-19 20:01:55.678  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pagehelper-com.github.pagehelper.autoconfigure.PageHelperProperties---初始化成功
+2019-11-19 20:01:55.678  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration---初始化开始
+2019-11-19 20:01:55.693  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pageHelperProperties---初始化开始
+2019-11-19 20:01:55.740  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---pageHelperProperties---初始化成功
+2019-11-19 20:01:55.772  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---com.github.pagehelper.autoconfigure.PageHelperAutoConfiguration---初始化成功
+2019-11-19 20:01:55.772  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration---初始化开始
+2019-11-19 20:01:55.787  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.admin.SpringApplicationAdminJmxAutoConfiguration---初始化成功
+2019-11-19 20:01:55.803  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springApplicationAdminRegistrar---初始化开始
+2019-11-19 20:01:55.803  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---springApplicationAdminRegistrar---初始化成功
+2019-11-19 20:01:55.803  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.aop.AopAutoConfiguration$CglibAutoProxyConfiguration---初始化开始
+2019-11-19 20:01:55.803  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.aop.AopAutoConfiguration$CglibAutoProxyConfiguration---初始化成功
+2019-11-19 20:01:55.818  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.aop.AopAutoConfiguration---初始化开始
+2019-11-19 20:01:55.818  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.aop.AopAutoConfiguration---初始化成功
+2019-11-19 20:01:55.834  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration---初始化开始
+2019-11-19 20:01:55.834  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.context.ConfigurationPropertiesAutoConfiguration---初始化成功
+2019-11-19 20:01:55.834  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration---初始化开始
+2019-11-19 20:01:55.834  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.dao.PersistenceExceptionTranslationAutoConfiguration---初始化成功
+2019-11-19 20:01:55.834  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---freeMarkerViewResolver---初始化开始
+2019-11-19 20:01:55.897  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---freeMarkerViewResolver---初始化成功
+2019-11-19 20:01:55.897  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration---初始化开始
+2019-11-19 20:01:55.897  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration---初始化成功
+2019-11-19 20:01:55.912  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$Jackson2ObjectMapperBuilderCustomizerConfiguration---初始化开始
+2019-11-19 20:01:55.912  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$Jackson2ObjectMapperBuilderCustomizerConfiguration---初始化成功
+2019-11-19 20:01:55.912  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.jackson-org.springframework.boot.autoconfigure.jackson.JacksonProperties---初始化开始
+2019-11-19 20:01:55.912  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.jackson-org.springframework.boot.autoconfigure.jackson.JacksonProperties---初始化成功
+2019-11-19 20:01:55.928  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---standardJacksonObjectMapperBuilderCustomizer---初始化开始
+2019-11-19 20:01:55.928  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---standardJacksonObjectMapperBuilderCustomizer---初始化成功
+2019-11-19 20:01:55.928  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperBuilderConfiguration---初始化开始
+2019-11-19 20:01:55.943  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperBuilderConfiguration---初始化成功
+2019-11-19 20:01:55.943  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$ParameterNamesModuleConfiguration---初始化开始
+2019-11-19 20:01:55.943  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$ParameterNamesModuleConfiguration---初始化成功
+2019-11-19 20:01:55.959  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterNamesModule---初始化开始
+2019-11-19 20:01:55.975  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---parameterNamesModule---初始化成功
+2019-11-19 20:01:55.990  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JodaDateTimeJacksonConfiguration---初始化开始
+2019-11-19 20:01:55.990  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JodaDateTimeJacksonConfiguration---初始化成功
+2019-11-19 20:01:55.990  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jodaDateTimeSerializationModule---初始化开始
+2019-11-19 20:01:56.006  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jodaDateTimeSerializationModule---初始化成功
+2019-11-19 20:01:56.006  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration---初始化开始
+2019-11-19 20:01:56.006  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration---初始化成功
+2019-11-19 20:01:56.021  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jsonComponentModule---初始化开始
+2019-11-19 20:01:56.053  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jsonComponentModule---初始化成功
+2019-11-19 20:01:56.053  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jacksonObjectMapperBuilder---初始化开始
+2019-11-19 20:01:56.068  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jacksonObjectMapperBuilder---初始化成功
+2019-11-19 20:01:56.068  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration---初始化开始
+2019-11-19 20:01:56.068  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration$JacksonObjectMapperConfiguration---初始化成功
+2019-11-19 20:01:56.115  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jacksonObjectMapper---初始化开始
+2019-11-19 20:01:56.327  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jacksonObjectMapper---初始化成功
+2019-11-19 20:01:56.342  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration$StringHttpMessageConverterConfiguration---初始化开始
+2019-11-19 20:01:56.342  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration$StringHttpMessageConverterConfiguration---初始化成功
+2019-11-19 20:01:56.342  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---stringHttpMessageConverter---初始化开始
+2019-11-19 20:01:56.358  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---stringHttpMessageConverter---初始化成功
+2019-11-19 20:01:56.358  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.JacksonHttpMessageConvertersConfiguration$MappingJackson2HttpMessageConverterConfiguration---初始化开始
+2019-11-19 20:01:56.358  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.JacksonHttpMessageConvertersConfiguration$MappingJackson2HttpMessageConverterConfiguration---初始化成功
+2019-11-19 20:01:56.406  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mappingJackson2HttpMessageConverter---初始化开始
+2019-11-19 20:01:56.421  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---mappingJackson2HttpMessageConverter---初始化成功
+2019-11-19 20:01:56.437  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.JacksonHttpMessageConvertersConfiguration---初始化开始
+2019-11-19 20:01:56.437  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.JacksonHttpMessageConvertersConfiguration---初始化成功
+2019-11-19 20:01:56.437  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration---初始化开始
+2019-11-19 20:01:56.453  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.HttpMessageConvertersAutoConfiguration---初始化成功
+2019-11-19 20:01:56.453  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---messageConverters---初始化开始
+2019-11-19 20:01:56.453  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---messageConverters---初始化成功
+2019-11-19 20:01:56.468  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.codec.CodecsAutoConfiguration$JacksonCodecConfiguration---初始化开始
+2019-11-19 20:01:56.468  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.codec.CodecsAutoConfiguration$JacksonCodecConfiguration---初始化成功
+2019-11-19 20:01:56.468  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jacksonCodecCustomizer---初始化开始
+2019-11-19 20:01:56.468  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jacksonCodecCustomizer---初始化成功
+2019-11-19 20:01:56.484  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.codec.CodecsAutoConfiguration---初始化开始
+2019-11-19 20:01:56.484  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.http.codec.CodecsAutoConfiguration---初始化成功
+2019-11-19 20:01:56.484  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.info-org.springframework.boot.autoconfigure.info.ProjectInfoProperties---初始化开始
+2019-11-19 20:01:56.484  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.info-org.springframework.boot.autoconfigure.info.ProjectInfoProperties---初始化成功
+2019-11-19 20:01:56.499  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration---初始化开始
+2019-11-19 20:01:56.499  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.info.ProjectInfoAutoConfiguration---初始化成功
+2019-11-19 20:01:56.499  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration$IntegrationComponentScanAutoConfiguration---初始化开始
+2019-11-19 20:01:56.499  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration$IntegrationComponentScanAutoConfiguration---初始化成功
+2019-11-19 20:01:56.499  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration$IntegrationManagementConfiguration$EnableIntegrationManagementConfiguration---初始化开始
+2019-11-19 20:01:56.499  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration$IntegrationManagementConfiguration$EnableIntegrationManagementConfiguration---初始化成功
+2019-11-19 20:01:56.515  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration$IntegrationManagementConfiguration---初始化开始
+2019-11-19 20:01:56.515  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration$IntegrationManagementConfiguration---初始化成功
+2019-11-19 20:01:56.515  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration$IntegrationConfiguration---初始化开始
+2019-11-19 20:01:56.515  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration$IntegrationConfiguration---初始化成功
+2019-11-19 20:01:56.546  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationGlobalProperties---初始化开始
+2019-11-19 20:01:56.562  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationGlobalProperties---初始化成功
+2019-11-19 20:01:56.611  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationGlobalProperties---初始化成功
+2019-11-19 20:01:56.613  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---channelInitializer---初始化开始
+2019-11-19 20:01:56.617  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---$autoCreateChannelCandidates---初始化开始
+2019-11-19 20:01:56.618  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---$autoCreateChannelCandidates---初始化成功
+2019-11-19 20:01:56.619  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---channelInitializer---初始化成功
+2019-11-19 20:01:56.629  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationEvaluationContext---初始化开始
+2019-11-19 20:01:56.640  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationConversionService---初始化开始
+2019-11-19 20:01:56.642  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationConversionService---初始化成功
+2019-11-19 20:01:56.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationConversionService---初始化成功
+2019-11-19 20:01:56.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jsonPath---初始化开始
+2019-11-19 20:01:56.646  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jsonPath---初始化成功
+2019-11-19 20:01:56.662  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationEvaluationContext---初始化成功
+2019-11-19 20:01:56.662  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationSimpleEvaluationContext---初始化开始
+2019-11-19 20:01:56.677  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationSimpleEvaluationContext---初始化成功
+2019-11-19 20:01:56.693  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationHeaderChannelRegistry---初始化开始
+2019-11-19 20:01:56.693  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---messageBuilderFactory---初始化开始
+2019-11-19 20:01:56.693  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---messageBuilderFactory---初始化成功
+2019-11-19 20:01:56.724  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#705d914f---初始化开始
+2019-11-19 20:01:56.724  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#705d914f---初始化成功
+2019-11-19 20:01:56.724  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---taskScheduler---初始化开始
+2019-11-19 20:01:56.786  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---taskScheduler---初始化成功
+2019-11-19 20:01:56.802  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationHeaderChannelRegistry---初始化成功
+2019-11-19 20:01:56.818  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---toStringFriendlyJsonNodeToStringConverter---初始化开始
+2019-11-19 20:01:56.818  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---toStringFriendlyJsonNodeToStringConverter---初始化成功
+2019-11-19 20:01:56.833  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---converterRegistrar---初始化开始
+2019-11-19 20:01:56.833  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---converterRegistrar---初始化成功
+2019-11-19 20:01:56.833  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---datatypeChannelMessageConverter---初始化开始
+2019-11-19 20:01:56.833  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---datatypeChannelMessageConverter---初始化成功
+2019-11-19 20:01:56.849  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationArgumentResolverMessageConverter---初始化开始
+2019-11-19 20:01:56.849  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationArgumentResolverMessageConverter---初始化成功
+2019-11-19 20:01:56.865  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#4e671ef---初始化开始
+2019-11-19 20:01:56.865  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationEvaluationContext---初始化成功
+2019-11-19 20:01:56.880  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#4e671ef---初始化成功
+2019-11-19 20:01:56.880  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#70e1aa20---初始化开始
+2019-11-19 20:01:56.880  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationEvaluationContext---初始化成功
+2019-11-19 20:01:56.880  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#70e1aa20---初始化成功
+2019-11-19 20:01:56.896  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#e67d3b7---初始化开始
+2019-11-19 20:01:56.896  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationEvaluationContext---初始化成功
+2019-11-19 20:01:56.896  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#e67d3b7---初始化成功
+2019-11-19 20:01:56.896  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationArgumentResolvers---初始化开始
+2019-11-19 20:01:56.896  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationArgumentResolvers---初始化成功
+2019-11-19 20:01:56.896  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#48b09105---初始化开始
+2019-11-19 20:01:56.896  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationEvaluationContext---初始化成功
+2019-11-19 20:01:56.911  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#48b09105---初始化成功
+2019-11-19 20:01:56.911  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#18b45500---初始化开始
+2019-11-19 20:01:56.911  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationEvaluationContext---初始化成功
+2019-11-19 20:01:56.911  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#18b45500---初始化成功
+2019-11-19 20:01:56.911  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#25110bb9---初始化开始
+2019-11-19 20:01:56.911  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationEvaluationContext---初始化成功
+2019-11-19 20:01:56.911  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#25110bb9---初始化成功
+2019-11-19 20:01:56.927  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#dbda472---初始化开始
+2019-11-19 20:01:56.927  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationEvaluationContext---初始化成功
+2019-11-19 20:01:56.927  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---(inner bean)#dbda472---初始化成功
+2019-11-19 20:01:56.927  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationListArgumentResolvers---初始化开始
+2019-11-19 20:01:56.927  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationListArgumentResolvers---初始化成功
+2019-11-19 20:01:56.927  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationLifecycleRoleController---初始化开始
+2019-11-19 20:01:56.927  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationLifecycleRoleController---初始化成功
+2019-11-19 20:01:56.943  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration---初始化开始
+2019-11-19 20:01:56.943  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.integration.IntegrationAutoConfiguration---初始化成功
+2019-11-19 20:01:56.943  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.integration-org.springframework.boot.autoconfigure.integration.IntegrationProperties---初始化开始
+2019-11-19 20:01:56.943  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.integration-org.springframework.boot.autoconfigure.integration.IntegrationProperties---初始化成功
+2019-11-19 20:01:56.943  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.jdbc-org.springframework.boot.autoconfigure.jdbc.JdbcProperties---初始化开始
+2019-11-19 20:01:56.943  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.jdbc-org.springframework.boot.autoconfigure.jdbc.JdbcProperties---初始化成功
+2019-11-19 20:01:56.958  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration$JdbcTemplateConfiguration---初始化开始
+2019-11-19 20:01:56.958  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration$JdbcTemplateConfiguration---初始化成功
+2019-11-19 20:01:56.974  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jdbcTemplate---初始化开始
+2019-11-19 20:01:57.052  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---jdbcTemplate---初始化成功
+2019-11-19 20:01:57.052  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration$NamedParameterJdbcTemplateConfiguration---初始化开始
+2019-11-19 20:01:57.052  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration$NamedParameterJdbcTemplateConfiguration---初始化成功
+2019-11-19 20:01:57.068  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---namedParameterJdbcTemplate---初始化开始
+2019-11-19 20:01:57.083  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---namedParameterJdbcTemplate---初始化成功
+2019-11-19 20:01:57.083  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration---初始化开始
+2019-11-19 20:01:57.083  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration---初始化成功
+2019-11-19 20:01:57.083  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataSourceCustomizer---初始化开始
+2019-11-19 20:01:57.099  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---dataSourceCustomizer---初始化成功
+2019-11-19 20:01:57.115  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration---初始化开始
+2019-11-19 20:01:57.115  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.quartz.QuartzAutoConfiguration---初始化成功
+2019-11-19 20:01:57.130  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.reactor-org.springframework.boot.autoconfigure.reactor.core.ReactorCoreProperties---初始化开始
+2019-11-19 20:01:57.130  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.reactor-org.springframework.boot.autoconfigure.reactor.core.ReactorCoreProperties---初始化成功
+2019-11-19 20:01:57.130  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.reactor.core.ReactorCoreAutoConfiguration---初始化开始
+2019-11-19 20:01:57.130  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.reactor.core.ReactorCoreAutoConfiguration---初始化成功
+2019-11-19 20:01:57.130  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration---初始化开始
+2019-11-19 20:01:57.130  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration---初始化成功
+2019-11-19 20:01:57.146  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.security-org.springframework.boot.autoconfigure.security.SecurityProperties---初始化开始
+2019-11-19 20:01:57.146  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---spring.security-org.springframework.boot.autoconfigure.security.SecurityProperties---初始化成功
+2019-11-19 20:01:57.146  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration---初始化开始
+2019-11-19 20:01:57.146  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration---初始化成功
+2019-11-19 20:01:57.161  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration$TransactionTemplateConfiguration---初始化开始
+2019-11-19 20:01:57.161  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.transaction.TransactionAutoConfiguration$TransactionTemplateConfiguration---初始化成功
+2019-11-19 20:01:57.161  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---transactionTemplate---初始化开始
+2019-11-19 20:01:57.177  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---transactionTemplate---初始化成功
+2019-11-19 20:01:57.177  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration---初始化开始
+2019-11-19 20:01:57.177  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.client.RestTemplateAutoConfiguration---初始化成功
+2019-11-19 20:01:57.193  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---restTemplateBuilder---初始化开始
+2019-11-19 20:01:57.193  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---restTemplateBuilder---初始化成功
+2019-11-19 20:01:57.193  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration---初始化开始
+2019-11-19 20:01:57.193  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.boot.autoconfigure.web.embedded.EmbeddedWebServerFactoryCustomizerAutoConfiguration---初始化成功
+2019-11-19 20:01:57.208  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---multipartResolver---初始化开始
+2019-11-19 20:01:57.208  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---multipartResolver---初始化成功
+2019-11-19 20:01:57.208  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.integration.dsl.context.IntegrationFlowContext---初始化开始
+2019-11-19 20:01:57.208  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.integration.dsl.context.IntegrationFlowContext---初始化成功
+2019-11-19 20:01:57.239  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---nullChannel---初始化开始
+2019-11-19 20:01:57.239  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---nullChannel---初始化成功
+2019-11-19 20:01:57.286  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---errorChannel---初始化开始
+2019-11-19 20:01:57.367  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---errorChannel---初始化成功
+2019-11-19 20:01:57.412  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---_org.springframework.integration.errorLogger.handler---初始化开始
+2019-11-19 20:01:57.412  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---integrationEvaluationContext---初始化成功
+2019-11-19 20:01:57.459  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---_org.springframework.integration.errorLogger.handler---初始化成功
+2019-11-19 20:01:57.475  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---_org.springframework.integration.errorLogger---初始化开始
+2019-11-19 20:01:57.490  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---_org.springframework.integration.errorLogger---初始化成功
+2019-11-19 20:01:57.490  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.integration.config.IdGeneratorConfigurer#0---初始化开始
+2019-11-19 20:01:57.490  INFO 68752 --- [main] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.integration.config.IdGeneratorConfigurer#0---初始化成功
+2019-11-19 20:01:57.897  INFO 68752 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-11-19 20:01:57.928  INFO 68752 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-11-19 20:01:58.022  INFO 68752 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-11-19 20:01:58.287  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: delUsingPOST_1
+2019-11-19 20:01:58.287  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showAuthenticationUsingGET_1
+2019-11-19 20:01:58.287  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showRoleListUsingGET_1
+2019-11-19 20:01:58.395  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: delUsingPOST_2
+2019-11-19 20:01:58.404  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showRoleListUsingGET_2
+2019-11-19 20:01:58.404  WARN 68752 --- [main] s.d.s.w.r.p.ParameterDataTypeReader      : Trying to infer dataType java.lang.String[]
+2019-11-19 20:01:58.404  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: addDepartmentUsingPOST_1
+2019-11-19 20:01:58.404  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: delUsingPOST_3
+2019-11-19 20:01:58.404  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: goAddRoleUsingGET_1
+2019-11-19 20:01:58.419  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showRoleListUsingGET_3
+2019-11-19 20:01:58.419  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateRoleUsingGET_1
+2019-11-19 20:01:58.419  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: delUsingPOST_4
+2019-11-19 20:01:58.435  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: deleteFileUsingPOST_1
+2019-11-19 20:01:58.497  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: delUsingPOST_5
+2019-11-19 20:01:58.497  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showUserUsingGET_1
+2019-11-19 20:01:58.513  WARN 68752 --- [main] s.d.s.w.r.p.ParameterDataTypeReader      : Trying to infer dataType java.lang.String[]
+2019-11-19 20:01:58.513  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: delUsingPOST_6
+2019-11-19 20:01:58.529  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showMenuUsingGET_1
+2019-11-19 20:01:58.638  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: delUsingPOST_7
+2019-11-19 20:01:58.641  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showMenuUsingGET_2
+2019-11-19 20:01:58.660  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: delUsingPOST_8
+2019-11-19 20:01:58.663  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: goAddRoleUsingGET_2
+2019-11-19 20:01:58.673  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showRoleListUsingGET_4
+2019-11-19 20:01:58.673  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateRoleUsingGET_2
+2019-11-19 20:01:58.720  WARN 68752 --- [main] s.d.s.w.r.p.ParameterDataTypeReader      : Trying to infer dataType java.lang.String[]
+2019-11-19 20:01:58.720  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: delUsingPOST_9
+2019-11-19 20:01:58.735  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: goAddRoleUsingGET_3
+2019-11-19 20:01:58.735  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showRoleListUsingGET_5
+2019-11-19 20:01:58.735  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showRoleListUsingGET_6
+2019-11-19 20:01:58.735  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateRoleUsingGET_3
+2019-11-19 20:01:58.751  WARN 68752 --- [main] s.d.s.w.r.p.ParameterDataTypeReader      : Trying to infer dataType java.lang.String[]
+2019-11-19 20:01:58.751  WARN 68752 --- [main] s.d.s.w.r.p.ParameterDataTypeReader      : Trying to infer dataType java.lang.String[]
+2019-11-19 20:01:58.766  WARN 68752 --- [main] s.d.s.w.r.p.ParameterDataTypeReader      : Trying to infer dataType java.lang.String[]
+2019-11-19 20:01:58.766  WARN 68752 --- [main] s.d.s.w.r.p.ParameterDataTypeReader      : Trying to infer dataType java.lang.String[]
+2019-11-19 20:01:58.782  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: delUsingPOST_10
+2019-11-19 20:01:58.782  WARN 68752 --- [main] s.d.s.w.r.p.ParameterDataTypeReader      : Trying to infer dataType org.springframework.ui.ModelMap
+2019-11-19 20:01:58.813  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showBlackListUsingGET_1
+2019-11-19 20:01:58.829  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showUserUsingGET_2
+2019-11-19 20:01:58.829  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showUserUsingGET_3
+2019-11-19 20:01:58.829  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: showUserUsingGET_4
+2019-11-19 20:01:58.845  WARN 68752 --- [main] s.d.s.w.r.p.ParameterDataTypeReader      : Trying to infer dataType java.lang.String[]
+2019-11-19 20:01:58.845  INFO 68752 --- [main] .d.s.w.r.o.CachingOperationNameGenerator : Generating unique operation named: updateUserUsingPOST_1
+2019-11-19 20:01:58.860  INFO 68752 --- [main] org.quartz.core.QuartzScheduler          : Scheduler schedulerFactoryBean_$_NON_CLUSTERED started.
+2019-11-19 20:01:58.876  INFO 68752 --- [main] c.n.c.B.MyApplicationListener            : -------------bean初始化完毕-------------
+2019-11-19 20:01:59.991 DEBUG 68752 --- [Thread-31] c.n.m.SysJobMapper.selectListByPage      : ==>  Preparing: SELECT * from sys_job WHERE status =? 
+2019-11-19 20:02:00.054 DEBUG 68752 --- [Thread-31] c.n.m.SysJobMapper.selectListByPage      : ==> Parameters: true(Boolean)
+2019-11-19 20:02:00.085 DEBUG 68752 --- [Thread-31] c.n.m.SysJobMapper.selectListByPage      : <==      Total: 0
+2019-11-19 20:02:21.613  INFO 68752 --- [https-openssl-nio-4430-exec-9] o.a.c.c.C.[.[localhost].[/xzb-zhglpt]    : Initializing Spring FrameworkServlet 'dispatcherServlet'
+2019-11-19 20:02:21.620  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver---初始化开始
+2019-11-19 20:02:21.622  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver---初始化成功
+2019-11-19 20:02:21.631  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.web.servlet.theme.FixedThemeResolver---初始化开始
+2019-11-19 20:02:21.634  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.web.servlet.theme.FixedThemeResolver---初始化成功
+2019-11-19 20:02:21.645  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator---初始化开始
+2019-11-19 20:02:21.646  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator---初始化成功
+2019-11-19 20:02:21.657  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.web.servlet.support.SessionFlashMapManager---初始化开始
+2019-11-19 20:02:21.660  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---org.springframework.web.servlet.support.SessionFlashMapManager---初始化成功
+2019-11-19 20:02:21.678  INFO 68752 --- [https-openssl-nio-4430-exec-9] a.s.s.m.AbstractValidatingSessionManager : Enabling session validation scheduler...
+2019-11-19 20:02:21.761  INFO 68752 --- [https-openssl-nio-4430-exec-10] com.nfdw.config.ZBeanFactory             : 对象---/login---初始化开始
+2019-11-19 20:02:21.839  INFO 68752 --- [https-openssl-nio-4430-exec-10] com.nfdw.config.ZBeanFactory             : 对象---/login---初始化成功
+2019-11-19 20:02:27.627 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.n.mapper.SysUserMapper.getStudentType  : ==>  Preparing: select user_type from sys_user where username=? 
+2019-11-19 20:02:27.629 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.n.mapper.SysUserMapper.getStudentType  : ==> Parameters: admin(String)
+2019-11-19 20:02:27.639 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.n.mapper.SysUserMapper.getStudentType  : <==      Total: 1
+2019-11-19 20:02:27.643 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.SysUserMapper.login      : ==>  Preparing: select u.*,d.gzarea from sys_user u left join sys_department d on u.department_id = d.id where u.username=? 
+2019-11-19 20:02:27.647 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.SysUserMapper.login      : ==> Parameters: admin(String)
+2019-11-19 20:02:27.661 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.SysUserMapper.login      : <==      Total: 1
+2019-11-19 20:02:27.663 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.n.mapper.SysUserMapper.updateStatus    : ==>  Preparing: update sys_user set status=? where id=? 
+2019-11-19 20:02:27.670 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.n.mapper.SysUserMapper.updateStatus    : ==> Parameters: 1(Integer), acfc0e9232f54732a5d9ffe9071bf572(String)
+2019-11-19 20:02:27.691 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.n.mapper.SysUserMapper.updateStatus    : <==    Updates: 1
+2019-11-19 20:02:27.694 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.nfdw.mapper.SysMenuMapper.getUserMenu  : ==>  Preparing: select concat(?,m.url) as url, m.*,r.id as rid,r.role_name as role_name,r.remark as remark from sys_menu m left join sys_role_menu rm on m.id=rm.menu_id left join sys_role r on rm.role_id=r.id left join sys_role_user ru on r.id=ru.role_id where ru.user_id =? order by m.order_num asc 
+2019-11-19 20:02:27.700 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.nfdw.mapper.SysMenuMapper.getUserMenu  : ==> Parameters: /xzb-zhglpt(String), acfc0e9232f54732a5d9ffe9071bf572(String)
+2019-11-19 20:02:27.733 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.nfdw.mapper.SysMenuMapper.getUserMenu  : <==      Total: 52
+2019-11-19 20:02:27.871 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.ConfigMapper.selectOne   : ==>  Preparing: SELECT id,name,parameter FROM t_config WHERE name = ? 
+2019-11-19 20:02:27.871 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.ConfigMapper.selectOne   : ==> Parameters: Locking(String)
+2019-11-19 20:02:27.871 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.ConfigMapper.selectOne   : <==      Total: 1
+2019-11-19 20:02:28.026 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.SysLogMapper.insert      : ==>  Preparing: INSERT INTO sys_log ( id,user_name,ip,type,text,create_time,param ) VALUES( ?,?,?,?,?,?,? ) 
+2019-11-19 20:02:28.032 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.SysLogMapper.insert      : ==> Parameters: null, admin(String), 0:0:0:0:0:0:0:1(String), ATHOR(String), 登录成功(String), 2019-11-19 20:02:27.996(Timestamp), null
+2019-11-19 20:02:28.054 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.SysLogMapper.insert      : <==    Updates: 1
+2019-11-19 20:02:28.058  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---redirect:/studentIndex---初始化开始
+2019-11-19 20:02:28.133  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---redirect:/studentIndex---初始化成功
+2019-11-19 20:02:28.139  INFO 68752 --- [https-openssl-nio-4430-exec-6] com.nfdw.config.ZBeanFactory             : 对象---studentIndex---初始化开始
+2019-11-19 20:02:28.217  INFO 68752 --- [https-openssl-nio-4430-exec-6] com.nfdw.config.ZBeanFactory             : 对象---studentIndex---初始化成功
+2019-11-19 20:02:36.718 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.n.m.S.getUserIDByStudentInformation    : ==>  Preparing: select * from j_student_information where name=? 
+2019-11-19 20:02:36.719 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.n.m.S.getUserIDByStudentInformation    : ==> Parameters: admin(String)
+2019-11-19 20:02:36.727 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] c.n.m.S.getUserIDByStudentInformation    : <==      Total: 0
+2019-11-19 20:02:36.741 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.SysLogMapper.insert      : ==>  Preparing: INSERT INTO sys_log ( id,user_name,ip,type,text,create_time,param ) VALUES( ?,?,?,?,?,?,? ) 
+2019-11-19 20:02:36.742 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.SysLogMapper.insert      : ==> Parameters: null, admin(String), 0:0:0:0:0:0:0:1(String), ATHOR(String), 查询学生基本信息并显示添加页面(String), 2019-11-19 20:02:36.74(Timestamp), [参数1:(String)
+2019-11-19 20:02:36.764 DEBUG 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.mapper.SysLogMapper.insert      : <==    Updates: 1
+2019-11-19 20:02:36.766  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---basicInformation---初始化开始
+2019-11-19 20:02:36.847  INFO 68752 --- [https-openssl-nio-4430-exec-9] com.nfdw.config.ZBeanFactory             : 对象---basicInformation---初始化成功
+2019-11-19 20:18:06.738  INFO 68752 --- [Thread-47] org.quartz.core.QuartzScheduler          : Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+2019-11-19 20:18:06.801  INFO 68752 --- [Thread-47] org.quartz.core.QuartzScheduler          : Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutting down.
+2019-11-19 20:18:06.801  INFO 68752 --- [Thread-47] org.quartz.core.QuartzScheduler          : Scheduler schedulerFactoryBean_$_NON_CLUSTERED paused.
+2019-11-19 20:18:06.816  INFO 68752 --- [Thread-47] org.quartz.core.QuartzScheduler          : Scheduler schedulerFactoryBean_$_NON_CLUSTERED shutdown complete.
