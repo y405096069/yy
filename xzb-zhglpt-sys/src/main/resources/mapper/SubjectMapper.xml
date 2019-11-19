@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.SubjectMapper">
+
+    <resultMap id="BaseResultMap" type="com.nfdw.entity.Subject">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="subject_name" jdbcType="VARCHAR" property="subject_name" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+        <result column="update_name" jdbcType="VARCHAR" property="update_name"/>
+        <result column="spec_id" jdbcType="VARCHAR" property="spec_id" />
+    </resultMap>
+
+
+    <select id="selectListByPage" parameterType="com.nfdw.entity.Subject" resultMap="BaseResultMap">
+        select * from subject
+        <if test="subject_name != null and subject_name != ''" >
+            and subject_name = #{subject_name}
+        </if>
+
+        <if test="code != null and code != ''">
+            and code = #{code}
+        </if>
+        <if test="introduction != null and introduction != ''">
+            and introduction = #{introduction}
+        </if>
+        <if test="update_time != null and update_time != ''">
+            and update_time = #{update_time}
+        </if>
+        <if test="update_name != null and update_name != ''">
+            and update_name = #{update_name}
+        </if>
+
+        <if test="spec_id != null and spec_id != ''">
+            and spec_id = #{spec_id}
+        </if>
+    </select>
+
+</mapper>
