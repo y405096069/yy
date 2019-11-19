@@ -40,6 +40,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.util.List;
 import java.util.UUID;
 
@@ -165,6 +166,7 @@ public class LoginController extends BaseLoginController {
             }
         }else{
             user.setUser_type(userService.getStudentType(user.getUsername()));
+            System.out.println(user.getUser_type());
             return super.login(user, code, model, request,type);
         }
     }

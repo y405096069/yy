@@ -97,7 +97,7 @@ public class MenuServiceImpl extends BaseServiceImpl<SysMenu, String> implements
             }
         }
 
-      //  System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
+        //  System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
         Collections.sort(menuList, new Comparator<SysMenu>() {
             @Override
             public int compare(SysMenu o1, SysMenu o2) {
@@ -111,7 +111,7 @@ public class MenuServiceImpl extends BaseServiceImpl<SysMenu, String> implements
         for (SysMenu menu : menuList) {
             if (StringUtils.isEmpty(menu.getPId())) {
                 SysMenu sysMenu = getChilds(menu, pNum, 0, menuList);
-               jsonArr.add(index++,sysMenu);
+                jsonArr.add(index++,sysMenu);
 
                 pNum += 1000;
             }
@@ -179,7 +179,7 @@ public class MenuServiceImpl extends BaseServiceImpl<SysMenu, String> implements
         treeUtil.setId(sysMenu.getId());
         treeUtil.setName(sysMenu.getName());
         treeUtil.setLayer(layer);
-        treeUtil.setPId(pId);
+        treeUtil.setpId(pId);
         /**判断是否存在*/
         if (!StringUtils.isEmpty(roleId)) {
             SysRoleMenu sysRoleMenu = new SysRoleMenu();

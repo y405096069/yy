@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 public abstract class BaseLoginController {
     @PostMapping(value = "/login")
     public String login(SysUser user, String code, Model model, HttpServletRequest request,String type) {
-
+        System.out.println(user.getUser_type());
         String codeMsg = (String) request.getSession().getAttribute("_code");
         if (null != code && !code.toLowerCase().equals(codeMsg)) {
             model.addAttribute("message", "验证码错误");

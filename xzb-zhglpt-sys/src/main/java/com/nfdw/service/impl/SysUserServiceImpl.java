@@ -264,6 +264,26 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser, String> impleme
     }
 
     @Override
+    public int addSysUser(SysUser sysUser) {
+        return 0;
+    }
+
+    @Override
+    public int getPhoneStatus(String phone) {
+        return 0;
+    }
+
+    @Override
+    public int updatePhoneStatus(String phone, int status) {
+        return 0;
+    }
+
+    @Override
+    public String getStudentType(String phone) {
+        return sysUserMapper.getStudentType(phone);
+    }
+
+    @Override
     public int whileAddUser(SysUser sysUser) {
         String pwd = Md5Util.getMD5(sysUser.getPassword().trim(), sysUser.getUsername().trim());
         sysUser.setPassword(pwd);

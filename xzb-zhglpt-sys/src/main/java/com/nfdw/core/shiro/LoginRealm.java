@@ -98,7 +98,7 @@ public class LoginRealm extends AuthorizingRealm {
             List<CurrentMenu> currentMenuList = new ArrayList<>();
             List<SysRole> roleList = new ArrayList<>();
             for (SysMenu m : menuList) {
-                currentMenu = new CurrentMenu(m.getId(), m.getName(), m.getpId(), m.getUrl(), m.getOrderNum(), m.getIcon(), m.getPermission(), m.getMenuType(), m.getNum());
+                currentMenu = new CurrentMenu(m.getId(), m.getName(), m.getPId(), m.getUrl(), m.getOrderNum(), m.getIcon(), m.getPermission(), m.getMenuType(), m.getNum());
                 currentMenuList.add(currentMenu);
                 roleList.addAll(m.getRoleList());
             }
