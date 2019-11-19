@@ -19,6 +19,7 @@ public class SpecManagementServiceImpl extends BaseServiceImpl<SpecManagement,St
     @Autowired
     private SpecManagementMapper specManagementMapper;
 
+
     @Override
     public BaseMapper<SpecManagement, String> getMappser() {
         return specManagementMapper;
