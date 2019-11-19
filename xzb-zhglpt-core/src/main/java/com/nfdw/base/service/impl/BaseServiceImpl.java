@@ -144,11 +144,6 @@ public abstract class BaseServiceImpl<T, E extends Serializable> implements Base
     }
 
     @Override
-    public List<T> selectListByPage(T record,int ex_id) {
-        return getMappser().selectListByPage(record,ex_id);
-    }
-
-    @Override
     public int deleteByPrimaryKey(Object o) {
         return getMappser().deleteByPrimaryKey(o);
     }
