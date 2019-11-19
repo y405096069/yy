@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.ExamineeDataMapper">
+    <select id="man" resultType="int">
+        SELECT COUNT(1) FROM examinee_user WHERE gender='男'
+    </select>
+    <select id="goddess" resultType="int">
+        SELECT COUNT(1) FROM examinee_user WHERE gender='女'
+    </select>
+    <select id="freshGraduate" resultType="int">
+        SELECT COUNT(1) FROM examinee_user WHERE `session`='应届生'
+    </select>
+    <select id="formerGraduate" resultType="int">
+         SELECT COUNT(1) FROM examinee_user WHERE `session`='往届生'
+    </select>
+    <select id="ethnicHan" resultType="int">
+         SELECT COUNT(1) FROM examinee_user WHERE nation='汉族'
+    </select>
+    <select id="nationalMinority" resultType="int">
+        SELECT COUNT(1) FROM examinee_user WHERE nation='少数民族'
+    </select>
+    <select id="science" resultType="int">
+        SELECT COUNT(1) FROM examinee_user WHERE subject='理科'
+    </select>
+    <select id="arts" resultType="int">
+          SELECT COUNT(1) FROM examinee_user WHERE subject='文科'
+    </select>
+
+</mapper>

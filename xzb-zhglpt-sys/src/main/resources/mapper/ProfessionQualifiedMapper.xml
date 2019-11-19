@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.ProfessionQualifiedMapper">
+    <select id="QualifiedAvg" resultType="int">
+      SELECT AVG(crade) from crea_crade
+    </select>
+    <select id="QualifiedNumber" resultType="int">
+         SELECT COUNT(1) FROM crea_crade WHERE status='1'
+     </select>
+
+</mapper>

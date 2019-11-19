@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.RegistrationStatisticsMapper">
+    
+    <select id="NumberApplicants" resultType="int">
+        SELECT count(1) FROM examinee_user
+    </select>
+    <select id="PendingReview" resultType="int">
+        SELECT count(1) FROM crea_order WHERE typs='1'
+    </select>
+    <select id="Audited" resultType="int">
+        SELECT count(1) FROM crea_order WHERE typs='2'
+    </select>
+    <select id="PendingPayment" resultType="int">
+SELECT count(1) FROM crea_order WHERE status='1'
+    </select>
+    <select id="Paid" resultType="int">
+SELECT count(1) FROM crea_order WHERE status='2'
+</select>
+    <select id="SignUpSuccess" resultType="int">
+        SELECT count(1) FROM crea_order WHERE status='2'
+    </select>
+
+</mapper>
