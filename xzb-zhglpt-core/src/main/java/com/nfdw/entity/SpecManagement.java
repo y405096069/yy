@@ -67,4 +67,6 @@ public class SpecManagement {
     @Column(name = "collect_id")
     private String collect_id;
 
+
+
 }
