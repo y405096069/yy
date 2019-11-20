@@ -30,37 +30,36 @@ To change this template use File | Settings | File Templates.-->
       </fieldset>
     </div>
     <div class="layui-form-item">
-      <label for="departmentName" class="layui-form-label">
-        <span class="x-red">*</span>部门名称
+      <label for="name" class="layui-form-label">
+        <span class="x-red">*</span>学院名称
       </label>
       <div class="layui-input-inline">
-        <input type="text"  id="departmentName" name="departmentName"  lay-verify="departmentname"
+        <input type="text"  id="name" name="name"
                autocomplete="off" class="layui-input">
       </div>
-      <div id="ms" class="layui-form-mid layui-word-aux">
-        <span class="x-red">*</span><span id="ums">部门名称必填</span>
-      </div>
     </div>
-    
-      <<#--div class="layui-form-item">
-	      <label class="layui-form-label ">所属区域:</label>  
-	      <div class="layui-input-inline"> 
-	       <select name="gzarea" id="region_type" lay-verify="regionType" lay-filter="regionType"> 
-	          <option value=""></option>
-	        </select>
-	      </div> 
-	  </div>-->
+
     
     <div class="layui-form-item">
     <div class="layui-inline">
-      <label for="creater" class="layui-form-label">
-        <span class="x-red">*</span>创建者备注
+      <label for="code" class="layui-form-label">
+        <span class="x-red">*</span>学院代码
       </label>
       <div class="layui-input-inline">
-        <input type="text" id="creater" name="creater" lay-verify="creater"  autocomplete="off" class="layui-input">
+        <input type="text" id="code" name="code"  autocomplete="off" class="layui-input">
       </div>
     </div>
     </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label for="introduction" class="layui-form-label">
+                    <span class="x-red">*</span>学院介绍
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="introduction" name="introduction" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+        </div>
       <div style="height: 60px"></div>
     </div>
   <div style="width: 100%;height: 55px;background-color: white;border-top:1px solid #e6e6e6;

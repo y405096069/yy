@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-@Table(name = "sys_department")
+@Table(name = "spec_collect")
 @Data
 @ToString
 @EqualsAndHashCode
@@ -23,9 +23,9 @@ public class SpecCollect {
     private String  code;
     @Column(name = "introduction")
     private String  introduction;
-    @Column(name = " update_time;")
-    private Date updateTime;;
-    @Column(name = "add_name;")
-    private String addName;;
+    @Column(name = " update_time")
+    private Date updateTime;
+    @Column(name = "add_name")
+    private String addName;
 
 }

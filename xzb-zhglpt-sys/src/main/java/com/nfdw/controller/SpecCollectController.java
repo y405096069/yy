@@ -66,7 +66,7 @@ public class SpecCollectController extends BaseController {
 
     @ApiOperation(value = "/addSpecCollect", httpMethod = "POST", notes = "添加学院")
     @Log(desc = "添加学院")
-    @PostMapping(value = "addspecCollect")
+    @PostMapping(value = "addSpecCollect")
     @ResponseBody
     public JsonUtil addSpecCollect(SpecCollect SpecCollect) {
         if (StringUtils.isEmpty(SpecCollect.getName())) {
@@ -122,11 +122,11 @@ public class SpecCollectController extends BaseController {
 //            model.addAttribute("menus", jsonArray.toJSONString());
         }
         model.addAttribute("detail", detail);
-        return "system/specCollect/update-specCollect";
+        return "specCollect/update-specCollect";
     }
 
 
-    @ApiOperation(value = "/updateSpecCollect", httpMethod = "POST", notes = "更新用户")
+    @ApiOperation(value = "/updateSpecCollect", httpMethod = "POST", notes = "更新学院")
     @Log(desc = "更新学院", type = LOG_TYPE.UPDATE)
     @PostMapping(value = "updateSpecCollect")
     @ResponseBody
