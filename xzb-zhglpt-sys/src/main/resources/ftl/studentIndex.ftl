@@ -214,7 +214,6 @@
                             <div style="cursor: pointer;">修改密码</div>
                         </div>
                         <div class="personal_right">
-                            <div class="notice">通知公告</div>
                         <div class="youself">
                             <i class="el-icon-user-solid"></i>
                             <div class="title">学生,你好！</div>

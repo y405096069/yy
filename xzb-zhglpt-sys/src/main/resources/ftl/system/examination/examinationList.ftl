@@ -106,12 +106,12 @@
                     width: '10%',
                     sort: true
                 }
-                , {field: 'specialtyName', title: '招生专业', width: '10%', sort: true}
+                , {field: 'specialty_name', title: '招生专业', width: '10%', sort: true}
                 , {field: 'exam_time', title: '报名开始时间', width: '13%'}
                 , {field: 'end_time', title: '报名截止时间', width: '13%'}
-                , {field: 'types', title: '信息采集模板', width: '13%'}
-                , {field: 'create_start_time', title: '考试开始时间', width: '10%'}
-                , {field: 'create_end_time', title: '考试结束时间', width: '10%'}
+                , {field: 'gathering_id', title: '信息采集模板', width: '13%'}
+                , {field: 'create_time', title: '考试开始时间', width: '10%'}
+                , {field: 'update_time', title: '考试结束时间', width: '10%'}
                 , {fixed: 'right', field: 'right', title: '操作', toolbar: "#barDemo"}
             ]]
             , page: true

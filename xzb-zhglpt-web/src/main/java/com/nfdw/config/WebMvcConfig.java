@@ -49,7 +49,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**").addResourceLocations("classpath:/META-INF/resources/").setCachePeriod(0);
-        registry.addResourceHandler("/plugin/**", "/upload/**")
+        registry.addResourceHandler("/plugin/**", "/app/**")
                 .addResourceLocations("classpath:/plugin/", "classpath:/static/");
         registry.addResourceHandler("/ftl/**").addResourceLocations("classpath:/ftl/");
         registry.addResourceHandler("/images/**").addResourceLocations("file:" + imagePath);

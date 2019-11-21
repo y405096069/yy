@@ -7,6 +7,7 @@ import com.nfdw.entity.SpecManagement;
 import com.nfdw.exception.MyException;
 import com.nfdw.service.ExaminationService;
 import com.nfdw.service.Infor_CollectionService;
+import com.nfdw.service.SubjectService;
 import com.nfdw.util.JsonUtil;
 import com.nfdw.util.ReType;
 import io.swagger.annotations.ApiOperation;
@@ -15,13 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.*;
+
+
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.List;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * @Auther: EagleJunBin
@@ -31,6 +34,9 @@ import java.util.List;
 @RequestMapping("/examination")
 @Controller
 public class ExaminationController {
+
+    @Autowired
+    SubjectService subjectService;
 
     @Autowired
     ExaminationService examinationService;
@@ -87,12 +93,13 @@ public class ExaminationController {
     @ApiOperation(value = "/addExamination", httpMethod = " POST")
     @PostMapping(value = "addExamination")
     @ResponseBody
-    public JsonUtil addExamination(Examination examination, HttpServletRequest request) {
+    public JsonUtil addExamination(Examination examination, HttpServletRequest request,Model model) {
        /* if (StringUtils.isEmpty(examination.getExam())) {
             JsonUtil.error("考试名称不能为空");
         }*/
         JsonUtil j = new JsonUtil();
         try {
+
             //设置成绩状态默认为 不开启 0:关闭 1：开启
             examinationService.addExamination(examination);
             //操作role-menu data
@@ -104,8 +111,6 @@ public class ExaminationController {
         }
         return j;
     }
-
-
 
 
     @GetMapping(value = "updateExamination")
