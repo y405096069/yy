@@ -19,9 +19,6 @@ public class Achievement_Summary {
     @Column(name = "exam_id")
     private int exam_id;                //考试id
 
-    @Column(name = "exam_name")
-    private String exam_name;                //考试名称
-
     @Column(name = "id_card")           //身份证
     private String id_card;
 
