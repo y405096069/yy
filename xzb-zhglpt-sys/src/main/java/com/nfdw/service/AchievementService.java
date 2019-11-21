@@ -8,6 +8,8 @@ public interface AchievementService extends BaseService<Examination, String> {
 
     boolean updateGrade_switch(int id, int grade);
 
+    boolean updateGrade_switch2(int id, int grade2);
+
     boolean addFirstGrade(Achievement_Summary as);
 
     boolean delFirstGradeByEId(int id);

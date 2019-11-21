@@ -28,6 +28,11 @@ public class AchievementServiceImpl extends BaseServiceImpl<Examination, String>
     }
 
     @Override
+    public boolean updateGrade_switch2(int id, int grade2) {
+        return acMapper.updateGrade_switch2(id, grade2)>0;
+    }
+
+    @Override
     public boolean addFirstGrade(Achievement_Summary as) {
         return acMapper.addFirstGrade(as)>0;
     }

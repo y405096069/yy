@@ -110,11 +110,15 @@ public class Examination {
     @Column(name = "end_time")
     private Date end_time;//报名结束时间
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "create_start_time")
-    private String create_start_time;//初试考试开始时间 list
+    private Date create_start_time;//初试考试开始时间 list
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "create_end_time")
-    private String create_end_time; //初试考试结束时间  list
+    private Date create_end_time; //初试考试结束时间  list
 
     @Column(name = "people_num")
     private String people_num;         //考场人数限制      list
@@ -564,8 +568,371 @@ public class Examination {
     private String father_k_d_zong;
 
 
+    public Integer getId() {
+        return id;
+    }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
+    public String getExam() {
+        return exam;
+    }
 
+    public void setExam(String exam) {
+        this.exam = exam;
+    }
 
+    public String getNumber_limitation() {
+        return number_limitation;
+    }
+
+    public void setNumber_limitation(String number_limitation) {
+        this.number_limitation = number_limitation;
+    }
+
+    public String getSpecialty_id() {
+        return specialty_id;
+    }
+
+    public void setSpecialty_id(String specialty_id) {
+        this.specialty_id = specialty_id;
+    }
+
+    public String getSpecialty_name() {
+        return specialty_name;
+    }
+
+    public void setSpecialty_name(String specialty_name) {
+        this.specialty_name = specialty_name;
+    }
+
+    public String getProvince_id() {
+        return province_id;
+    }
+
+    public void setProvince_id(String province_id) {
+        this.province_id = province_id;
+    }
+
+    public String getGathering_id() {
+        return gathering_id;
+    }
+
+    public void setGathering_id(String gathering_id) {
+        this.gathering_id = gathering_id;
+    }
+
+    public Integer getCrade() {
+        return crade;
+    }
+
+    public void setCrade(Integer crade) {
+        this.crade = crade;
+    }
+
+    public String getSubject_stint() {
+        return subject_stint;
+    }
+
+    public void setSubject_stint(String subject_stint) {
+        this.subject_stint = subject_stint;
+    }
+
+    public Integer getCertificate() {
+        return certificate;
+    }
+
+    public void setCertificate(Integer certificate) {
+        this.certificate = certificate;
+    }
+
+    public Integer getGrade() {
+        return grade;
+    }
+
+    public void setGrade(Integer grade) {
+        this.grade = grade;
+    }
+
+    public Integer getGrade2() {
+        return grade2;
+    }
+
+    public void setGrade2(Integer grade2) {
+        this.grade2 = grade2;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public String getPrologue() {
+        return prologue;
+    }
+
+    public void setPrologue(String prologue) {
+        this.prologue = prologue;
+    }
+
+    public String getPrologue_tem() {
+        return prologue_tem;
+    }
+
+    public void setPrologue_tem(String prologue_tem) {
+        this.prologue_tem = prologue_tem;
+    }
+
+    public String getPrologue_remarks() {
+        return prologue_remarks;
+    }
+
+    public void setPrologue_remarks(String prologue_remarks) {
+        this.prologue_remarks = prologue_remarks;
+    }
+
+    public String getVersion1() {
+        return version1;
+    }
+
+    public void setVersion1(String version1) {
+        this.version1 = version1;
+    }
+
+    public Double getPrcie() {
+        return prcie;
+    }
+
+    public void setPrcie(Double prcie) {
+        this.prcie = prcie;
+    }
+
+    public Double getRetestPrcie() {
+        return retestPrcie;
+    }
+
+    public void setRetestPrcie(Double retestPrcie) {
+        this.retestPrcie = retestPrcie;
+    }
+
+    public int getRetest_type() {
+        return retest_type;
+    }
+
+    public void setRetest_type(int retest_type) {
+        this.retest_type = retest_type;
+    }
+
+    public Date getCreate_time() {
+        return create_time;
+    }
+
+    public void setCreate_time(Date create_time) {
+        this.create_time = create_time;
+    }
+
+    public Date getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
+    }
+
+    public Date getExam_time() {
+        return exam_time;
+    }
+
+    public void setExam_time(Date exam_time) {
+        this.exam_time = exam_time;
+    }
+
+    public Date getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(Date end_time) {
+        this.end_time = end_time;
+    }
+
+    public Date getCreate_start_time() {
+        return create_start_time;
+    }
+
+    public void setCreate_start_time(Date create_start_time) {
+        this.create_start_time = create_start_time;
+    }
+
+    public Date getCreate_end_time() {
+        return create_end_time;
+    }
+
+    public void setCreate_end_time(Date create_end_time) {
+        this.create_end_time = create_end_time;
+    }
+
+    public String getPeople_num() {
+        return people_num;
+    }
+
+    public void setPeople_num(String people_num) {
+        this.people_num = people_num;
+    }
+
+    public String getBuild() {
+        return build;
+    }
+
+    public void setBuild(String build) {
+        this.build = build;
+    }
+
+    public String getCreate_enclosure() {
+        return create_enclosure;
+    }
+
+    public void setCreate_enclosure(String create_enclosure) {
+        this.create_enclosure = create_enclosure;
+    }
+
+    public String getCreate_disclaimer() {
+        return create_disclaimer;
+    }
+
+    public void setCreate_disclaimer(String create_disclaimer) {
+        this.create_disclaimer = create_disclaimer;
+    }
+
+    public String getCreate_watermark() {
+        return create_watermark;
+    }
+
+    public void setCreate_watermark(String create_watermark) {
+        this.create_watermark = create_watermark;
+    }
+
+    public String getRemarks() {
+        return remarks;
+    }
+
+    public void setRemarks(String remarks) {
+        this.remarks = remarks;
+    }
+
+    public Integer getTypes() {
+        return types;
+    }
+
+    public void setTypes(Integer types) {
+        this.types = types;
+    }
+
+    public Integer getCurrent1() {
+        return current1;
+    }
+
+    public void setCurrent1(Integer current1) {
+        this.current1 = current1;
+    }
+
+    public Integer getCollege_id() {
+        return college_id;
+    }
+
+    public void setCollege_id(Integer college_id) {
+        this.college_id = college_id;
+    }
+
+    public String getReport_setting() {
+        return report_setting;
+    }
+
+    public void setReport_setting(String report_setting) {
+        this.report_setting = report_setting;
+    }
+
+    public Integer getHuchi() {
+        return huchi;
+    }
+
+    public void setHuchi(Integer huchi) {
+        this.huchi = huchi;
+    }
+
+    public String getSubject_id() {
+        return subject_id;
+    }
+
+    public void setSubject_id(String subject_id) {
+        this.subject_id = subject_id;
+    }
+
+    public String getFather_id() {
+        return father_id;
+    }
+
+    public void setFather_id(String father_id) {
+        this.father_id = father_id;
+    }
+
+    public Integer getCheck_pay() {
+        return check_pay;
+    }
+
+    public void setCheck_pay(Integer check_pay) {
+        this.check_pay = check_pay;
+    }
+
+    public Integer getSubject_q_fen() {
+        return subject_q_fen;
+    }
+
+    public void setSubject_q_fen(Integer subject_q_fen) {
+        this.subject_q_fen = subject_q_fen;
+    }
+
+    public Integer getFather_q_fen() {
+        return father_q_fen;
+    }
+
+    public void setFather_q_fen(Integer father_q_fen) {
+        this.father_q_fen = father_q_fen;
+    }
+
+    public String getSubject_q_fen_child() {
+        return subject_q_fen_child;
+    }
+
+    public void setSubject_q_fen_child(String subject_q_fen_child) {
+        this.subject_q_fen_child = subject_q_fen_child;
+    }
+
+    public String getFather_q_fen_child() {
+        return father_q_fen_child;
+    }
+
+    public void setFather_q_fen_child(String father_q_fen_child) {
+        this.father_q_fen_child = father_q_fen_child;
+    }
+
+    public String getSubject_k_d_zong() {
+        return subject_k_d_zong;
+    }
+
+    public void setSubject_k_d_zong(String subject_k_d_zong) {
+        this.subject_k_d_zong = subject_k_d_zong;
+    }
+
+    public String getFather_k_d_zong() {
+        return father_k_d_zong;
+    }
+
+    public void setFather_k_d_zong(String father_k_d_zong) {
+        this.father_k_d_zong = father_k_d_zong;
+    }
 }

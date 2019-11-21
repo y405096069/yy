@@ -8,6 +8,7 @@
 
         <id column="id" jdbcType="INTEGER" property="id" />
         <id column="exam_id" jdbcType="INTEGER" property="exam_id" />
+        <id column="exam_name" jdbcType="VARCHAR" property="exam_name" />
         <id column="id_card" jdbcType="VARCHAR" property="id_card" />
         <id column="name" jdbcType="VARCHAR" property="name" />
         <id column="gender" jdbcType="VARCHAR" property="gender" />
@@ -89,7 +90,13 @@
 
 
     <select id="selectListByPage" parameterType="com.nfdw.entity.Achievement_Summary" resultMap="BaseResultMap">
-        select * from achievement_summary where exam_id=#{ex_id}
+        select * from achievement_summary where 1=1
+        <if test="exam_id !=null and exam_id != 0">
+            and exam_id=#{exam_id}
+        </if>
+        <!--<if test="qualified_mark !=null and qualified_mark != ''">
+            and qualified_mark=#{qualified_mark}
+        </if>-->
         <!--<if test="id !=null and id != 0">
             and id = #{id}
         </if>
@@ -105,8 +112,63 @@
         <if test="exam != null and exam != ''">
             and exam like CONCAT('%',#{exam},'%')
         </if>-->
+    </select>
+
+    <select id="selectListByPage2" parameterType="com.nfdw.entity.Achievement_Summary" resultMap="BaseResultMap">
+        select * from achievement_summary where 1=1
+        <if test="exam_id !=null and exam_id != 0">
+            and exam_id=#{exam_id}
+        </if>
+    </select>
+
+
+    <select id="selectAllHigh_province" resultType="java.lang.String">
+        select high_province from achievement_summary GROUP BY high_province
+    </select>
+
+    <select id="selectListByTerm" parameterType="com.nfdw.entity.Achievement_Summary" resultMap="BaseResultMap">
+        select * from achievement_summary where id in (
+            select a.id from (
+                select * from achievement_summary where 1=1
+                <if test="exam_id !=null and exam_id != 0">
+                    and exam_id=#{exam_id}
+                </if>
+                <if test="professional_name !=null and professional_name !=''">
+                    and professional_name=#{professional_name}
+                </if>
+                <if test="high_provinces !=null and high_provinces != ''">
+                    and high_province in
+                    <foreach item="item" index="index" collection="high_provinces.split(',')"  open="(" separator="," close=")">
+                         '${item}'
+                    </foreach>
+                </if>
+                <if test="cut_score !=null and cut_score != 0">
+                    and first_subjects_total &gt;= #{cut_score}
+                </if>
+                <if test="cut_num !=null and cut_num != 0">
+                    GROUP BY first_subjects_total DESC
+                    limit #{cut_num}
+                </if>
+                <if test="cut_rank !=null and cut_rank != 0">
+                    GROUP BY first_subjects_total DESC
+                    limit #{cut_rank}
+                </if>
+            )  as  a
+        )
+        <if test="cut_num !=null and cut_num != 0">
+            GROUP BY first_subjects_total DESC
+        </if>
+        <if test="cut_rank !=null and cut_rank != 0">
+            GROUP BY first_subjects_total DESC
+        </if>
 
     </select>
 
+    <select id="getIdByExam_num" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from achievement_summary where 1=1
+        <if test="exe_num !=null and exe_num!=''">
+            and examinee_num=#{exe_num}
+        </if>
+    </select>
 
 </mapper>
