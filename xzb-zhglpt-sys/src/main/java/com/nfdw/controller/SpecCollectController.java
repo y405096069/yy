@@ -5,11 +5,8 @@ import com.nfdw.base.controller.BaseController;
 import com.nfdw.core.annotation.Log;
 import com.nfdw.core.annotation.Log.LOG_TYPE;
 import com.nfdw.entity.SpecCollect;
-import com.nfdw.entity.SysUser;
 import com.nfdw.exception.MyException;
 import com.nfdw.service.SpecCollectService;
-import com.nfdw.service.SpecCollectService;
-import com.nfdw.service.SysUserService;
 import com.nfdw.util.BeanUtil;
 import com.nfdw.util.JsonUtil;
 import com.nfdw.util.ReType;
@@ -24,9 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
-import java.util.List;
 
 @RequestMapping("/specCollect")
 @Controller
@@ -68,14 +63,14 @@ public class SpecCollectController extends BaseController {
     @Log(desc = "添加学院")
     @PostMapping(value = "addSpecCollect")
     @ResponseBody
-    public JsonUtil addSpecCollect(SpecCollect SpecCollect) {
-        if (StringUtils.isEmpty(SpecCollect.getName())) {
+    public JsonUtil addSpecCollect(SpecCollect specCollect) {
+        if (StringUtils.isEmpty(specCollect.getName())) {
             JsonUtil.error("学院名称不能为空");
         }
         JsonUtil j = new JsonUtil();
         try {
-        	SpecCollect.setUpdateTime(new Date());
-            specCollectService.insertSelective(SpecCollect);
+            specCollect.setUpdateTime(new Date());
+            specCollectService.insertSelective(specCollect);
             //操作role-menu data
             j.setMsg("保存成功");
 

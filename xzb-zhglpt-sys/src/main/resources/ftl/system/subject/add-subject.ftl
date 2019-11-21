@@ -9,7 +9,7 @@ To change this template use File | Settings | File Templates.-->
 
 <head>
   <meta charset="UTF-8">
-  <title>添加学院</title>
+  <title>添加科目</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -26,15 +26,15 @@ To change this template use File | Settings | File Templates.-->
     <div style="width:100%;height:400px;overflow: auto;">
     <div class="layui-form-item">
       <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-        <legend style="font-size:16px;">学院信息</legend>
+        <legend style="font-size:16px;">科目信息</legend>
       </fieldset>
     </div>
     <div class="layui-form-item">
-      <label for="name" class="layui-form-label">
-        <span class="x-red">*</span>学院名称
+      <label for="subject_name" class="layui-form-label">
+        <span class="x-red">*</span>科目名称
       </label>
       <div class="layui-input-inline">
-        <input type="text"  id="name" name="name"
+        <input type="text"  id="subject_name" name="subject_name"
                autocomplete="off" class="layui-input">
       </div>
     </div>
@@ -43,34 +43,68 @@ To change this template use File | Settings | File Templates.-->
     <div class="layui-form-item">
     <div class="layui-inline">
       <label for="code" class="layui-form-label">
-        <span class="x-red">*</span>学院代码
+        <span class="x-red">*</span>科目代码
       </label>
       <div class="layui-input-inline">
         <input type="text" id="code" name="code"  autocomplete="off" class="layui-input">
       </div>
     </div>
     </div>
-        <div class="layui-form-item">
-            <#--<div class="layui-inline">
+       <#-- <div class="layui-form-item">
+            <div class="layui-inline">
                 <label for="introduction" class="layui-form-label">
-                    <span class="x-red">*</span>学院介绍
+                    <span class="x-red">*</span>科目介绍
                 </label>
                 <div class="layui-input-inline">
                     <input type="text" id="introduction" name="introduction" autocomplete="off" class="layui-input">
                 </div>
-            </div>-->
-            <div class="layui-form-item layui-form-text">
-                <label for="introduction" class="layui-form-label">
-                    <span class="x-red">*</span>学院介绍
-                </label>
-                <div class="layui-input-block">
+            </div>
+        </div>-->
+        <div class="layui-form-item layui-form-text">
+            <label for="subject" class="layui-form-label">
+                <span class="x-red">*</span>科目介绍
+            </label>
+            <div class="layui-input-block">
                     <textarea name="introduction" placeholder="请输入内容" class="layui-textarea">
 
-                    </textarea>
-                </div>
-            </div>
 
+                    </textarea>
+            </div>
         </div>
+        <div class="layui-form-item">
+                    <label for="spec_id" class="layui-form-label">
+                        <span class="x-red">*</span>所属专业
+                    </label>
+            <div class="layui-input-inline">
+                <select name="spec_id" id="spec_id" class="spec_id" lay-verify="spec_id"
+                        lay-filter="spec_id">
+                    <option value="">请选择专业</option>
+                    <#list specList as spe>
+                        <option value="${spe.id}">${spe.name}</option>
+                    </#list>
+
+                </select>
+            </div>
+        </div>
+<#--
+        <div class="layui-inline">
+            <div class="layui-input-inline" style="width:190px;">
+
+                <select name="specialtyName" id="specialtyName" lay-verify="specialtyName"
+                        lay-filter="specialtyName"
+                    <#if curentUser.id==exam.id>
+                        disabled
+                    </#if>
+
+                <option value=""></option>
+                <#list speList as spe>
+                    <option value="${spe.id}">${spe.specialtyName}</option>
+                </#list>
+
+                </select>
+            </div>
+        </div>-->
+
       <div style="height: 60px"></div>
     </div>
   <div style="width: 100%;height: 55px;background-color: white;border-top:1px solid #e6e6e6;
@@ -122,7 +156,7 @@ To change this template use File | Settings | File Templates.-->
         //      menus.push(jsonArr[item].id);
         //  }
         // data.field.menus=menus;
-      layerAjax('addSpecCollect',data.field,'departmentList');
+      layerAjax('addSubject',data.field,'departmentList');
       return false;
     });
   });

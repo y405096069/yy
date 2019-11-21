@@ -43,6 +43,12 @@ public class SubjectController {
     @GetMapping(value = "showSubjectList")
     @ResponseBody
     public ReType showSpecList(Model model, Subject subject, String page, String limit) {
+
+
+        List<Subject> subjects = subjectService.selectListByPage(subject);
+
+        System.err.println(subjects);
+
         return subjectService.show(subject,Integer.valueOf(page), Integer.valueOf(limit));
     }
 

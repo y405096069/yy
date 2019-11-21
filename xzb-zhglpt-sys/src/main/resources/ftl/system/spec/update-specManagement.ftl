@@ -9,7 +9,7 @@ To change this template use File | Settings | File Templates.-->
 
 <head>
     <meta charset="UTF-8">
-    <title>编辑学院</title>
+    <title>编辑专业</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -36,16 +36,16 @@ To change this template use File | Settings | File Templates.-->
         <div style="width:100%;height:400px;overflow: auto;">
             <div class="layui-form-item">
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-                    <legend style="font-size:16px;">学院信息</legend>
+                    <legend style="font-size:16px;">专业信息</legend>
                 </fieldset>
             </div>
             <div class="layui-form-item">
                 <label for="roleName" class="layui-form-label">
-                    <span class="x-red">*</span>学院名称
+                    <span class="x-red">*</span>专业名称
                 </label>
                 <div class="layui-input-inline">
-                    <input value="${specCollect.id}" type="hidden" name="id">
-                    <input type="text" value="${specCollect.name}" id="name" name="name"
+                    <input value="${specManagement.id}" type="hidden" name="id">
+                    <input type="text" value="${specManagement.name}" id="name" name="name"
                            lay-verify="name"
                            autocomplete="off" class="layui-input">
                 </div>
@@ -53,22 +53,27 @@ To change this template use File | Settings | File Templates.-->
 
             <div class="layui-form-item">
                 <label for="roleName" class="layui-form-label">
-                    <span class="x-red">*</span>学院代码
+                    <span class="x-red">*</span>专业代码
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" value="${specCollect.code}" id="code" name="code"
+                    <input type="text" value="${specManagement.code}" id="code" name="code"
                            lay-verify="code"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label for="roleName" class="layui-form-label">
-                    <span class="x-red">*</span>学院介绍
+                    <span class="x-red">*</span>专业介绍
                 </label>
-                <div class="layui-input-inline">
-                    <input type="text" value="${specCollect.introduction}" id="introduction" name="introduction"
+               <#-- <div class="layui-input-inline">
+                    <input type="text" value="${specManagement.introduction}" id="introduction" name="introduction"
                            lay-verify="code"
                            autocomplete="off" class="layui-input">
+                </div>-->
+                <div class="layui-input-block">
+                    <textarea name="introduction" placeholder="请输入内容" class="layui-textarea" >
+                       ${specManagement.introduction}
+                    </textarea>
                 </div>
             </div>
             <div style="height: 60px"></div>

@@ -2,7 +2,6 @@ package com.nfdw.service;
 
 import com.nfdw.base.service.BaseService;
 import com.nfdw.entity.SpecCollect;
-import com.nfdw.entity.SysDepartment;
 
 /**
  * @Auther: EagleJunBin

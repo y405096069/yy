@@ -1,5 +1,5 @@
 <#-- Created by IntelliJ IDEA.
- subject: Administrator
+ User: Administrator
  Date: 2017/12/6
  Time: 14:00
  To change this template use File | Settings | File Templates.
@@ -8,11 +8,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>专业管理</title>
+    <title>科目管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
-          content="width=device-width,subject-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
+          content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi"/>
     <link rel="stylesheet" href="${re.contextPath}/plugin/layui/css/layui.css">
     <link rel="stylesheet" href="${re.contextPath}/plugin/lenos/main.css">
     <script type="text/javascript" src="${re.contextPath}/plugin/jquery/jquery-3.2.1.min.js"></script>
@@ -23,63 +23,90 @@
 </head>
 
 <body>
-
-<div class="select">
-    更新人：
-    <div class="layui-inline">
-        <select class="layui-input" height="20px" id="sub_limit" name="sub_limit" autocomplete="off">
-            <option value="">全部</option>
-            <option value="0">张三</option>
-            <option value="1">李四</option>
-        </select>
+<div class="lenos-search">
+    <div class="select">
+        部门：
+        <div class="layui-inline">
+            <input class="layui-input" height="20px" id="departmentname" autocomplete="off">
+        </div>
+    <#--邮箱：-->
+    <#--<div class="layui-inline">-->
+    <#--<input class="layui-input" height="20px" id="email" autocomplete="off">-->
+    <#--</div>-->
+        <button class="select-on layui-btn layui-btn-sm" data-type="select"><i class="layui-icon"></i>
+        </button>
+        <button class="layui-btn layui-btn-sm icon-position-button" id="refresh" style="float: right;"
+                data-type="reload">
+            <i class="layui-icon">ဂ</i>
+        </button>
     </div>
-    <button class="select-on layui-btn layui-btn-sm" data-type="select"><i class="layui-icon"></i>
-    </button>
-    <button class="layui-btn layui-btn-sm icon-position-button" id="refresh" style="float: right;"
-            data-type="reload">
-        <i class="layui-icon">ဂ</i>
-    </button>
+
 </div>
 <div class="layui-col-md12" style="height:40px;margin-top:3px;">
     <div class="layui-btn-group">
-        <@shiro.hasPermission name="subject:select">
-            <button class="layui-btn layui-btn-normal" data-type="add">
-                <i class="layui-icon">&#xe608;</i>新增
-            </button>
-        </@shiro.hasPermission>
-        <#--<@shiro.hasPermission name="subject:select">
-            <button class="layui-btn layui-btn-normal" data-type="update">
-                <i class="layui-icon">&#xe642;</i>编辑
-            </button>
-        </@shiro.hasPermission>
-        <@shiro.hasPermission name="subject:del">
-            <button class="layui-btn layui-btn-normal" data-type="detail">
-                <i class="layui-icon">&#xe605;</i>查看
-            </button>
-        </@shiro.hasPermission>
-        <@shiro.hasPermission name="subject:repass">
-            <button class="layui-btn layui-btn-normal" data-type="changePwd">
-                <i class="layui-icon">&#xe605;</i>重置密码
-            </button>
-        </@shiro.hasPermission>-->q
+      <@shiro.hasPermission name="user:select">
+      <button class="layui-btn layui-btn-normal" data-type="add">
+          <i class="layui-icon">&#xe608;</i>新增
+      </button>
+      </@shiro.hasPermission>
+<#--    <@shiro.hasPermission name="user:select">
+    <button class="layui-btn layui-btn-normal" data-type="update">
+        <i class="layui-icon">&#xe642;</i>编辑
+    </button>
+    </@shiro.hasPermission>
+<@shiro.hasPermission name="user:del">
+    <button class="layui-btn layui-btn-normal" data-type="detail">
+        <i class="layui-icon">&#xe605;</i>查看
+    </button>
+</@shiro.hasPermission>-->
     </div>
 </div>
-<table id="subList" class="layui-hide" lay-filter="subject"></table>
-<script type="text/html" id="barDemo">
-   <#-- <@shiro.hasPermission name="subject:select">-->
-        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-    <#--</@shiro.hasPermission>-->
-    <#--<@shiro.hasPermission name="subject:update">-->
-        <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="edit">编辑</a>
-    <#--</@shiro.hasPermission>-->
-    <#--<@shiro.hasPermission name="subject:del">-->
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-    <#--</@shiro.hasPermission>-->
+<table id="departmentList" class="layui-hide" lay-filter="department"></table>
+<script type="text/html" id="toolBar">
+
+
+    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="detail">查看</a>
+
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+
 </script>
-<script type="text/html" id="switchTpl">
-    <input type="checkbox" name="sex" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo">
-</script>
+
 <script>
+    layui.laytpl.toDateString = function (d, format) {
+        var date = new Date(d || new Date())
+                , ymd = [
+            this.digit(date.getFullYear(), 4)
+            , this.digit(date.getMonth() + 1)
+            , this.digit(date.getDate())
+        ]
+                , hms = [
+            this.digit(date.getHours())
+            , this.digit(date.getMinutes())
+            , this.digit(date.getSeconds())
+        ];
+
+        format = format || 'yyyy-MM-dd HH:mm:ss';
+
+        return format.replace(/yyyy/g, ymd[0])
+                .replace(/MM/g, ymd[1])
+                .replace(/dd/g, ymd[2])
+                .replace(/HH/g, hms[0])
+                .replace(/mm/g, hms[1])
+                .replace(/ss/g, hms[2]);
+    };
+
+    //数字前置补零
+    layui.laytpl.digit = function (num, length, end) {
+        var str = '';
+        num = String(num);
+        length = length || 2;
+        for (var i = num.length; i < length; i++) {
+            str += '0';
+        }
+        return num < Math.pow(10, length) ? str + (num | 0) : num;
+    };
+
     document.onkeydown = function (e) { // 回车提交表单
         var theEvent = window.event || e;
         var code = theEvent.keyCode || theEvent.which;
@@ -91,130 +118,80 @@
         var table = layui.table;
         //方法级渲染
         table.render({
-            id: 'subList',
-            elem: '#subList'
+            id: 'departmentList',
+            elem: '#departmentList'
             , url: 'showSubjectList'
             , cols: [[
                 {checkbox: true, fixed: true, width: '5%'}
-                , {
-                    field: 'id',
-                    title: '序号',
-                    width: '5%'
-                } , {
-                    field: 'subject_name',
-                    title: '科目',
-                    width: '10%'
-
-                }
-                , {field: 'code', title: '科目代码', width: '5%'}
+                , {field: 'subject_name', title: '科目名称', width: '20%'}
+                , {field: 'code', title: '科目代号', width: '10%'}
                 , {field: 'introduction', title: '科目介绍', width: '20%'}
-                , {field: 'update_time', title: '更新时间', width: '15%'}
-                , {field: 'update_name', title: '更新人', width: '15%', template: '#switchTpl'}
-                , {fixed: 'right', field: 'right', title: '操作', toolbar: "#barDemo"}
+                , {field: 'update_time', title: '创建时间', width: '10%'}
+                , {field: 'update_people', title: '添加人', width: '10%'}
+                , {field: 'spec_name1', title: '所属专业', width: '10%'}
+                , {field: 'remark', title: '操作', width: '10%', toolbar: "#toolBar"}
             ]]
             , page: true
         });
 
         var $ = layui.$, active = {
             select: function () {
-                var uname = $('#uname').val();
-                var email = $('#email').val();
-                console.info(uname);
-                table.reload('subList', {
+                var departmentname = $('#departmentname').val();
+                var remark = $('#remark').val();
+                table.reload('departmentList', {
                     where: {
-                        subjectname: uname,
-                        email: email
+                        // departmentList: departmentList,
+                        departmentName:departmentname,
                     }
                 });
             },
             reload: function () {
-                $('#uname').val('');
-                $('#email').val('');
-                table.reload('subList', {
+
+                table.reload('departmentList', {
                     where: {
-                        subjectname: null,
-                        email: null
+                        departmentList: null,
+
                     }
                 });
             },
             add: function () {
-                add('添加用户', 'showAddsubject',700, 680);
+                add('添加', 'showAddSubjectList', 700, 450);
             },
             update: function () {
-                var checkStatus = table.checkStatus('subList')
-                    , data = checkStatus.data;
+                var checkStatus = table.checkStatus('departmentList')
+                        , data = checkStatus.data;
                 if (data.length != 1) {
-                    layer.msg('请选择一行编辑,已选[' + data.length + ']行', {icon: 5});
+                    layer.msg('请选择一行编辑', {icon: 5});
                     return false;
                 }
-                update('编辑用户', 'updatesubject?id=' + data[0].id, 700, 450);
+                update('编辑角色', 'updateSpecManagement?id=' + data[0].id, 700, 450);
             },
             detail: function () {
-                var checkStatus = table.checkStatus('subList')
-                    , data = checkStatus.data;
+                var checkStatus = table.checkStatus('departmentList')
+                        , data = checkStatus.data;
                 if (data.length != 1) {
-                    layer.msg('请选择一行查看,已选[' + data.length + ']行', {icon: 5});
+                    layer.msg('请选择一行查看', {icon: 5});
                     return false;
                 }
-                detail('查看用户信息', 'updatesubject?id=' + data[0].id, 700, 450);
-            },
-            /*changePwd:function(){
-              var checkStatus = table.checkStatus('subList')
-                  , data = checkStatus.data;
-              if (data.length != 1) {
-                layer.msg('请选择一个用户,已选['+data.length+']行', {icon: 5});
-                return false;
-              }
-              rePwd('修改密码','goRePass?id='+data[0].id,500,350);
-            }*/
-
-            changePwd: function () {
-                var checkStatus = table.checkStatus('subList')
-                    , data = checkStatus.data;
-                if (data.length != 1) {
-                    layer.msg('请选择一个用户,已选[' + data.length + ']行', {icon: 5});
-                    return false;
-                }
-                $.ajax({
-                    url: 'resetPassword',
-                    type: 'get',
-                    data: 'id=' + data[0].id,
-                    async: false, dataType: "json", traditional: true,
-                    success: function (json) {
-                        /*var index = parent.layer.getFrameIndex(window.name);
-                        window.parent.layui.table.reload('subList');*/
-                        window.top.layer.msg(json.msg, {icon: 6, offset: 'rb', area: ['120px', '100px'], anim: 2});
-                    }, error: function () {
-                        var index = parent.layer.getFrameIndex(window.name);
-                        parent.layer.close(index);
-                        window.top.layer.msg('请求失败', {icon: 5, offset: 'rb', area: ['120px', '80px'], anim: 2});
-                    }
-                });
-                return false;
+                detail('查看角色信息', 'updateSpecManagement?id=' + data[0].id, 700, 450);
             }
         };
 
         //监听表格复选框选择
-        table.on('checkbox(subject)', function (obj) {
-            console.log(obj)
+        table.on('checkbox(department)', function (obj) {
+            //console.log(obj)
         });
         //监听工具条
-        table.on('tool(subject)', function (obj) {
+        table.on('tool(department)', function (obj) {
             var data = obj.data;
-            if (obj.event === 'detail') {
-                detail('查看用户', 'updatesubject?id=' + data.id, 700, 600);
-            } else if (obj.event === 'del') {
-                layer.confirm('确定删除用户[<label style="color: #00AA91;">' + data.subject_name + '</label>]?', {
-                    btn: ['逻辑删除', '物理删除']
-                }, function (index) {
-                    layer.close(index);
-                    toolDelByFlag(data.id, '', false, 'subList');
-                }, function (index) {
-                    layer.close(index);
-                    toolDelByFlag(data.id, '', true, 'subList');
+            if (obj.event === 'del') {
+                layer.confirm('确定删除科目[<label style="color: #00AA91;">' + data.subject_name + '</label>]?', function () {
+                    del(data.id);
                 });
             } else if (obj.event === 'edit') {
-                update('编辑用户', 'updatesubject?id=' + data.id, 700, 600);
+                update('编辑科目', 'updateSpecManagement?id=' + data.id, 700, 450);
+            }else if (obj.event === 'detail') {
+                update('查看科目', 'updateSpecManagement?id=' + data.id, 700, 450);
             }
         });
 
@@ -229,43 +206,30 @@
 
     });
 
-    function rePwd(title, url, w, h) {
-        if (title == null || title == '') {
-            title = false;
-        }
-        ;
-        if (url == null || url == '') {
-            url = "404.html";
-        }
-        ;
-        if (w == null || w == '') {
-            w = ($(window).width() * 0.9);
-        }
-        ;
-        if (h == null || h == '') {
-            h = ($(window).height() - 50);
-        }
-        ;
-        layer.open({
-            id: 'subject-rePwd',
-            type: 2,
-            area: [w + 'px', h + 'px'],
-            fix: false,
-            maxmin: true,
-            shadeClose: true,
-            shade: 0.4,
-            title: title,
-            content: url,
+    function del(id) {
+        $.ajax({
+            url: "del",
+            type: "post",
+            data: {id: id},
+            success: function (d) {
+                if (d.msg) {
+                    layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                    layui.table.reload('departmentList');
+                } else {
+                    layer.msg(d.msg, {icon: 5, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                }
+            }
         });
     }
 
     function detail(title, url, w, h) {
+        var number = 1;
         if (title == null || title == '') {
             title = false;
         }
         ;
         if (url == null || url == '') {
-            url = "error/404";
+            url = "/error/404";
         }
         ;
         if (w == null || w == '') {
@@ -277,7 +241,7 @@
         }
         ;
         layer.open({
-            id: 'subject-detail',
+            id: 'department-detail',
             type: 2,
             area: [w + 'px', h + 'px'],
             fix: false,
@@ -298,7 +262,7 @@
             title = false;
         }
         if (url == null || url == '') {
-            url = "404.html";
+            url = "/error/404";
         }
         if (w == null || w == '') {
             w = ($(window).width() * 0.9);
@@ -307,7 +271,7 @@
             h = ($(window).height() - 50);
         }
         layer.open({
-            id: 'subject-update',
+            id: 'department-update',
             type: 2,
             area: [w + 'px', h + 'px'],
             fix: false,
@@ -334,7 +298,7 @@
         }
         ;
         if (url == null || url == '') {
-            url = "404.html";
+            url = "/error/404";
         }
         ;
         if (w == null || w == '') {
@@ -346,7 +310,7 @@
         }
         ;
         layer.open({
-            id: 'subject-add',
+            id: 'add-specCollect',
             type: 2,
             area: [w + 'px', h + 'px'],
             fix: false,

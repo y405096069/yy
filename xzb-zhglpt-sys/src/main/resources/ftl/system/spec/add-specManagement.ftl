@@ -26,12 +26,12 @@ To change this template use File | Settings | File Templates.-->
     <div style="width:100%;height:400px;overflow: auto;">
     <div class="layui-form-item">
       <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-        <legend style="font-size:16px;">学院信息</legend>
+        <legend style="font-size:16px;">专业信息</legend>
       </fieldset>
     </div>
     <div class="layui-form-item">
       <label for="name" class="layui-form-label">
-        <span class="x-red">*</span>学院名称
+        <span class="x-red">*</span>专业名称
       </label>
       <div class="layui-input-inline">
         <input type="text"  id="name" name="name"
@@ -43,7 +43,7 @@ To change this template use File | Settings | File Templates.-->
     <div class="layui-form-item">
     <div class="layui-inline">
       <label for="code" class="layui-form-label">
-        <span class="x-red">*</span>学院代码
+        <span class="x-red">*</span>专业代码
       </label>
       <div class="layui-input-inline">
         <input type="text" id="code" name="code"  autocomplete="off" class="layui-input">
@@ -51,9 +51,9 @@ To change this template use File | Settings | File Templates.-->
     </div>
     </div>
         <div class="layui-form-item">
-            <#--<div class="layui-inline">
+           <#-- <div class="layui-inline">
                 <label for="introduction" class="layui-form-label">
-                    <span class="x-red">*</span>学院介绍
+                    <span class="x-red">*</span>专业介绍
                 </label>
                 <div class="layui-input-inline">
                     <input type="text" id="introduction" name="introduction" autocomplete="off" class="layui-input">
@@ -61,7 +61,7 @@ To change this template use File | Settings | File Templates.-->
             </div>-->
             <div class="layui-form-item layui-form-text">
                 <label for="introduction" class="layui-form-label">
-                    <span class="x-red">*</span>学院介绍
+                    <span class="x-red">*</span>专业介绍
                 </label>
                 <div class="layui-input-block">
                     <textarea name="introduction" placeholder="请输入内容" class="layui-textarea">
@@ -71,6 +71,23 @@ To change this template use File | Settings | File Templates.-->
             </div>
 
         </div>
+        <div class="layui-form-item">
+
+            <label for="collect_id" class="layui-form-label">
+                <span class="x-red">*</span>所属学院
+            </label>
+            <div class="layui-input-inline">
+                <select name="collect_id" id="collect_id" class="collect_id" lay-verify="collect_id"
+                        lay-filter="spec_id">
+                    <option value="">请选择学院</option>
+                    <#list specCollectList as spe>
+                        <option value="${spe.id}">${spe.name}</option>
+                    </#list>
+
+                </select>
+            </div>
+        </div>
+
       <div style="height: 60px"></div>
     </div>
   <div style="width: 100%;height: 55px;background-color: white;border-top:1px solid #e6e6e6;
@@ -122,7 +139,7 @@ To change this template use File | Settings | File Templates.-->
         //      menus.push(jsonArr[item].id);
         //  }
         // data.field.menus=menus;
-      layerAjax('addSpecCollect',data.field,'departmentList');
+      layerAjax('addSpecManagement',data.field,'departmentList');
       return false;
     });
   });

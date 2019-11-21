@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>学院管理</title>
+    <title>专业管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -120,15 +120,15 @@
         table.render({
             id: 'departmentList',
             elem: '#departmentList'
-            , url: 'showSpecCollectList'
+            , url: 'showSpecList'
             , cols: [[
                 {checkbox: true, fixed: true, width: '5%'}
-                , {field: 'name', title: '学院名称', width: '20%', sort: true}
-                , {field: 'code', title: '学院代号', width: '20%', sort: true}
-                , {field: 'introduction', title: '学院介绍', width: '10%', sort: true}
-                , {field: 'createTime', title: '创建时间', width: '10%'}
-                , {field: 'addName', title: '添加人', width: '10%',
-                }
+                , {field: 'name', title: '专业名称', width: '20%'}
+                , {field: 'code', title: '专业代号', width: '10%'}
+                , {field: 'spcname', title: '所属学院', width: '10%'}
+                , {field: 'introduction', title: '专业介绍', width: '10%'}
+                , {field: 'update_time', title: '创建时间', width: '10%'}
+                , {field: 'update_people', title: '添加人', width: '10%'}
                 , {field: 'remark', title: '操作', width: '20%', toolbar: "#toolBar"}
             ]]
             , page: true
@@ -155,7 +155,7 @@
                 });
             },
             add: function () {
-                add('添加', 'showAddSpecCollect', 700, 450);
+                add('添加', 'showAddSpecManagement', 700, 450);
             },
             update: function () {
                 var checkStatus = table.checkStatus('departmentList')
@@ -164,7 +164,7 @@
                     layer.msg('请选择一行编辑', {icon: 5});
                     return false;
                 }
-                update('编辑角色', 'updateDepartment?id=' + data[0].id, 700, 450);
+                update('编辑', 'updateSpecManagement?id=' + data[0].id, 700, 450);
             },
             detail: function () {
                 var checkStatus = table.checkStatus('departmentList')
@@ -173,7 +173,7 @@
                     layer.msg('请选择一行查看', {icon: 5});
                     return false;
                 }
-                detail('查看角色信息', 'updateSpecCollect?id=' + data[0].id, 700, 450);
+                detail('查看信息', 'updateSpecManagement?id=' + data[0].id, 700, 450);
             }
         };
 
@@ -192,9 +192,9 @@
                     del(data.id);
                 });
             } else if (obj.event === 'edit') {
-                update('编辑学院', 'updateSpecCollect?id=' + data.id, 700, 450);
+                update('编辑学院', 'updateSpecManagement?id=' + data.id, 700, 450);
             }else if (obj.event === 'detail') {
-                update('查看学院', 'updateSpecCollect?id=' + data.id, 700, 450);
+                update('查看学院', 'updateSpecManagement?id=' + data.id, 700, 450);
             }
         });
 

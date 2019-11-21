@@ -9,7 +9,7 @@ To change this template use File | Settings | File Templates.-->
 
 <head>
     <meta charset="UTF-8">
-    <title>编辑学院</title>
+    <title>编辑科目</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -36,41 +36,53 @@ To change this template use File | Settings | File Templates.-->
         <div style="width:100%;height:400px;overflow: auto;">
             <div class="layui-form-item">
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-                    <legend style="font-size:16px;">学院信息</legend>
+                    <legend style="font-size:16px;">科目信息</legend>
                 </fieldset>
             </div>
             <div class="layui-form-item">
                 <label for="roleName" class="layui-form-label">
-                    <span class="x-red">*</span>学院名称
+                    <span class="x-red">*</span>科目名称
                 </label>
                 <div class="layui-input-inline">
-                    <input value="${specCollect.id}" type="hidden" name="id">
-                    <input type="text" value="${specCollect.name}" id="name" name="name"
-                           lay-verify="name"
+                    <input value="${subject.id}" type="hidden" name="id">
+                    <input type="text" value="${subject.subject_name}" id="subject_name" name="subject_name"
+                           lay-verify="subject_name"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
                 <label for="roleName" class="layui-form-label">
-                    <span class="x-red">*</span>学院代码
+                    <span class="x-red">*</span>科目代码
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" value="${specCollect.code}" id="code" name="code"
+                    <input type="text" value="${subject.code}" id="code" name="code"
                            lay-verify="code"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
-            <div class="layui-form-item">
-                <label for="roleName" class="layui-form-label">
-                    <span class="x-red">*</span>学院介绍
+           <#-- <div class="layui-form-item">
+                <label for="introduction" class="layui-form-label">
+                    <span class="x-red">*</span>科目介绍
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" value="${specCollect.introduction}" id="introduction" name="introduction"
+                    <input type="text" value="${subject.introduction}" id="introduction" name="introduction"
                            lay-verify="code"
                            autocomplete="off" class="layui-input">
                 </div>
+            </div>-->
+
+            <div class="layui-form-item layui-form-text">
+                <label for="introduction" class="layui-form-label">
+                    <span class="x-red">*</span>科目介绍
+                </label>
+                <div class="layui-input-block">
+                    <textarea name="introduction" placeholder="请输入内容" class="layui-textarea" >
+                       ${subject.introduction}
+                    </textarea>
+                </div>
             </div>
+
             <div style="height: 60px"></div>
         </div>
   <#if !detail>
@@ -122,7 +134,7 @@ To change this template use File | Settings | File Templates.-->
             //     menus.push(jsonArr[item].id);
             // }
             // data.field.menus = menus;
-            layerAjax('updateSpecCollect', data.field, 'departmentList');
+            layerAjax('updateSpecManagement', data.field, 'departmentList');
             return false;
         });
         
