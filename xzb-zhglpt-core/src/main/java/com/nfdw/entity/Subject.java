@@ -49,9 +49,10 @@ public class Subject {
 
     //专业id
     @Column(name = "spec_id")
-    private String spec_id;
+    private Integer spec_id;
 
-
-
+    //专业名称
+    @Column(name = "spec_name")
+    private String spec_name;
 
 }

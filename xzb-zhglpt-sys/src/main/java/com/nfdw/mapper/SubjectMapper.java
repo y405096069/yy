@@ -1,7 +1,10 @@
 package com.nfdw.mapper;
 
 import com.nfdw.base.BaseMapper;
+import com.nfdw.entity.SpecManagement;
 import com.nfdw.entity.Subject;
+
+import java.util.List;
 
 /**
  * @Auther: EagleJunBin
@@ -9,4 +12,5 @@ import com.nfdw.entity.Subject;
  * @Description:
  */
 public interface SubjectMapper extends BaseMapper<Subject,String>{
+    List<SpecManagement> selectSpecManagementById();
 }
