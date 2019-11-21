@@ -15,6 +15,7 @@ public interface AchievementMapper extends BaseMapper<Examination,String> {
 
     int delFirstGradeByEId(@Param("id") int id);
 
+    int updateGrade_switch2(@Param("id") int id, @Param("grade2") int grade2);
 
 
 }

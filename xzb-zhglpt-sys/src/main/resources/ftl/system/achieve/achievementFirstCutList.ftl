@@ -18,51 +18,79 @@
 <body>
 <div class="lenos-search">
     <div class="select">
-        考试名称：
+        考试：
         <div class="layui-inline">
             <select class="layui-input" height="20px" id="exam_id" autocomplete="off">
-                <option value="">全部</option>
+                <option value="0">全部</option>
                 <#list list as list>
                     <option value="${list.id}">${list.exam}</option>
                 </#list>
             </select>
         </div>
-        <#--专业：
+        专业：
         <div class="layui-inline">
-            <select class="layui-input" height="20px" id="specialty_id" autocomplete="off">
+            <select class="layui-input" height="20px" id="professional_name" autocomplete="off">
                 <option value="">全部</option>
-                <option value="1">音乐</option>
-                <option value="2">体育</option>
+                <#list list2 as list2>
+                    <option value="${list2.name}">${list2.name}</option>
+                </#list>
             </select>
-        </div>-->
-        入围人数：
+        </div>
+        初步入围人数：
         <div class="layui-inline">
-            <input class="layui-input" height="20px" id="exam" autocomplete="off">
+            <input class="layui-input" type="text" height="20px" id="cut_num" autocomplete="off">
         </div>
         高考省份：
         <div class="layui-inline">
-            <select class="layui-input" height="20px" id="province_id" autocomplete="off">
+            <input class="layui-input" type="text" height="20px" id="high_provinces" autocomplete="off" readonly style="width: 200px!important;">
+        </div>
+        <div class="layui-inline">
+            <select class="layui-input" height="20px" id="high_prov" autocomplete="off">
                 <option value="0">全部</option>
-                <option value="1">北京</option>
-                <option value="2">上海</option>
-                <option value="3">深圳</option>
+                <#list list3 as list3>
+                    <option value="${list3}">${list3}</option>
+                </#list>
             </select>
         </div>
 
-        <button class="select-on layui-btn layui-btn-sm" data-type="select"><i class="layui-icon"></i>
+
+        <button class="select-on layui-btn layui-btn-sm" data-type="high_prov_add"><i class="layui-icon">+</i>
+        </button>
+        <button class="select-on layui-btn layui-btn-sm" data-type="high_prov_qk"><i class="layui-icon">清空</i>
+        </button>
+        <button class="select-on layui-btn layui-btn-sm" data-type="rank" style="margin-left: 40px;"><i class="layui-icon">排名</i>
         </button>
         <button class="layui-btn layui-btn-sm icon-position-button" id="refresh" style="float: right;"
                 data-type="reload">
             <i class="layui-icon">ဂ</i>
         </button>
     </div>
+</div>
+<div class="lenos-search">
+    <div class="select">
+        入围分数线：
+        <div class="layui-inline">
+            <input class="layui-input" type="text" height="20px" id="cut_score" autocomplete="off">
+        </div>
+        或       入围排名：
+        <div class="layui-inline">
+            <input class="layui-input" type="text" height="20px" id="cut_rank" autocomplete="off">
+        </div>
 
+        <button class="select-on layui-btn layui-btn-sm" data-type="ec_rank" style="margin-left: 40px;"><i class="layui-icon">二次排名</i>
+        </button>
+
+    </div>
 </div>
 <div class="layui-col-md12" style="height:40px;margin-top:3px;">
     <div class="layui-btn-group">
 
-        <button class="layui-btn layui-btn-normal" data-type="quanxuan" lay-filter="quanxuan">
-            <i class="layui-icon">&#xe605;</i>全选
+        <button class="layui-btn layui-btn-normal" data-type="qr_sc" lay-filter="qr_sc">
+            <i class="layui-icon">&#xe605;</i>确认输出
+        </button>
+
+        <button class="layui-btn layui-btn-normal" data-type="sadsasda" lay-filter="sadsa">
+            <i class="layui-icon">&#xe605;</i>导出
         </button>
 
         <#--<button class="layui-btn layui-btn-normal" data-type="batch">
@@ -98,7 +126,7 @@
     </@shiro.hasPermission>-->
     </div>
 </div>
-<table id="achievementFirstList" class="layui-hide" lay-filter="achieve"></table>
+<table id="achievementFirstCut" class="layui-hide" lay-filter="achieveCut"></table>
 
 <script type="text/html" id="ChaxunDemo">
     <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="opening">开启</a>
@@ -118,9 +146,6 @@
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </@shiro.hasPermission>-->
 </script>
-<script type="text/html" id="switchTpl">
-    <input type="checkbox" name="sex" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo">
-</script>
 <script>
     document.onkeydown = function (e) { // 回车提交表单
         var theEvent = window.event || e;
@@ -136,17 +161,18 @@
 
         //方法级渲染
         table.render({
-            id: 'achievementFirstList',
-            elem: '#achievementFirstList'
-            , url: 'showachievementFirstList'
+            id: 'achievementFirstCut',
+            elem: '#achievementFirstCut'
+            , url: 'showachievementFirstCutList'
             , cols: [[
                 {checkbox: true, fixed: true, width: '5%'}
                 , {
                     field: 'id',
                     title: '序号',
+                    fixed: true,
                     width: '5%'
                 }
-                , {field: 'exam_id', title: '考试名称', width: '15%'}
+                , {field: 'exam_name', title: '考试名称', width: '15%'}
                 , {field: 'professional_name', title: '专业', width: '8%'}
                 , {field: 'name', title: '姓名', width: '6%'}
                 , {field: 'high_province', title: '高考省份', width: '6%'}
@@ -182,56 +208,123 @@
                 , {field: 'remarks', title: '备注', width: '10%'}
             ]],
             done: function(res, curr, count) {
-                 $("[data-field='grade']").children().each(function () {
+                 /*$("[data-field='grade']").children().each(function () {
                      if ($(this).text() == "1") {
                          $(this).text("开启");
                      } else if($(this).text() == "0") {
                          $(this).text("关闭");
                      }
-                 });
+                 });*/
             }
             , page: true
-
         });
         var flagqx = 1;
         var $ = layui.$, active = {
-            select: function () {
-                var exam_id = $('#exam_id').val();
-                var specialty_id = $('#specialty_id').val();
-                var exam = $('#exam').val();
-
-                table.reload('achievementFirstList', {
-                    where: {
-                        id: exam_id,
-                        specialty_id: specialty_id,
-                        exam: exam
-                    }
-                });
-            },
             reload: function () {
-                $('#exam_id').val('');
-                $('#specialty_id').val('');
-                $('#exam').val('');
-                table.reload('achievementFirstList', {
+                $("#exam_id").val('0');
+                $("#professional_name").val('');
+                $("#cut_num").val("");
+                $("#high_provinces").val("");
+                 $("#cut_score").val("");
+                $("#cut_rank").val("");
+                table.reload('achievementFirstCut', {
                     where: {
-                        id: null,
-                        specialty_id: null,
-                        exam: null
+                        exam_id: null,
+                        professional_name: null,
+                        cut_num: null,
+                        high_provinces: null,
+                        cut_score: null,
+                        cut_rank: null
                     }
                 });
             },
             quanxuan: function () {
                 $("body").find("input[type='checkbox']").next().click();
-                /*if(flagqx==1){
-                    $("body").find("input[type='checkbox']").next().addClass("layui-form-checked");
-                    $("body").find("input[type='checkbox']").prop('checked',true);
-                    flagqx = 2;
+            },
+            high_prov_add: function () {            //添加省份
+                var high_provinces = $("#high_provinces").val();
+                var high_prov = $("#high_prov").val();
+                var flag=0;
+                if(high_prov === "0"){
+                    layer.msg('请选择一行添加', {icon: 5});
                 }else{
-                    $("body").find("input[type='checkbox']").next().removeClass("layui-form-checked");
-                    $("body").find("input[type='checkbox']").prop('checked',false);
-                    flagqx =1;
-                }*/
-                //form.render('checkbox');
+                    if (high_provinces=="" || high_provinces==null){
+                        high_provinces=high_prov;
+                        $("#high_provinces").val(high_provinces);
+                    }else {
+                        if (high_provinces.indexOf(high_prov)<0){
+                            high_provinces=high_provinces+","+high_prov;
+                            $("#high_provinces").val(high_provinces);
+                        }else {
+                            layer.msg('当前省份已添加', {icon: 5});
+                        }
+
+                    }
+                }
+            },
+            high_prov_qk: function () {                 //清空省份
+                $("#high_province").val('');
+            },
+            rank: function () {                 //排名
+                var exam_id = $("#exam_id").val();
+                var professional_name = $("#professional_name").val();
+                var cut_num = $("#cut_num").val();
+                var high_provinces = $("#high_provinces").val();
+
+                table.reload('achievementFirstCut', {
+                    where: {
+                        exam_id: exam_id,
+                        professional_name: professional_name,
+                        cut_num: cut_num,
+                        high_provinces: high_provinces
+                    }
+                });
+            },
+            ec_rank: function () {                 //二次排名
+                var exam_id = $("#exam_id").val();
+                var professional_name = $("#professional_name").val();
+                var cut_num = $("#cut_num").val();
+                var high_provinces = $("#high_provinces").val();
+                var cut_score = $("#cut_score").val();
+                var cut_rank = $("#cut_rank").val();
+                if(cut_score !="" && cut_rank !=""){
+                    layer.msg('不能同时填写 [入围分数线] 和 [入围排名] ', {icon: 5});
+                }else{
+                    table.reload('achievementFirstCut', {
+                        where: {
+                            exam_id: exam_id,
+                            professional_name: professional_name,
+                            cut_num: cut_num,
+                            high_provinces: high_provinces,
+                            cut_score: cut_score,
+                            cut_rank: cut_rank
+                        }
+                    });
+                }
+
+            },
+            qr_sc: function () {                 //输出
+                layer.confirm('确认进行操作?', {
+                    btn: ['确认', '取消']
+                }, function (index) {
+                    layer.close(index);
+                    var exam_id = $("#exam_id").val();
+                    var professional_name = $("#professional_name").val();
+                    var cut_num = $("#cut_num").val();
+                    var high_provinces = $("#high_provinces").val();
+                    var cut_score = $("#cut_score").val();
+                    var cut_rank = $("#cut_rank").val();
+                    table.reload('achievementFirstCut', {
+                        where: {
+                            exam_id: exam_id,
+                            professional_name: professional_name,
+                            cut_num: cut_num,
+                            high_provinces: high_provinces,
+                            cut_score: cut_score,
+                            cut_rank: cut_rank
+                        }
+                    });
+                });
             },
 
             add: function () {
@@ -239,7 +332,7 @@
             },
 
             batch: function () {
-                var checkStatus = table.checkStatus('achievementFirstList')
+                var checkStatus = table.checkStatus('achievementFirstCut')
                     , data = checkStatus.data;
                 if (data.length == 0) {
                     layer.msg('请至少选择一行编辑,已选[' + data.length + ']行', {icon: 5});
@@ -261,13 +354,13 @@
                         }
                         status.push(num);
                     }
-                    batchUpdateAudit(id,status, 'achievementFirstList');  //批量审核
+                    batchUpdateAudit(id,status, 'achievementFirstCut');  //批量审核
                 });
 
                 //layerAjax('batchUpdateAudit', data.field, 'auditList');
             },
             update: function () {
-                var checkStatus = table.checkStatus('achievementFirstList')
+                var checkStatus = table.checkStatus('achievementFirstCut')
                         , data = checkStatus.data;
                 if (data.length != 1) {
                     layer.msg('请选择一行编辑,已选[' + data.length + ']行', {icon: 5});
@@ -276,7 +369,7 @@
                 update('编辑用户', 'updateUser?id=' + data[0].id, 700, 450);
             },
             detail: function () {
-                var checkStatus = table.checkStatus('achievementFirstList')
+                var checkStatus = table.checkStatus('achievementFirstCut')
                         , data = checkStatus.data;
                 if (data.length != 1) {
                     layer.msg('请选择一行查看,已选[' + data.length + ']行', {icon: 5});
@@ -288,12 +381,12 @@
         };
 
         //监听表格复选框选择
-        table.on('checkbox(achieve)', function (obj) {
+        table.on('checkbox(achieveCut)', function (obj) {
             console.log(obj)
         });
 
         //监听工具条
-        table.on('tool(achieve)', function (obj) {
+        table.on('tool(achieveCut)', function (obj) {
             var data = obj.data;
             if (obj.event === 'detail') {
                 detail("'" + data.exam + "'" + '  —初试成绩', 'achievementFirstGradeList?id=' + data.id, 1200, 680);

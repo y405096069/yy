@@ -19,7 +19,6 @@
     <script type="text/javascript" src="${re.contextPath}/plugin/layui/layui.all.js"
             charset="utf-8"></script>
     <script type="text/javascript" src="${re.contextPath}/plugin/tools/tool.js"></script>
-
 </head>
 
 <body>
@@ -29,17 +28,18 @@
         <div class="layui-inline">
             <select class="layui-input" height="20px" id="exam_id" autocomplete="off">
                 <option value="">全部</option>
-                <option value="2">篮球考试</option>
-                <option value="1">美术考试</option>
-                <option value="24">666666</option>
+                <#list list as list>
+                    <option value="${list.id}">${list.exam}</option>
+                </#list>
             </select>
         </div>
         专业：
         <div class="layui-inline">
             <select class="layui-input" height="20px" id="specialty_id" autocomplete="off">
                 <option value="">全部</option>
-                <option value="1">音乐</option>
-                <option value="2">体育</option>
+                <#list list2 as list2>
+                    <option value="${list2.id}">${list2.name}</option>
+                </#list>
             </select>
         </div>
         <#--生源地：
@@ -90,29 +90,29 @@
         <#--<button class="layui-btn layui-btn-normal" data-type="batch">
             <i class="layui-icon">&#xe608;</i>批量审核
         </button>-->
-      <#--<@shiro.hasPermission name="user:select">
-      <button class="layui-btn layui-btn-normal" data-type="add">
-          <i class="layui-icon">&#xe608;</i>新增
+        <#--<@shiro.hasPermission name="user:select">
+        <button class="layui-btn layui-btn-normal" data-type="add">
+            <i class="layui-icon">&#xe608;</i>新增
+        </button>
+        </@shiro.hasPermission>
+      <@shiro.hasPermission name="user:select">
+      <button class="layui-btn layui-btn-normal" data-type="update">
+          <i class="layui-icon">&#xe642;</i>编辑
       </button>
       </@shiro.hasPermission>
-    <@shiro.hasPermission name="user:select">
-    <button class="layui-btn layui-btn-normal" data-type="update">
-        <i class="layui-icon">&#xe642;</i>编辑
-    </button>
-    </@shiro.hasPermission>
-<@shiro.hasPermission name="user:del">
-    <button class="layui-btn layui-btn-normal" data-type="detail">
-        <i class="layui-icon">&#xe605;</i>查看
-    </button>
-</@shiro.hasPermission>
-    <@shiro.hasPermission name="user:repass">
-    <button class="layui-btn layui-btn-normal" data-type="changePwd">
-        <i class="layui-icon">&#xe605;</i>重置密码
-    </button>
-    </@shiro.hasPermission>-->
+  <@shiro.hasPermission name="user:del">
+      <button class="layui-btn layui-btn-normal" data-type="detail">
+          <i class="layui-icon">&#xe605;</i>查看
+      </button>
+  </@shiro.hasPermission>
+      <@shiro.hasPermission name="user:repass">
+      <button class="layui-btn layui-btn-normal" data-type="changePwd">
+          <i class="layui-icon">&#xe605;</i>重置密码
+      </button>
+      </@shiro.hasPermission>-->
     </div>
 </div>
-<table id="achievementFirstList" class="layui-hide" lay-filter="achieve"></table>
+<table id="achievementLastList" class="layui-hide" lay-filter="achieve"></table>
 
 <script type="text/html" id="ChaxunDemo">
     <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="opening">开启</a>
@@ -122,15 +122,15 @@
 <script type="text/html" id="barDemo">
     <#---->
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="opening">导入</a>
-    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="opening">导出</a>
+    <a class="layui-btn layui-btn-xs  layui-btn-normal" id="intoing" lay-event="intoing">导入</a>
+    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="inout">导出</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="deling">删除</a>
-<#--<@shiro.hasPermission name="user:update">
-  <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="edit">编辑</a>
-</@shiro.hasPermission>
-<@shiro.hasPermission name="user:del">
-  <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
-</@shiro.hasPermission>-->
+    <#--<@shiro.hasPermission name="user:update">
+      <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="edit">编辑</a>
+    </@shiro.hasPermission>
+    <@shiro.hasPermission name="user:del">
+      <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </@shiro.hasPermission>-->
 </script>
 <script type="text/html" id="switchTpl">
     <input type="checkbox" name="sex" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo">
@@ -143,13 +143,16 @@
             $(".select .select-on").click();
         }
     }
-    layui.use('table', function () {
-        var table = layui.table;
+    layui.use(['table', 'upload'], function () {
+        var table = layui.table,upload = layui.upload;
+
+
+
         //方法级渲染
         table.render({
-            id: 'achievementFirstList',
-            elem: '#achievementFirstList'
-            , url: 'showachievementFirstList'
+            id: 'achievementLastList',
+            elem: '#achievementLastList'
+            , url: 'showachievementLastList'
             , cols: [[
                 {checkbox: true, fixed: true, width: '5%'}
                 , {
@@ -159,22 +162,23 @@
                 }
                 , {field: 'exam', title: '考试名称', width: '30%'}
                 , {field: 'specialty_name', title: '专业', width: '15%'}
-                , {field: 'grade', title: '成绩开关状态', width: '20%',sort: true}
+                , {field: 'grade2', title: '成绩开关状态', width: '20%',sort: true}
                 , {fixed: 'right', field: 'right',title: '开关操作',toolbar: "#ChaxunDemo"}
                 , {fixed: 'right', field: 'right', title: '操作', toolbar: "#barDemo"}
             ]],
             done: function(res, curr, count) {
-                 $("[data-field='grade']").children().each(function () {
-                     if ($(this).text() == "1") {
-                         $(this).text("开启");
-                     } else if($(this).text() == "0") {
-                         $(this).text("关闭");
-                     }
-                 });
+                $("[data-field='grade2']").children().each(function () {
+                    if ($(this).text() == "1") {
+                        $(this).text("开启");
+                    } else if($(this).text() == "0") {
+                        $(this).text("关闭");
+                    }
+                });
             }
             , page: true
 
         });
+
         var flagqx = 1;
         var $ = layui.$, active = {
             select: function () {
@@ -182,7 +186,7 @@
                 var specialty_id = $('#specialty_id').val();
                 var exam = $('#exam').val();
 
-                table.reload('achievementFirstList', {
+                table.reload('achievementLastList', {
                     where: {
                         id: exam_id,
                         specialty_id: specialty_id,
@@ -194,7 +198,7 @@
                 $('#exam_id').val('');
                 $('#specialty_id').val('');
                 $('#exam').val('');
-                table.reload('achievementFirstList', {
+                table.reload('achievementLastList', {
                     where: {
                         id: null,
                         specialty_id: null,
@@ -217,11 +221,11 @@
             },
 
             add: function () {
-                add('新建信息采集模板', 'addinfor_collect',900, 680);
+                add('新建信息采集模板', 'achievementFirstGradeList',900, 680);
             },
 
             batch: function () {
-                var checkStatus = table.checkStatus('achievementFirstList')
+                var checkStatus = table.checkStatus('achievementLastList')
                     , data = checkStatus.data;
                 if (data.length == 0) {
                     layer.msg('请至少选择一行编辑,已选[' + data.length + ']行', {icon: 5});
@@ -243,14 +247,14 @@
                         }
                         status.push(num);
                     }
-                    batchUpdateAudit(id,status, 'achievementFirstList');  //批量审核
+                    batchUpdateAudit(id,status, 'achievementLastList');  //批量审核
                 });
 
                 //layerAjax('batchUpdateAudit', data.field, 'auditList');
             },
             update: function () {
-                var checkStatus = table.checkStatus('achievementFirstList')
-                        , data = checkStatus.data;
+                var checkStatus = table.checkStatus('achievementLastList')
+                    , data = checkStatus.data;
                 if (data.length != 1) {
                     layer.msg('请选择一行编辑,已选[' + data.length + ']行', {icon: 5});
                     return false;
@@ -258,8 +262,8 @@
                 update('编辑用户', 'updateUser?id=' + data[0].id, 700, 450);
             },
             detail: function () {
-                var checkStatus = table.checkStatus('achievementFirstList')
-                        , data = checkStatus.data;
+                var checkStatus = table.checkStatus('achievementLastList')
+                    , data = checkStatus.data;
                 if (data.length != 1) {
                     layer.msg('请选择一行查看,已选[' + data.length + ']行', {icon: 5});
                     return false;
@@ -273,74 +277,94 @@
         table.on('checkbox(achieve)', function (obj) {
             console.log(obj)
         });
+
         //监听工具条
         table.on('tool(achieve)', function (obj) {
             var data = obj.data;
             if (obj.event === 'detail') {
-                detail('查看用户', 'updinfor_collect?id=' + data.id, 900, 680);
+                detail("'" + data.exam + "'" + '  —复试成绩', 'achievementLastGradeList?id=' + data.id, 1200, 680);
             } else if (obj.event === 'opening') {
-                if(data.grade === 0){
+                if (data.grade2 === 0) {
                     layer.confirm('确定开启?', {
                         btn: ['确认', '取消']
                     }, function (index) {
                         layer.close(index);
                         $.ajax({
-                            url: "updateGrade_switch",
+                            url: "updateGrade_switch2",
                             type: "post",
-                            data: {"id":data.id,"status":"1"},
+                            data: {"id": data.id, "status": "1"},
                             success: function (d) {
                                 if (d.flag) {
-                                    window.layui.table.reload('achievementFirstList');
-                                    window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                                    window.layui.table.reload('achievementLastList');
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
                                 } else {
-                                    window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
                                 }
                             }, error: function () {
                                 alert('error');
                             }
                         });
                     });
-                }else {
+                } else {
                     window.top.layer.msg('已开启', {icon: 5, offset: 'rb', area: ['120px', '80px'], anim: 2});
                 }
-
             } else if (obj.event === 'closing') {
-                if(data.grade === 1){
+                if (data.grade2 === 1) {
                     layer.confirm('确定关闭?', {
                         btn: ['确认', '取消']
                     }, function (index) {
                         layer.close(index);
                         $.ajax({
-                            url: "updateGrade_switch",
+                            url: "updateGrade_switch2",
                             type: "post",
-                            data: {"id":data.id,"status":"0"},
+                            data: {"id": data.id, "status": "0"},
                             success: function (d) {
                                 if (d.flag) {
-                                    window.layui.table.reload('achievementFirstList');
-                                    window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                                    window.layui.table.reload('achievementLastList');
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
                                 } else {
-                                    window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
                                 }
                             }, error: function () {
                                 alert('error');
                             }
                         });
                     });
-                }else {
+                } else {
                     window.top.layer.msg('已关闭', {icon: 5, offset: 'rb', area: ['120px', '80px'], anim: 2});
                 }
-            }else if (obj.event === 'deling') {
-                layer.confirm('确定删除?', {
+            } else if (obj.event === 'deling') {
+                layer.confirm('确定删除 [' + data.exam + '] 所有成绩?', {
                     btn: ['确认', '取消']
                 }, function (index) {
                     layer.close(index);
                     $.ajax({
-                        url: "delinfor_collect",
+                        url: "delFirstGradeById",
                         type: "post",
-                        data: {"id":data.id},
+                        data: {"id": data.id},
                         success: function (d) {
                             if (d.flag) {
-                                window.layui.table.reload('inforList');
+                                window.layui.table.reload('achievementLastList');
                                 window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                             } else {
                                 window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
@@ -349,6 +373,30 @@
                             alert('error');
                         }
                     });
+                });
+            } else if (obj.event === 'intoing') {
+                add(data.exam + '——初试成绩导入', 'achievementLastInto?id=' + data.id, 700, 300);
+            } else if (obj.event === 'inout') {
+                layer.confirm('确定导出 [' + data.exam + '] 所有成绩?', {
+                    btn: ['确认', '取消']
+                }, function (index) {
+                    layer.close(index);
+                    location.href="inout_achieveFirstGrade?id="+data.id+"&name="+data.exam;
+                    /*$.ajax({
+                        url: 'inout_achieveFirstGrade',
+                        type: "post",
+                        data: {"id": data.id, "name": data.exam},
+                        success: function (d) {
+                            if (d.flag) {
+                                window.layui.table.reload('achievementLastList');
+                                window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                            } else {
+                                window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                            }
+                        }, error: function () {
+                            alert('error');
+                        }
+                    });*/
                 });
             }
         });
@@ -381,7 +429,7 @@
             h = ($(window).height() - 50);
         }
         ;
-        layer.open({
+        var index =layer.open({
             id: 'audit-detail',
             type: 2,
             area: [w + 'px', h + 'px'],
@@ -393,6 +441,7 @@
             content: url ,
             // btn:['关闭']
         });
+        layer.full(index);
     }
 
     /**
