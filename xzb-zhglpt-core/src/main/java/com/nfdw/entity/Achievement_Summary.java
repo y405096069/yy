@@ -19,6 +19,17 @@ public class Achievement_Summary {
     @Column(name = "exam_id")
     private int exam_id;                //考试id
 
+    @Column(name = "exam_name")
+    private String exam_name;                //考试id
+
+    public String getExam_name() {
+        return exam_name;
+    }
+
+    public void setExam_name(String exam_name) {
+        this.exam_name = exam_name;
+    }
+
     @Column(name = "id_card")           //身份证
     private String id_card;
 
@@ -223,6 +234,7 @@ public class Achievement_Summary {
 
     @Column(name = "complex_subjects_achieve_ex6")      //成绩说明
     private String complex_subjects_achieve_ex6;
+
 
     public int getId() {
         return id;
