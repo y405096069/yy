@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.AdmissionTicketMapper">
+
+
+    <select id="getById" resultType="com.nfdw.entity.AdmissionTicket">
+       select * from j_student_information where student_id=#{id}
+    </select>
+
+    <select id="getRemarks" resultType="java.lang.String">
+        select remarks as member_work from crea_exam WHERE prologue='1234'
+    </select>
+
+
+</mapper>
