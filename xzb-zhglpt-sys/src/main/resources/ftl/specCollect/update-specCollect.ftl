@@ -44,22 +44,31 @@ To change this template use File | Settings | File Templates.-->
                     <span class="x-red">*</span>学院名称
                 </label>
                 <div class="layui-input-inline">
-                    <input value="${department.id}" type="hidden" name="id">
-                    <input type="text" value="${department.departmentName}" id="departmentName" name="departmentName"
-                           lay-verify="departmentName"
+                    <input value="${specCollect.id}" type="hidden" name="id">
+                    <input type="text" value="${specCollect.name}" id="name" name="name"
+                           lay-verify="name"
                            autocomplete="off" class="layui-input">
                 </div>
             </div>
 
             <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label for="remark" class="layui-form-label">
-                        <span class="x-red">*</span>
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" value="${department.creater}" id="creater" name="creater" autocomplete="off"
-                               class="layui-input">
-                    </div>
+                <label for="roleName" class="layui-form-label">
+                    <span class="x-red">*</span>学院代码
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" value="${specCollect.code}" id="code" name="code"
+                           lay-verify="code"
+                           autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label for="roleName" class="layui-form-label">
+                    <span class="x-red">*</span>学院介绍
+                </label>
+                <div class="layui-input-inline">
+                    <input type="text" value="${specCollect.introduction}" id="introduction" name="introduction"
+                           lay-verify="code"
+                           autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div style="height: 60px"></div>
@@ -113,7 +122,7 @@ To change this template use File | Settings | File Templates.-->
             //     menus.push(jsonArr[item].id);
             // }
             // data.field.menus = menus;
-            layerAjax('updateDepartment', data.field, 'departmentList');
+            layerAjax('updateSpecCollect', data.field, 'departmentList');
             return false;
         });
         

@@ -8,7 +8,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>用户管理</title>
+    <title>学院管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -49,7 +49,7 @@
           <i class="layui-icon">&#xe608;</i>新增
       </button>
       </@shiro.hasPermission>
-    <@shiro.hasPermission name="user:select">
+<#--    <@shiro.hasPermission name="user:select">
     <button class="layui-btn layui-btn-normal" data-type="update">
         <i class="layui-icon">&#xe642;</i>编辑
     </button>
@@ -58,7 +58,7 @@
     <button class="layui-btn layui-btn-normal" data-type="detail">
         <i class="layui-icon">&#xe605;</i>查看
     </button>
-</@shiro.hasPermission>
+</@shiro.hasPermission>-->
     </div>
 </div>
 <table id="departmentList" class="layui-hide" lay-filter="department"></table>
@@ -66,6 +66,7 @@
 
 
     <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="detail">查看</a>
 
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 
@@ -187,11 +188,13 @@
             //     detail('编辑角色', 'updateRole?id=' + data.id, 700, 450);
             // } else
             if (obj.event === 'del') {
-                layer.confirm('确定删除角色[<label style="color: #00AA91;">' + data.departmentName + '</label>]?', function () {
+                layer.confirm('确定删除学院[<label style="color: #00AA91;">' + data.name + '</label>]?', function () {
                     del(data.id);
                 });
             } else if (obj.event === 'edit') {
-                update('编辑角色', 'updateSpecCollect?id=' + data.id, 700, 450);
+                update('编辑学院', 'updateSpecCollect?id=' + data.id, 700, 450);
+            }else if (obj.event === 'detail') {
+                update('查看学院', 'updateSpecCollect?id=' + data.id, 700, 450);
             }
         });
 

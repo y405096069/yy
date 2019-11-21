@@ -1,7 +1,9 @@
 package com.nfdw.controller;
 
 import com.nfdw.core.annotation.Log;
-import com.nfdw.entity.*;
+import com.nfdw.entity.Examination;
+import com.nfdw.entity.Infor_collection;
+import com.nfdw.entity.SpecManagement;
 import com.nfdw.exception.MyException;
 import com.nfdw.service.ExaminationService;
 import com.nfdw.service.Infor_CollectionService;
@@ -9,7 +11,6 @@ import com.nfdw.util.JsonUtil;
 import com.nfdw.util.ReType;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;

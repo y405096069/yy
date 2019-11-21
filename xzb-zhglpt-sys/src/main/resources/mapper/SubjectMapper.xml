@@ -9,12 +9,13 @@
         <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
         <result column="update_name" jdbcType="VARCHAR" property="update_name"/>
-        <result column="spec_id" jdbcType="VARCHAR" property="spec_id" />
+        <result column="spec_id" jdbcType="INTEGER" property="spec_id" />
     </resultMap>
 
 
     <select id="selectListByPage" parameterType="com.nfdw.entity.Subject" resultMap="BaseResultMap">
-        select * from subject
+        select *
+        from subject s
         <if test="subject_name != null and subject_name != ''" >
             and subject_name = #{subject_name}
         </if>
@@ -32,9 +33,20 @@
             and update_name = #{update_name}
         </if>
 
-        <if test="spec_id != null and spec_id != ''">
+       <if test="spec_id != null and spec_id != ''">
             and spec_id = #{spec_id}
         </if>
+
     </select>
+
+    <!--查询关联的专业-->
+    <select id="selectSpecManagementById" resultType="com.nfdw.entity.SpecManagement">
+        select * from spec_management
+    </select>
+
+
+
+
+
 
 </mapper>

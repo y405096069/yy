@@ -9,7 +9,7 @@ To change this template use File | Settings | File Templates.-->
 
 <head>
   <meta charset="UTF-8">
-  <title>添加部门</title>
+  <title>添加学院</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -51,14 +51,25 @@ To change this template use File | Settings | File Templates.-->
     </div>
     </div>
         <div class="layui-form-item">
-            <div class="layui-inline">
+            <#--<div class="layui-inline">
                 <label for="introduction" class="layui-form-label">
                     <span class="x-red">*</span>学院介绍
                 </label>
                 <div class="layui-input-inline">
                     <input type="text" id="introduction" name="introduction" autocomplete="off" class="layui-input">
                 </div>
+            </div>-->
+            <div class="layui-form-item layui-form-text">
+                <label for="introduction" class="layui-form-label">
+                    <span class="x-red">*</span>学院介绍
+                </label>
+                <div class="layui-input-block">
+                    <textarea name="introduction" placeholder="请输入内容" class="layui-textarea">
+
+                    </textarea>
+                </div>
             </div>
+
         </div>
       <div style="height: 60px"></div>
     </div>
