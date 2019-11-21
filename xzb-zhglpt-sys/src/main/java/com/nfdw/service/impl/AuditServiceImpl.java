@@ -39,4 +39,9 @@ public class AuditServiceImpl extends BaseServiceImpl<Audit, String> implements 
     public Examinee_User getExaminee_UserById(int id) {
         return auditMapper.getExaminee_UserById(id);
     }
+
+    @Override
+    public boolean addAudit(Audit audit) {
+        return auditMapper.addAudit(audit)>0;
+    }
 }

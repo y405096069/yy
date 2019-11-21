@@ -1,7 +1,10 @@
 package com.nfdw.service;
 
 import com.nfdw.base.service.BaseService;
+import com.nfdw.entity.SpecManagement;
 import com.nfdw.entity.Subject;
+
+import java.util.List;
 
 /**
  * @Auther: EagleJunBin
@@ -9,4 +12,6 @@ import com.nfdw.entity.Subject;
  * @Description:
  */
 public interface SubjectService extends BaseService<Subject,String> {
+
+    List<SpecManagement> selectSpecManagementById();
 }

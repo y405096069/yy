@@ -185,9 +185,9 @@
                     <input type="text" id="temp_norms_desc" name="temp_norms_desc" lay-verify="required"
                            autocomplete="off" class="layui-input" placeholder="请输入上传图片描述(必填)">
                 </div>
-                <div id="ms" class="layui-form-mid layui-word-aux">
+                <!--<div id="ms" class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span><span id="ums">只能上传jpg/png文件，且不超过1M</span>
-                </div>
+                </div>-->
             </div>
             <button type="button" class="layui-btn layui-btn-danger" onclick="removeTemp(this)">删除</button>
             </div>`;
@@ -220,9 +220,9 @@
                     <input type="text" id="temp_norms_desc" name="temp_norms_desc" lay-verify="required"
                            autocomplete="off" class="layui-input" placeholder="请输入上传视频描述(必填)">
                 </div>
-                <div id="ms" class="layui-form-mid layui-word-aux">
+                <!--<div id="ms" class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span><span id="ums">可上传mp4、flv、wmv等视频，且不超过100MB</span>
-                </div>
+                </div>-->
             </div>
             <button type="button" class="layui-btn layui-btn-danger" onclick="removeTemp2(this)">删除</button>
             </div>`;
@@ -255,9 +255,9 @@
                     <input type="text" id="temp_norms_desc" name="temp_norms_desc" lay-verify="required"
                            autocomplete="off" class="layui-input" placeholder="请输入上传文件描述(必填)">
                 </div>
-                <div id="ms" class="layui-form-mid layui-word-aux">
+                <!--<div id="ms" class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span><span id="ums">仅支持excel、word、txt文件，大小不超过10M</span>
-                </div>
+                </div>-->
             </div>
             <button type="button" class="layui-btn layui-btn-danger" onclick="removeTemp3(this)">删除</button>
             </div>`;
@@ -290,9 +290,9 @@
                     <input type="text" id="temp_norms_desc" name="temp_norms_desc" lay-verify="required"
                            autocomplete="off" class="layui-input" placeholder="请输入上传音乐描述(必填)">
                 </div>
-                <div id="ms" class="layui-form-mid layui-word-aux">
+                <!--<div id="ms" class="layui-form-mid layui-word-aux">
                     <span class="x-red">*</span><span id="ums">只能上传mp3格式，且不超过10M</span>
-                </div>
+                </div>-->
             </div>
             <button type="button" class="layui-btn layui-btn-danger" onclick="removeTemp4(this)">删除</button>
             </div>`;

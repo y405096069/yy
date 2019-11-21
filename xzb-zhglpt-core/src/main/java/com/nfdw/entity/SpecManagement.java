@@ -24,6 +24,9 @@ public class SpecManagement {
     @GeneratedValue(generator = "JDBC")
     @Column(name = "id")
     private int id;
+    //学院名称
+    @Column(name = "spcname")
+    private String spcname;
 
 
     @Column(name = "name")
@@ -65,6 +68,11 @@ public class SpecManagement {
 
     //学院id
     @Column(name = "collect_id")
-    private String collect_id;
+    private Integer collect_id;
+
+    @Column(name = "introduction")
+    private String  introduction;
+
+
 
 }

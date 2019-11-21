@@ -106,7 +106,7 @@
 
                             </select>
                         </div>
-                </div>
+                    </div>
             </div>
         </div>
         <div class="layui-form-item">

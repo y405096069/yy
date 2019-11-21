@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.SpecCollectMapper">
+    <resultMap id="BaseResultMap" type="com.nfdw.entity.SpecCollect">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="code" jdbcType="VARCHAR" property="code" />
+        <result column="introduction" jdbcType="TIMESTAMP" property="introduction" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <result column="add_name" jdbcType="VARCHAR" property="addName" />
+    </resultMap>
+
+    <select id="selectListByPage" parameterType="com.nfdw.entity.SpecCollect" resultMap="BaseResultMap">
+        SELECT *
+        from spec_collect
+        <where>
+            <if test="name!=null and name!=''">and name like '%${name}%'</if>
+            <if test="code!=null and code!=''">and name like '%${code}%'</if>
+        </where>
+        order by update_time desc
+    </select>
+
+</mapper>

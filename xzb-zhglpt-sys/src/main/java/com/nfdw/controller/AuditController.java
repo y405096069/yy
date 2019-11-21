@@ -66,11 +66,36 @@ public class AuditController {          ////审核管理
             jsonUtil.setMsg("获取数据失败");
             return jsonUtil;
         }
-        Date date = new Date();
-        audit.setAudit_time(date);
-        audit.setAudit_status("已审核");
+
         try {
+            Date date = new Date();
+            audit.setAudit_status("已审核");
+            audit.setAudit_time(date);
+            if (audit.getAudit_link().equals("交费前")){                     //资料环节
+                if (audit.getInfo_collect_status().equals("审核通过")){     //信息采集
+                    if(audit.getEnroll_status().equals("审核通过")){
+                        audit.setPay_status("待支付");
+                        audit.setEnroll_status("等待缴费");
+                    }else{
+                        audit.setEnroll_status("审核不通过");
+                    }
+                    auditService.updAudit(audit);
+                }
+            }else if (audit.getAudit_link().equals("交费后")){
+                if (audit.getPay_status().equals("已支付")){
+                    if(audit.getEnroll_status().equals("审核通过")){
+                        audit.setEnroll_status("报名成功");
+
+                    }else{
+                        audit.setEnroll_status("报名不成功");
+                    }
+                    auditService.updAudit(audit);
+                }
+            }
             if (auditService.updAudit(audit)){
+                if(audit.getEnroll_status().equals("报名状态")){
+                    //向成绩表插入
+                }
                 jsonUtil.setFlag(true);
                 jsonUtil.setMsg("审核成功");
             }

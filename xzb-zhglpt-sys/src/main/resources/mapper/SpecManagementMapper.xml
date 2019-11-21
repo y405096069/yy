@@ -3,25 +3,23 @@
 <mapper namespace="com.nfdw.mapper.SpecManagementMapper">
 
     <resultMap id="BaseResultMap" type="com.nfdw.entity.SpecManagement">
-        <id column="id" jdbcType="INTEGER" property="id" />
-        <result column="name" jdbcType="VARCHAR" property="name" />
-        <result column="sub_limit" jdbcType="INTEGER" property="sub_limit" />
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="sub_limit" jdbcType="INTEGER" property="sub_limit"/>
         <result column="code" jdbcType="INTEGER" property="code"/>
-        <result column="res_status" jdbcType="INTEGER" property="res_status" />
+        <result column="res_status" jdbcType="INTEGER" property="res_status"/>
         <result column="zs_content" jdbcType="VARCHAR" property="zs_content"/>
-        <result column="ticket_id" jdbcType="VARCHAR" property="ticket_id" />
+        <result column="ticket_id" jdbcType="VARCHAR" property="ticket_id"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="update_time"/>
         <result column="update_people" jdbcType="VARCHAR" property="update_people"/>
-        <result column="collect_id" jdbcType="VARCHAR" property="collect_id" />
+        <result column="collect_id" jdbcType="INTEGER" property="collect_id"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
+        <result column="spcname" jdbcType="VARCHAR" property="spcname"/>
     </resultMap>
-<!--
-    <sql id="specClumns">
-
-    </sql>-->
 
     <select id="selectListByPage" parameterType="com.nfdw.entity.SpecManagement" resultMap="BaseResultMap">
-        select * from spec_management
-        <if test="name != null and name != ''" >
+        select * from spec_management s
+        <if test="name != null and name != ''">
             and name = #{name}
         </if>
 
@@ -41,25 +39,34 @@
         <if test="ticket_id != null and ticket_id != ''">
             and ticket_id = #{ticket_id}
         </if>
-         <if test="update_time != null and update_time != ''">
+        <if test="update_time != null and update_time != ''">
             and update_time = #{update_time}
         </if>
-         <if test="update_people != null and update_people != ''">
+        <if test="update_people != null and update_people != ''">
             and update_people = #{update_people}
         </if>
-         <if test="collect_id != null and collect_id != ''">
+        <if test="collect_id != null and collect_id != ''">
             and collect_id = #{collect_id}
+        </if>
+        <if test="introduction != null and introduction != ''">
+            and introduction = #{introduction}
+        </if>
+        <if test="spcname != null and spcname != ''">
+            and spcname = #{spcname}
         </if>
 
     </select>
 
-   <!-- <insert id="addSpec" parameterType="com.nfdw.entity.SpecManagement">
-       insert into spec_management (
-       <include refid=""/>
-       )
-       values (
-       <include refid=""/>
-        )
-    </insert>-->
+    <!--搜索学院-->
+    <select id="selectSpecCollect" resultType="com.nfdw.entity.SpecCollect">
+         select * from spec_collect
+     </select>
+
+
+    <select id="selectIdByName" resultType="com.nfdw.entity.SpecCollect">
+        SELECT m.*,s.`spcname`
+        FROM `spec_management` m,spec_collect s
+        where m.collect_id=s.id and m.collect_id=#{collect_id}
+    </select>
 
 </mapper>

@@ -18,4 +18,6 @@ public interface AuditMapper extends BaseMapper<Audit,String> {
 
     Examinee_User getExaminee_UserById(@Param("id") int id);
 
+    int addAudit(Audit audit);
+
 }

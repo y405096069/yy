@@ -13,7 +13,7 @@
         <id column="current1" jdbcType="INTEGER" property="current1"/>
         <id column="college_id" jdbcType="INTEGER" property="college_id"/>
         <!--<id column="crade_id" jdbcType="INTEGER" property="crade_id" />-->
-        <id column="report_setting" jdbcType="INTEGER" property="report_setting"/>
+        <id column="report_setting" jdbcType="VARCHAR" property="report_setting"/>
 
         <id column="exam" jdbcType="VARCHAR" property="exam"/>
         <id column="number_limitation" jdbcType="VARCHAR" property="number_limitation"/>
