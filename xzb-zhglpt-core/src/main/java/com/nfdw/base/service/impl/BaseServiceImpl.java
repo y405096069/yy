@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.nfdw.base.BaseMapper;
 import com.nfdw.base.service.BaseService;
+import com.nfdw.entity.Achievement_Summary;
 import com.nfdw.entity.CurrentUser;
 import com.nfdw.exception.MyException;
 import com.nfdw.util.ReType;
@@ -144,8 +145,14 @@ public abstract class BaseServiceImpl<T, E extends Serializable> implements Base
     }
 
     @Override
-    public List<T> selectListByPage(T record,int ex_id) {
-        return getMappser().selectListByPage(record,ex_id);
+    public List<T> selectListByPage(T record,int exam_id) {
+        return getMappser().selectListByPage(record,exam_id);
+    }
+
+    @Override                   //入围管理select
+    public List<Achievement_Summary> selectListByTerm(Integer exam_id,String professional_name, Integer cut_num, String high_provinces,
+                                                      Integer cut_score,Integer cut_rank) {
+        return getMappser().selectListByTerm(exam_id, professional_name, cut_num,  high_provinces,cut_score,cut_rank);
     }
 
     @Override

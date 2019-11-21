@@ -110,11 +110,15 @@ public class Examination {
     @Column(name = "end_time")
     private Date end_time;//报名结束时间
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "create_start_time")
-    private String create_start_time;//初试考试开始时间 list
+    private Date create_start_time;//初试考试开始时间 list
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "create_end_time")
-    private String create_end_time; //初试考试结束时间  list
+    private Date create_end_time; //初试考试结束时间  list
 
     @Column(name = "people_num")
     private String people_num;         //考场人数限制      list
@@ -143,6 +147,60 @@ public class Examination {
 
     @Column(name = "college_id")
     private Integer college_id;//学院ID
+
+
+/*@Column(name = "crade_id")
+    private Integer crade_id;//成绩ID
+
+    @Column(name = "total_ratio")
+    private String total_ratio;//分比值*/
+
+    @Column(name = "report_setting")
+    private String report_setting;//兼报设置 0是 1否
+
+    @Column(name = "huchi")
+    private Integer huchi;//互斥设置 0是 1否
+
+
+    @Column(name = "subject_id")
+    private String subject_id;//初试科目ID 多个   list
+
+    @Column(name = "father_id")
+    private String father_id;//复试科目ID多个     list
+
+
+    @Column(name = "check_pay")
+    private Integer check_pay;//审核费用 0:交费钱 1：交费后
+
+
+
+
+
+
+    //初试科目权重分值
+    @Column(name = "subject_q_fen")
+    private Integer subject_q_fen;
+
+    //复试科目权重分值
+    @Column(name = "father_q_fen")
+    private Integer father_q_fen;
+
+    //科目权重占比（初试）（子） list
+    @Column(name = "subject_q_fen_child")
+    private String subject_q_fen_child;
+
+    //科目权重占比（复试）（子） list
+    @Column(name = "father_q_fen_child")
+    private String father_q_fen_child;
+
+    //初试科目对应的总分(单个科目满分) list
+    @Column(name = "subject_k_d_zong")
+    private String subject_k_d_zong;
+
+    //复试科目对应的总分(单个科目满分) list
+    @Column(name = "father_k_d_zong")
+    private String father_k_d_zong;
+
 
     public Integer getId() {
         return id;
@@ -336,19 +394,19 @@ public class Examination {
         this.end_time = end_time;
     }
 
-    public String getCreate_start_time() {
+    public Date getCreate_start_time() {
         return create_start_time;
     }
 
-    public void setCreate_start_time(String create_start_time) {
+    public void setCreate_start_time(Date create_start_time) {
         this.create_start_time = create_start_time;
     }
 
-    public String getCreate_end_time() {
+    public Date getCreate_end_time() {
         return create_end_time;
     }
 
-    public void setCreate_end_time(String create_end_time) {
+    public void setCreate_end_time(Date create_end_time) {
         this.create_end_time = create_end_time;
     }
 
@@ -511,61 +569,4 @@ public class Examination {
     public void setFather_k_d_zong(String father_k_d_zong) {
         this.father_k_d_zong = father_k_d_zong;
     }
-/*@Column(name = "crade_id")
-    private Integer crade_id;//成绩ID
-
-    @Column(name = "total_ratio")
-    private String total_ratio;//分比值*/
-
-    @Column(name = "report_setting")
-    private String report_setting;//兼报设置 0是 1否
-
-    @Column(name = "huchi")
-    private Integer huchi;//互斥设置 0是 1否
-
-
-    @Column(name = "subject_id")
-    private String subject_id;//初试科目ID 多个   list
-
-    @Column(name = "father_id")
-    private String father_id;//复试科目ID多个     list
-
-
-    @Column(name = "check_pay")
-    private Integer check_pay;//审核费用 0:交费钱 1：交费后
-
-
-
-
-
-
-    //初试科目权重分值
-    @Column(name = "subject_q_fen")
-    private Integer subject_q_fen;
-
-    //复试科目权重分值
-    @Column(name = "father_q_fen")
-    private Integer father_q_fen;
-
-    //科目权重占比（初试）（子） list
-    @Column(name = "subject_q_fen_child")
-    private String subject_q_fen_child;
-
-    //科目权重占比（复试）（子） list
-    @Column(name = "father_q_fen_child")
-    private String father_q_fen_child;
-
-    //初试科目对应的总分(单个科目满分) list
-    @Column(name = "subject_k_d_zong")
-    private String subject_k_d_zong;
-
-    //复试科目对应的总分(单个科目满分) list
-    @Column(name = "father_k_d_zong")
-    private String father_k_d_zong;
-
-
-
-
-
-
 }

@@ -14,6 +14,6 @@ public interface AchieveMapper extends BaseMapper<Achievement_Summary,String> {
 
     Achievement_Summary getIdByExam_num(@Param("exe_num") String exe_num); //考生号
 
-    List<Achievement_Summary >selectListByPage2(@Param("exam_id")int exam_id);
+    List<Achievement_Summary >selectListByPage2(@Param("exam_id") int exam_id);
 
 }

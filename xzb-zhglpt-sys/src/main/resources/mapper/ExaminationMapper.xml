@@ -42,8 +42,8 @@
         <id column="update_time" jdbcType="TIMESTAMP" property="update_time"/>
         <id column="exam_time" jdbcType="TIMESTAMP" property="exam_time"/>
         <id column="end_time" jdbcType="TIMESTAMP" property="end_time"/>
-        <id column="create_start_time" jdbcType="VARCHAR" property="create_start_time"/>
-        <id column="create_end_time" jdbcType="VARCHAR" property="create_end_time"/>
+        <id column="create_start_time" jdbcType="TIMESTAMP" property="create_start_time"/>
+        <id column="create_end_time" jdbcType="TIMESTAMP" property="create_end_time"/>
 
 
         <id column="prcie" jdbcType="DOUBLE" property="prcie"/>
