@@ -23,43 +23,23 @@
         html, body {
             height: 100%;
         }
-        .layui-row{
-            display: flex;
-            height: 100%;
-            flex-direction: column;
-        }
-        .layui-row .layui-content{
-            width: 1000px;
-            flex: 1;
-            margin: 0 auto;
-            padding: 20px 0;
-            box-sizing: border-box;
-        }
-        .layui-row .layui-content .layui-table th,td {
+        .haeader-content {
+            width: 100%;
+            background-color: #009688;
+            color: #333;
             text-align: center;
         }
-        .layui-row .layui-content .step-body {
-            margin: 30px 0;
-        }
-        .layui-row .layui-content .layui-table-box {
-            min-height: 200px;
-        }
-        .layui-row .layui-content .matter {
-            width: 800px;
-            font-size: 14px;
-            line-height: 25px;
-            margin: 70px 0 50px 0;
-        }
-        .haeader-content, .footer-content {
+        .footer-content {
             width: 100%;
             background-color: #009688;
             color: #333;
             height: 120px;
             text-align: center;
+            padding: 15px 0;
+            box-sizing: border-box;
         }
         .footer-content .footer {
             width: 666px;
-            padding-top: 15px;
             font-size: 14px;
             margin: 0 auto;
             color: white;
@@ -85,11 +65,44 @@
             color: white;
             font-size: 30px;
         }
-        .layui-row .layui-table-box .layui-table .red{
-            color:red;
+        .layui-row .layui-content{
+            width: 1000px;
+            min-height: 600px;
+            margin: 0 auto;
+            padding: 20px 0;
+            box-sizing: border-box;
+        }
+        .layui-row .layui-content .layui-table {
+            margin-bottom: 30px;
+        }
+        .layui-row .layui-content .layui-table td {
+            text-align: center;
+        }
+        .layui-row .layui-content .layui-table th {
+            text-align: center;
+            background-color: seagreen;
+            color: #fff;
+        }
+        .layui-row .layui-content .step-body {
+            margin: 30px 0;
+        }
+        .layui-row .layui-content .layui-table-box {
+            min-height: 200px;
+        }
+        .layui-row .layui-content .matter {
+            width: 800px;
+            font-size: 14px;
+            line-height: 25px;
+            margin: 70px 0 50px 0;
+        }
+        .layui-row .layui-table-box .layui-table .black{
+            color:black;
         }
         .layui-row .layui-table-box .layui-table .blue{
-            color:blue;
+            color:deepskyblue;
+        }
+        .layui-row .layui-table-box .layui-table .link {
+            color: mediumblue;
         }
     </style>
 </head>
@@ -120,47 +133,126 @@
         <div class="layui-table-box">
             <table class="layui-table">
                 <colgroup>
-                    <col width="220">
-                    <col width="200">
+                    <col>
+                    <col>
                     <col>
                 </colgroup>
                 <thead>
                     <tr>
                     <th>创建时间</th>
                     <th>信息采集</th>
-                    <th>缴费状态</th>
-                    <th>报名状态</th>
+                    <th>初试缴费状态</th>
+                    <th>复试缴费状态</th>
+                    <th>初试报名状态</th>
+                    <th>复试报名状态</th>
                     <th>准考证</th>
+                    <th>合格证</th>
+                    <th>初试入围名单查询</th>
+                    <th>复试入围名单查询</th>
                     </tr> 
                 </thead>
                 <tbody>
                     <tr>
-                    <td>2019/01/01/ 14：59：00</td>
-                    <td>英语</td>
-                    <td class="blue">缴费成功</td>
-                    <td>报名成功</td>
-                    <td class="red">查看</td>
+                    <td>2019/01/01/ 14:59:00</td>
+                    <td>审核成功</td>
+                    <td class="blue" onclick="location.href='${re.contextPath}/studentInformation/getPayFees';">待支付</td>
+                    <td class="black">待审核</td>
+                    <td class="black">等待缴费</td>
+                        <td class="black">待审核</td>
+                    <td class="link" onclick="location.href='${re.contextPath}/studentInformation/getAdmissionTicket';">查看</td>
+                    <td class="link" onclick="location.href='${re.contextPath}/studentInformation/getCertificateQualification';">查看</td>
+                    <td class="link">查看</td>
+                    <td class="link">查看</td>
                     </tr>
                 </tbody>
                 <thead>
                     <tr>
                     <th>考试名称</th>
-                    <th>考试金额</th>
                     <th>专业名称</th>
+                    <th>初试考试金额</th>
+                    <th>复试考试金额</th>
                     <th>专业代码</th>
-                    <th>考试成绩</th>
+                    <th>初试考试成绩</th>
+                    <th>初试考试成绩排名</th>
+                    <th>复试考试成绩</th>
+                    <th>复试考试成绩排名</th>
+                        <th></th>
                     </tr> 
                 </thead>
                 <tbody>
                     <tr>
-                    <td>语文考试</td>
-                    <td>100</td>
-                    <td>跑步</td>
-                    <td>100101</td>
-                    <td class="red">查看</td>
+                    <td>艺术考试</td>
+                    <td>钢琴</td>
+                    <td>500</td>
+                    <td>1000</td>
+                    <td>8866</td>
+                    <td class="link">显示成绩</td>
+                    <td class="link">显示排名</td>
+                    <td class="link">显示成绩</td>
+                    <td class="link">显示排名</td>
+                        <td class="link"></td>
                     </tr>
                 </tbody>
             </table>
+<#--              <table class="layui-table">-->
+<#--                <colgroup>-->
+<#--                    <col>-->
+<#--                    <col>-->
+<#--                    <col>-->
+<#--                </colgroup>-->
+<#--                <thead>-->
+<#--                    <tr>-->
+<#--                    <th>创建时间</th>-->
+<#--                    <th>信息采集</th>-->
+<#--                    <th>初试缴费状态</th>-->
+<#--                    <th>复试缴费状态</th>-->
+<#--                    <th>报名状态</th>-->
+<#--                    <th>准考证</th>-->
+<#--                    <th>合格证</th>-->
+<#--                    <th>入围名单查询</th>-->
+<#--                    <th></th>-->
+<#--                    </tr> -->
+<#--                </thead>-->
+<#--                <tbody>-->
+<#--                    <tr>-->
+<#--                    <td>2019/01/01/ 14:59:00</td>-->
+<#--                    <td>审核成功</td>-->
+<#--                    <td class="red">待审核</td>-->
+<#--                    <td class="blue">待支付</td>-->
+<#--                    <td class="green">报名完成</td>-->
+<#--                    <td class="link">查看</td>-->
+<#--                    <td class="link">查看</td>-->
+<#--                    <td class="link">查看</td>-->
+<#--                    <td></td>-->
+<#--                    </tr>-->
+<#--                </tbody>-->
+<#--                <thead>-->
+<#--                    <tr>-->
+<#--                    <th>考试名称</th>-->
+<#--                    <th>专业名称</th>-->
+<#--                    <th>初试考试金额</th>-->
+<#--                    <th>复试考试金额</th>-->
+<#--                    <th>专业代码</th>-->
+<#--                    <th>初试考试成绩</th>-->
+<#--                    <th>初试考试成绩排名</th>-->
+<#--                    <th>复试考试成绩</th>-->
+<#--                    <th>复试考试成绩排名</th>-->
+<#--                    </tr> -->
+<#--                </thead>-->
+<#--                <tbody>-->
+<#--                    <tr>-->
+<#--                    <td>体育</td>-->
+<#--                    <td>篮球</td>-->
+<#--                    <td>100</td>-->
+<#--                    <td>200</td>-->
+<#--                    <td>8866</td>-->
+<#--                    <td class="link">显示成绩</td>-->
+<#--                    <td class="link">显示排名</td>-->
+<#--                    <td class="link">显示成绩</td>-->
+<#--                    <td class="link">显示排名</td>-->
+<#--                    </tr>-->
+<#--                </tbody>-->
+<#--            </table>-->
         </div>
       
     </div>

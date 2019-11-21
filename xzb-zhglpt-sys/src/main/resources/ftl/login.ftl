@@ -16,6 +16,19 @@
     <script type="text/javascript" src="${re.contextPath}/plugin/layui/layui.all.js"></script>
     <script type="text/javascript" src="${re.contextPath}/plugin/jquery/jquery-3.2.1.min.js"></script>
     <style>
+        .login .layui-form #one{
+            width:15%;
+            padding: 9px 0;
+        }
+        #two {
+            width:45%;
+        }
+        #three {
+            width:35%
+        }
+        .four {
+            width:100%;height:35px;
+        }
         #register {
             display: inline-block;
             font-size: 18px;
@@ -43,17 +56,37 @@
         <input name="password" lay-verify="password" placeholder="密码" autocomplete="off" type="password"
                class="layui-input">
         <hr class="hr15">
-        <div class="layui-inline">
-            <label class="layui-form-label" style="width:40px;padding: 9px 0px;">验证码&nbsp;</label>
-            <div class="layui-input-inline">
+        <div class="layui-inline" style="display:flex;justify-content:space-between;">
+            <label class="layui-form-label" id="one">验证码&nbsp;</label>
+            <div class="layui-input-inline" id="two">
                 <input type="text" name="code" style="width:150px;height:35px;" autocomplete="off" lay-verify="code"
                        class="layui-input">
             </div>
-            <div class="layui-input-inline">
-                <img src="" id="code">
+            <div class="layui-input-inline" id="three">
+                <img src="" id="code" class="four">
             </div>
-
         </div>
+<#--        <div class="layui-inline">-->
+<#--            <label class="layui-form-label" style="width:40px;padding: 9px 0px;">验证码&nbsp;</label>-->
+<#--            <div class="layui-input-inline">-->
+<#--                <input type="text" name="code" style="width:150px;height:35px;" autocomplete="off" lay-verify="code"-->
+<#--                       class="layui-input">-->
+<#--            </div>-->
+<#--            <div class="layui-input-inline">-->
+<#--                <img src="" style="width:100%;height:35px;" id="code">-->
+<#--            </div>-->
+
+<#--        </div>-->
+<#--        <div class="layui-inline">-->
+<#--            <label class="layui-form-label" style="width: 15%;padding: 9px 0;" class="layui-form-label">验证码&nbsp;</label>-->
+<#--            <div style="width:45%;" class="layui-input-inline">-->
+<#--                <input type="text" name="code" style="width:150px;height:35px;" autocomplete="off" lay-verify="code"-->
+<#--                       class="layui-input">-->
+<#--            </div>-->
+<#--            <div style="width:35%;" class="layui-input-inline">-->
+<#--                <img src=""  style="width: 100%;height: 35px;"  id="code">-->
+<#--            </div>-->
+<#--        </div>-->
         <hr class="hr15">
          <div style="display: flex;justify-content: space-between;">
                <input value="登录" lay-submit lay-filter="login" style="width:45%;" type="submit">

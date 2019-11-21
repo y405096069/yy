@@ -218,7 +218,7 @@ public class InformationPublishController extends BaseController {
     /**
      * 上传 目前首先相对路径
      */
-    @PostMapping(value = "upload", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "app", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public JsonUtil upload(@RequestParam(required = false) MultipartFile file) {
         JsonUtil j = new JsonUtil();

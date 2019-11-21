@@ -114,6 +114,7 @@
     <div class="layui-content">
         <div style="height: 4%;">
             <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-primary" onclick="location.href='${re.contextPath}/studentInformation/getStudentIndex';">返回首页</button>
+            <input id="start" type="hidden" data-method="setTop" class="layui-btn" value="${rel}"></input>
         </div>
         <div id="step_demo" class="step-body">
             <div class="step-header" style="width:80%;overflow: hidden;">
@@ -143,7 +144,8 @@
                 <div class="step-list"></div>
             </div>
         </div>
-        <form class="layui-form" action="">
+        <form class="layui-form" method="post" action="${re.contextPath}/studentInformation/addStudentInformations" enctype="multipart/form-data">
+            <input id="start" type="hidden" data-method="setTop" class="layui-btn" value="${rel}"></input>
             <div class="layui-header">
                 <p>提示:</p>
                 <p>(注：带*符号的项必填)</p>
@@ -158,7 +160,7 @@
                         <span class="x-red">*</span>证件类型
                     </label>
                     <div class="layui-input-inline">
-                        <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                        <select name="certificate_type" id="departmentId" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择证件类型</option>
                             <option value="0">身份证</option>
@@ -172,7 +174,7 @@
                         <span class="x-red">*</span>证件号码
                     </label>
                     <div class="layui-input-inline w-22">
-                        <input type="text" id="uname" name="username" lay-verify="username"
+                        <input type="text" id="uname" name="certificate_number" lay-verify="username"
                                autocomplete="off" class="layui-input" placeholder="请输入证件号码">
                     </div>
                 </div>
@@ -181,7 +183,7 @@
                         <span class="x-red">*</span>民族
                     </label>
                     <div class="layui-input-inline">
-                        <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                        <select name="nation" id="departmentId" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择民族</option>
                             <option value="0">汉族</option>
@@ -196,7 +198,7 @@
                         <span class="x-red">*</span>姓名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="uname" name="username" lay-verify="username"
+                        <input type="text" id="uname" name="name" lay-verify="username"
                                autocomplete="off" class="layui-input" placeholder="请输入姓名">
                     </div>
                 </div>
@@ -205,7 +207,7 @@
                         <span class="x-red">*</span>出生日期
                     </label>
                     <div class="layui-input-inline w-22">
-                        <input type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd">
+                        <input type="text" name="birthdate" class="layui-input" id="test1" placeholder="yyyy-MM-dd">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -213,7 +215,7 @@
                         <span class="x-red">*</span>性别
                     </label>
                     <div class="layui-input-inline">
-                        <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                        <select name="sex" id="departmentId" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择性别</option>
                             <option value="0">男</option>
@@ -228,7 +230,7 @@
                         <span class="x-red">*</span>收件人
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="uname" name="username" lay-verify="username"
+                        <input type="text" id="uname" name="recipient" lay-verify="username"
                                autocomplete="off" class="layui-input" placeholder="请输入收件人">
                     </div>
                 </div>
@@ -237,7 +239,7 @@
                         <span class="x-red">*</span>街道详情
                     </label>
                     <div class="layui-input-inline" style="width: 360px;">
-                        <input type="text" id="uname" name="username" lay-verify="username"
+                        <input type="text" id="uname" name="street" lay-verify="username"
                                autocomplete="off" class="layui-input" placeholder="请输入街道详情">
                     </div>
                 </div>
@@ -248,25 +250,25 @@
                         <span class="x-red">*</span>邮政编码
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="uname" name="username" lay-verify="username"
+                        <input type="text" id="uname" name="postal_code" lay-verify="username"
                                autocomplete="off" class="layui-input" placeholder="请输入邮政编码">
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label for="uname" class="layui-form-label">
+                    <label for="email" class="layui-form-label">
                         <span class="x-red">*</span>电子邮箱
                     </label>
                     <div class="layui-input-inline w-22">
-                        <input type="text" id="uname" name="username" lay-verify="username"
+                        <input type="text" id="email" name="email" lay-verify="required|email"
                                autocomplete="off" class="layui-input" placeholder="请输入电子邮箱">
                     </div>
                 </div>
                 <div class="layui-inline">
-                    <label for="phone" class="layui-form-label">
+                    <label for="uname" class="layui-form-label">
                         <span class="x-red">*</span>本人手机
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="phone" name="phone" lay-verify="required|phone"
+                        <input type="text" id="uname" name="phone" lay-verify="required|phone"
                                autocomplete="off" class="layui-input" placeholder="请输入本人手机">
                     </div>
                 </div>
@@ -280,7 +282,7 @@
                         <span class="x-red">*</span>考生类型
                     </label>
                     <div class="layui-input-inline">
-                        <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                        <select name="examinee_type" id="departmentId" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择考生类型</option>
                             <option value="0">高中生</option>
@@ -293,7 +295,7 @@
                         <span class="x-red">*</span>考生学历
                     </label>
                     <div class="layui-input-inline w-22">
-                        <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                        <select name="examinee_education" id="departmentId" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择考生学历</option>
                             <option value="0">高中</option>
@@ -308,13 +310,43 @@
                         <span class="x-red">*</span>考生省份
                     </label>
                     <div class="layui-input-inline">
-                        <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                        <select name="examinee_province" id="departmentId" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择考生省份</option>
-                            <option value="0">北京市</option>
-                            <option value="1">天净市</option>
-                            <option value="2">广东省</option>
-                            <option value="3">上海市</option>
+                            <option value ="北京市">北京市 </option>
+                            <option value ="天津市">天津市 </option>
+                            <option value ="上海市">上海市 </option>
+                            <option value ="重庆市">重庆市 </option>
+                            <option value ="河北省">河北省 </option>
+                            <option value ="山西省">山西省 </option>
+                            <option value ="辽宁省">辽宁省 </option>
+                            <option value ="吉林省">吉林省 </option>
+                            <option value ="黑龙江省">黑龙江省</option>
+                            <option value ="江苏省">江苏省 </option>
+                            <option value ="浙江省">浙江省 </option>
+                            <option value ="安徽省">安徽省 </option>
+                            <option value ="福建省">福建省 </option>
+                            <option value ="江西省">江西省 </option>
+                            <option value ="山东省">山东省 </option>
+                            <option value ="河南省">河南省 </option>
+                            <option value ="湖北省">湖北省 </option>
+                            <option value ="湖南省">湖南省 </option>
+                            <option value ="广东省">广东省 </option>
+                            <option value ="海南省">海南省 </option>
+                            <option value ="四川省">四川省 </option>
+                            <option value ="贵州省">贵州省 </option>
+                            <option value ="云南省">云南省 </option>
+                            <option value ="陕西省">陕西省 </option>
+                            <option value ="甘肃省">甘肃省 </option>
+                            <option value ="青海省">青海省 </option>
+                            <option value ="台湾省">台湾省 </option>
+                            <option value ="广西壮族自治区">广西壮族自治区</option>
+                            <option value ="内蒙古自治区">内蒙古自治区</option>
+                            <option value ="西藏自治区">西藏自治区</option>
+                            <option value ="宁夏回族自治区">宁夏回族自治区 </option>
+                            <option value ="新疆维吾尔自治区">新疆维吾尔自治区</option>
+                            <option value ="香港特别行政区">香港特别行政区</option>
+                            <option value ="澳门特别行政区">澳门特别行政区</option>
                         </select>
                     </div>
                 </div>
@@ -325,7 +357,7 @@
                         <span class="x-red">*</span>政治面貌
                     </label>
                     <div class="layui-input-inline">
-                        <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                        <select name="politics_status" id="departmentId" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择政治面貌</option>
                             <option value="0">群众</option>
@@ -339,7 +371,7 @@
                         <span class="x-red">*</span>应往届
                     </label>
                     <div class="layui-input-inline w-22">
-                        <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                        <select name="graduate_type" id="departmentId" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择应往届</option>
                             <option value="0">应届生</option>
@@ -352,7 +384,7 @@
                         <span class="x-red">*</span>毕业中学
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="uname" name="username" lay-verify="username"
+                        <input type="text" id="uname" name="graduate_middle" lay-verify="username"
                                autocomplete="off" class="layui-input" placeholder="请输入毕业中学">
                     </div>
                 </div>
@@ -363,7 +395,7 @@
                         <span class="x-red">*</span>考生号
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="uname" name="inputExaminee" lay-verify="required|inputExaminee"
+                        <input type="text" id="examineeNumber" lay-filter="inputExaminee" name="examinee_number" lay-verify="inputExaminee"
                                autocomplete="off" class="layui-input" placeholder="请输入考生号">
                     </div>
                 </div>
@@ -372,7 +404,7 @@
                         <span class="x-red">*</span>文理科
                     </label>
                     <div class="layui-input-inline w-22">
-                        <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                        <select name="subject_type" id="departmentId" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择文理科</option>
                             <option value="0">文科</option>
@@ -381,80 +413,76 @@
                     </div>
                 </div>
             </div>
-            <div class="layui-form-item">
+            <div id="family-box">
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
-                    <legend style="font-size:16px;font-weight: 700;">家庭信息（至少填写一位考生监护人）</legend>
+                    <legend style="font-size:16px;font-weight: 700;">家庭信息（至少填写一位考生监护人）<i class="layui-icon" onclick="addAction()">&#xe654;</i></legend>
                 </fieldset>
-                <div class="layui-inline">
-                    <label for="uname" class="layui-form-label">
-                        <span class="x-red">*</span>姓名
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="uname" name="username" lay-verify="username"
-                               autocomplete="off" class="layui-input" placeholder="请输入姓名">
+                <div class="layui-form-item" id="one">
+                    <div class="layui-inline">
+                        <label for="uname" class="layui-form-label">
+                            <span class="x-red">*</span>姓名
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="uname" name="member_name" lay-verify="username"
+                                   autocomplete="off" class="layui-input" placeholder="请输入姓名">
+                        </div>
                     </div>
-                </div>
-                <div class="layui-inline">
-                    <label for="uname" class="layui-form-label">
-                        <span class="x-red">*</span>关系
-                    </label>
-                    <div class="layui-input-inline w-22">
-                        <input type="text" id="uname" name="username" lay-verify="username"
-                               autocomplete="off" class="layui-input" placeholder="请输入关系">
+                    <div class="layui-inline">
+                        <label for="uname" class="layui-form-label">
+                            <span class="x-red">*</span>关系
+                        </label>
+                        <div class="layui-input-inline w-22">
+                            <input type="text" id="uname" name="member_relationship" lay-verify="username"
+                                   autocomplete="off" class="layui-input" placeholder="请输入关系">
+                        </div>
                     </div>
-                </div>
-                <div class="layui-inline">
-                    <label for="uname" class="layui-form-label">
-                        <span class="x-red">*</span>职业
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="uname" name="username" lay-verify="username"
-                               autocomplete="off" class="layui-input" placeholder="请输入职业">
+                    <div class="layui-inline">
+                        <label for="uname" class="layui-form-label">
+                            <span class="x-red">*</span>职业
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="uname" name="member_occupation" lay-verify="username"
+                                   autocomplete="off" class="layui-input" placeholder="请输入职业">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label for="uname" class="layui-form-label">
+                            <span class="x-red">*</span>手机号码
+                        </label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="uname" name="member_phone" lay-verify="required|phone"
+                                   autocomplete="off" class="layui-input" placeholder="请输入手机号码">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label for="uname" class="layui-form-label">
+                            <span class="x-red">*</span>工作单位
+                        </label>
+                        <div class="layui-input-inline" style="width: 360px;">
+                            <input type="text" id="uname" name="member_work" lay-verify="username"
+                                   autocomplete="off" class="layui-input" placeholder="请输入工作单位">
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="layui-form-item">
-                <div class="layui-inline">
-                    <label for="phone" class="layui-form-label">
-                        <span class="x-red">*</span>手机号码
-                    </label>
-                    <div class="layui-input-inline">
-                        <input type="text" id="phone" name="phone" lay-verify="required|phone"
-                               autocomplete="off" class="layui-input" placeholder="请输入手机号码">
-                    </div>
-                </div>
-                <div class="layui-inline">
-                    <label for="uname" class="layui-form-label">
-                        <span class="x-red">*</span>工作单位
-                    </label>
-                    <div class="layui-input-inline" style="width: 360px;">
-                        <input type="text" id="uname" name="username" lay-verify="username"
-                               autocomplete="off" class="layui-input" placeholder="请输入工作单位">
-                    </div>
-                </div>
-            </div>
+            <div id="active"></div>
             <div class="layui-form-item">
                 <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
                     <legend style="font-size:16px;font-weight: 700;">正面照</legend>
                 </fieldset>
                 <div class="layui-input-inline">
-                    <div class="layui-upload-drag" style="margin-left:10%;" id="test10">
-                        <i style="font-size:30px;" class="layui-icon"></i>
-                        <p style="font-size: 10px">点击上传，或将文件拖拽到此处</p>
-                    </div>
-                </div>
-                <div class="layui-input-inline">
-
                     <div id="demo2" style="margin-top: 20px;margin-left: 50px">
                         <img src="${servletPath}/plugin/x-admin/images/bg.png" width="100px" height="100px"
                              class="layui-upload-img layui-circle">
                     </div>
                 </div>
+                <input type="file" name="file" id="file" accept="image/*" onchange="showPic(this)" style="visibility:hidden;position:absolute;top:0px;width:0px" />
+                <input type="button" value="upload" id="upload" style="visibility:hidden;position:absolute;top:0px;width:0px"/>
             </div>
             <div>
                 <div style="display: flex;justify-content: center;align-items: center;min-height: 80px;">
-                    <button style="width: 150px;height: 40px;" type="submit" class="layui-btn" lay-submit="" lay-filter="submits">修改</button>
-                    <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-normal">下一步</button>
+                    <button style="width: 150px;height: 40px;" type="submit" class="layui-btn" lay-submit="" lay-filter="submits">新增</button>
+                    <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-normal" onclick="location.href='${re.contextPath}/studentInformation/getSelectExam';">下一步</button>
                 </div>
             </div>
         </form>
@@ -473,6 +501,12 @@
     </div>
 </div>
 <script>
+    $( function rel(){
+        var rel=$("#start").val();
+        if(rel!=""&&rel!=null){
+            alert(rel);
+        }
+    });
     layui.use(['jquery', 'steps', 'form', 'laydate', 'upload'], function(){
 
         var $ = layui.$;
@@ -527,7 +561,22 @@
         });
 
     });
-
+    $('#demo2').click(function() {
+        $('#file').click();
+    })
+    function showPic(source) {
+        var file = source.files[0];
+        if (window.FileReader) {
+            var fr = new FileReader();
+            fr.onloadend = function(e) {
+                // submit提交
+                $('#upload').click();
+                console.log(e.target.result)
+                $("#demo2 img").attr('src', e.target.result)
+            };
+            fr.readAsDataURL(file);
+        }
+    }
 
 </script>
 </body>

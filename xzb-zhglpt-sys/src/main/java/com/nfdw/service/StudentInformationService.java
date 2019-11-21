@@ -4,9 +4,12 @@ package com.nfdw.service;/**
  */
 
 import com.github.pagehelper.PageInfo;
+import com.nfdw.entity.Examination;
 import com.nfdw.entity.Examinationstatistics;
 import com.nfdw.entity.StudentInformation;
-import com.nfdw.pojo.Examination;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 考试情况统计
@@ -19,6 +22,7 @@ public interface StudentInformationService {
     int addStudentInformation(StudentInformation studentInformation);
     //按学生用户ID查找该学生基本信息
     StudentInformation getUserIDByStudentInformation(String name);
-
+    //按学生用户和当前日期查找报考信息
+    List<Examination> getListExamination(StudentInformation studentInformation,String currentDate);
 
 }
