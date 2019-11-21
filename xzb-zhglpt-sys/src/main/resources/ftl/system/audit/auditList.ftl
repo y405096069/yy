@@ -139,9 +139,7 @@
 </div>
 <table id="auditList" class="layui-hide" lay-filter="audit"></table>
 <script type="text/html" id="barDemo">
-    <@shiro.hasPermission name="user:select">
-  <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">审核</a>
-    </@shiro.hasPermission>
+    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="detail">审核</a>
 <#--<@shiro.hasPermission name="user:update">
   <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="edit">编辑</a>
 </@shiro.hasPermission>
@@ -178,14 +176,19 @@
                 , {field: 'biog_land', title: '生源地', width: '5%'}
                 , {field: 'exam_name', title: '报考考试名称', width: '10%'}
                 , {field: 'major', title: '报考专业', width: '8%', template: '#switchTpl'}
-                , {field: 'sub_time', title: '信息提交时间', width: '10%'}
-                , {field: 'end_time', title: '信息截止时间', width: '10%'}
-                , {field: 'audit_status', title: '审核状态', width: '6%'}
-                , {field: 'audit_time', title: '审核时间', width: '10%'}
-                , {field: 'pay_status', title: '缴费状态', width: '6%'}
                 , {field: 'audit_link', title: '审核资料环节', width: '7%'}
-                , {field: 'enroll_status', title: '报名状态', width: '8%'}
-                , {fixed: 'right', field: 'right', title: '操作', toolbar: "#barDemo"}
+                , {field: 'sub_time', title: '信息提交时间', width: '10%'}
+                , {field: 'end_time', title: '审核截止时间', width: '10%'}
+                , {field: 'info_collect_status', title: '信息采集状态', width: '10%'}
+                , {field: 'audit_status', title: '初试审核状态', width: '10%'}
+                , {field: 'audit_time', title: '初试审核时间', width: '10%'}
+                , {field: 'pay_status', title: '初试缴费状态', width: '10%'}
+                , {field: 'enroll_status', title: '初试报名状态', width: '10%'}
+                , {field: 're_audit_status', title: '复试审核状态', width: '10%'}
+                , {field: 're_audit_time', title: '复试审核时间', width: '10%'}
+                , {field: 're_pay_status', title: '复试缴费状态', width: '10%'}
+                , {field: 're_enroll_status', title: '复试报名状态', width: '10%'}
+                , {fixed: 'right', field: 'right', title: '操作', toolbar: "#barDemo",width: '4%'}
             ]]
             , page: true
         });
@@ -200,7 +203,7 @@
                 var pay_status = $('#pay_status').val();
                 var audit_link = $('#audit_link').val();
                 var enroll_status = $('#enroll_status').val();
-
+                var info_collect_status =  $('#info_collect_status').val();
                 console.info(name);
                 table.reload('auditList', {
                     where: {
@@ -343,7 +346,30 @@
         table.on('tool(audit)', function (obj) {
             var data = obj.data;
             if (obj.event === 'detail') {
-                detail('审核考生', 'updateAudit?id=' + data.id, 1150, 620);
+
+                var oDate1 = new Date();
+                var oDate2 = new Date(data.end_time);
+
+                if (oDate1.getTime() <= oDate2.getTime()){
+                    if(data.audit_link =='交费前'){
+                        if (data.info_collect_status == '审核成功')
+                            detail('审核考生', 'updateAudit?id=' + data.id, 1150, 620);
+                        else if((data.enroll_status == '审核不成功')){
+                            window.top.layer.msg('信息未采集', {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                        }else{
+                            window.top.layer.msg('当前已审核', {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                        }
+
+                    }else if (data.audit_link =='交费后') {
+                        if (data.pay_status == '已支付')
+                            detail('审核考生', 'updateAudit?id=' + data.id, 1150, 620);
+                        else
+                            window.top.layer.msg('请先确认支付', {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                    }
+                }else {
+                    window.top.layer.msg('审核已截止', {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                }
+
             } else if (obj.event === 'del') {
                 layer.confirm('确定删除用户[<label style="color: #00AA91;">' + data.username + '</label>]?', {
                     btn: ['逻辑删除', '物理删除']

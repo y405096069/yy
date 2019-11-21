@@ -25,14 +25,14 @@
 <body>
 <div class="lenos-search">
     <div class="select">
-        专业：
+        <#--专业：
         <div class="layui-inline">
             <select class="layui-input" height="20px" id="specialty_id" autocomplete="off">
                 <option value="">全部</option>
                 <option value="1">音乐</option>
                 <option value="2">体育</option>
             </select>
-        </div>
+        </div>-->
         <#--生源地：
         <div class="layui-inline">
             <select class="layui-input" height="20px" id="province_id" autocomplete="off">
@@ -42,10 +42,10 @@
                 <option value="3">深圳</option>
             </select>
         </div>-->
-        考试搜索：
+       <#-- 考试搜索：
         <div class="layui-inline">
             <input class="layui-input" height="20px" id="exam" autocomplete="off">
-        </div>
+        </div>-->
         <#--考试：
         <div class="layui-inline">
             <input class="layui-input" height="20px" id="uname" autocomplete="off">
@@ -105,17 +105,9 @@
 </div>
 <table id="achievementFirstGradeList" class="layui-hide" lay-filter="achieveFirst"></table>
 
-<script type="text/html" id="ChaxunDemo">
-    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="opening">开启</a>
-    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="closing">关闭</a>
-</script>
 
 <script type="text/html" id="barDemo">
-    <#---->
-    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">编辑</a>
-</script>
-<script type="text/html" id="switchTpl">
-    <input type="checkbox" name="sex" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo">
+    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="detail">编辑</a>
 </script>
 <script>
     document.onkeydown = function (e) { // 回车提交表单
@@ -165,9 +157,8 @@
                 , {field: 'first_subjects_achieve5', title: '科目5成绩', width: 100}
                 , {field: 'first_subjects_name6', title: '科目6名称', width: 100}
                 , {field: 'first_subjects_achieve6', title: '科目6成绩', width: 100}
-
                 , {field: 'first_subjects_total', title: '总分', width: 100}
-                , {fixed: 'right', field: 'right', title: '操作', toolbar: "#barDemo",width: 60}
+                //, {fixed: 'right', field: 'right', title: '操作', toolbar: "#barDemo",width: '6%'}
             ]]
             , page: true
 

@@ -295,19 +295,26 @@
                     文件，大小不超过10M</span>
             </div>
         </div>
-         <div>
-            <button style="width: 150px;height: 40px;" type="button" class="layui-btn">确认</button>
-            <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-danger">返回</button>
-       </div>
+        <div style="width: 100%;height: 55px;background-color: white;border-top:1px solid #e6e6e6;
+  position: fixed;bottom: 0px;margin-left:-20px;">
+            <div class="layui-form-item" style=" float: right;margin-right: 30px;margin-top: 8px">
+
+                <button class="layui-btn layui-btn-normal" lay-filter="add" lay-submit="">
+                    增加
+                </button>
+                <button class="layui-btn layui-btn-primary" id="close">
+                    取消
+                </button>
+            </div>
+        </div>
     </form>
 </div>
 <script>
 
 
-    layui.use(['form', 'laydate', 'transfer'], function () {
+    layui.use(['form', 'laydate'], function () {
         var form = layui.form
         ,laydate = layui.laydate
-        ,transfer = layui.transfer
         ,upload = layui.upload;
         form.render();
 
@@ -321,7 +328,23 @@
             ,{"value": "6", "title": "湖南省"}
             ,{"value": "7", "title": "湖北省"}
             ,{"value": "8", "title": "江西省"}
-        ]
+        ];
+
+        //监听提交
+        form.on('submit(add)', function (data) {
+            var r = document.getElementsByName("role");
+            var role = [];
+            for (var i = 0; i < r.length; i++) {
+                if (r[i].checked) {
+                    console.info(r[i].value);
+                    role.push(r[i].value);
+                }
+            }
+            data.field.role = role;
+            layerAjax('addUser', data.field, 'userList');
+            return false;
+        });
+        form.render();
         //基础效果
         transfer.render({
             elem: '#test7',

@@ -1,5 +1,6 @@
 package com.nfdw.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.nfdw.core.annotation.Log;
@@ -11,6 +12,8 @@ import com.nfdw.service.AchievementService;
 import com.nfdw.service.ImportExcelService;
 import com.nfdw.util.JsonUtil;
 import com.nfdw.util.ReType;
+import com.nfdw.utils.ExcelUtil;
+import com.nfdw.utils.ExportToExcel;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +41,7 @@ public class AchievementController {
     ImportExcelService excelService;
 
     /*
-     *初试成绩管理 start
+     *初试成绩管理 start          (只查看报名成功)
      */
     @GetMapping(value = "achievementFirstList")
     public String achievementFirstList(Model model) {
@@ -164,9 +167,57 @@ public class AchievementController {
         return jsonUtil;
     }
 
+    //@ApiOperation(value = "/inout_achieveFirstGrade", httpMethod = "POST", notes = "导出")
+    @RequestMapping(value = "inout_achieveFirstGrade")      //导出
+    @ResponseBody
+    public JsonUtil inout_achieveFirstGrade(String id, String name, HttpServletResponse response) {
 
+        List<Achievement_Summary> tList = achieveService.selectListByPage(null, Integer.valueOf(id));
+        JsonUtil jsonUtil = new JsonUtil();
+
+        try{
+            ExportToExcel.exportWhiteList(name, tList, response);
+            jsonUtil.setFlag(true);
+            jsonUtil.setMsg("导出成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonUtil.setMsg("发生错误,导出失败");
+        }
+        return jsonUtil;
+    }
     /*
      *初试成绩管理-查看成绩 end
      */
 
+
+    /*
+        初试入围成绩管理 -        start
+     */
+    @GetMapping(value = "achievementFirstCutList")
+    public String achievementFirstCutList(Model model) {
+        List<Examination> list = acService.selectListByPage(null);
+        model.addAttribute("list",list);
+        return "/system/achieve/achievementFirstCutList";
+    }
+
+    @GetMapping(value = "showachievementFirstCutList")
+    @ResponseBody
+    public ReType showachievementFirstCutList(Model model, Achievement_Summary a_sum, String page, String limit) {
+        return achieveService.show(a_sum,Integer.valueOf(page), Integer.valueOf(limit));
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
+        初试入围成绩管理 -        end
+     */
 }

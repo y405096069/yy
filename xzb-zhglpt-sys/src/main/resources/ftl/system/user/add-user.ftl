@@ -283,7 +283,7 @@ To change this template use File | Settings | File Templates.-->
                 }
             }
             data.field.role = role;
-            layerAjax('addUser', data.field, 'userList');
+            layerAjax('addExamination', data.field, 'examinationList');
             return false;
         });
         form.render();

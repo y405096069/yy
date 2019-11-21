@@ -85,9 +85,13 @@
             ,accept: 'file'
             ,exts: 'xls|excel|xlsx' //只允许上传压缩文件
             ,done: function (res) {
-                //如果上传失败
-                if (res.code > 0) {
-                    return layer.msg('上传失败');
+                if (res.flag) {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    window.parent.layui.table.reload('achievementFirstList');
+                    window.top.layer.msg(res.msg, {icon: 6, offset: 'rb', area: ['200px', '80px'], anim: 2});
+                } else {
+                    window.top.layer.msg(res.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                 }
             }
         });

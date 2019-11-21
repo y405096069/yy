@@ -19,30 +19,30 @@ public class Audit {                //审核汇总表
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "u_id")
+    @Column(name = "u_id")      //用户id
     private int u_id;
 
-    @Column(name = "name")
+    @Column(name = "name")      //姓名
     private String name;
-    @Column(name = "biog_land")
+    @Column(name = "biog_land")  //生源地
     private String biog_land;
     @Column(name = "exam_id")
     private int exam_id;
-    @Column(name = "exam_name")
+    @Column(name = "exam_name")     //考试名称
     private String exam_name;
     @Column(name = "major_id")
     private int major_id;
-    @Column(name = "major")
+    @Column(name = "major")     //专业名称
     private String major;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "sub_time")
-    private Date sub_time;
+    private Date sub_time;          //信息提交时间
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @Column(name = "end_time")
+    @Column(name = "end_time")          //报名截止时间
     private Date end_time;
 
     @Column(name = "audit_status")
@@ -61,6 +61,17 @@ public class Audit {                //审核汇总表
     private String pay_status;
     @Column(name = "audit_link")
     private String audit_link;
+
+    @Column(name = "info_collect_status")      //信息采集状态
+    private String info_collect_status;
+    @Column(name = "re_pay_status")             //复试缴费状态
+    private String re_pay_status;
+    @Column(name = "re_enroll_status")          //复试报名状态
+    private String re_enroll_status;
+    @Column(name = "re_audit_status")           //复试审核状态
+    private String re_audit_status;
+    @Column(name = "re_audit_time")              //复试审核时间
+    private String re_audit_time;
 
 
     public Integer getId() {
@@ -182,4 +193,53 @@ public class Audit {                //审核汇总表
     public void setPay_status(String pay_status) {
         this.pay_status = pay_status;
     }
+
+    public String getAudit_link() {
+        return audit_link;
+    }
+
+    public void setAudit_link(String audit_link) {
+        this.audit_link = audit_link;
+    }
+
+    public String getInfo_collect_status() {
+        return info_collect_status;
+    }
+
+    public void setInfo_collect_status(String info_collect_status) {
+        this.info_collect_status = info_collect_status;
+    }
+
+    public String getRe_pay_status() {
+        return re_pay_status;
+    }
+
+    public void setRe_pay_status(String re_pay_status) {
+        this.re_pay_status = re_pay_status;
+    }
+
+    public String getRe_enroll_status() {
+        return re_enroll_status;
+    }
+
+    public void setRe_enroll_status(String re_enroll_status) {
+        this.re_enroll_status = re_enroll_status;
+    }
+
+    public String getRe_audit_status() {
+        return re_audit_status;
+    }
+
+    public void setRe_audit_status(String re_audit_status) {
+        this.re_audit_status = re_audit_status;
+    }
+
+    public String getRe_audit_time() {
+        return re_audit_time;
+    }
+
+    public void setRe_audit_time(String re_audit_time) {
+        this.re_audit_time = re_audit_time;
+    }
+
 }
