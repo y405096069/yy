@@ -37,7 +37,10 @@ To change this template use File | Settings | File Templates.-->
         <div style="width:100%;height:520px;overflow: auto;margin-top: 30px;">
             <input type="hidden" id="id" name="id" value="${audit.id}">
             <input type="hidden" id="u_id" name="u_id" value="${audit.u_id}">
-
+            <input type="hidden" id="audit_link" name="audit_link" value="${audit.audit_link}">
+            <input type="hidden" id="info_collect_status" name="info_collect_status" value="${audit.info_collect_status}">
+            <input type="hidden" id="pay_status" name="pay_status" value="${audit.pay_status}">
+            pay_status
 
             <#--<div class="layui-form-item">
                 <div class="layui-inline">
@@ -207,9 +210,11 @@ To change this template use File | Settings | File Templates.-->
                     </label>
                     <div class="layui-input-inline" style="width:190px;">
                         <select name="enroll_status" id="enroll_status">
-                            <option value="待审核">待审核</option>
+                            <#--<option value="待审核">待审核</option>
                             <option value="报名成功" <#if audit.enroll_status='报名成功'>selected</#if>>报名成功</option>
-                            <option value="报名不成功"<#if audit.enroll_status='报名不成功'>selected</#if>>报名不成功</option>
+                            <option value="报名不成功"<#if audit.enroll_status='报名不成功'>selected</#if>>报名不成功</option>-->
+                            <option value="审核通过">审核通过</option>
+                            <option value="审核不通过">审核不通过</option>
                         </select>
 
                     </div>

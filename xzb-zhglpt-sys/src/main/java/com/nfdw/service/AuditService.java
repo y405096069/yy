@@ -15,4 +15,6 @@ public interface AuditService extends BaseService<Audit, String> {
     boolean updAudit(Audit audit);
 
     Examinee_User getExaminee_UserById(int id);
+
+    boolean addAudit(Audit audit);
 }

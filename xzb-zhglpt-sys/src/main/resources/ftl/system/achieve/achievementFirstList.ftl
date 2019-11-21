@@ -19,7 +19,6 @@
     <script type="text/javascript" src="${re.contextPath}/plugin/layui/layui.all.js"
             charset="utf-8"></script>
     <script type="text/javascript" src="${re.contextPath}/plugin/tools/tool.js"></script>
-
 </head>
 
 <body>
@@ -123,7 +122,7 @@
     <#---->
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-xs  layui-btn-normal" id="intoing" lay-event="intoing">导入</a>
-    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="">导出</a>
+    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="inout">导出</a>
     <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="deling">删除</a>
 <#--<@shiro.hasPermission name="user:update">
   <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="edit">编辑</a>
@@ -145,6 +144,9 @@
     }
     layui.use(['table', 'upload'], function () {
         var table = layui.table,upload = layui.upload;
+
+
+
         //方法级渲染
         table.render({
             id: 'achievementFirstList',
@@ -278,9 +280,9 @@
         table.on('tool(achieve)', function (obj) {
             var data = obj.data;
             if (obj.event === 'detail') {
-                detail("'"+data.exam+"'"+'  —初试成绩', 'achievementFirstGradeList?id=' + data.id, 1200, 680);
+                detail("'" + data.exam + "'" + '  —初试成绩', 'achievementFirstGradeList?id=' + data.id, 1200, 680);
             } else if (obj.event === 'opening') {
-                if(data.grade === 0){
+                if (data.grade === 0) {
                     layer.confirm('确定开启?', {
                         btn: ['确认', '取消']
                     }, function (index) {
@@ -288,24 +290,34 @@
                         $.ajax({
                             url: "updateGrade_switch",
                             type: "post",
-                            data: {"id":data.id,"status":"1"},
+                            data: {"id": data.id, "status": "1"},
                             success: function (d) {
                                 if (d.flag) {
                                     window.layui.table.reload('achievementFirstList');
-                                    window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
                                 } else {
-                                    window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
                                 }
                             }, error: function () {
                                 alert('error');
                             }
                         });
                     });
-                }else {
+                } else {
                     window.top.layer.msg('已开启', {icon: 5, offset: 'rb', area: ['120px', '80px'], anim: 2});
                 }
             } else if (obj.event === 'closing') {
-                if(data.grade === 1){
+                if (data.grade === 1) {
                     layer.confirm('确定关闭?', {
                         btn: ['确认', '取消']
                     }, function (index) {
@@ -313,34 +325,44 @@
                         $.ajax({
                             url: "updateGrade_switch",
                             type: "post",
-                            data: {"id":data.id,"status":"0"},
+                            data: {"id": data.id, "status": "0"},
                             success: function (d) {
                                 if (d.flag) {
                                     window.layui.table.reload('achievementFirstList');
-                                    window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
                                 } else {
-                                    window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
                                 }
                             }, error: function () {
                                 alert('error');
                             }
                         });
                     });
-                }else {
+                } else {
                     window.top.layer.msg('已关闭', {icon: 5, offset: 'rb', area: ['120px', '80px'], anim: 2});
                 }
-            }else if (obj.event === 'deling') {
-                layer.confirm('确定删除?', {
+            } else if (obj.event === 'deling') {
+                layer.confirm('确定删除 [' + data.exam + '] 所有成绩?', {
                     btn: ['确认', '取消']
                 }, function (index) {
                     layer.close(index);
                     $.ajax({
                         url: "delFirstGradeById",
                         type: "post",
-                        data: {"id":data.id},
+                        data: {"id": data.id},
                         success: function (d) {
                             if (d.flag) {
-                                window.layui.table.reload('inforList');
+                                window.layui.table.reload('achievementFirstList');
                                 window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                             } else {
                                 window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
@@ -350,8 +372,30 @@
                         }
                     });
                 });
-            }else if (obj.event === 'intoing'){
-                add(data.exam+'——初试成绩导入', 'achievementFirstInto?id=' + data.id, 700, 300);
+            } else if (obj.event === 'intoing') {
+                add(data.exam + '——初试成绩导入', 'achievementFirstInto?id=' + data.id, 700, 300);
+            } else if (obj.event === 'inout') {
+                layer.confirm('确定导出 [' + data.exam + '] 所有成绩?', {
+                    btn: ['确认', '取消']
+                }, function (index) {
+                    layer.close(index);
+                    location.href="inout_achieveFirstGrade?id="+data.id+"&name="+data.exam;
+                    /*$.ajax({
+                        url: 'inout_achieveFirstGrade',
+                        type: "post",
+                        data: {"id": data.id, "name": data.exam},
+                        success: function (d) {
+                            if (d.flag) {
+                                window.layui.table.reload('achievementFirstList');
+                                window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                            } else {
+                                window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                            }
+                        }, error: function () {
+                            alert('error');
+                        }
+                    });*/
+                });
             }
         });
 
