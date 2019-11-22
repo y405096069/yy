@@ -53,13 +53,16 @@
 
     </select>
 
-   <!-- <insert id="addSpec" parameterType="com.nfdw.entity.SpecManagement">
-       insert into spec_management (
-       <include refid=""/>
-       )
-       values (
-       <include refid=""/>
-        )
-    </insert>-->
+    <!--搜索学院-->
+    <select id="selectSpecCollect" resultType="com.nfdw.entity.SpecCollect">
+         select * from spec_collect
+     </select>
+
+
+    <select id="selectIdByName" resultType="com.nfdw.entity.SpecCollect">
+        SELECT m.*,s.`spcname`
+        FROM `spec_management` m,spec_collect s
+        where m.collect_id=s.id and m.collect_id=#{collect_id}
+    </select>
 
 </mapper>
