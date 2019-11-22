@@ -4,6 +4,7 @@ import com.nfdw.base.BaseMapper;
 import com.nfdw.base.service.impl.BaseServiceImpl;
 import com.nfdw.entity.Audit;
 import com.nfdw.entity.Examinee_User;
+import com.nfdw.entity.StudentInformation;
 import com.nfdw.mapper.AuditMapper;
 import com.nfdw.service.AuditService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,10 @@ public class AuditServiceImpl extends BaseServiceImpl<Audit, String> implements 
     @Override
     public boolean addAudit(Audit audit) {
         return auditMapper.addAudit(audit)>0;
+    }
+
+    @Override
+    public StudentInformation getUserInfoById(String student_userid) {
+        return auditMapper.getUserInfoById(student_userid);
     }
 }

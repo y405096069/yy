@@ -167,7 +167,7 @@
             , cols: [[
                 {checkbox: true, fixed: true, width: '5%'}
                 , {
-                    field: 'id',
+                    type: 'numbers',
                     title: '序号',
                     fixed: true,
                     width: '5%'
@@ -188,22 +188,22 @@
                 , {field: 'qualified_line', title: '合格线', width: '8%'}
                 , {field: 'first_subjects_name1', title: '科目1名称', width: '8%'}
                 , {field: 'first_subjects_achieve1', title: '科目1成绩', width: '6%'}
-                , {field: 'first_subjects_achieve_ex1', title: '科目1成绩说明', width: '10%'}
+                //, {field: 'first_subjects_achieve_ex1', title: '科目1成绩说明', width: '10%'}
                 , {field: 'first_subjects_name2', title: '科目2名称', width: '8%'}
                 , {field: 'first_subjects_achieve2', title: '科目2成绩', width: '6%'}
-                , {field: 'first_subjects_achieve_ex2', title: '科目2成绩说明', width: '10%'}
+                //, {field: 'first_subjects_achieve_ex2', title: '科目2成绩说明', width: '10%'}
                 , {field: 'first_subjects_name3', title: '科目3名称', width: '8%'}
                 , {field: 'first_subjects_achieve3', title: '科目3成绩', width: '6%'}
-                , {field: 'first_subjects_achieve_ex3', title: '科目3成绩说明', width: '10%'}
+                //, {field: 'first_subjects_achieve_ex3', title: '科目3成绩说明', width: '10%'}
                 , {field: 'first_subjects_name4', title: '科目4名称', width: '8%'}
                 , {field: 'first_subjects_achieve4', title: '科目4成绩', width: '6%'}
-                , {field: 'first_subjects_achieve_ex4', title: '科目4成绩说明', width: '10%'}
+                //, {field: 'first_subjects_achieve_ex4', title: '科目4成绩说明', width: '10%'}
                 , {field: 'first_subjects_name5', title: '科目5名称', width: '8%'}
                 , {field: 'first_subjects_achieve5', title: '科目5成绩', width: '6%'}
-                , {field: 'first_subjects_achieve_ex5', title: '科目5成绩说明', width: '10%'}
+                //, {field: 'first_subjects_achieve_ex5', title: '科目5成绩说明', width: '10%'}
                 , {field: 'first_subjects_name6', title: '科目6名称', width: '8%'}
                 , {field: 'first_subjects_achieve6', title: '科目6成绩', width: '6%'}
-                , {field: 'first_subjects_achieve_ex6', title: '科目6成绩说明', width: '10%'}
+                //, {field: 'first_subjects_achieve_ex6', title: '科目6成绩说明', width: '10%'}
                 , {field: 'first_subjects_total', title: '总分', width: '8%'}
                 , {field: 'remarks', title: '备注', width: '10%'}
             ]],

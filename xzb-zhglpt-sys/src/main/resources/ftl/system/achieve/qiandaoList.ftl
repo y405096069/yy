@@ -129,7 +129,7 @@
             , url: 'showqiandaoList'
             , cols: [[
                 {checkbox: true, fixed: true, width: '5%'}
-                , {field: 'id',title: '序号',width: '5%' }
+                , {type: 'numbers',fixed: true,title: '序号',width: '5%' }
                 , {field: 'id_card', title: '身份证号',width:'12%'}
                 , {field: 'name', title: '姓名',width:'7%'}
                 , {field: 'gender', title: '性别',width:'5%'}

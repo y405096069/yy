@@ -109,7 +109,8 @@
             , cols: [[
                 {checkbox: true, fixed: true, width: '5%'}
                 , {
-                    field: 'id',
+                    type: 'numbers',
+                    fixed: true,
                     title: '序号',
                     width: '5%'
                 }

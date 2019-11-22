@@ -146,8 +146,6 @@
     layui.use(['table', 'upload'], function () {
         var table = layui.table,upload = layui.upload;
 
-
-
         //方法级渲染
         table.render({
             id: 'achievementFirstList',
@@ -156,7 +154,8 @@
             , cols: [[
                 {checkbox: true, fixed: true, width: '5%'}
                 , {
-                    field: 'id',
+                    type: 'numbers',
+                    fixed: true,
                     title: '序号',
                     width: '5%'
                 }

@@ -235,7 +235,7 @@ public class AchievementController {
             System.out.print("_____high_provinces:"+high_provinces);
             System.out.print("_____cut_score:"+cut_score);
             System.out.print("_____cut_rank:"+cut_rank+"}");
-            if(cut_score!=null)
+            if(cut_score!=null || cut_rank!=null)
                 cut_num=0;
             tList = achieveService.selectListByTerm(exam_id,professional_name,cut_num,high_provinces,cut_score,cut_rank);
         } catch (MyException e) {
