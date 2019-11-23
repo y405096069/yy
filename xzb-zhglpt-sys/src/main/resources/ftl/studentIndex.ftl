@@ -259,11 +259,9 @@
                 <div>本业务由广州大学招生办决定本业务由广州大学招生办决定本业务由广州大学招。</div>
             </div>
             <div class="main-button">
-                <button round style="cursor: pointer;">招生章程</button>
-                <button round style="cursor: pointer;">报名公告</button>
-                <button style="white-space: unset;cursor: pointer;padding:8px 25px;width:116px;" round>
-                网上报名操作实例
-                </button>
+                <button round style="cursor: pointer;" onclick="location.href='${re.contextPath}/enrolmentCharter/showEnrolmentCharter';">招生章程</button>
+                <button round style="cursor: pointer;" onclick="">报名公告</button>
+                <button style="white-space: unset;cursor: pointer;padding:8px 25px;width:116px;" round>网上报名操作实例</button>
                 <button round style="cursor: pointer;">手机报名</button>
             </div>
         </div>
@@ -340,6 +338,12 @@
                 }
             });
         });
+    }
+
+
+    function Enrol() {
+
+
     }
 </script> 
 </body>

@@ -129,7 +129,7 @@
             , url: 'show_achievementFirstGradeList'
             , cols: [[
                 {checkbox: true, fixed: true, width: 50}
-                , {field: 'id',title: '序号',width: 80 }
+                , {type: 'numbers',fixed: true,title: '序号',width: 80 }
                 , {field: 'id_card', title: '身份证号',width:196}
                 , {field: 'name', title: '姓名',width:127}
                 , {field: 'gender', title: '性别',width:80}

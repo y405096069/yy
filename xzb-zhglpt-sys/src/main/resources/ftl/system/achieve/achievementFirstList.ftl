@@ -37,8 +37,9 @@
         <div class="layui-inline">
             <select class="layui-input" height="20px" id="specialty_id" autocomplete="off">
                 <option value="">全部</option>
-                <option value="1">音乐</option>
-                <option value="2">体育</option>
+                <#list list2 as list2>
+                    <option value="${list2.id}">${list2.name}</option>
+                </#list>
             </select>
         </div>
         <#--生源地：
@@ -145,8 +146,6 @@
     layui.use(['table', 'upload'], function () {
         var table = layui.table,upload = layui.upload;
 
-
-
         //方法级渲染
         table.render({
             id: 'achievementFirstList',
@@ -155,7 +154,8 @@
             , cols: [[
                 {checkbox: true, fixed: true, width: '5%'}
                 , {
-                    field: 'id',
+                    type: 'numbers',
+                    fixed: true,
                     title: '序号',
                     width: '5%'
                 }
@@ -177,6 +177,7 @@
             , page: true
 
         });
+
         var flagqx = 1;
         var $ = layui.$, active = {
             select: function () {

@@ -20,7 +20,7 @@ public class Audit {                //审核汇总表
     private Integer id;
 
     @Column(name = "u_id")      //用户id
-    private int u_id;
+    private String u_id;
 
     @Column(name = "name")      //姓名
     private String name;
@@ -82,11 +82,11 @@ public class Audit {                //审核汇总表
         this.id = id;
     }
 
-    public int getU_id() {
+    public String getU_id() {
         return u_id;
     }
 
-    public void setU_id(int u_id) {
+    public void setU_id(String u_id) {
         this.u_id = u_id;
     }
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.EnrolmentCharterMapper">
+    <resultMap id="BaseResultMap" type="com.nfdw.entity.EnrolmentCharter">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="caption" jdbcType="VARCHAR" property="caption"/>
+    </resultMap>
+
+    <select id="selectListByPage" parameterType="com.nfdw.entity.EnrolmentCharter" resultMap="BaseResultMap">
+        SELECT *
+        from enrolment_charter
+    </select>
+
+    <select id="selectByPrimaryKey1" parameterType="string" resultMap="BaseResultMap">
+         SELECT * FROM enrolment_charter WHERE id = #{id}
+    </select>
+
+    <select id="getAll" resultMap="BaseResultMap">
+        SELECT * FROM `enrolment_charter` order by create_time desc LIMIT 8
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete  from enrolment_charter where id = #{id}
+    </delete>
+
+    <update id="updateById" parameterType="com.nfdw.entity.EnrolmentCharter">
+        update enrolment_charter set caption = #{caption} ,content=#{content} where id = #{id}
+    </update>
+
+    <insert id="add" parameterType="com.nfdw.entity.EnrolmentCharter">
+        insert into enrolment_charter (
+        caption,
+        content
+        )values (
+        #{caption},
+        #{content}
+        )
+    </insert>
+
+</mapper>

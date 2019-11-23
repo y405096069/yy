@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.OnlineExercisesMapper">
+
+    <resultMap id="BaseResultMap" type="com.nfdw.entity.OnlineExercises">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="caption" jdbcType="VARCHAR" property="caption"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <select id="selectListByPage" parameterType="com.nfdw.entity.OnlineExercises" resultMap="BaseResultMap">
+        SELECT *
+        from online_exercises
+    </select>
+
+    <select id="selectGetByPrimaryKey" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM online_exercises WHERE id = #{id}
+    </select>
+
+    <delete id="deleteById" parameterType="java.lang.String">
+        delete  from online_exercises where id = #{id}
+    </delete>
+
+    <update id="updateById" parameterType="com.nfdw.entity.OnlineExercises">
+        update online_exercises set caption = #{caption} ,content=#{content} where id = #{id}
+    </update>
+
+    <select id="getAll" resultMap="BaseResultMap">
+       SELECT * FROM `online_exercises` order by create_time desc LIMIT 8
+    </select>
+
+
+
+</mapper>

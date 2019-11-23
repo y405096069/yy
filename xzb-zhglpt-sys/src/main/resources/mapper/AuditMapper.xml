@@ -4,7 +4,7 @@
 
     <resultMap id="BaseResultMap" type="com.nfdw.entity.Audit">
         <id column="id" jdbcType="VARCHAR" property="id" />
-        <result column="u_id" jdbcType="INTEGER" property="u_id"/>
+        <result column="u_id" jdbcType="VARCHAR" property="u_id"/>
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="biog_land" jdbcType="VARCHAR" property="biog_land" />
         <result column="exam_id" jdbcType="INTEGER" property="exam_id"/>
@@ -281,6 +281,10 @@
 
     <select id="getExaminee_UserById" resultType="com.nfdw.entity.Examinee_User">
         select * from examinee_user where id=#{id}
+    </select>
+
+    <select id="getUserInfoById" resultType="com.nfdw.entity.StudentInformation">
+        select * from j_student_information where student_userid=#{student_userid}
     </select>
 
 

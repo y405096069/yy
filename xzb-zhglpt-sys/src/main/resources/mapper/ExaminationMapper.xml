@@ -42,8 +42,8 @@
         <id column="update_time" jdbcType="TIMESTAMP" property="update_time"/>
         <id column="exam_time" jdbcType="TIMESTAMP" property="exam_time"/>
         <id column="end_time" jdbcType="TIMESTAMP" property="end_time"/>
-        <id column="create_start_time" jdbcType="VARCHAR" property="create_start_time"/>
-        <id column="create_end_time" jdbcType="VARCHAR" property="create_end_time"/>
+        <id column="create_start_time" jdbcType="TIMESTAMP" property="create_start_time"/>
+        <id column="create_end_time" jdbcType="TIMESTAMP" property="create_end_time"/>
 
 
         <id column="prcie" jdbcType="DOUBLE" property="prcie"/>
@@ -218,8 +218,8 @@
             <if test="prologue_tem != null">
                 prologue_tem,
             </if>
-             <if test="prologue_remarks != null">
-                 prologue_remarks,
+            <if test="prologue_remarks != null">
+                prologue_remarks,
             </if>
 
         </trim>
@@ -377,7 +377,7 @@
             <if test="prologue_tem != null">
                 #{prologue_tem},
             </if>
-             <if test="prologue_remarks != null">
+            <if test="prologue_remarks != null">
                 #{prologue_remarks},
             </if>
         </trim>
@@ -408,10 +408,10 @@
     <select id="queryInfoById" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from crea_exam where id=#{id,javaType=String,jdbcType=VARCHAR};
   </select>
-<!--
-    <update id="uplateById" parameterType="java.lang.String">
-        update crea_exam set <include refid="examColumn"/><include refid="examValue"/> where id = #{id};
-    </update>-->
+    <!--
+        <update id="uplateById" parameterType="java.lang.String">
+            update crea_exam set <include refid="examColumn"/><include refid="examValue"/> where id = #{id};
+        </update>-->
 
 
     <delete id="deleteById" parameterType="java.lang.String">

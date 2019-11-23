@@ -80,9 +80,12 @@
     <update id="updateGrade_switch">
         update crea_exam set grade=#{grade} where id=#{id}
     </update>
+    <update id="updateGrade_switch2">
+        update crea_exam set grade2=#{grade2} where id=#{id}
+    </update>
 
     <insert id="addFirstGrade">
-        insert into achievement_summary(exam_id,id_card,name,gender,high_province,examinee_num,ticket_num
+        insert into achievement_summary(exam_id,exam_name,id_card,name,gender,high_province,examinee_num,ticket_num
         ,wl_subject,professional_code,professional_name,national_rankings,national_same_name,provincial_ranking
         ,provincial_same_name,qualified_mark,qualified_line
         ,first_subjects_total,complex_subjects_total,total_score,remarks
@@ -98,7 +101,7 @@
         ,complex_subjects_id4,complex_subjects_name4,complex_subjects_achieve4,complex_subjects_achieve_ex4
         ,complex_subjects_id5,complex_subjects_name5,complex_subjects_achieve5,complex_subjects_achieve_ex5
         ,complex_subjects_id6,complex_subjects_name6,complex_subjects_achieve6,complex_subjects_achieve_ex6)
-        values(#{exam_id},#{id_card},#{name},#{gender},#{high_province},#{examinee_num},#{ticket_num},#{wl_subject}
+        values(#{exam_id},#{exam_name},#{id_card},#{name},#{gender},#{high_province},#{examinee_num},#{ticket_num},#{wl_subject}
         ,#{professional_code},#{professional_name},#{national_rankings},#{national_same_name},#{provincial_ranking}
         ,#{provincial_same_name},#{qualified_mark},#{qualified_line}
         ,#{first_subjects_total},#{complex_subjects_total},#{total_score},#{remarks}
@@ -119,6 +122,8 @@
     <delete id="delFirstGradeByEId">
         delete from achievement_summary where exam_id=#{id}
     </delete>
+
+
 
 
 </mapper>

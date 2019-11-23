@@ -4,11 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>广州市协作办公室综合管理平台</title>
+    <title>广州大学考试系统</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <link href="" rel="stylesheet">
-    <link rel="shortcut icon" href="${re.contextPath}/plugin/x-admin/images/bizhou.ico" type="image/x-icon"/>
+    <link rel="shortcut" href="${re.contextPath}/plugin/x-admin/images/bizhou.ico" type="image/x-icon"/>
     <link rel="stylesheet" href="${re.contextPath}/plugin/layui/css/layui.css" media="all"/>
     <link rel="stylesheet" href="${re.contextPath}/plugin/plugins/font-awesome/css/font-awesome.min.css" media="all"/>
     <link rel="stylesheet" href="${re.contextPath}/plugin/build/css/app.css" media="all"/>
@@ -43,7 +43,7 @@
 <body class="kit-theme">
 <div class="layui-layout layui-layout-admin kit-layout-admin">
     <div class="layui-header" style="height: 60px;">
-        <div class="layui-logo" style="width:300px;font-size:18px"><b>广州市协作办公室综合管理系统</b></div>
+        <div class="layui-logo" style="width:300px;font-size:18px"><b>广州大学考试系统</b></div>
         <div class="layui-logo kit-logo-mobile" style="padding-left:20px"></div>
         <div class="layui-hide-xs" style="margin-left:500px">
             <ul class="layui-nav layui-layout-left kit-nav" style="margin-left:120px">

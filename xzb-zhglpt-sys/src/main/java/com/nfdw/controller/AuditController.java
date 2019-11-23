@@ -48,9 +48,10 @@ public class AuditController {          ////审核管理
     public String updateAudit(String id, Model model) {
         if (StringUtils.isNotEmpty(id)) {
             Audit audit = auditService.getAuditById(id);
-            Examinee_User e_user = auditService.getExaminee_UserById(audit.getU_id());
+            StudentInformation stin =auditService.getUserInfoById(audit.getU_id());
+            //Examinee_User e_user = auditService.getExaminee_UserById(audit.getU_id());
             model.addAttribute("audit", audit);
-            model.addAttribute("e_user", e_user);
+            model.addAttribute("e_user", stin);
         }
         return "system/audit/update-audit";
     }
@@ -66,38 +67,60 @@ public class AuditController {          ////审核管理
             jsonUtil.setMsg("获取数据失败");
             return jsonUtil;
         }
-
         try {
             Date date = new Date();
-            audit.setAudit_status("已审核");
             audit.setAudit_time(date);
+            boolean flag = false;
             if (audit.getAudit_link().equals("交费前")){                     //资料环节
-                if (audit.getInfo_collect_status().equals("审核通过")){     //信息采集
-                    if(audit.getEnroll_status().equals("审核通过")){
-                        audit.setPay_status("待支付");
-                        audit.setEnroll_status("等待缴费");
-                    }else{
-                        audit.setEnroll_status("审核不通过");
+                if (audit.getAudit_status().equals("待审核")){
+                    if (audit.getEnroll_status().equals("审核通过")){
+                        audit.setInfo_collect_status("已审核");
+                        audit.setAudit_status("待缴费");
+                        flag=true;
+                    }else if (audit.getEnroll_status().equals("审核不通过")){
+                        audit.setInfo_collect_status("已审核");
+                        audit.setAudit_status("已审核");
+                        flag=true;
                     }
-                    auditService.updAudit(audit);
+                }else if(audit.getAudit_status().equals("已审核")){
+                    if (audit.getEnroll_status().equals("审核通过")){
+                        audit.setInfo_collect_status("已审核");
+                        audit.setAudit_status("待缴费");
+                        flag=true;
+                    }else if (audit.getEnroll_status().equals("审核不通过")){
+                        audit.setInfo_collect_status("已审核");
+                        audit.setAudit_status("已审核");
+                        flag=true;
+                    }
                 }
             }else if (audit.getAudit_link().equals("交费后")){
-                if (audit.getPay_status().equals("已支付")){
-                    if(audit.getEnroll_status().equals("审核通过")){
-                        audit.setEnroll_status("报名成功");
-
-                    }else{
-                        audit.setEnroll_status("报名不成功");
+                if (audit.getAudit_status().equals("待审核")){     //已缴费
+                    if (audit.getEnroll_status().equals("审核通过")){
+                        audit.setInfo_collect_status("已审核");
+                        audit.setAudit_status("报名完成");
+                        flag=true;
+                    }else if (audit.getEnroll_status().equals("审核不通过")){
+                        audit.setInfo_collect_status("已审核");
+                        audit.setAudit_status("已审核");
+                        flag=true;
                     }
-                    auditService.updAudit(audit);
+                }else if (audit.getAudit_status().equals("已审核")){
+                    if (audit.getEnroll_status().equals("审核通过")){
+                        audit.setInfo_collect_status("已审核");
+                        audit.setAudit_status("报名完成");
+                        flag=true;
+                    }else if (audit.getEnroll_status().equals("审核不通过")){
+                        audit.setInfo_collect_status("已审核");
+                        audit.setAudit_status("已审核");
+                        flag=true;
+                    }
                 }
             }
-            if (auditService.updAudit(audit)){
-                if(audit.getEnroll_status().equals("报名状态")){
-                    //向成绩表插入
+            if(flag){
+                if (auditService.updAudit(audit)){
+                    jsonUtil.setFlag(true);
+                    jsonUtil.setMsg("审核成功");
                 }
-                jsonUtil.setFlag(true);
-                jsonUtil.setMsg("审核成功");
             }
         } catch (MyException e) {
             e.printStackTrace();
