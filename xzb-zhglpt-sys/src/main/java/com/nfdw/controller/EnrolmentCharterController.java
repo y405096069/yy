@@ -32,8 +32,21 @@ public class EnrolmentCharterController {
     @GetMapping(value = "showEnrolmentCharter")
     /*@RequiresPermissions("user:show")*/
     public String showNotice(Model model) {
-        return "/system/enrolmentCharter/enrolmentCharterList";//报名公告
+        return "/system/enrolmentCharter/enrolmentCharterList";//招生公告
     }
+
+
+
+    //跳学生端主页公告
+    @GetMapping(value = "showStuEnrolmentCharter")
+    /*@RequiresPermissions("user:show")*/
+    public String showStuNotice(Model model) {
+        List<EnrolmentCharter> enroList = enrolmentCharterService.getAll();
+        System.err.println(enroList);
+        model.addAttribute("enroList",enroList);
+        return "/student/enrolmentCharter";//招生公告
+    }
+
 
     @GetMapping(value = "showEnrolmentCharterList")
     @ResponseBody

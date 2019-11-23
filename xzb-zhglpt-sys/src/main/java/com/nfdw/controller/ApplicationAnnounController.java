@@ -36,6 +36,15 @@ public class ApplicationAnnounController {
         return "/system/applicationAnnoun/applicationAnnoun";//报名公告
     }
 
+     //跳学生端首页
+    @GetMapping(value = "showStuApplicationAnnoun")
+    /*@RequiresPermissions("user:show")*/
+    public String showStuNotice(Model model) {
+        List<ApplicationAnnoun> appList = applicationAnnounService.getAll();
+        model.addAttribute("appList",appList);
+        return "/student/applicationAnnoun";//报名公告
+    }
+
     @GetMapping(value = "showApplicationAnnounList")
     @ResponseBody
    /* @RequiresPermissions("user:show")*/
