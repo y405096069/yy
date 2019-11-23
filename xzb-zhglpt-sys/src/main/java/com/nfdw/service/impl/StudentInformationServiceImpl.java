@@ -24,7 +24,7 @@ public class StudentInformationServiceImpl implements StudentInformationService 
     }
 
     @Override
-    public List<Examination> getListExamination(StudentInformation studentInformation, String currentDate) {
-        return studentInformationMapper.getListExamination(studentInformation,currentDate);
+    public List<Examination> getListExamination(String create_start_time,String exam,String name,StudentInformation studentInformation, String currentDate) {
+        return studentInformationMapper.getListExamination(create_start_time,name,exam,studentInformation,currentDate);
     }
 }

@@ -142,8 +142,6 @@
                                 lay-filter="departmentId">
                             <option value="">请选择证件类型</option>
                             <option value="0">身份证</option>
-                            <option value="1">驾驶证</option>
-                            <option value="2">技能证</option>
                         </select>
                     </div>
                 </div>

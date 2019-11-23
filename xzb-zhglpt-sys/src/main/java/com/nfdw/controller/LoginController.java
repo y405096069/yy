@@ -58,8 +58,8 @@ public class LoginController extends BaseLoginController {
     private MenuService menuService;
 
     @GetMapping(value = "")
-    public String loginInit(String type) {
-        return loginCheck(type);
+    public String loginInit(String sysUser,String type) {
+        return loginCheck(sysUser,type);
     }
 
     @GetMapping(value = "goLogin")
@@ -80,8 +80,10 @@ public class LoginController extends BaseLoginController {
 //    }
 
     @GetMapping(value = "/login")
-    public String loginCheck(String type) {
+    public String loginCheck(String username,String type) {
 
+        SysUser user=new SysUser();
+        user.setUsername(username);
         System.out.println("11111111111111111111");
         if(null==type||("").equals(type)){
             System.out.println("1111111222221111111111");
@@ -96,6 +98,24 @@ public class LoginController extends BaseLoginController {
             return "addStudentUser";
         }else if("2".equals(type)){
             return "/login";
+        }else if(("3").equals(type)){
+            String vertifyCode = ToolUtil.getRandomNumString(4);
+            //发送短信
+            SendSms sendSms = new SendSms();
+            try {
+                System.out.println(vertifyCode);
+                sendSms.sendSMS(user.getUsername(),vertifyCode);
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            ShiroKitUtils.setSessionAttr(user.getUsername(),vertifyCode,"60000");
+            if(user.getUsername()!=null){
+                return "1";
+            }else{
+                return "1";
+            }
         }
         return "/login";
     }
@@ -145,24 +165,6 @@ public class LoginController extends BaseLoginController {
                 return "3";
             }else{
                 return "4";
-            }
-        }else if(("3").equals(type)){
-            String vertifyCode = ToolUtil.getRandomNumString(4);
-            //发送短信
-            SendSms sendSms = new SendSms();
-            try {
-                System.out.println(vertifyCode);
-                sendSms.sendSMS(user.getUsername(),vertifyCode);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            ShiroKitUtils.setSessionAttr(user.getUsername(),vertifyCode,"60000");
-            if(user.getUsername()!=null){
-                return "1";
-            }else{
-                return "2";
             }
         }else{
             user.setUser_type(userService.getStudentType(user.getUsername()));
