@@ -33,8 +33,8 @@ public class Examination {
     @Column(name = "specialty_id")
     private String specialty_id;//兼职专业id
 
-    @Column(name = "specialty_name")
-    private String specialty_name;//专业名称
+    @Column(name = "name")
+    private String name;//专业名称
 
     @Column(name = "province_id")
     private String province_id;//生源地限制 省ID 多个用逗号隔开 <list>
@@ -99,14 +99,14 @@ public class Examination {
     private Date update_time;//更新时间
 
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @Column(name = "exam_time")
     private Date exam_time;//报名开始时间
 
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @Column(name = "end_time")
     private Date end_time;//报名结束时间
 
@@ -176,12 +176,12 @@ public class Examination {
         this.specialty_id = specialty_id;
     }
 
-    public String getSpecialty_name() {
-        return specialty_name;
+    public String getName() {
+        return name;
     }
 
-    public void setSpecialty_name(String specialty_name) {
-        this.specialty_name = specialty_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getProvince_id() {

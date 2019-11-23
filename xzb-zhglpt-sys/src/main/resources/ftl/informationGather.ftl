@@ -116,7 +116,7 @@
     </div>
     <div class="layui-content">
      <div style="height: 8%;">
-            <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-primary">返回首页</button>
+            <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-primary" location.href='${re.contextPath}/studentInformation/getStudentIndex';>返回首页</button>
         </div>
         <div id="step_demo" class="step-body">
             <div class="step-header" style="width:80%;overflow: hidden;">

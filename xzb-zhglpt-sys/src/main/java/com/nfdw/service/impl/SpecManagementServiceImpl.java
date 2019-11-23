@@ -4,7 +4,6 @@ import com.nfdw.base.BaseMapper;
 import com.nfdw.base.service.impl.BaseServiceImpl;
 import com.nfdw.entity.SpecCollect;
 import com.nfdw.entity.SpecManagement;
-import com.nfdw.mapper.SpecManagementMapper;
 import com.nfdw.service.SpecManagementService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -5,7 +5,7 @@
  To change this template use File | Settings | File Templates.
  切片管理-->
 <!DOCTYPE html>
-<html>
+<html xmlns:th=“http://www.thymeleaf.org”>
 <head>
     <meta charset="UTF-8">
     <title>选择报考</title>
@@ -106,7 +106,7 @@
     </div>
     <div class="layui-content">
         <div style="height: 8%;">
-            <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-primary">返回首页</button>
+            <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-primary" onclick="location.href='${re.contextPath}/studentInformation/getStudentIndex';">返回首页</button>
         </div>
         <div id="step_demo" class="step-body">
             <div class="step-header" style="width:80%;overflow: hidden;">
@@ -147,10 +147,10 @@
                         <span class="x-red">*</span>考试名称
                     </label>
                     <div class="layui-input-inline">
-                        <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                        <select name="exam" id="exam" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择考试名称</option>
-                            <option value="0">艺术考试</option>
+                            <option th:each="list1:${typeList1}" th:value="${list1.exam}" th:text="${list1.exam }"></option>
                         </select>
                     </div>
                 </div>
@@ -159,11 +159,9 @@
                         <span class="x-red">*</span>专业名称
                     </label>
                     <div class="layui-input-inline">
-                        <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                        <select name="name" id="name" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择专业名称</option>
-                            <option value="0">钢琴</option>
-                            <option value="1">拉丁舞</option>
                         </select>
                     </div>
                 </div>
@@ -173,11 +171,9 @@
                             <span class="x-red">*</span>考试时间
                         </label>
                         <div class="layui-input-inline">
-                            <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                            <select name="create_start_time" id="create_start_time" lay-verify="departmentId"
                                     lay-filter="departmentId">
                                 <option value="">请选择考试时间</option>
-                                <option value="0">08:00-12:00</option>
-                                <option value="1">14:00-17:00</option>
                             </select>
                         </div>
                     </div>
@@ -186,11 +182,9 @@
                             <span class="x-red">*</span>考试地点
                         </label>
                         <div class="layui-input-inline">
-                            <select name="departmentId" id="departmentId" lay-verify="departmentId"
+                            <select name="buiId" id="buiId" lay-verify="departmentId"
                                     lay-filter="departmentId">
                                 <option value="">请选择考试地点</option>
-                                <option value="0">2栋2楼2教室</option>
-                                <option value="1">3栋3楼3教室</option>
                             </select>
                         </div>
                     </div>
@@ -375,6 +369,43 @@
         });
     }
 
+    form.on('select()', function (data) {
+
+        var pId = data.value;// 一级列表的id
+        $.post('${re.contextPath}/studentInformation/getSelectExam', {'exam': exam, 'name':name, 'create_start_time':create_start_time}, function (msg) {// 请求二级列表的数据
+            // console.log(msg);
+            $('#name').empty();// 将二级列表的内容清空
+            for (var i in msg) {// 遍历数据赋值给二级列表的内容
+                var $content = $('<option value="' + msg[i].name + '">' + msg[i].name + '</option>');
+                $('#name').append($content);
+                form.on('select(exam)', function (data1) {
+
+                    var pId1 = data1.value;// 一级列表的id
+                    $.post('${re.contextPath}/studentInformation/getSelectExam', {'exam': exam, 'name':name, 'create_start_time':create_start_time}, function (msg) {// 请求二级列表的数据
+                        // console.log(msg);
+                        $('#create_start_time').empty();// 将二级列表的内容清空
+                        for (var j in msg) {// 遍历数据赋值给二级列表的内容
+                            var $content = $('<option value="' + msg[j].create_start_time + '">' + msg[j].create_start_time + '</option>');
+                            $('#create_start_time').append($content);
+                            var $content1 = $('<option value="' + msg[j].buiId + '">' + msg[j].buiId + '</option>');
+                            $('#buiId').append($content1);
+                            $.post('${re.contextPath}/studentInformation/getSelectExam', {'exam': exam, 'name':name, 'create_start_time':create_start_time}, function (msg) {// 请求二级列表的数据
+                                // console.log(msg);
+                                $('#buiId').empty();// 将二级列表的内容清空
+                                for (var k in msg) {// 遍历数据赋值给二级列表的内容
+                                    var $content2 = $('<option value="' + msg[k].buiId + '">' + msg[k].buiId + '</option>');
+                                    $('#buiId').append($content2);
+                                }
+                                form.render('select');//  注意：数据赋值完成之后必须调用该方法，进行layui的渲染，否则数据出不来
+                            });
+                        }
+                        form.render('select');//  注意：数据赋值完成之后必须调用该方法，进行layui的渲染，否则数据出不来
+                    });
+                });
+            }
+            form.render('select');//  注意：数据赋值完成之后必须调用该方法，进行layui的渲染，否则数据出不来
+        });
+    });
 
 
 </script>

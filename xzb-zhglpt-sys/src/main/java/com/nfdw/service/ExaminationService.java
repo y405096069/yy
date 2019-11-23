@@ -1,10 +1,8 @@
 package com.nfdw.service;
 
 import com.nfdw.base.service.BaseService;
-import com.nfdw.entity.Examination;
-import com.nfdw.entity.Infor_collection;
-import com.nfdw.entity.SpecManagement;
-import com.nfdw.entity.Subject;
+import com.nfdw.entity.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -32,4 +30,5 @@ public interface ExaminationService extends BaseService<Examination,String> {
     List<Subject> selectBySubject();
 
     List<SpecManagement> selectBySpec();
+
 }

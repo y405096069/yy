@@ -49,7 +49,7 @@
     <div id="darkbannerwrap"></div>
 
     <form class="layui-form">
-        <input name="username" placeholder="用户名" autocomplete="off" type="text" lay-verify="username"
+        <input name="username" id="username" placeholder="用户名" autocomplete="off" type="text" lay-verify="username"
                class="layui-input">
         <hr class="hr15">
         <input name="password" lay-verify="password" placeholder="密码" autocomplete="off" type="password"
@@ -96,6 +96,19 @@
             countdown = 60;
             return;
         } else {
+            var username=$("#username").val();
+            var type='3';
+            $.ajax({
+                url:"${re.contextPath}/login",
+                date:{type:type,username:username},
+                type:"get",
+                dateType:"json",
+                cusses:function (data) {
+                    if(data=='1'){
+                        alert("发送成功");
+                    }
+                }
+            })
             obj.attr('disabled',true);
             obj.val("已发送(" + countdown + ")");
             countdown--;

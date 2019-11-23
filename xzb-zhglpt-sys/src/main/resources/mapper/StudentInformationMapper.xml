@@ -13,4 +13,25 @@
   <select id="getUserIDByStudentInformation" resultType="com.nfdw.entity.StudentInformation">
     select * from j_student_information where name=#{name}
   </select>
+  <select id="getListExamination" resultType="com.nfdw.entity.Examination">
+    SELECT c.*,s.`name`
+    FROM crea_exam c
+    LEFT JOIN spec_management s ON c.specialty_id=s.id
+    WHERE c.end_time &gt;= to_date(#{exam_time},'yyyy-MM-dd')
+    AND c.exam_time &lt;= to_date(#{exam_time},'yyyy-MM-dd')
+    AND c.province_id = ${examinee_province}
+    AND c.subject_stint = ${subject_type}
+    <if test="exam!=null and exam!=''">
+      and c.exam = ${exam}
+    </if>
+    <if test="name!=null and name!=''">
+      and s.name = ${name}
+    </if>
+    <if test="create_start_time!=null and create_start_time!=''">
+      AND c.create_start_time=#{create_start_time};
+    </if>
+  </select>
+  <insert id="addStudentExamAudit">
+
+  </insert>
 </mapper>

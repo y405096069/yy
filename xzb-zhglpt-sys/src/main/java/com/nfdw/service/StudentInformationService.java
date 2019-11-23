@@ -23,6 +23,6 @@ public interface StudentInformationService {
     //按学生用户ID查找该学生基本信息
     StudentInformation getUserIDByStudentInformation(String name);
     //按学生用户和当前日期查找报考信息
-    List<Examination> getListExamination(StudentInformation studentInformation,String currentDate);
+    List<Examination> getListExamination(String create_start_time,String exam,String name,StudentInformation studentInformation,String currentDate);
 
 }
