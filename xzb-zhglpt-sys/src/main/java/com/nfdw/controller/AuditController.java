@@ -70,47 +70,25 @@ public class AuditController {          ////审核管理
         try {
             Date date = new Date();
             audit.setAudit_time(date);
+            audit.setInfo_collect_status("已审核");
             boolean flag = false;
             if (audit.getAudit_link().equals("交费前")){                     //资料环节
-                if (audit.getAudit_status().equals("待审核")){
+                //（已审核）审核失败过的考生
+                if (audit.getAudit_status().equals("待审核") || audit.getAudit_status().equals("已审核") || audit.getAudit_status().equals("待缴费")){
                     if (audit.getEnroll_status().equals("审核通过")){
-                        audit.setInfo_collect_status("已审核");
                         audit.setAudit_status("待缴费");
                         flag=true;
                     }else if (audit.getEnroll_status().equals("审核不通过")){
-                        audit.setInfo_collect_status("已审核");
-                        audit.setAudit_status("已审核");
-                        flag=true;
-                    }
-                }else if(audit.getAudit_status().equals("已审核")){
-                    if (audit.getEnroll_status().equals("审核通过")){
-                        audit.setInfo_collect_status("已审核");
-                        audit.setAudit_status("待缴费");
-                        flag=true;
-                    }else if (audit.getEnroll_status().equals("审核不通过")){
-                        audit.setInfo_collect_status("已审核");
                         audit.setAudit_status("已审核");
                         flag=true;
                     }
                 }
             }else if (audit.getAudit_link().equals("交费后")){
-                if (audit.getAudit_status().equals("待审核")){     //已缴费
+                if (audit.getAudit_status().equals("待审核") || audit.getAudit_status().equals("已审核")){     //已缴费
                     if (audit.getEnroll_status().equals("审核通过")){
-                        audit.setInfo_collect_status("已审核");
                         audit.setAudit_status("报名完成");
                         flag=true;
                     }else if (audit.getEnroll_status().equals("审核不通过")){
-                        audit.setInfo_collect_status("已审核");
-                        audit.setAudit_status("已审核");
-                        flag=true;
-                    }
-                }else if (audit.getAudit_status().equals("已审核")){
-                    if (audit.getEnroll_status().equals("审核通过")){
-                        audit.setInfo_collect_status("已审核");
-                        audit.setAudit_status("报名完成");
-                        flag=true;
-                    }else if (audit.getEnroll_status().equals("审核不通过")){
-                        audit.setInfo_collect_status("已审核");
                         audit.setAudit_status("已审核");
                         flag=true;
                     }
@@ -132,29 +110,40 @@ public class AuditController {          ////审核管理
     @Log(desc = "批量审核考生", type = Log.LOG_TYPE.UPDATE)
     @PostMapping(value = "batchUpdateAudit")
     @ResponseBody
-    public JsonUtil batchUpdateAudit(String[] id, String[] status) {
+    public JsonUtil batchUpdateAudit(String[] id, String[] audit_link,String[] audit_status) {
         if (id == null) {
             return JsonUtil.error("获取数据失败");
         }
         JsonUtil j = new JsonUtil();
         int num = 0;
         try {
+            Date date = new Date();
             for (int i=0; i<id.length;i++){
-                if (status[i].equals("1")){
-                    Audit audit = new Audit();
-                    audit.setId(Integer.valueOf(id[i]));
-                    Date date = new Date();
-                    audit.setAudit_time(date);
-                    audit.setAudit_status("已审核");
-                    audit.setEnroll_status("报名成功");
-                    audit.setAudit_reason("无");
-                    auditService.updAudit(audit);
-                    num++;
+                if (audit_link[i].equals("交费前")) {                     //资料环节
+                    if (audit_status[i].equals("待审核") || audit_status[i].equals("已审核")){
+                        Audit audit = new Audit();
+                        audit.setId(Integer.valueOf(id[i]));
+                        audit.setInfo_collect_status("已审核");
+                        audit.setAudit_status("待缴费");
+                        audit.setAudit_time(date);
+                        auditService.updAudit(audit);
+                        num++;
+                    }
+                }else { //交费后
+                    if (audit_status[i].equals("待审核") || audit_status[i].equals("已审核")){
+                        Audit audit = new Audit();
+                        audit.setId(Integer.valueOf(id[i]));
+                        audit.setInfo_collect_status("已审核");
+                        audit.setAudit_status("报名完成");
+                        audit.setAudit_time(date);
+                        auditService.updAudit(audit);
+                        num++;
+                    }
                 }
             }
-            j.setFlag(true);
             if (num>0){
-                j.setMsg("批量审批成功");
+                j.setFlag(true);
+                j.setMsg("批量审批成功,");
             }
         } catch (MyException e) {
             j.setMsg("批量审批失败");

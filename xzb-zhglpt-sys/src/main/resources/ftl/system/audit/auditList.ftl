@@ -264,25 +264,41 @@
                     layer.msg('请至少选择一行编辑,已选[' + data.length + ']行', {icon: 5});
                     return false;
                 }
-
                 layer.confirm('确认 批量审核操作?', {
                     btn: ['确认', '取消']
                 }, function (index) {
                     layer.close(index);
                     var id=[];
-                    var status=[];
+                    var audit_link=[];
+                    var audit_status=[];
+                    //var status=[];
                     for (var i=0;i<data.length;i++){
                         id.push(data[i].id);
-                        var num = 1;
+                        /*var num = 1;
                         if(data[i].enroll_status == "报名成功" || data[i].enroll_status == "报名不成功"){
                             num=2;
                         }
                         status.push(num);
-
-                        //toolDelByFlag(data[i].id,true, 'auditList');
-                        //batchUpdateAudit(id, 'auditList');
+                        toolDelByFlag(data[i].id,true, 'auditList');*/
+                        audit_link.push(data[i].audit_link);
+                        audit_status.push(data[i].audit_status);
                     }
-                    batchUpdateAudit(id,status, 'auditList');  //批量审核
+                    $.ajax({
+                        url: "batchUpdateAudit",
+                        type: "post",
+                        data: {"id": id, "audit_link": audit_link,"audit_status":audit_status},
+                        success: function (d) {
+                            if (d.flag) {
+                                window.layui.table.reload('auditList');
+                                window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                            } else {
+                                window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                            }
+                        }, error: function () {
+                            layer.alert('error');
+                        }
+                    });
+                    //batchUpdateAudit(id,status, 'auditList');  //批量审核
                 });
 
                 //layerAjax('batchUpdateAudit', data.field, 'auditList');
@@ -355,21 +371,13 @@
 
                 if (oDate1.getTime() <= oDate2.getTime()){          //是否截止
                     if(data.audit_link =='交费前'){
-
-                        if(data.audit_status == '待审核') {
+                        if(data.audit_status == '待审核' || data.audit_status == '已审核' || data.audit_status == '待缴费') {
                             detail('审核考生', 'updateAudit?id=' + data.id, 1150, 620);
-                        }else if(data.audit_status == '已审核') {
-                            detail('审核考生', 'updateAudit?id=' + data.id, 1150, 620);
-                        }else if(data.audit_status == '待缴费') {
-                            window.top.layer.msg('考生未缴费', {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                         }else {
                             window.top.layer.msg('已报名成功', {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                         }
-
                     }else if (data.audit_link =='交费后') {
-                        if (data.audit_status == '待审核'){
-                            detail('审核考生', 'updateAudit?id=' + data.id, 1150, 620);
-                        }else if(data.audit_status == '已审核'){
+                        if (data.audit_status == '待审核' || data.audit_status == '已审核' || data.audit_status == '已审核'){
                             detail('审核考生', 'updateAudit?id=' + data.id, 1150, 620);
                         }else if(data.audit_status == '待缴费'){
                             window.top.layer.msg('考生未缴费', {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});

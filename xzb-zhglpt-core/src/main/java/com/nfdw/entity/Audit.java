@@ -24,8 +24,9 @@ public class Audit {                //审核汇总表
 
     @Column(name = "name")      //姓名
     private String name;
-    @Column(name = "biog_land")  //生源地
+    @Column(name = "biog_land")  //省份
     private String biog_land;
+
     @Column(name = "exam_id")
     private int exam_id;
     @Column(name = "exam_name")     //考试名称
@@ -34,6 +35,21 @@ public class Audit {                //审核汇总表
     private int major_id;
     @Column(name = "major")     //专业名称
     private String major;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Column(name = "exam_room_startTime")
+    private Date exam_room_startTime;          //考场开始时间
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Column(name = "exam_room_startTime")
+    private Date exam_room_endTime;          //考场结束时间
+
+    @Column(name = "exam_room_site")            //考场位置
+    private String exam_room_site;
+
+
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
