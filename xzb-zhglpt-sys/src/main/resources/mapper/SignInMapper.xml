@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.SignInMapper">
+
+    <resultMap id="BaseResultMap" type="com.nfdw.entity.SignIn">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="exam_name" jdbcType="VARCHAR" property="examineeName"/>
+        <result column="professional_name" jdbcType="TIMESTAMP" property="applyingMajor"/>
+        <result column="ticket_num" jdbcType="VARCHAR" property="exam"/>
+        <result column="examinee_num" jdbcType="VARCHAR" property="no"/>
+        <result column="qiandao" jdbcType="INTEGER" property="singInCondition"/>
+    </resultMap>
+
+    <select id="getAll"  resultType="com.nfdw.entity.SignIn">
+            select a.name as name,
+            a.exam_name as examineeName,
+            a.professional_name as applyingMajor,
+            a.ticket_num as exam,
+            a.examinee_num as no,
+            c.`status` as singInCondition
+            from achievement_summary as a,crea_examinatio as c
+            where a.exam_id=c.exam_idn
+    </select>
+
+    <select id="selectListByPage" parameterType="com.nfdw.entity.SignIn" resultMap="BaseResultMap">
+        SELECT *
+        from achievement_summary
+        <where>
+            <if test="exam!=null and exam!=''"> and ticket_num like '%${exam}%'</if>
+            <if test="no!=null and no!=''">and examinee_num like '%${no}%'</if>
+        </where>
+    </select>
+
+    <update id="updateById" parameterType="com.nfdw.entity.SignIn">
+        update achievement_summary set qiandao = '1' where id = #{id}
+    </update>
+</mapper>
