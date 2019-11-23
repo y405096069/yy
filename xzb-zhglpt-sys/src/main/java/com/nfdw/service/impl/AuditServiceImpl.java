@@ -50,4 +50,9 @@ public class AuditServiceImpl extends BaseServiceImpl<Audit, String> implements 
     public StudentInformation getUserInfoById(String student_userid) {
         return auditMapper.getUserInfoById(student_userid);
     }
+
+    @Override
+    public String[] selectAllBiog_land() {
+        return auditMapper.selectAllBiog_land();
+    }
 }

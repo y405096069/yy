@@ -23,4 +23,6 @@ public interface AuditMapper extends BaseMapper<Audit,String> {
 
     StudentInformation getUserInfoById(@Param("student_userid")String student_userid);
 
+    String[] selectAllBiog_land();
+
 }

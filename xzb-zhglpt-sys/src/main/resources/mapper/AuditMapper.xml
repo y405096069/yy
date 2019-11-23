@@ -8,6 +8,7 @@
         <result column="u_id" jdbcType="VARCHAR" property="u_id"/>
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="biog_land" jdbcType="VARCHAR" property="biog_land" />
+        <result column="examinee_number" jdbcType="VARCHAR" property="examinee_number" />
         <result column="exam_id" jdbcType="INTEGER" property="exam_id"/>
         <result column="exam_name" jdbcType="VARCHAR" property="exam_name" />
         <result column="major_id" jdbcType="INTEGER" property="major_id"/>
@@ -67,7 +68,9 @@
         <if test="name != null and name != ''">
             and name like CONCAT('%',#{name},'%')
         </if>
-
+        <if test="examinee_number != null and examinee_number != ''">
+            and examinee_number like CONCAT('%',#{examinee_number},'%')
+        </if>
     </select>
 
     <select id="getAuditById" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -90,6 +93,9 @@
             </if>
             <if test="biog_land!=null">
                 biog_land,
+            </if>
+            <if test="examinee_number!=null">
+                examinee_number,
             </if>
             <if test="exam_id!=null">
                 exam_id,
@@ -171,6 +177,9 @@
             <if test="biog_land!=null">
                 #{biog_land},
             </if>
+            <if test="examinee_number!=null">
+                #{examinee_number},
+            </if>
             <if test="exam_id!=null">
                 #{exam_id},
             </if>
@@ -248,6 +257,9 @@
             </if>
             <if test="biog_land!=null">
                 biog_land=#{biog_land},
+            </if>
+            <if test="examinee_number!=null">
+                examinee_number=#{examinee_number},
             </if>
             <if test="exam_id!=null">
                 exam_id=#{exam_id},
@@ -337,5 +349,8 @@
         select * from j_student_information where student_userid=#{student_userid}
     </select>
 
+    <select id="selectAllBiog_land" resultType="java.lang.String">
+        select biog_land from t_audit GROUP BY biog_land
+    </select>
 
 </mapper>

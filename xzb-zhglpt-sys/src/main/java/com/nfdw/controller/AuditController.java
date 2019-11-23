@@ -3,10 +3,14 @@ package com.nfdw.controller;
 import com.nfdw.core.annotation.Log;
 import com.nfdw.entity.*;
 import com.nfdw.exception.MyException;
+import com.nfdw.service.AchievementService;
 import com.nfdw.service.AuditService;
 import com.nfdw.service.Infor_CollectionService;
+import com.nfdw.service.SpecManagementService;
 import com.nfdw.util.JsonUtil;
 import com.nfdw.util.ReType;
+import com.nfdw.utils.ExportAuditToExcel;
+import com.nfdw.utils.ExportToExcel;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
@@ -33,8 +38,20 @@ public class AuditController {          ////审核管理
     @Autowired
     Infor_CollectionService inforService;
 
+    @Autowired
+    AchievementService acService;
+
+    @Autowired
+    SpecManagementService specService;
+
     @GetMapping(value = "auditList")
     public String showUser(Model model) {
+        List<Examination> list = acService.selectListByPage(null);//考试列表
+        model.addAttribute("list",list);
+        List<SpecManagement> list2 = specService.selectListByPage(null);//专业列表
+        model.addAttribute("list2",list2);
+        String[] list3 = auditService.selectAllBiog_land();   //生源地列表
+        model.addAttribute("list3",list3);
         return "/system/audit/auditList";
     }
 
@@ -111,7 +128,7 @@ public class AuditController {          ////审核管理
     @PostMapping(value = "batchUpdateAudit")
     @ResponseBody
     public JsonUtil batchUpdateAudit(String[] id, String[] audit_link,String[] audit_status) {
-        if (id == null) {
+        if (id ==null) {
             return JsonUtil.error("获取数据失败");
         }
         JsonUtil j = new JsonUtil();
@@ -151,6 +168,25 @@ public class AuditController {          ////审核管理
             e.printStackTrace();
         }
         return j;
+    }
+
+    @ApiOperation(value = "/inout_Audit", httpMethod = "POST", notes = "导出")
+    @RequestMapping(value = "inout_Audit")      //导出
+    @ResponseBody
+    public JsonUtil inout_Audit( HttpServletResponse response) {
+
+        List<Audit> tList= auditService.selectListByPage(null);
+        JsonUtil jsonUtil = new JsonUtil();
+
+        try{
+            ExportAuditToExcel.exportWhiteList("审核汇总表", tList, response);
+            jsonUtil.setFlag(true);
+            jsonUtil.setMsg("导出成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonUtil.setMsg("发生错误,导出失败");
+        }
+        return jsonUtil;
     }
 
 

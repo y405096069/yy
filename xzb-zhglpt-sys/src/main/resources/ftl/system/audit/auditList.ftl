@@ -29,45 +29,35 @@
         <div class="layui-inline">
             <select class="layui-input" height="20px" id="exam_name" autocomplete="off">
                 <option value="">全部</option>
-                <option value="篮球考试">篮球考试</option>
-                <option value="美术考试">美术考试</option>
-                <option value="33000">33000</option>
+                <#list list as list>
+                    <option value="${list.id}">${list.exam}</option>
+                </#list>
             </select>
         </div>
         生源地：
         <div class="layui-inline">
             <select class="layui-input" height="20px" id="biog_land" autocomplete="off">
                 <option value="">全部</option>
-                <option value="上海">上海</option>
-                <option value="广州">广州</option>
-                <option value="香港">香港</option>
-                <option value="深圳">深圳</option>
+                <#list list3 as list3>
+                    <option value="${list3}">${list3}</option>
+                </#list>
             </select>
         </div>
         报考专业：
         <div class="layui-inline">
             <select class="layui-input" height="20px" id="major" autocomplete="off">
                 <option value="">全部</option>
-                <option value="体育">体育类</option>
-                <option value="艺术">艺术类</option>
-                <option value="330">330</option>
-            </select>
-        </div>
-        审核状态：
-        <div class="layui-inline">
-            <select class="layui-input" height="20px" id="audit_status" autocomplete="off">
-                <option value="">全部</option>
-                <option value="待审核">待审核</option>
-                <option value="已审核">已审核</option>
+                <#list list2 as list2>
+                    <option value="${list2.name}">${list2.name}</option>
+                </#list>
             </select>
         </div>
         缴费状态：
         <div class="layui-inline">
             <select class="layui-input" height="20px" id="pay_status" autocomplete="off">
                 <option value="">全部</option>
-                <option value="支付失败">支付失败</option>
-                <option value="支付成功">支付成功</option>
-                <option value="待支付">待支付</option>
+                <option value="待缴费">待缴费</option>
+                <option value="已缴费">已缴费</option>
             </select>
         </div>
         审核资料环节：
@@ -80,15 +70,21 @@
         </div>
         报名状态：
         <div class="layui-inline">
-            <select class="layui-input" height="20px" id="enroll_status" autocomplete="off">
+            <select class="layui-input" height="20px" id="audit_status" autocomplete="off">
                 <option value="">全部</option>
+                <option value="待审核">待审核</option>
+                <option value="已审核">已审核</option>
+                <option value="待缴费">待缴费</option>
                 <option value="报名完成">报名完成</option>
-                <option value="报名不完成">报名不完成</option>
             </select>
         </div>
         考生姓名：
         <div class="layui-inline">
             <input class="layui-input" height="20px" id="name" autocomplete="off">
+        </div>
+        考生号：
+        <div class="layui-inline">
+            <input class="layui-input" height="20px" id="examinee_number" autocomplete="off">
         </div>
         <#--考试：
         <div class="layui-inline">
@@ -113,7 +109,10 @@
             <i class="layui-icon">&#xe605;</i>全选
         </button>
         <button class="layui-btn layui-btn-normal" data-type="batch">
-            <i class="layui-icon">&#xe608;</i>批量审核
+            <i class="layui-icon">&#xe608;</i>批量审核通过
+        </button>
+        <button class="layui-btn layui-btn-normal" data-type="export">
+            <i class="layui-icon">&#xe608;</i>导出全部
         </button>
       <#--<@shiro.hasPermission name="user:select">
       <button class="layui-btn layui-btn-normal" data-type="add">
@@ -146,9 +145,6 @@
 <@shiro.hasPermission name="user:del">
   <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 </@shiro.hasPermission>-->
-</script>
-<script type="text/html" id="switchTpl">
-    <input type="checkbox" name="sex" lay-skin="switch" lay-text="女|男" lay-filter="sexDemo">
 </script>
 <script>
     document.onkeydown = function (e) { // 回车提交表单
@@ -198,15 +194,15 @@
         var flagqx = 1;
         var $ = layui.$, active = {
             select: function () {
-                var name = $('#name').val();
+
                 var exam_name = $('#exam_name').val();
                 var biog_land = $('#biog_land').val();
                 var major = $('#major').val();
                 var audit_status = $('#audit_status').val();
                 var pay_status = $('#pay_status').val();
                 var audit_link = $('#audit_link').val();
-                var enroll_status = $('#enroll_status').val();
-                var info_collect_status =  $('#info_collect_status').val();
+                var name = $('#name').val();
+                var examinee_number =  $('#examinee_number').val();
                 console.info(name);
                 table.reload('auditList', {
                     where: {
@@ -216,20 +212,21 @@
                         audit_status: audit_status,
                         pay_status: pay_status,
                         audit_link: audit_link,
-                        enroll_status: enroll_status,
-                        name: name
+                        name: name,
+                        examinee_number: examinee_number
                     }
                 });
             },
             reload: function () {
-                $('#name').val('');
+
                 $('#exam_name').val('');
                 $('#biog_land').val('');
                 $('#major').val('');
                 $('#audit_status').val('');
                 $('#pay_status').val('');
                 $('#audit_link').val('');
-                $('#enroll_status').val('');
+                $('#name').val('');
+                $('#examinee_number').val('');
                 table.reload('auditList', {
                     where: {
                         exam_name: null,
@@ -238,8 +235,8 @@
                         audit_status: null,
                         pay_status: null,
                         audit_link: null,
-                        enroll_status: null,
-                        name: null
+                        name: null,
+                        examinee_number: null
                     }
                 });
             },
@@ -256,7 +253,14 @@
                 }*/
                 //form.render('checkbox');
             },
-
+            export: function () {
+                layer.confirm('确定导出信息?', {
+                    btn: ['确认', '取消']
+                }, function (index) {
+                    layer.close(index);
+                    location.href="inout_Audit";
+                });
+            },
             batch: function () {
                 var checkStatus = table.checkStatus('auditList')
                     , data = checkStatus.data;
@@ -271,22 +275,22 @@
                     var id=[];
                     var audit_link=[];
                     var audit_status=[];
-                    //var status=[];
+                    var end_time=[];
                     for (var i=0;i<data.length;i++){
-                        id.push(data[i].id);
-                        /*var num = 1;
-                        if(data[i].enroll_status == "报名成功" || data[i].enroll_status == "报名不成功"){
-                            num=2;
+                        var oDate1 = new Date();
+                        var oDate2 = new Date(data[i].end_time);
+                        if (oDate1.getTime() <= oDate2.getTime()) {          // 是否截止
+                            id.push(data[i].id);
+                            audit_link.push(data[i].audit_link);
+                            audit_status.push(data[i].audit_status);
+                            end_time.push(data[i].end_time);
                         }
-                        status.push(num);
-                        toolDelByFlag(data[i].id,true, 'auditList');*/
-                        audit_link.push(data[i].audit_link);
-                        audit_status.push(data[i].audit_status);
                     }
                     $.ajax({
                         url: "batchUpdateAudit",
                         type: "post",
-                        data: {"id": id, "audit_link": audit_link,"audit_status":audit_status},
+                        data: {"id": id, "audit_link": audit_link,"audit_status":audit_status,"end_time":end_time},
+                        traditional:true,
                         success: function (d) {
                             if (d.flag) {
                                 window.layui.table.reload('auditList');
@@ -298,7 +302,6 @@
                             layer.alert('error');
                         }
                     });
-                    //batchUpdateAudit(id,status, 'auditList');  //批量审核
                 });
 
                 //layerAjax('batchUpdateAudit', data.field, 'auditList');
@@ -321,40 +324,7 @@
                 }
                 detail('查看用户信息', 'updateUser?id=' + data[0].id, 700, 450);
             },
-            /*changePwd:function(){
-              var checkStatus = table.checkStatus('userList')
-                  , data = checkStatus.data;
-              if (data.length != 1) {
-                layer.msg('请选择一个用户,已选['+data.length+']行', {icon: 5});
-                return false;
-              }
-              rePwd('修改密码','goRePass?id='+data[0].id,500,350);
-            }*/
 
-            changePwd: function () {
-                var checkStatus = table.checkStatus('userList')
-                        , data = checkStatus.data;
-                if (data.length != 1) {
-                    layer.msg('请选择一个用户,已选[' + data.length + ']行', {icon: 5});
-                    return false;
-                }
-                $.ajax({
-                    url: 'resetPassword',
-                    type: 'get',
-                    data: 'id=' + data[0].id,
-                    async: false, dataType: "json", traditional: true,
-                    success: function (json) {
-                        /*var index = parent.layer.getFrameIndex(window.name);
-                        window.parent.layui.table.reload('userList');*/
-                        window.top.layer.msg(json.msg, {icon: 6, offset: 'rb', area: ['120px', '100px'], anim: 2});
-                    }, error: function () {
-                        var index = parent.layer.getFrameIndex(window.name);
-                        parent.layer.close(index);
-                        window.top.layer.msg('请求失败', {icon: 5, offset: 'rb', area: ['120px', '80px'], anim: 2});
-                    }
-                });
-                return false;
-            }
         };
 
         //监听表格复选框选择

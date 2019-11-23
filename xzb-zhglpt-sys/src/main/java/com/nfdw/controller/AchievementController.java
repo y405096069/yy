@@ -131,6 +131,7 @@ public class AchievementController {
 
         HttpSession session = request.getSession();
         String ex_id= (String)session.getAttribute("achieveGrade_eid");
+        acService.delFirstGradeByEId(Integer.valueOf(ex_id));       //删除所有
 
         if(file.isEmpty()){
             return JsonUtil.error("获取数据失败");
@@ -176,7 +177,7 @@ public class AchievementController {
         return jsonUtil;
     }
 
-    //@ApiOperation(value = "/inout_achieveFirstGrade", httpMethod = "POST", notes = "导出")
+    @ApiOperation(value = "/inout_achieveFirstGrade", httpMethod = "POST", notes = "导出")
     @RequestMapping(value = "inout_achieveFirstGrade")      //导出
     @ResponseBody
     public JsonUtil inout_achieveFirstGrade(String id, String name, HttpServletResponse response) {
@@ -459,12 +460,6 @@ public class AchievementController {
     }
 
 
-
-
-
-
-
-
     /*
         复试入围成绩管理 -        end
      */
@@ -477,7 +472,6 @@ public class AchievementController {
     public String qiandaoList(String id, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.setAttribute("achieveGrade_eid",id);        //保存考试id
-
         return "/system/achieve/qiandaoList";
     }
 
