@@ -19,7 +19,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -33,7 +32,7 @@ public class StudentInformationController {
     private static final long serialVersionUID = 1L;
 
     // 上传文件存储目录
-    private static final String UPLOAD_DIRECTORY = "app";
+    private static final String UPLOAD_DIRECTORY = "temp-rainy";
 
     // 上传配置
     private static final int MEMORY_THRESHOLD   = 1024 * 1024 * 3;  // 3MB
@@ -58,16 +57,20 @@ public class StudentInformationController {
         CurrentUser user = ShiroUtil.getCurrentUse();
         StudentInformation studentInformation=studentInformationService.getUserIDByStudentInformation(user.getUsername());
         if(studentInformation!=null){
-            model.addAttribute("BasicInformation",studentInformation);
+            model.addAttribute("studentInformation",studentInformation);
         }
         return "basicInformation";
     }
     @Log(desc = "跳转到网上报考页面")
     @GetMapping(value = "/getOnlineExamination")
     public String getOnlineExamination(Model model){
+        CurrentUser user = ShiroUtil.getCurrentUse();
+        StudentInformation studentInformation=studentInformationService.getUserIDByStudentInformation(user.getUsername());
+        if(studentInformation!=null){
+            model.addAttribute("studentInformation",studentInformation);
+        }
         return "onlineExamination";
     }
-
     @Log(desc = "跳转到报考查询")
     @GetMapping(value = "/getExamQuary")
     public String getExamQuary(Model model){
@@ -109,21 +112,41 @@ public class StudentInformationController {
         return "informationGather";
     }
     @Log(desc = "跳转到选择报考")
-    @RequestMapping ("/getSelectExam")
-    public String getSelectExam(String exam,String name,String create_start_time,Model model){
+    @RequestMapping(value="/getSelectExam")
+    public String getSelectExam(String exam,String name,Date create_start_time,Model model){
         CurrentUser user = ShiroUtil.getCurrentUse();
-        System.out.print(user.getUsername()+"1111111111111111111111111111111111111111111111111111111111");
+
         StudentInformation studentInformation=studentInformationService.getUserIDByStudentInformation(user.getUsername());
         System.out.print(studentInformation.getExaminee_province()+"111111111111");
-        studentInformation.getExaminee_education();
-        Date date = new Date();
-        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
-        List<Examination> examinationList=studentInformationService.getListExamination(create_start_time,exam,name,studentInformation,date.toString());
+//        Date currentTime = new Date();
+////改变输出格式（自己想要的格式）
+//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+////得到字符串时间
+//        String s8 = formatter.format(currentTime);
+        studentInformation.setCurrentDate(new Date());
+        if(!"".equals(studentInformation.getExamName())&&null!=studentInformation.getExamName()){
+            studentInformation.setExamName(exam);
+        }
+        if(!"".equals(studentInformation.getSubjectName())&&null!=studentInformation.getSubjectName()){
+            studentInformation.setSubjectName(name);
+        }
+        if(!"".equals(studentInformation.getCreate_start_time())&&null!=studentInformation.getCreate_start_time()){
+            studentInformation.setCreate_start_time(create_start_time);
+        }
+        List<Examination> examinationList=studentInformationService.getListExamination(studentInformation.getCurrentDate(),studentInformation.getExaminee_province(),
+                studentInformation.getSubject_type(),exam,name,create_start_time);
+        for (Examination e:examinationList
+             ) {
+            System.out.print(e.getExam()+"111111111111");
+        }
         model.addAttribute("examinationList",examinationList);
         return "selectExam";
     }
     @PostMapping(value= "addStudentInformations")
     public String addStudentInformations(HttpSession session, StudentInformation studentInformation, @RequestParam("file")MultipartFile file,Model model, HttpServletRequest request) throws IOException {
+        studentInformation.setStudent_id(UUID.randomUUID().toString().replaceAll("\\-", ""));
+        CurrentUser user = ShiroUtil.getCurrentUse();
+        if(studentInformationService.getStudentInfoConunt(user.getUsername())>1){
         if("".equals(studentInformation.getCertificate_type())||null==studentInformation.getCertificate_type()){
             model.addAttribute("rel","证件类型不能为空!");
             return "basicInformation";
@@ -234,16 +257,195 @@ public class StudentInformationController {
 
             }
         }
+
+//        if (file.isEmpty()) {
+//            System.out.println("文件为空空");
+//        }
+//        String fileName = file.getOriginalFilename();  // 文件名
+//        String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
+//        String filePath = "D://temp-rainy//"; // 上传后的路径
+//        fileName = UUID.randomUUID() + suffixName; // 新文件名
+//        File dest = new File(filePath + fileName);
+//        if (!dest.getParentFile().exists()) {
+//            dest.getParentFile().mkdirs();
+//        }
+//        try {
+//            file.transferTo(dest);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        String filename = "/temp-rainy/" + fileName;
+//        studentInformation.setPhotograph(filename);
+
+
+
+            SysUser sysUser=userService.getSysUserByUsername(user.getUsername());
+            studentInformation.setStudent_userid(sysUser.getId());
+            if(studentInformationService.addStudentInformation(studentInformation)>0){
+                model.addAttribute("rel","添加成功！");
+                if(studentInformation!=null){
+                    model.addAttribute("studentInformation",studentInformation);
+                }
+                return "onlineExamination";
+            }else{
+                model.addAttribute("rel","添加失败！");
+                return "basicInformation";
+            }
+        }else{
+            return "redirect:getSelectExam";
+        }
+    }
+    @PostMapping(value= "addStudentInformationss")
+    public String addStudentInformationss(HttpSession session, StudentInformation studentInformation, @RequestParam("file")MultipartFile file,Model model, HttpServletRequest request) throws IOException {
         studentInformation.setStudent_id(UUID.randomUUID().toString().replaceAll("\\-", ""));
         CurrentUser user = ShiroUtil.getCurrentUse();
-        SysUser sysUser=userService.getSysUserByUsername(user.getUsername());
-        studentInformation.setStudent_userid(sysUser.getId());
-        if(studentInformationService.addStudentInformation(studentInformation)>0){
-            model.addAttribute("rel","添加成功！");
-            return "onlineExamination";
+        if(studentInformationService.getStudentInfoConunt(user.getUsername())>1){
+            if("".equals(studentInformation.getCertificate_type())||null==studentInformation.getCertificate_type()){
+                model.addAttribute("rel","证件类型不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getCertificate_number())||null==studentInformation.getCertificate_number()){
+                model.addAttribute("rel","证件号码不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getNation())||null==studentInformation.getNation()){
+                model.addAttribute("rel","民族不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getName())||null==studentInformation.getName()){
+                model.addAttribute("rel","姓名不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getBirthdate())||null==studentInformation.getBirthdate()){
+                model.addAttribute("rel","出生日期不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getSex())||null==studentInformation.getSex()){
+                model.addAttribute("rel","性别不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getPostal_code())||null==studentInformation.getPostal_code()){
+                model.addAttribute("rel","邮政编码不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getExaminee_type())||null==studentInformation.getExaminee_type()){
+                model.addAttribute("rel","考生类型不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getExaminee_education())||null==studentInformation.getExaminee_education()){
+                model.addAttribute("rel","考生学历不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getExaminee_province())||null==studentInformation.getExaminee_province()){
+                model.addAttribute("rel","考生省份不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getPolitics_status())||null==studentInformation.getPolitics_status()){
+                model.addAttribute("rel","政治面貌不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getGraduate_type())||null==studentInformation.getGraduate_type()){
+                model.addAttribute("1","应往届不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getGraduate_middle())||null==studentInformation.getGraduate_middle()){
+                model.addAttribute("rel","毕业中学不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getExaminee_number())||null==studentInformation.getExaminee_number()){
+                model.addAttribute("rel","考生号码不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getSubject_type())||null==studentInformation.getSubject_type()){
+                model.addAttribute("rel","文理科不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getMember_name())||null==studentInformation.getMember_name()){
+                model.addAttribute("rel","家庭联络员姓名不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getMember_relationship())||null==studentInformation.getMember_relationship()){
+                model.addAttribute("rel","家庭联络员关系不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getMember_occupation())||null==studentInformation.getMember_occupation()){
+                model.addAttribute("rel","家庭联络员职业不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getMember_work())||null==studentInformation.getMember_work()){
+                model.addAttribute("1","家庭联络员工作单位不能为空!");
+                return "onlineExamination";
+            }
+            if("".equals(studentInformation.getMember_phone())||null==studentInformation.getMember_phone()){
+                model.addAttribute("rel","主键不能为空!");
+                return "onlineExamination";
+            }
+
+            //获取存储app文件夹的路径
+            String appPath = session.getServletContext().getRealPath("/app");
+            File appRootDir = new File(appPath);
+            if (!appRootDir.exists()) {
+                System.out.println("存储app的文件夹不存在 appPath= " + appPath);
+                appRootDir.mkdirs();
+            } else {
+                System.out.println("存储app的文件夹存在 appPath= " + appPath);
+            }
+            CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
+
+            if (multipartResolver.isMultipart(request)) {
+                MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
+
+                Iterator<String> names = multiRequest.getFileNames();
+                while (names.hasNext()) {
+                    MultipartFile file1 = multiRequest.getFile(names.next().toString());
+                    if (file1 != null) {
+                        File appFile = new File(appRootDir, file1.getOriginalFilename());
+                        file1.transferTo(appFile);
+                        String fileName = file.getOriginalFilename();
+                        // 获取文件的后缀名
+                        //String suffixName = fileName.substring(fileName.lastIndexOf("."));
+                        studentInformation.setPhotograph(appFile.getPath());
+                        System.out.println(appFile.getPath());
+                    }
+
+                }
+            }
+
+//        if (file.isEmpty()) {
+//            System.out.println("文件为空空");
+//        }
+//        String fileName = file.getOriginalFilename();  // 文件名
+//        String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
+//        String filePath = "D://temp-rainy//"; // 上传后的路径
+//        fileName = UUID.randomUUID() + suffixName; // 新文件名
+//        File dest = new File(filePath + fileName);
+//        if (!dest.getParentFile().exists()) {
+//            dest.getParentFile().mkdirs();
+//        }
+//        try {
+//            file.transferTo(dest);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        String filename = "/temp-rainy/" + fileName;
+//        studentInformation.setPhotograph(filename);
+
+
+
+            SysUser sysUser=userService.getSysUserByUsername(user.getUsername());
+            studentInformation.setStudent_userid(sysUser.getId());
+            if(studentInformationService.addStudentInformation(studentInformation)>0){
+                model.addAttribute("rel","添加成功！");
+                if(studentInformation!=null){
+                    model.addAttribute("studentInformation",studentInformation);
+                }
+                return "onlineExamination";
+            }else{
+                model.addAttribute("rel","添加失败！");
+                return "basicInformation";
+            }
         }else{
-            model.addAttribute("rel","添加失败！");
-            return "basicInformation";
+            return "redirect:getSelectExam";
         }
     }
     @RequestMapping(value = "/addVideo")

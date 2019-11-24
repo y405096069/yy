@@ -145,7 +145,10 @@
             </div>
         </div>
         <form class="layui-form" method="post" action="${re.contextPath}/studentInformation/addStudentInformations" enctype="multipart/form-data">
-            <input id="start" type="hidden" data-method="setTop" class="layui-btn" value="${rel}"></input>
+            <input id="start" type="hidden" data-method="setTop" class="layui-btn" value="${certificate_type}"
+                    <#if studentInformation.certificate_type ??>
+                disabled="disabled"
+                    </#if>></input>
             <div class="layui-header">
                 <p>提示:</p>
                 <p>(注：带*符号的项必填)</p>
@@ -161,9 +164,14 @@
                     </label>
                     <div class="layui-input-inline">
                         <select name="certificate_type" id="departmentId" lay-verify="departmentId"
-                                lay-filter="departmentId">
+                                lay-filter="departmentId"  <#if studentInformation.certificate_type ??>
+                            disabled="disabled"
+                                </#if>>
+                            <#if studentInformation.certificate_type ??>
+                                <option value="${studentInformation.certificate_type}">${studentInformation.certificate_type}</option>
+                            </#if>
                             <option value="">请选择证件类型</option>
-                            <option value="0">身份证</option>
+                            <option value="身份证">身份证</option>
                         </select>
                     </div>
                 </div>
@@ -172,8 +180,10 @@
                         <span class="x-red">*</span>证件号码
                     </label>
                     <div class="layui-input-inline w-22">
-                        <input type="text" id="uname" name="certificate_number" lay-verify="username"
-                               autocomplete="off" class="layui-input" placeholder="请输入证件号码">
+                        <input type="text" id="uname" name="certificate_number" lay-verify="username"  <#if studentInformation.certificate_number ??>
+                            disabled="disabled"
+                        </#if>
+                               autocomplete="off" class="layui-input" placeholder="请输入证件号码" value="${studentInformation.certificate_number} ">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -182,10 +192,15 @@
                     </label>
                     <div class="layui-input-inline">
                         <select name="nation" id="departmentId" lay-verify="departmentId"
-                                lay-filter="departmentId">
+                                lay-filter="departmentId" <#if studentInformation.nation ??>
+                            disabled="disabled"
+                                </#if>>
+                            <#if studentInformation.nation ??>
+                                <option value="${studentInformation.nation}">${studentInformation.nation}</option>
+                            </#if>
                             <option value="">请选择民族</option>
-                            <option value="0">汉族</option>
-                            <option value="1">少数民族</option>
+                            <option value="汉族">汉族</option>
+                            <option value="少数民族">少数民族</option>
                         </select>
                     </div>
                 </div>
@@ -196,8 +211,10 @@
                         <span class="x-red">*</span>姓名
                     </label>
                     <div class="layui-input-inline">
-                        <input type="text" id="uname" name="name" lay-verify="username"
-                               autocomplete="off" class="layui-input" placeholder="请输入姓名">
+                        <input type="text" id="uname" name="name" lay-verify="username" <#if studentInformation.name ??>
+                            disabled="disabled"
+                        </#if>
+                               autocomplete="off" class="layui-input" placeholder="请输入姓名" value="${studentInformation.name}">
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -205,7 +222,10 @@
                         <span class="x-red">*</span>出生日期
                     </label>
                     <div class="layui-input-inline w-22">
-                        <input type="text" name="birthdate" class="layui-input" id="test1" placeholder="yyyy-MM-dd">
+                        <input type="text" name="birthdate" class="layui-input" id="test1" placeholder="yyyy-MM-dd" value="${studentInformation.birthdate}"
+                                <#if studentInformation.birthdate ??>
+                            disabled="disabled"
+                                </#if>>
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -214,10 +234,15 @@
                     </label>
                     <div class="layui-input-inline">
                         <select name="sex" id="departmentId" lay-verify="departmentId"
-                                lay-filter="departmentId">
+                                lay-filter="departmentId"  <#if studentInformation.sex ??>
+                            disabled="disabled"
+                                </#if>>
+                            <#if studentInformation.sex ??>
+                                <option value="${studentInformation.sex}">${studentInformation.sex}</option>
+                            </#if>
                             <option value="">请选择性别</option>
-                            <option value="0">男</option>
-                            <option value="1">女</option>
+                            <option value="男">男</option>
+                            <option value="女">女</option>
                         </select>
                     </div>
                 </div>
@@ -229,7 +254,10 @@
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="uname" name="recipient" lay-verify="username"
-                               autocomplete="off" class="layui-input" placeholder="请输入收件人">
+                               autocomplete="off" class="layui-input" placeholder="请输入收件人" value="${studentInformation.recipient}"
+                                <#if studentInformation.recipient ??>
+                            disabled="disabled"
+                                </#if>>
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -238,7 +266,10 @@
                     </label>
                     <div class="layui-input-inline" style="width: 360px;">
                         <input type="text" id="uname" name="street" lay-verify="username"
-                               autocomplete="off" class="layui-input" placeholder="请输入街道详情">
+                               autocomplete="off" class="layui-input" placeholder="请输入街道详情" value="${studentInformation.street}"
+                                <#if studentInformation.street ??>
+                            disabled="disabled"
+                                </#if>>
                     </div>
                 </div>
             </div>
@@ -249,7 +280,10 @@
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="uname" name="postal_code" lay-verify="username"
-                               autocomplete="off" class="layui-input" placeholder="请输入邮政编码">
+                               autocomplete="off" class="layui-input" placeholder="请输入邮政编码" value="${studentInformation.postal_code}"
+                                <#if studentInformation.postal_code ??>
+                            disabled="disabled"
+                                </#if>>
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -258,7 +292,10 @@
                     </label>
                     <div class="layui-input-inline w-22">
                         <input type="text" id="email" name="email" lay-verify="required|email"
-                               autocomplete="off" class="layui-input" placeholder="请输入电子邮箱">
+                               autocomplete="off" class="layui-input" placeholder="请输入电子邮箱" value="${studentInformation.email}"
+                                <#if studentInformation.email ??>
+                            disabled="disabled"
+                                </#if>>
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -267,7 +304,9 @@
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="uname" name="phone" lay-verify="required|phone"
-                               autocomplete="off" class="layui-input" placeholder="请输入本人手机">
+                               autocomplete="off" class="layui-input" placeholder="请输入本人手机" value="${studentInformation.phone}" <#if studentInformation.phone ??>
+                            disabled="disabled"
+                                </#if>>
                     </div>
                 </div>
             </div>
@@ -281,10 +320,15 @@
                     </label>
                     <div class="layui-input-inline">
                         <select name="examinee_type" id="departmentId" lay-verify="departmentId"
-                                lay-filter="departmentId">
+                                lay-filter="departmentId" <#if studentInformation.examinee_type ??>
+                            disabled="disabled"
+                                </#if>>
+                            <#if studentInformation.examinee_type ??>
+                                <option value="${studentInformation.examinee_type}">${studentInformation.examinee_type}</option>
+                            </#if>
                             <option value="">请选择考生类型</option>
-                            <option value="0">高中生</option>
-                            <option value="1">大学生</option>
+                            <option value="高中生">高中生</option>
+                            <option value="大学生">大学生</option>
                         </select>
                     </div>
                 </div>
@@ -294,12 +338,17 @@
                     </label>
                     <div class="layui-input-inline w-22">
                         <select name="examinee_education" id="departmentId" lay-verify="departmentId"
-                                lay-filter="departmentId">
+                                lay-filter="departmentId" <#if studentInformation.examinee_education ??>
+                            disabled="disabled"
+                                </#if>>
+                            <#if studentInformation.examinee_education ??>
+                                <option value="${studentInformation.examinee_education}">${studentInformation.examinee_education}</option>
+                            </#if>
                             <option value="">请选择考生学历</option>
-                            <option value="0">高中</option>
-                            <option value="1">中专</option>
-                            <option value="2">大专</option>
-                            <option value="3">本科</option>
+                            <option value="高中">高中</option>
+                            <option value="中专">中专</option>
+                            <option value="大专">大专</option>
+                            <option value="本科">本科</option>
                         </select>
                     </div>
                 </div>
@@ -309,7 +358,12 @@
                     </label>
                     <div class="layui-input-inline">
                         <select name="examinee_province" id="departmentId" lay-verify="departmentId"
-                                lay-filter="departmentId">
+                                lay-filter="departmentId" <#if studentInformation.examinee_province ??>
+                            disabled="disabled"
+                                </#if>>
+                            <#if studentInformation.examinee_province ??>
+                                <option value="${studentInformation.examinee_province}">${studentInformation.examinee_province}</option>
+                            </#if>
                             <option value="">请选择考生省份</option>
                             <option value ="北京市">北京市 </option>
                             <option value ="天津市">天津市 </option>
@@ -356,11 +410,16 @@
                     </label>
                     <div class="layui-input-inline">
                         <select name="politics_status" id="departmentId" lay-verify="departmentId"
-                                lay-filter="departmentId">
+                                lay-filter="departmentId" <#if studentInformation.politics_status ??>
+                            disabled="disabled"
+                                </#if>>
+                            <#if studentInformation.politics_status ??>
+                                <option value="${studentInformation.politics_status}">${studentInformation.politics_status}</option>
+                            </#if>
                             <option value="">请选择政治面貌</option>
-                            <option value="0">群众</option>
-                            <option value="1">团员</option>
-                            <option value="2">党员</option>
+                            <option value="群众">群众</option>
+                            <option value="团员">团员</option>
+                            <option value="党员">党员</option>
                         </select>
                     </div>
                 </div>
@@ -370,10 +429,15 @@
                     </label>
                     <div class="layui-input-inline w-22">
                         <select name="graduate_type" id="departmentId" lay-verify="departmentId"
-                                lay-filter="departmentId">
+                                lay-filter="departmentId" <#if studentInformation.graduate_type ??>
+                            disabled="disabled"
+                                </#if>>
+                            <#if studentInformation.graduate_type ??>
+                                <option value="${studentInformation.graduate_type}">${studentInformation.graduate_type}</option>
+                            </#if>
                             <option value="">请选择应往届</option>
-                            <option value="0">应届生</option>
-                            <option value="1">往届生</option>
+                            <option value="应届生">应届生</option>
+                            <option value="往届生">往届生</option>
                         </select>
                     </div>
                 </div>
@@ -383,7 +447,10 @@
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="uname" name="graduate_middle" lay-verify="username"
-                               autocomplete="off" class="layui-input" placeholder="请输入毕业中学">
+                               autocomplete="off" class="layui-input" placeholder="请输入毕业中学" value="${studentInformation.graduate_middle}"
+                                <#if studentInformation.graduate_middle ??>
+                            disabled="disabled"
+                                </#if>>
                     </div>
                 </div>
             </div>
@@ -394,7 +461,10 @@
                     </label>
                     <div class="layui-input-inline">
                         <input type="text" id="examineeNumber" lay-filter="inputExaminee" name="examinee_number" lay-verify="inputExaminee"
-                               autocomplete="off" class="layui-input" placeholder="请输入考生号">
+                               autocomplete="off" class="layui-input" placeholder="请输入考生号"  value="${studentInformation.examinee_number}"
+                                <#if studentInformation.examinee_number ??>
+                            disabled="disabled"
+                                </#if>>
                     </div>
                 </div>
                 <div class="layui-inline">
@@ -403,10 +473,15 @@
                     </label>
                     <div class="layui-input-inline w-22">
                         <select name="subject_type" id="departmentId" lay-verify="departmentId"
-                                lay-filter="departmentId">
+                                lay-filter="departmentId" <#if studentInformation.subject_type ??>
+                            disabled="disabled"
+                                </#if>>
+                            <#if studentInformation.subject_type ??>
+                                <option value="${studentInformation.subject_type}">${studentInformation.subject_type}</option>
+                            </#if>
                             <option value="">请选择文理科</option>
-                            <option value="0">文科</option>
-                            <option value="1">理科</option>
+                            <option value="文科">文科</option>
+                            <option value="理科">理科</option>
                         </select>
                     </div>
                 </div>
@@ -422,7 +497,10 @@
                         </label>
                         <div class="layui-input-inline">
                             <input type="text" id="uname" name="member_name" lay-verify="username"
-                                   autocomplete="off" class="layui-input" placeholder="请输入姓名">
+                                   autocomplete="off" class="layui-input" placeholder="请输入姓名" value="${studentInformation.member_name}"
+                                    <#if studentInformation.member_name ??>
+                                disabled="disabled"
+                                    </#if>>
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -431,7 +509,10 @@
                         </label>
                         <div class="layui-input-inline w-22">
                             <input type="text" id="uname" name="member_relationship" lay-verify="username"
-                                   autocomplete="off" class="layui-input" placeholder="请输入关系">
+                                   autocomplete="off" class="layui-input" placeholder="请输入关系" value="${studentInformation.member_relationship}"
+                                    <#if studentInformation.member_relationship ??>
+                                disabled="disabled"
+                                    </#if>>
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -440,7 +521,10 @@
                         </label>
                         <div class="layui-input-inline">
                             <input type="text" id="uname" name="member_occupation" lay-verify="username"
-                                   autocomplete="off" class="layui-input" placeholder="请输入职业">
+                                   autocomplete="off" class="layui-input" placeholder="请输入职业" value="${studentInformation.member_occupation}"
+                                    <#if studentInformation.member_occupation ??>
+                                disabled="disabled"
+                                    </#if>>
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -449,7 +533,10 @@
                         </label>
                         <div class="layui-input-inline">
                             <input type="text" id="uname" name="member_phone" lay-verify="required|phone"
-                                   autocomplete="off" class="layui-input" placeholder="请输入手机号码">
+                                   autocomplete="off" class="layui-input" placeholder="请输入手机号码" value="${studentInformation.member_phone}"
+                                    <#if studentInformation.member_phone ??>
+                                disabled="disabled"
+                                    </#if>>
                         </div>
                     </div>
                     <div class="layui-inline">
@@ -458,7 +545,10 @@
                         </label>
                         <div class="layui-input-inline" style="width: 360px;">
                             <input type="text" id="uname" name="member_work" lay-verify="username"
-                                   autocomplete="off" class="layui-input" placeholder="请输入工作单位">
+                                   autocomplete="off" class="layui-input" placeholder="请输入工作单位" value="${studentInformation.member_work}"
+                                    <#if studentInformation.member_work ??>
+                                disabled="disabled"
+                                    </#if>>
                         </div>
                     </div>
                 </div>
@@ -470,7 +560,7 @@
                 </fieldset>
                 <div class="layui-input-inline">
                     <div id="demo2" style="margin-top: 20px;margin-left: 50px">
-                        <img src="${servletPath}/plugin/x-admin/images/bg.png" width="100px" height="100px"
+                        <img src="C:/Users/Administrator/AppData/Local/Temp/tomcat-docbase.6614518231621164549.4430/app/weixin_20191121104932.jpg" width="100px" height="100px"
                              class="layui-upload-img layui-circle">
                     </div>
                 </div>
@@ -479,7 +569,9 @@
             </div>
             <div>
                 <div style="display: flex;justify-content: center;align-items: center;min-height: 80px;">
-                    <button style="width: 150px;height: 40px;" type="submit" class="layui-btn" lay-submit="" lay-filter="submits">新增</button>
+                    <button style="width: 150px;height: 40px;" type="submit" class="layui-btn" lay-submit="" lay-filter="submits" <#if studentInformation.student_id ??>
+                        disabled="disabled"
+                            </#if>>新增</button>
                     <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-normal" onclick="location.href='${re.contextPath}/studentInformation/getSelectExam';">下一步</button>
                 </div>
             </div>

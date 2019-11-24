@@ -4,11 +4,10 @@ package com.nfdw.service;/**
  */
 
 import com.github.pagehelper.PageInfo;
-import com.nfdw.entity.Examination;
-import com.nfdw.entity.Examinationstatistics;
-import com.nfdw.entity.StudentInformation;
+import com.nfdw.entity.*;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +22,9 @@ public interface StudentInformationService {
     //按学生用户ID查找该学生基本信息
     StudentInformation getUserIDByStudentInformation(String name);
     //按学生用户和当前日期查找报考信息
-    List<Examination> getListExamination(String create_start_time,String exam,String name,StudentInformation studentInformation,String currentDate);
-
+    List<Examination> getListExamination(Date currentDate, String examinee_province, String subject_type, String examName, String subjectName, Date create_start_time);
+    //学生上传文件审核
+    int addStudentExamAudit(StudentExamAudit studentExamAudit);
+    //根据用戶账号查询学生信息总数
+    int getStudentInfoConunt(String username);
 }

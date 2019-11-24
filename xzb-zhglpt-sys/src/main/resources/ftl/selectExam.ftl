@@ -150,7 +150,10 @@
                         <select name="exam" id="exam" lay-verify="departmentId"
                                 lay-filter="departmentId">
                             <option value="">请选择考试名称</option>
-                            <option th:each="list1:${typeList1}" th:value="${list1.exam}" th:text="${list1.exam }"></option>
+                            <#list examinationList as examination>
+                                <option value="${examination.exam}">${examination.exam}</option>
+                            </#list>
+<#--                            <option th:each="list1:${typeList1}" th:value="${list1.exam}" th:text="${list1.exam }"></option>-->
                         </select>
                     </div>
                 </div>
@@ -161,7 +164,10 @@
                     <div class="layui-input-inline">
                         <select name="name" id="name" lay-verify="departmentId"
                                 lay-filter="departmentId">
-                            <option value="">请选择专业名称</option>
+                            <#list specList as spe>
+                                <option value="${spe.id}">${spe.name}</option>
+                            </#list>
+                            //<option value="">请选择专业名称</option>
                         </select>
                     </div>
                 </div>
@@ -369,45 +375,65 @@
         });
     }
 
-    form.on('select()', function (data) {
+    <#--form.on('select()', function (data) {-->
 
-        var pId = data.value;// 一级列表的id
-        $.post('${re.contextPath}/studentInformation/getSelectExam', {'exam': exam, 'name':name, 'create_start_time':create_start_time}, function (msg) {// 请求二级列表的数据
-            // console.log(msg);
-            $('#name').empty();// 将二级列表的内容清空
-            for (var i in msg) {// 遍历数据赋值给二级列表的内容
-                var $content = $('<option value="' + msg[i].name + '">' + msg[i].name + '</option>');
-                $('#name').append($content);
-                form.on('select(exam)', function (data1) {
+    <#--    var pId = data.value;// 一级列表的id-->
+    <#--    $.post('${re.contextPath}/studentInformation/getSelectExam', {'exam': exam, 'name':name, 'create_start_time':create_start_time}, function (msg) {// 请求二级列表的数据-->
+    <#--        // console.log(msg);-->
+    <#--        $('#name').empty();// 将二级列表的内容清空-->
+    <#--        for (var i in msg) {// 遍历数据赋值给二级列表的内容-->
+    <#--            var $content = $('<option value="' + msg[i].name + '">' + msg[i].name + '</option>');-->
+    <#--            $('#name').append($content);-->
+    <#--            form.on('select(exam)', function (data1) {-->
 
-                    var pId1 = data1.value;// 一级列表的id
-                    $.post('${re.contextPath}/studentInformation/getSelectExam', {'exam': exam, 'name':name, 'create_start_time':create_start_time}, function (msg) {// 请求二级列表的数据
-                        // console.log(msg);
-                        $('#create_start_time').empty();// 将二级列表的内容清空
-                        for (var j in msg) {// 遍历数据赋值给二级列表的内容
-                            var $content = $('<option value="' + msg[j].create_start_time + '">' + msg[j].create_start_time + '</option>');
-                            $('#create_start_time').append($content);
-                            var $content1 = $('<option value="' + msg[j].buiId + '">' + msg[j].buiId + '</option>');
-                            $('#buiId').append($content1);
-                            $.post('${re.contextPath}/studentInformation/getSelectExam', {'exam': exam, 'name':name, 'create_start_time':create_start_time}, function (msg) {// 请求二级列表的数据
-                                // console.log(msg);
-                                $('#buiId').empty();// 将二级列表的内容清空
-                                for (var k in msg) {// 遍历数据赋值给二级列表的内容
-                                    var $content2 = $('<option value="' + msg[k].buiId + '">' + msg[k].buiId + '</option>');
-                                    $('#buiId').append($content2);
-                                }
-                                form.render('select');//  注意：数据赋值完成之后必须调用该方法，进行layui的渲染，否则数据出不来
-                            });
-                        }
-                        form.render('select');//  注意：数据赋值完成之后必须调用该方法，进行layui的渲染，否则数据出不来
-                    });
-                });
-            }
-            form.render('select');//  注意：数据赋值完成之后必须调用该方法，进行layui的渲染，否则数据出不来
-        });
-    });
-
-
+    <#--                var pId1 = data1.value;// 一级列表的id-->
+    <#--                $.post('${re.contextPath}/studentInformation/getSelectExam', {'exam': exam, 'name':name, 'create_start_time':create_start_time}, function (msg) {// 请求二级列表的数据-->
+    <#--                    // console.log(msg);-->
+    <#--                    $('#create_start_time').empty();// 将二级列表的内容清空-->
+    <#--                    for (var j in msg) {// 遍历数据赋值给二级列表的内容-->
+    <#--                        var $content = $('<option value="' + msg[j].create_start_time + '">' + msg[j].create_start_time + '</option>');-->
+    <#--                        $('#create_start_time').append($content);-->
+    <#--                        var $content1 = $('<option value="' + msg[j].buiId + '">' + msg[j].buiId + '</option>');-->
+    <#--                        $('#buiId').append($content1);-->
+    <#--                        $.post('${re.contextPath}/studentInformation/getSelectExam', {'exam': exam, 'name':name, 'create_start_time':create_start_time}, function (msg) {// 请求二级列表的数据-->
+    <#--                            // console.log(msg);-->
+    <#--                            $('#buiId').empty();// 将二级列表的内容清空-->
+    <#--                            for (var k in msg) {// 遍历数据赋值给二级列表的内容-->
+    <#--                                var $content2 = $('<option value="' + msg[k].buiId + '">' + msg[k].buiId + '</option>');-->
+    <#--                                $('#buiId').append($content2);-->
+    <#--                            }-->
+    <#--                            form.render('select');//  注意：数据赋值完成之后必须调用该方法，进行layui的渲染，否则数据出不来-->
+    <#--                        });-->
+    <#--                    }-->
+    <#--                    form.render('select');//  注意：数据赋值完成之后必须调用该方法，进行layui的渲染，否则数据出不来-->
+    <#--                });-->
+    <#--            });-->
+    <#--        }-->
+    <#--        form.render('select');//  注意：数据赋值完成之后必须调用该方法，进行layui的渲染，否则数据出不来-->
+    <#--    });-->
+    <#--});-->
+    <#--layui.use(['layer', 'form'], function(){-->
+    <#--    var layer = layui.layer-->
+    <#--        ,form = layui.form;-->
+    <#--    form.on('select(myselect)', function(data){-->
+    <#--        var areaId=(data.value).replaceAll(",","");-->
+    <#--        $.ajax({-->
+    <#--            type: 'POST',-->
+    <#--            url: '${re.contextPath}/studentInformation/getSelectExam',-->
+    <#--            data: {exam:exam},-->
+    <#--            dataType: 'json',-->
+    <#--            success: function(data){-->
+    <#--                $("#exam").html("");-->
+    <#--                $.each(data, function(key, val) {-->
+    <#--                    var option1 = $("<option>").val(val.exam).text(val.exam);-->
+    <#--                    $("#exam").append(option1);-->
+    <#--                    form.render('select');-->
+    <#--                });-->
+    <#--                $("#exam").get(0).selectedIndex=0;-->
+    <#--            }-->
+    <#--        });-->
+    <#--    });-->
+    <#--});-->
 </script>
 </body>
 

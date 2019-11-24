@@ -7,6 +7,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * @author JiangXiaYang
@@ -74,6 +75,48 @@ public class StudentInformation {
     private String member_phone;
     //正面照
     private String photograph;
+
+
+    //当天时间
+    private Date currentDate;
+    //考试时间
+    private Date create_start_time;
+    //考试名称
+    private String examName;
+    //科目名称
+    private String subjectName;
+
+    public Date getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(Date currentDate) {
+        this.currentDate = currentDate;
+    }
+
+    public Date getCreate_start_time() {
+        return create_start_time;
+    }
+
+    public void setCreate_start_time(Date create_start_time) {
+        this.create_start_time = create_start_time;
+    }
+
+    public String getExamName() {
+        return examName;
+    }
+
+    public void setExamName(String examName) {
+        this.examName = examName;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
 
     public String getStudent_userid() {
         return student_userid;

@@ -20,4 +20,15 @@ public enum Path {
         this.type=type;
     }
 
+    public String getPath() {
+        return path;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public String getType() {
+        return type;
+    }
 }

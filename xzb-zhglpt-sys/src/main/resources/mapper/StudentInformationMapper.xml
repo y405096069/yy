@@ -11,27 +11,36 @@
     #{member_work},#{member_phone},#{photograph})
   </insert>
   <select id="getUserIDByStudentInformation" resultType="com.nfdw.entity.StudentInformation">
-    select * from j_student_information where name=#{name}
+    select * from j_student_information j
+    LEFT JOIN sys_user s ON j.student_userid=s.id
+    where s.username=#{name }
   </select>
   <select id="getListExamination" resultType="com.nfdw.entity.Examination">
-    SELECT c.*,s.`name`
+    SELECT c.*,s.`name` as name
     FROM crea_exam c
     LEFT JOIN spec_management s ON c.specialty_id=s.id
-    WHERE c.end_time &gt;= to_date(#{exam_time},'yyyy-MM-dd')
-    AND c.exam_time &lt;= to_date(#{exam_time},'yyyy-MM-dd')
-    AND c.province_id = ${examinee_province}
-    AND c.subject_stint = ${subject_type}
-    <if test="exam!=null and exam!=''">
-      and c.exam = ${exam}
+    WHERE c.end_time &gt;= #{currentDate}
+    AND c.exam_time &lt;= #{currentDate}
+    AND c.province_id = #{examinee_province}
+    AND c.subject_stint = #{subject_type}
+    <if test="examName!=null">
+      and c.exam = #{examName}
     </if>
-    <if test="name!=null and name!=''">
-      and s.name = ${name}
+    <if test="subjectName!=null">
+      and s.name = #{subjectName}
     </if>
-    <if test="create_start_time!=null and create_start_time!=''">
+    <if test="create_start_time!=null">
       AND c.create_start_time=#{create_start_time};
     </if>
   </select>
   <insert id="addStudentExamAudit">
 
   </insert>
+  <select id="getStudentInfoConunt" resultType="int">
+    	SELECT count(1)
+    FROM j_student_information j
+	  LEFT JOIN sys_user u on j.student_userid=u.id
+		WHERE u.username=#{username}
+  </select>
+
 </mapper>

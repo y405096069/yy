@@ -23,12 +23,12 @@ public class StudentExamAudit {
     private int agreement;
     //照片
     private String view;
-    //自拍视屏
-    private String viewScreen;
-    //文件
-    private String fileName;
-    //音乐
-    private String music;
+//    //自拍视屏
+//    private String viewScreen;
+//    //文件
+//    private String fileName;
+//    //音乐
+//    private String music;
     //上传描述
     private String description;
     //审核状态
@@ -82,33 +82,33 @@ public class StudentExamAudit {
         return view;
     }
 
-    public void setView(String view) {
-        this.view = view;
-    }
-
-    public String getViewScreen() {
-        return viewScreen;
-    }
-
-    public void setViewScreen(String viewScreen) {
-        this.viewScreen = viewScreen;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getMusic() {
-        return music;
-    }
-
-    public void setMusic(String music) {
-        this.music = music;
-    }
+//    public void setView(String view) {
+//        this.view = view;
+//    }
+//
+//    public String getViewScreen() {
+//        return viewScreen;
+//    }
+//
+//    public void setViewScreen(String viewScreen) {
+//        this.viewScreen = viewScreen;
+//    }
+//
+//    public String getFileName() {
+//        return fileName;
+//    }
+//
+//    public void setFileName(String fileName) {
+//        this.fileName = fileName;
+//    }
+//
+//    public String getMusic() {
+//        return music;
+//    }
+//
+//    public void setMusic(String music) {
+//        this.music = music;
+//    }
 
     public String getDescription() {
         return description;

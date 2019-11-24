@@ -43,6 +43,7 @@ public class UploadUtil {
 	@Value("${lenosp.filePath}")
 	private String filePath;
 
+
 	public static final String ROOT_PATH=System.getProperty("user.dir");
 
 	public static final String IMAGE_SUFFIX = "bmp,jpg,png,gif,jpeg";
@@ -168,4 +169,20 @@ public class UploadUtil {
 class LoadType {
 	private String fileName;
 	private File currentFile;
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public File getCurrentFile() {
+		return currentFile;
+	}
+
+	public void setCurrentFile(File currentFile) {
+		this.currentFile = currentFile;
+	}
 }
