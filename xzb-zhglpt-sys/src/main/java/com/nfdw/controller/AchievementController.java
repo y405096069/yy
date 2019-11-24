@@ -6,12 +6,10 @@ import com.github.pagehelper.PageHelper;
 import com.nfdw.core.annotation.Log;
 import com.nfdw.entity.Achievement_Summary;
 import com.nfdw.entity.Examination;
+import com.nfdw.entity.SignIn;
 import com.nfdw.entity.SpecManagement;
 import com.nfdw.exception.MyException;
-import com.nfdw.service.AchieveService;
-import com.nfdw.service.AchievementService;
-import com.nfdw.service.ImportExcelService;
-import com.nfdw.service.SpecManagementService;
+import com.nfdw.service.*;
 import com.nfdw.util.JsonUtil;
 import com.nfdw.util.ReType;
 import com.nfdw.utils.ExcelUtil;
@@ -473,7 +471,7 @@ public class AchievementController {
     /*
         签到管理 qiandao
      */
-    @GetMapping(value = "qiandaoList")
+    /*@GetMapping(value = "qiandaoList")
     public String qiandaoList(String id, Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         session.setAttribute("achieveGrade_eid",id);        //保存考试id
@@ -494,12 +492,52 @@ public class AchievementController {
             e.printStackTrace();
         }
         return new ReType(tPage.getTotal(), tList);
-    }
+    }*/
     /*
         end 签到 应付
      */
 
+    @Autowired
+    SignInService signInService;
+    //signIn/showSignIn
+    @GetMapping(value = "/qiandaoList")
+    /*@RequiresPermissions("user:show")*/
+    public String showNotice(Model model) {
+        return "/system/achieve/signInList";//学生签到
+    }
 
+    @GetMapping(value = "showSignInList")
+    @ResponseBody
+    /* @RequiresPermissions("user:show")*/
+    public ReType showNotice(Model model, SignIn signIn, String page, String limit) {
+
+        return signInService.show(signIn, Integer.valueOf(page), Integer.valueOf(limit));
+    }
+
+
+
+    @PostMapping(value = "del")
+    @ResponseBody
+    @Transactional
+    public JsonUtil updateNotice(SignIn signIn) {
+        JsonUtil jsonUtil = new JsonUtil();
+        jsonUtil.setFlag(false);
+        if (signIn == null) {
+            jsonUtil.setMsg("获取数据失败");
+            return jsonUtil;
+        }
+        try {
+            int count=signInService.updateById(signIn);
+            if (count>0){
+                jsonUtil.setFlag(true);
+                jsonUtil.setMsg("签到成功");
+            }
+            //throw  new MyException("错误");
+        } catch (MyException e) {
+            e.printStackTrace();
+        }
+        return jsonUtil;
+    }
 
 
 }

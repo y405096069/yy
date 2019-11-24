@@ -24,8 +24,12 @@ public class Audit {                //审核汇总表
 
     @Column(name = "name")      //姓名
     private String name;
-    @Column(name = "biog_land")  //生源地
+    @Column(name = "biog_land")  //省份
     private String biog_land;
+
+    @Column(name = "examinee_number")  //考生号
+    private String examinee_number;
+
     @Column(name = "exam_id")
     private int exam_id;
     @Column(name = "exam_name")     //考试名称
@@ -34,6 +38,21 @@ public class Audit {                //审核汇总表
     private int major_id;
     @Column(name = "major")     //专业名称
     private String major;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Column(name = "exam_room_startTime")
+    private Date exam_room_startTime;          //考场开始时间
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Column(name = "exam_room_startTime")
+    private Date exam_room_endTime;          //考场结束时间
+
+    @Column(name = "exam_room_site")            //考场位置
+    private String exam_room_site;
+
+
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -70,8 +89,18 @@ public class Audit {                //审核汇总表
     private String re_enroll_status;
     @Column(name = "re_audit_status")           //复试审核状态
     private String re_audit_status;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "re_audit_time")              //复试审核时间
-    private String re_audit_time;
+    private Date re_audit_time;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    @Column(name = "re_end_time")              //复试截止时间
+    private Date re_end_time;
+
+
 
 
     public Integer getId() {
@@ -104,6 +133,15 @@ public class Audit {                //审核汇总表
 
     public void setBiog_land(String biog_land) {
         this.biog_land = biog_land;
+    }
+
+    public String getExaminee_number() {
+
+        return examinee_number;
+    }
+
+    public void setExaminee_number(String examinee_number) {
+        this.examinee_number = examinee_number;
     }
 
     public int getExam_id() {
@@ -234,12 +272,43 @@ public class Audit {                //审核汇总表
         this.re_audit_status = re_audit_status;
     }
 
-    public String getRe_audit_time() {
+    public Date getExam_room_startTime() {
+        return exam_room_startTime;
+    }
+
+    public void setExam_room_startTime(Date exam_room_startTime) {
+        this.exam_room_startTime = exam_room_startTime;
+    }
+
+    public Date getExam_room_endTime() {
+        return exam_room_endTime;
+    }
+
+    public void setExam_room_endTime(Date exam_room_endTime) {
+        this.exam_room_endTime = exam_room_endTime;
+    }
+
+    public String getExam_room_site() {
+        return exam_room_site;
+    }
+
+    public void setExam_room_site(String exam_room_site) {
+        this.exam_room_site = exam_room_site;
+    }
+
+    public Date getRe_audit_time() {
         return re_audit_time;
     }
 
-    public void setRe_audit_time(String re_audit_time) {
+    public void setRe_audit_time(Date re_audit_time) {
         this.re_audit_time = re_audit_time;
     }
 
+    public Date getRe_end_time() {
+        return re_end_time;
+    }
+
+    public void setRe_end_time(Date re_end_time) {
+        this.re_end_time = re_end_time;
+    }
 }

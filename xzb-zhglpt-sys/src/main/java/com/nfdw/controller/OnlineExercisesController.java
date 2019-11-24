@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "/onlineExercises")
@@ -30,9 +31,17 @@ public class OnlineExercisesController {
     @GetMapping(value = "showOnlineExercises")
     /*@RequiresPermissions("user:show")*/
     public String showNotice(Model model) {
-        return "/system/onlineExercises/onlineExercises";//报名公告
+        return "/system/onlineExercises/onlineExercises";//网上报名实例公告
     }
 
+    //跳学生端首页
+    @GetMapping(value = "showStuOnlineExercises")
+    /*@RequiresPermissions("user:show")*/
+    public String showStuNotice(Model model) {
+        List<OnlineExercises> onList = onlineExercisesService.getAll();
+        model.addAttribute("onList",onList);
+        return "/student/onlineExercises";//网上报名实例公告
+    }
     @GetMapping(value = "showOnlineExercisesList")
     @ResponseBody
    /* @RequiresPermissions("user:show")*/

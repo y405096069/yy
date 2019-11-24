@@ -3,23 +3,38 @@
 <mapper namespace="com.nfdw.mapper.AuditMapper">
 
     <resultMap id="BaseResultMap" type="com.nfdw.entity.Audit">
+
         <id column="id" jdbcType="VARCHAR" property="id" />
         <result column="u_id" jdbcType="VARCHAR" property="u_id"/>
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="biog_land" jdbcType="VARCHAR" property="biog_land" />
+        <result column="examinee_number" jdbcType="VARCHAR" property="examinee_number" />
         <result column="exam_id" jdbcType="INTEGER" property="exam_id"/>
         <result column="exam_name" jdbcType="VARCHAR" property="exam_name" />
         <result column="major_id" jdbcType="INTEGER" property="major_id"/>
         <result column="major" jdbcType="VARCHAR" property="major" />
 
+        <result column="exam_room_startTime" jdbcType="TIMESTAMP" property="exam_room_startTime"/>
+        <result column="exam_room_endTime" jdbcType="TIMESTAMP" property="exam_room_endTime"/>
+        <result column="exam_room_site" jdbcType="VARCHAR" property="exam_room_site" />
+
         <result column="sub_time" jdbcType="TIMESTAMP" property="sub_time"/>
         <result column="end_time" jdbcType="TIMESTAMP" property="end_time"/>
         <result column="audit_status" jdbcType="VARCHAR" property="audit_status" />
         <result column="audit_time" jdbcType="TIMESTAMP" property="audit_time"/>
+
+        <result column="info_collect_status" jdbcType="VARCHAR" property="info_collect_status" />
         <result column="enroll_status" jdbcType="VARCHAR" property="enroll_status" />
         <result column="audit_reason" jdbcType="VARCHAR" property="audit_reason" />
         <result column="pay_status" jdbcType="VARCHAR" property="pay_status" />
         <result column="audit_link" jdbcType="VARCHAR" property="audit_link" />
+
+        <result column="re_pay_status" jdbcType="VARCHAR" property="re_pay_status" />
+        <result column="re_enroll_status" jdbcType="VARCHAR" property="re_enroll_status" />
+        <result column="re_audit_status" jdbcType="VARCHAR" property="re_audit_status" />
+        <result column="re_audit_time" jdbcType="TIMESTAMP" property="re_audit_time" />
+        <result column="re_end_time" jdbcType="TIMESTAMP" property="re_end_time" />
+
     </resultMap>
 
 
@@ -53,7 +68,9 @@
         <if test="name != null and name != ''">
             and name like CONCAT('%',#{name},'%')
         </if>
-
+        <if test="examinee_number != null and examinee_number != ''">
+            and examinee_number like CONCAT('%',#{examinee_number},'%')
+        </if>
     </select>
 
     <select id="getAuditById" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -77,6 +94,9 @@
             <if test="biog_land!=null">
                 biog_land,
             </if>
+            <if test="examinee_number!=null">
+                examinee_number,
+            </if>
             <if test="exam_id!=null">
                 exam_id,
             </if>
@@ -88,6 +108,15 @@
             </if>
             <if test="major!=null">
                 major,
+            </if>
+            <if test="exam_room_startTime!=null">
+                exam_room_startTime,
+            </if>
+            <if test="exam_room_endTime!=null">
+                exam_room_endTime,
+            </if>
+            <if test="exam_room_site!=null">
+                exam_room_site,
             </if>
             <if test="sub_time!=null">
                 sub_time,
@@ -128,6 +157,9 @@
             <if test="re_audit_time != null">
                 re_audit_time,
             </if>
+            <if test="re_end_time != null">
+                re_end_time
+            </if>
         </trim>
     </sql>
 
@@ -145,6 +177,9 @@
             <if test="biog_land!=null">
                 #{biog_land},
             </if>
+            <if test="examinee_number!=null">
+                #{examinee_number},
+            </if>
             <if test="exam_id!=null">
                 #{exam_id},
             </if>
@@ -156,6 +191,15 @@
             </if>
             <if test="major!=null">
                 #{major},
+            </if>
+            <if test="exam_room_startTime!=null">
+                #{exam_room_startTime},
+            </if>
+            <if test="exam_room_endTime!=null">
+                #{exam_room_endTime},
+            </if>
+            <if test="exam_room_site!=null">
+                #{exam_room_site},
             </if>
             <if test="sub_time!=null">
                 #{sub_time},
@@ -196,6 +240,9 @@
             <if test="re_audit_time != null">
                 #{re_audit_time},
             </if>
+            <if test="re_end_time != null">
+                #{re_end_time}
+            </if>
         </trim>
     </sql>
 
@@ -211,6 +258,9 @@
             <if test="biog_land!=null">
                 biog_land=#{biog_land},
             </if>
+            <if test="examinee_number!=null">
+                examinee_number=#{examinee_number},
+            </if>
             <if test="exam_id!=null">
                 exam_id=#{exam_id},
             </if>
@@ -222,6 +272,15 @@
             </if>
             <if test="major!=null">
                 major=#{major},
+            </if>
+            <if test="exam_room_startTime!=null">
+                exam_room_startTime=#{exam_room_startTime},
+            </if>
+            <if test="exam_room_endTime!=null">
+                exam_room_endTime=#{exam_room_endTime},
+            </if>
+            <if test="exam_room_site!=null">
+                exam_room_site=#{exam_room_site},
             </if>
             <if test="sub_time!=null">
                 sub_time=#{sub_time},
@@ -262,6 +321,9 @@
             <if test="re_audit_time != null">
                 re_audit_time=#{re_audit_time},
             </if>
+            <if test="re_end_time != null">
+                re_end_time=#{re_end_time},
+            </if>
         </trim>
     </sql>
 
@@ -287,5 +349,8 @@
         select * from j_student_information where student_userid=#{student_userid}
     </select>
 
+    <select id="selectAllBiog_land" resultType="java.lang.String">
+        select biog_land from t_audit GROUP BY biog_land
+    </select>
 
 </mapper>

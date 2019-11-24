@@ -3,10 +3,9 @@ package com.nfdw.utils;
 import com.nfdw.entity.Achievement_Summary;
 import com.nfdw.util.JsonUtil;
 import org.apache.commons.lang.time.DateFormatUtils;
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
+import org.apache.poi.ss.usermodel.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +17,11 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-
+/*
+       导出初试成绩
+     */
 public class ExportToExcel {
+
 
     public static void exportWhiteList( String name,List<Achievement_Summary> list, HttpServletResponse response) {
 
@@ -29,9 +31,35 @@ public class ExportToExcel {
         //创建行列
         HSSFRow nRow = sheet.createRow(0);
         HSSFCell nCell = nRow.createCell(0);
+        sheet.setDefaultColumnWidth(12);
+        sheet.setColumnWidth(0,24*256);
+        sheet.setColumnWidth(17,18*256);
+        sheet.setColumnWidth(20,18*256);
+        sheet.setColumnWidth(23,18*256);
+        sheet.setColumnWidth(26,18*256);
+        sheet.setColumnWidth(29,18*256);
+        sheet.setColumnWidth(32,18*256);
+
         //控制行号列号
         int rowNo = 0;
         int colNo = 0;
+
+        HSSFCellStyle style = wb.createCellStyle();//设置列样式
+        Font font =  wb.createFont();
+        font.setColor(HSSFColor.WHITE.index);
+        font.setFontHeightInPoints((short)13);
+        style.setFont(font);
+        style.setAlignment(HorizontalAlignment.CENTER);// 水平居中
+        style.setVerticalAlignment(VerticalAlignment.CENTER);// 垂直居中
+        style.setFillForegroundColor(IndexedColors.AUTOMATIC.getIndex());
+        style.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
+        HSSFCellStyle style2 = wb.createCellStyle();//设置列样式
+        Font font2 =  wb.createFont();
+        font2.setFontHeightInPoints((short)12);
+        style2.setFont(font2);
+
+
         //列标题
         String[] title;
         title = new String[]{"身份证号", "姓名", "性别", "高考省份", "考生号", "准考证号",
@@ -46,6 +74,7 @@ public class ExportToExcel {
         for (int i = 0; i < title.length; i++) {
             nCell = nRow.createCell(i);
             nCell.setCellValue(title[i]);
+            nCell.setCellStyle(style);
         }
         try {
             //List<Achievement_Summary> tList = achieveService.selectListByPage(null,Integer.valueOf(id));
@@ -58,44 +87,49 @@ public class ExportToExcel {
                 //身份证
                 nCell = nRow.createCell(colNo++);
                 if(as.getId_card()!=null)
-                    nCell.setCellValue(as.getId_card());
+                    nCell.setCellValue(as.getId_card());nCell.setCellStyle(style2);
                 //姓名
                 nCell = nRow.createCell(colNo++);
                 if(as.getName()!=null)
-                    nCell.setCellValue(as.getName());
+                    nCell.setCellValue(as.getName());nCell.setCellStyle(style2);
                 //性别
                 nCell = nRow.createCell(colNo++);
                 if(as.getGender()!=null)
-                    nCell.setCellValue(as.getGender());
+                    nCell.setCellValue(as.getGender());nCell.setCellStyle(style2);
                 //高考省份
                 nCell = nRow.createCell(colNo++);
                 if(as.getHigh_province()!=null)
-                    nCell.setCellValue(as.getHigh_province());
+                    nCell.setCellValue(as.getHigh_province());nCell.setCellStyle(style2);
                 //考生号
                 nCell = nRow.createCell(colNo++);
                 if(as.getExaminee_num()!=null)
-                    nCell.setCellValue(as.getExaminee_num());
+                    nCell.setCellValue(as.getExaminee_num());nCell.setCellStyle(style2);
                 //准考证号
                 nCell = nRow.createCell(colNo++);
                 if(as.getTicket_num()!=null)
-                    nCell.setCellValue(as.getTicket_num());
+                    nCell.setCellValue(as.getTicket_num());nCell.setCellStyle(style2);
                 //文理科
                 nCell = nRow.createCell(colNo++);
                 if(as.getWl_subject()!=null)
-                    nCell.setCellValue(as.getWl_subject());
+                    nCell.setCellValue(as.getWl_subject());nCell.setCellStyle(style2);
                 //专业代码
                 nCell = nRow.createCell(colNo++);
                 if(as.getProfessional_code()!=null)
-                    nCell.setCellValue(as.getProfessional_code());
+                    nCell.setCellValue(as.getProfessional_code());nCell.setCellStyle(style2);
                 //专业名称
                 nCell = nRow.createCell(colNo++);
                 if(as.getProfessional_name()!=null)
-                    nCell.setCellValue(as.getProfessional_name());
+                    nCell.setCellValue(as.getProfessional_name());nCell.setCellStyle(style2);
                 //全国排名
                 nCell = nRow.createCell(colNo++);
                 if(as.getNational_rankings()!=0)
-                    nCell.setCellValue(as.getNational_rankings());
-                //全国同名次
+                    nCell.setCellValue(as.getNational_rankings());nCell.setCellStyle(style2);
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*//全国同名次
                 nCell = nRow.createCell(colNo++);
                 if(as.getNational_same_name()!=null)
                     nCell.setCellValue(as.getNational_same_name());
@@ -114,96 +148,95 @@ public class ExportToExcel {
                 //合格线
                 nCell = nRow.createCell(colNo++);
                 if(as.getQualified_line()!=null)
-                    nCell.setCellValue(as.getQualified_line());
+                    nCell.setCellValue(as.getQualified_line());*/
 
                 //科目1名称
                 nCell = nRow.createCell(colNo++);
                 if (as.getFirst_subjects_name1()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_name1());
+                    nCell.setCellValue(as.getFirst_subjects_name1());nCell.setCellStyle(style2);
                 //科目1成绩
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve1()!=0)
-                    nCell.setCellValue(as.getFirst_subjects_achieve1());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve1()!=0)
+                    nCell.setCellValue(as.getFirst_subjects_achieve1());*/
                 //科目1成绩说明
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve_ex1()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_achieve_ex1());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve_ex1()!=null)
+                    nCell.setCellValue(as.getFirst_subjects_achieve_ex1());*/
 
                 //科目2名称
                 nCell = nRow.createCell(colNo++);
                 if (as.getFirst_subjects_name2()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_name2());
+                    nCell.setCellValue(as.getFirst_subjects_name2());nCell.setCellStyle(style2);
                 //科目2成绩
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve2()!=0)
-                    nCell.setCellValue(as.getFirst_subjects_achieve2());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve2()!=0)
+                    nCell.setCellValue(as.getFirst_subjects_achieve2());*/
                 //科目2成绩说明
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve_ex2()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_achieve_ex2());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve_ex2()!=null)
+                    nCell.setCellValue(as.getFirst_subjects_achieve_ex2());*/
 
                 //科目3名称
                 nCell = nRow.createCell(colNo++);
                 if (as.getFirst_subjects_name3()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_name3());
+                    nCell.setCellValue(as.getFirst_subjects_name3());nCell.setCellStyle(style2);
                 //科目3成绩
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve3()!=0)
-                    nCell.setCellValue(as.getFirst_subjects_achieve3());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve3()!=0)
+                    nCell.setCellValue(as.getFirst_subjects_achieve3());*/
                 //科目3成绩说明
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve_ex3()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_achieve_ex3());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve_ex3()!=null)
+                    nCell.setCellValue(as.getFirst_subjects_achieve_ex3());*/
 
                 //科目4名称
                 nCell = nRow.createCell(colNo++);
                 if (as.getFirst_subjects_name4()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_name4());
+                    nCell.setCellValue(as.getFirst_subjects_name4());nCell.setCellStyle(style2);
                 //科目4成绩
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve4()!=0)
-                    nCell.setCellValue(as.getFirst_subjects_achieve4());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve4()!=0)
+                    nCell.setCellValue(as.getFirst_subjects_achieve4());*/
                 //科目4成绩说明
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve_ex4()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_achieve_ex4());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve_ex4()!=null)
+                    nCell.setCellValue(as.getFirst_subjects_achieve_ex4());*/
 
                 //科目5名称
                 nCell = nRow.createCell(colNo++);
                 if (as.getFirst_subjects_name5()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_name5());
+                    nCell.setCellValue(as.getFirst_subjects_name5());nCell.setCellStyle(style2);
                 //科目5成绩
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve5()!=0)
-                    nCell.setCellValue(as.getFirst_subjects_achieve5());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve5()!=0)
+                    nCell.setCellValue(as.getFirst_subjects_achieve5());*/
                 //科目5成绩说明
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve_ex5()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_achieve_ex5());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve_ex5()!=null)
+                    nCell.setCellValue(as.getFirst_subjects_achieve_ex5());*/
 
                 //科目6名称
-                nCell = nRow.createCell(colNo++);
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
                 if (as.getFirst_subjects_name6()!=null)
                     nCell.setCellValue(as.getFirst_subjects_name6());
                 //科目6成绩
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve6()!=0)
-                    nCell.setCellValue(as.getFirst_subjects_achieve6());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve6()!=0)
+                    nCell.setCellValue(as.getFirst_subjects_achieve6());*/
                 //科目6成绩说明
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_achieve_ex6()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_achieve_ex6());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_achieve_ex6()!=null)
+                    nCell.setCellValue(as.getFirst_subjects_achieve_ex6());*/
 
                 //初试总分
-                nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_total()!=0)
-                    nCell.setCellValue(as.getFirst_subjects_total());
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getFirst_subjects_total()!=0)
+                    nCell.setCellValue(as.getFirst_subjects_total());*/
 
                 //备注
-                nCell = nRow.createCell(colNo++);
-                if (as.getRemarks()!=null)
-                    nCell.setCellValue(as.getRemarks());
-
+                nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
+                /*if (as.getRemarks()!=null)
+                    nCell.setCellValue(as.getRemarks());*/
             }
             loadResponse(name, response, wb);
         } catch (Exception e) {

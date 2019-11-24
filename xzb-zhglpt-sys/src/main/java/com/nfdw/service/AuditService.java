@@ -21,4 +21,6 @@ public interface AuditService extends BaseService<Audit, String> {
     boolean addAudit(Audit audit);
 
     StudentInformation getUserInfoById(String student_userid);
+
+    String[] selectAllBiog_land();
 }

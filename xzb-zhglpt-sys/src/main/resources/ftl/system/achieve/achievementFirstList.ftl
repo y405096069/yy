@@ -381,21 +381,6 @@
                 }, function (index) {
                     layer.close(index);
                     location.href="inout_achieveFirstGrade?id="+data.id+"&name="+data.exam;
-                    /*$.ajax({
-                        url: 'inout_achieveFirstGrade',
-                        type: "post",
-                        data: {"id": data.id, "name": data.exam},
-                        success: function (d) {
-                            if (d.flag) {
-                                window.layui.table.reload('achievementFirstList');
-                                window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
-                            } else {
-                                window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
-                            }
-                        }, error: function () {
-                            alert('error');
-                        }
-                    });*/
                 });
             }
         });
