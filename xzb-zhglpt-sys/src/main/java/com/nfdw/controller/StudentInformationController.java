@@ -137,9 +137,13 @@ public class StudentInformationController {
                 studentInformation.getSubject_type(),exam,name,create_start_time);
         for (Examination e:examinationList
              ) {
-            System.out.print(e.getExam()+"111111111111");
+            System.out.print(e.getName()+","+e.getCreate_start_time()+"111111111111");
         }
         model.addAttribute("examinationList",examinationList);
+        model.addAttribute("exam",exam);
+        model.addAttribute("name",name);
+        model.addAttribute("create_start_time",create_start_time);
+
         return "selectExam";
     }
     @PostMapping(value= "addStudentInformations")

@@ -148,11 +148,11 @@
                     </label>
                     <div class="layui-input-inline">
                         <select name="exam" id="exam" lay-verify="departmentId"
-                                lay-filter="departmentId">
+                                lay-filter="departmentId" value="${examination.exam}">
                             <option value="">请选择考试名称</option>
-                            <#list examinationList as examination>
-                                <option value="${examination.exam}">${examination.exam}</option>
-                            </#list>
+<#--                            <#list examinationList as examination>-->
+<#--                                <option value="${examination.exam}">${examination.exam}</option>-->
+<#--                            </#list>-->
 <#--                            <option th:each="list1:${typeList1}" th:value="${list1.exam}" th:text="${list1.exam }"></option>-->
                         </select>
                     </div>
@@ -163,11 +163,11 @@
                     </label>
                     <div class="layui-input-inline">
                         <select name="name" id="name" lay-verify="departmentId"
-                                lay-filter="departmentId">
-                            <#list specList as spe>
-                                <option value="${spe.id}">${spe.name}</option>
-                            </#list>
-                            //<option value="">请选择专业名称</option>
+                                lay-filter="departmentId"  value="${examination.name}">
+                            <option value="">请选择专业名称</option>
+<#--                            <#list examinationList as examination>-->
+<#--                                <option value="${examination.name}">${examination.name}</option>-->
+<#--                            </#list>-->
                         </select>
                     </div>
                 </div>
@@ -178,8 +178,11 @@
                         </label>
                         <div class="layui-input-inline">
                             <select name="create_start_time" id="create_start_time" lay-verify="departmentId"
-                                    lay-filter="departmentId">
+                                    lay-filter="departmentId" value="${examination.create_start_time}">
                                 <option value="">请选择考试时间</option>
+<#--                                <#list examinationList as examination>-->
+<#--                                    <option value="${examination.create_start_time?string("yyyy-MM-dd HH:mm:ss")}">${examination.create_start_time?string("yyyy-MM-dd HH:mm:ss")}</option>-->
+<#--                                </#list>-->
                             </select>
                         </div>
                     </div>
@@ -188,9 +191,12 @@
                             <span class="x-red">*</span>考试地点
                         </label>
                         <div class="layui-input-inline">
-                            <select name="buiId" id="buiId" lay-verify="departmentId"
-                                    lay-filter="departmentId">
+                            <select name="build" id="build" lay-verify="departmentId"
+                                    lay-filter="departmentId" value="${examination.build}">
                                 <option value="">请选择考试地点</option>
+                                <#list examinationList as examination>
+                                    <option value="${examination.build}">${examination.build}</option>
+                                </#list>
                             </select>
                         </div>
                     </div>
@@ -353,7 +359,6 @@
             });
         });
     }
-
     function informationActions() {
         layui.use(['layer'], function(){
             var confirm = layer.open({
@@ -374,6 +379,97 @@
             });
         });
     }
+    layui.use(['form','layer','jquery'],function(){
+        var WEB_ROOT="https://localhost:4430/xzb-zhglpt/";
+        var form = layui.form,
+            layer = parent.layer === undefined ? layui.layer : parent.layer,
+            $ = layui.jquery;
+
+        var provinceText = "";
+        var cityText = "";
+        var areaText = "";
+        //异步加载下拉框数据
+        $.post(WEB_ROOT+"studentInformation/getSelectExam",{"exam":null,"name":null,"create_start_time":null},function (data) {
+            if(!data.success){
+                layer.msg(data.msg)
+            }else{
+                var $html = "";
+                if(data.data != null) {
+                    $.each(data.data, function (index, item) {
+                        $html += "<option value='" + item.exam + "'>" + item.exam + "</option>";
+                    });
+                    $("#exam").append($html);
+                    //append后必须从新渲染
+                    form.render('select');
+                }
+            }
+
+        });
+
+        //监听省下拉框
+        form.on('select(exam)', function(dataObj){
+            //移除城市下拉框所有选项
+            $("#name").empty();
+            var cityHtml = '<option value="">请选择专业名称</option>';
+            $("#name").html(cityHtml);
+            var areaHtml = '<option value="">请选择考试时间</option>';
+            $("#create_start_time").html(areaHtml);
+            provinceText = $("#exam").find("option:selected").text();
+            var value = $("#exam").val();
+            //异步加载下拉框数据
+            $.post(WEB_ROOT+"studentInformation/getSelectExam",{"exam":value,"name":null,"create_start_time":null},function (data) {
+                if(!data.success){
+                    layer.msg(data.msg)
+                }else{
+                    var $html = "";
+                    if(data.data != null) {
+                        $.each(data.data, function (index, item) {
+                            $html += "<option value='" + item.exam + "'>" + item.exam + "</option>";
+                        });
+                        $("#name").append($html);
+                        //append后必须从新渲染
+                        form.render('select');
+                    }
+                }
+
+            });
+
+        });
+
+        //监听市下拉框
+        form.on('select(name)', function(dataObj){
+            //移除县区下拉框所有选项
+            $("#create_start_time").empty();
+            var html = '<option value="">请选择考试时间</option>';
+            $("#create_start_time").html(html);
+
+            cityText = $("#city").find("option:selected").text();
+            var value = $("#city").val();
+            //异步加载下拉框数据
+            $.post(WEB_ROOT+"dtArea/queryByParentId",{"exam":null,"name":value,"create_start_time":null},function (data) {
+                if(!data.success){
+                    layer.msg(data.msg)
+                }else{
+                    var $html = "";
+                    if(data.data != null) {
+                        $.each(data.data, function (index, item) {
+                            $html += "<option value='" + item.name + "'>" + item.name + "</option>";
+                        });
+                        $("#create_start_time").append($html);
+                        //append后必须从新渲染
+                        form.render('select');
+                    }
+                }
+
+            });
+
+        });
+
+        //监听县区下拉框
+        form.on('select(create_start_time)', function(dataObj){
+            areaText = $("#create_start_time").find("option:selected").text();
+        });
+    });
 
     <#--form.on('select()', function (data) {-->
 
@@ -412,28 +508,28 @@
     <#--        form.render('select');//  注意：数据赋值完成之后必须调用该方法，进行layui的渲染，否则数据出不来-->
     <#--    });-->
     <#--});-->
-    <#--layui.use(['layer', 'form'], function(){-->
-    <#--    var layer = layui.layer-->
-    <#--        ,form = layui.form;-->
-    <#--    form.on('select(myselect)', function(data){-->
-    <#--        var areaId=(data.value).replaceAll(",","");-->
-    <#--        $.ajax({-->
-    <#--            type: 'POST',-->
-    <#--            url: '${re.contextPath}/studentInformation/getSelectExam',-->
-    <#--            data: {exam:exam},-->
-    <#--            dataType: 'json',-->
-    <#--            success: function(data){-->
-    <#--                $("#exam").html("");-->
-    <#--                $.each(data, function(key, val) {-->
-    <#--                    var option1 = $("<option>").val(val.exam).text(val.exam);-->
-    <#--                    $("#exam").append(option1);-->
-    <#--                    form.render('select');-->
-    <#--                });-->
-    <#--                $("#exam").get(0).selectedIndex=0;-->
-    <#--            }-->
-    <#--        });-->
-    <#--    });-->
-    <#--});-->
+    layui.use(['layer', 'form'], function(){
+        var layer = layui.layer
+            ,form = layui.form;
+        form.on('select(myselect)', function(data){
+            var areaId=(data.value).replaceAll(",","");
+            $.ajax({
+                type: 'POST',
+                url: '${re.contextPath}/studentInformation/getSelectExam',
+                data: {exam:exam},
+                dataType: 'json',
+                success: function(data){
+                    $("#exam").html("");
+                    $.each(data, function(key, val) {
+                        var option1 = $("<option>").val(val.exam).text(val.exam);
+                        $("#exam").append(option1);
+                        form.render('select');
+                    });
+                    $("#exam").get(0).selectedIndex=0;
+                }
+            });
+        });
+    });
 </script>
 </body>
 
