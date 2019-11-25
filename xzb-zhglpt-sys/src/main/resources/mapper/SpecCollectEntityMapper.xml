@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nfdw.mapper.SpecCollectEntityMapper">
+    <resultMap id="BaseResultMap" type="com.nfdw.entity.SpecCollectEntity">
+        <!--
+          WARNING - @mbg.generated
+        -->
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="D_STATIC_ORG_VALID_NAME" jdbcType="VARCHAR" property="D_STATIC_ORG_VALID_NAME" />
+        <result column="D_STATIC_PARENT_ORG_CODE" jdbcType="VARCHAR" property="D_STATIC_PARENT_ORG_CODE" />
+        <result column="D_STATIC_ORG_CODE" jdbcType="VARCHAR" property="D_STATIC_ORG_CODE" />
+        <result column="D_STATIC_ORG_IS_VALID" jdbcType="VARCHAR" property="D_STATIC_ORG_IS_VALID" />
+        <result column="D_STATIC_ORG_NAME" jdbcType="VARCHAR" property="D_STATIC_ORG_NAME" />
+        <result column="D_STATIC_PARENT_ORG_NAME" jdbcType="VARCHAR" property="D_STATIC_PARENT_ORG_NAME" />
+    </resultMap>
+
+    <insert id="add" parameterType="com.nfdw.entity.SpecCollectEntity">
+        insert into spec_collectEntity(
+
+         D_STATIC_ORG_VALID_NAME,
+         D_STATIC_PARENT_ORG_CODE,
+         D_STATIC_ORG_CODE,
+         D_STATIC_ORG_IS_VALID,
+         D_STATIC_ORG_NAME,
+         D_STATIC_PARENT_ORG_NAME
+        )values (
+
+         #{D_STATIC_ORG_VALID_NAME},
+         #{D_STATIC_PARENT_ORG_CODE},
+         #{D_STATIC_ORG_CODE},
+         #{D_STATIC_ORG_IS_VALID},
+         #{D_STATIC_ORG_NAME},
+         #{D_STATIC_PARENT_ORG_NAME}
+        )
+    </insert>
+
+
+</mapper>

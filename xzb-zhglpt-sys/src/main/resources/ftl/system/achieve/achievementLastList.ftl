@@ -119,6 +119,11 @@
     <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="closing">关闭</a>
 </script>
 
+<script type="text/html" id="hgzDemo">
+    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="openinghgz">开启</a>
+    <a class="layui-btn layui-btn-xs  layui-btn-normal" lay-event="closinghgz">关闭</a>
+</script>
+
 <script type="text/html" id="barDemo">
     <#---->
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
@@ -161,10 +166,12 @@
                     title: '序号',
                     width: '5%'
                 }
-                , {field: 'exam', title: '考试名称', width: '30%'}
-                , {field: 'specialty_name', title: '专业', width: '15%'}
-                , {field: 'grade2', title: '成绩开关状态', width: '20%',sort: true}
+                , {field: 'exam', title: '考试名称', width: '20%'}
+                , {field: 'specialty_id', title: '专业', width: '15%'}
+                , {field: 'grade2', title: '成绩开关状态', width: '10%',sort: true}
                 , {fixed: 'right', field: 'right',title: '开关操作',toolbar: "#ChaxunDemo"}
+                , {field: 'certificate', title: '合格证开关状态', width: '10%',sort: true}
+                , {fixed: 'right', field: 'right',title: '开关操作',toolbar: "#hgzDemo"}
                 , {fixed: 'right', field: 'right', title: '操作', toolbar: "#barDemo"}
             ]],
             done: function(res, curr, count) {
@@ -173,6 +180,30 @@
                         $(this).text("开启");
                     } else if($(this).text() == "0") {
                         $(this).text("关闭");
+                    }
+                });
+                $("[data-field='certificate']").children().each(function () {
+                    if ($(this).text() == "1") {
+                        $(this).text("开启");
+                    } else if($(this).text() == "0") {
+                        $(this).text("关闭");
+                    }
+                });
+                $("[data-field='specialty_id']").children().each(function () {
+                    if($(this).text()!="专业"){
+                        var name;
+                        $.ajax({
+                            url: "selectSpecialty_NameById",
+                            type: "post",
+                            data: {"id": $(this).text()},
+                            async: false,
+                            success: function (d) {
+                                name=d;
+                            }, error: function () {
+                                alert('error');
+                            }
+                        });
+                        $(this).text(name);
                     }
                 });
             }
@@ -282,8 +313,20 @@
         //监听工具条
         table.on('tool(achieve)', function (obj) {
             var data = obj.data;
+            var name;
+            $.ajax({
+                url: "selectSpecialty_NameById",
+                type: "post",
+                data: {"id": data.specialty_id},
+                async: false,
+                success: function (d) {
+                    name=d;
+                }, error: function () {
+                    alert('error');
+                }
+            });
             if (obj.event === 'detail') {
-                detail("'" + data.exam + "'" + '  —复试成绩', 'achievementLastGradeList?id=' + data.id, 1200, 680);
+                detail("[  " + data.exam + "  ] "+ name + " 专业"+ '  复试成绩', 'achievementLastGradeList?id=' + data.id, 1200, 680);
             } else if (obj.event === 'opening') {
                 if (data.grade2 === 0) {
                     layer.confirm('确定开启?', {
@@ -355,12 +398,12 @@
                     window.top.layer.msg('已关闭', {icon: 5, offset: 'rb', area: ['120px', '80px'], anim: 2});
                 }
             } else if (obj.event === 'deling') {
-                layer.confirm('确定删除 [' + data.exam + '] 所有成绩?', {
+                layer.confirm('确认删除[  '+data.exam + ' ] '+ name + ' 专业的所有成绩?', {
                     btn: ['确认', '取消']
                 }, function (index) {
                     layer.close(index);
                     $.ajax({
-                        url: "delFirstGradeById",
+                        url: "delLastGradeById",
                         type: "post",
                         data: {"id": data.id},
                         success: function (d) {
@@ -376,29 +419,84 @@
                     });
                 });
             } else if (obj.event === 'intoing') {
-                add(data.exam + '——初试成绩导入', 'achievementLastInto?id=' + data.id, 700, 300);
+                add("[  " + data.exam + "  ] "+ name + " 专业——导入", 'achievementLastInto?id=' + data.id, 700, 300);
             } else if (obj.event === 'inout') {
-                layer.confirm('确定导出 [' + data.exam + '] 所有成绩?', {
+                layer.confirm('确认导出 [' + data.exam + ']'+name+' 专业 学生信息表?', {
                     btn: ['确认', '取消']
                 }, function (index) {
                     layer.close(index);
-                    location.href="inout_achieveFirstGrade?id="+data.id+"&name="+data.exam;
-                    /*$.ajax({
-                        url: 'inout_achieveFirstGrade',
-                        type: "post",
-                        data: {"id": data.id, "name": data.exam},
-                        success: function (d) {
-                            if (d.flag) {
-                                window.layui.table.reload('achievementLastList');
-                                window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
-                            } else {
-                                window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
-                            }
-                        }, error: function () {
-                            alert('error');
-                        }
-                    });*/
+                    location.href="inout_achieveLastGrade?id="+data.id+"&name="+data.exam;
                 });
+            } else if (obj.event === 'openinghgz') {
+                if (data.certificate === 0) {
+                    layer.confirm('确定开启?', {
+                        btn: ['确认', '取消']
+                    }, function (index) {
+                        layer.close(index);
+                        $.ajax({
+                            url: "updateGrade_Hgswitch",
+                            type: "post",
+                            data: {"id": data.id, "status": "1"},
+                            success: function (d) {
+                                if (d.flag) {
+                                    window.layui.table.reload('achievementLastList');
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
+                                } else {
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
+                                }
+                            }, error: function () {
+                                alert('error');
+                            }
+                        });
+                    });
+                } else {
+                    window.top.layer.msg('已开启', {icon: 5, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                }
+            } else if (obj.event === 'closinghgz') {
+                if (data.certificate === 1) {
+                    layer.confirm('确定关闭?', {
+                        btn: ['确认', '取消']
+                    }, function (index) {
+                        layer.close(index);
+                        $.ajax({
+                            url: "updateGrade_Hgswitch",
+                            type: "post",
+                            data: {"id": data.id, "status": "0"},
+                            success: function (d) {
+                                if (d.flag) {
+                                    window.layui.table.reload('achievementLastList');
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
+                                } else {
+                                    window.top.layer.msg(d.msg, {
+                                        icon: 6,
+                                        offset: 'rb',
+                                        area: ['120px', '80px'],
+                                        anim: 2
+                                    });
+                                }
+                            }, error: function () {
+                                alert('error');
+                            }
+                        });
+                    });
+                } else {
+                    window.top.layer.msg('已关闭', {icon: 5, offset: 'rb', area: ['120px', '80px'], anim: 2});
+                }
             }
         });
 

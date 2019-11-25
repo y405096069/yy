@@ -8,7 +8,7 @@
         <id column="id" jdbcType="INTEGER" property="id" />
         <result column="name" jdbcType="VARCHAR" property="name" />
         <result column="code" jdbcType="VARCHAR" property="code" />
-        <result column="introduction" jdbcType="TIMESTAMP" property="introduction" />
+        <result column="introduction" jdbcType="VARCHAR" property="introduction" />
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
         <result column="add_name" jdbcType="VARCHAR" property="addName" />
     </resultMap>
@@ -23,6 +23,18 @@
         order by update_time desc
     </select>
 
+
+    <insert id="add" parameterType="com.nfdw.entity.SpecCollect">
+        insert into spec_collect(
+        name,
+        code,
+        introduction
+        )values (
+        #{name},
+        #{code},
+        #{introduction}
+        )
+    </insert>
 
 
 </mapper>

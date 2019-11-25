@@ -283,13 +283,12 @@
                             id.push(data[i].id);
                             audit_link.push(data[i].audit_link);
                             audit_status.push(data[i].audit_status);
-                            end_time.push(data[i].end_time);
                         }
                     }
                     $.ajax({
                         url: "batchUpdateAudit",
                         type: "post",
-                        data: {"id": id, "audit_link": audit_link,"audit_status":audit_status,"end_time":end_time},
+                        data: {"id": id, "audit_link": audit_link,"audit_status":audit_status},
                         traditional:true,
                         success: function (d) {
                             if (d.flag) {
@@ -347,19 +346,17 @@
                             window.top.layer.msg('已报名成功', {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                         }
                     }else if (data.audit_link =='交费后') {
-                        if (data.audit_status == '待审核' || data.audit_status == '已审核' || data.audit_status == '已审核'){
+                        if (data.audit_status == '待审核' || data.audit_status == '已审核' ){
                             detail('审核考生', 'updateAudit?id=' + data.id, 1150, 620);
                         }else if(data.audit_status == '待缴费'){
                             window.top.layer.msg('考生未缴费', {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                         }else{
                             window.top.layer.msg('已成功报名', {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                         }
-
                     }
                 }else {
                     window.top.layer.msg('审核已截止', {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                 }
-
             } else if (obj.event === 'del') {
                 layer.confirm('确定删除用户[<label style="color: #00AA91;">' + data.username + '</label>]?', {
                     btn: ['逻辑删除', '物理删除']

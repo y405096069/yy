@@ -9,4 +9,5 @@ import com.nfdw.entity.SpecCollect;
  * @Description:
  */
 public interface SpecCollectService extends BaseService<SpecCollect,String> {
+    int add(SpecCollect entity);
 }

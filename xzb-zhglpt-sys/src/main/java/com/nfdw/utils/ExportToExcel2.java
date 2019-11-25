@@ -1,13 +1,10 @@
 package com.nfdw.utils;
 
 import com.nfdw.entity.Achievement_Summary;
-import com.nfdw.util.JsonUtil;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.Cookie;
@@ -18,9 +15,9 @@ import java.util.Date;
 import java.util.List;
 
 /*
-       导出初试成绩
+       导出复试成绩
      */
-public class ExportToExcel {
+public class ExportToExcel2 {
 
 
     public static void exportWhiteList( String name,List<Achievement_Summary> list, HttpServletResponse response) {
@@ -153,8 +150,8 @@ public class ExportToExcel {
 
                 //科目1名称
                 nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_name1()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_name1());nCell.setCellStyle(style2);
+                if (as.getComplex_subjects_name1()!=null)
+                    nCell.setCellValue(as.getComplex_subjects_name1());nCell.setCellStyle(style2);
                 //科目1成绩
                 nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
                 /*if (as.getFirst_subjects_achieve1()!=0)
@@ -166,8 +163,8 @@ public class ExportToExcel {
 
                 //科目2名称
                 nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_name2()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_name2());nCell.setCellStyle(style2);
+                if (as.getComplex_subjects_name2()!=null)
+                    nCell.setCellValue(as.getComplex_subjects_name2());nCell.setCellStyle(style2);
                 //科目2成绩
                 nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
                 /*if (as.getFirst_subjects_achieve2()!=0)
@@ -179,8 +176,8 @@ public class ExportToExcel {
 
                 //科目3名称
                 nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_name3()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_name3());nCell.setCellStyle(style2);
+                if (as.getComplex_subjects_name3()!=null)
+                    nCell.setCellValue(as.getComplex_subjects_name3());nCell.setCellStyle(style2);
                 //科目3成绩
                 nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
                 /*if (as.getFirst_subjects_achieve3()!=0)
@@ -192,8 +189,8 @@ public class ExportToExcel {
 
                 //科目4名称
                 nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_name4()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_name4());nCell.setCellStyle(style2);
+                if (as.getComplex_subjects_name4()!=null)
+                    nCell.setCellValue(as.getComplex_subjects_name4());nCell.setCellStyle(style2);
                 //科目4成绩
                 nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
                 /*if (as.getFirst_subjects_achieve4()!=0)
@@ -205,8 +202,8 @@ public class ExportToExcel {
 
                 //科目5名称
                 nCell = nRow.createCell(colNo++);
-                if (as.getFirst_subjects_name5()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_name5());nCell.setCellStyle(style2);
+                if (as.getComplex_subjects_name5()!=null)
+                    nCell.setCellValue(as.getComplex_subjects_name5());nCell.setCellStyle(style2);
                 //科目5成绩
                 nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
                 /*if (as.getFirst_subjects_achieve5()!=0)
@@ -218,8 +215,8 @@ public class ExportToExcel {
 
                 //科目6名称
                 nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
-                if (as.getFirst_subjects_name6()!=null)
-                    nCell.setCellValue(as.getFirst_subjects_name6());
+                if (as.getComplex_subjects_name6()!=null)
+                    nCell.setCellValue(as.getComplex_subjects_name6());
                 //科目6成绩
                 nCell = nRow.createCell(colNo++);nCell.setCellStyle(style2);
                 /*if (as.getFirst_subjects_achieve6()!=0)
@@ -260,7 +257,7 @@ public class ExportToExcel {
         wb.write(byteArrayOutputStream);
         //设置文件标题
         String dateTime = DateFormatUtils.format(new Date(), "yyyyMMdd");
-        String outFile = excelName + "-初试成绩表" + dateTime + ".xls";
+        String outFile = excelName + "-复试成绩表" + dateTime + ".xls";
         //设置返回的文件类型
         response.setContentType("application/vnd.ms-excel;charset=utf-8");
         //对文件编码

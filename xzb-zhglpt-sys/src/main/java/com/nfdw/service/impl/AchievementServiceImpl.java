@@ -41,4 +41,9 @@ public class AchievementServiceImpl extends BaseServiceImpl<Examination, String>
     public boolean delFirstGradeByEId(int id) {
         return acMapper.delFirstGradeByEId(id)>0;
     }
+
+    @Override
+    public boolean updateGrade_Hgswitch(int id, int certificate) {
+        return acMapper.updateGrade_Hgswitch(id,certificate)>0;
+    }
 }
