@@ -18,9 +18,9 @@ spring:
   datasource:
     druid:
       url: jdbc:mysql://193.112.139.184:3306/xzb-zhglpt1?useUnicode=true&characterEncoding=UTF-8
-        #url: jdbc:mysql://47.106.68.87:3306/wb_zhglpt?useUnicode=true&characterEncoding=UTF-8
+      #url: jdbc:mysql://47.106.68.87:3306/wb_zhglpt?useUnicode=true&characterEncoding=UTF-8
       username: develop
-        ##password: GZxz;1355
+      ##password: GZxz;1355
       password: jinghanv5
       # 使用druid数据源
       type: com.alibaba.druid.pool.DruidDataSource

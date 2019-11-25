@@ -1,14 +1,15 @@
 package com.nfdw.service;
 
 import com.nfdw.base.service.BaseService;
+import com.nfdw.entity.CurrentRole;
 import com.nfdw.entity.SysRole;
 
 import java.util.List;
 
 /**
-
+ *
  */
-public interface RoleService extends BaseService<SysRole,String> {
+public interface RoleService extends BaseService<SysRole, String> {
 
 
   int deleteByPrimaryKey(String id);
@@ -30,4 +31,7 @@ public interface RoleService extends BaseService<SysRole,String> {
 
   @Override
   List<SysRole> selectListByPage(SysRole sysRole);
+
+  List<CurrentRole> getUserRoles(String userId);
+
 }

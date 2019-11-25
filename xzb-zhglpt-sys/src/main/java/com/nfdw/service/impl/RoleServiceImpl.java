@@ -2,18 +2,21 @@ package com.nfdw.service.impl;
 
 import com.nfdw.base.BaseMapper;
 import com.nfdw.base.service.impl.BaseServiceImpl;
+import com.nfdw.entity.CurrentRole;
 import com.nfdw.entity.SysRole;
 import com.nfdw.mapper.SysRoleMapper;
 import com.nfdw.service.RoleService;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
+ *
  */
 @Service
-public class RoleServiceImpl extends BaseServiceImpl<SysRole,String> implements RoleService {
+public class RoleServiceImpl extends BaseServiceImpl<SysRole, String> implements RoleService {
 
   @Autowired
   private SysRoleMapper roleMapper;
@@ -30,7 +33,7 @@ public class RoleServiceImpl extends BaseServiceImpl<SysRole,String> implements 
 
   @Override
   public int insert(SysRole record) {
-    record=super.addValue(record,true);
+    record = super.addValue(record, true);
     return roleMapper.insert(record);
   }
 
@@ -57,5 +60,10 @@ public class RoleServiceImpl extends BaseServiceImpl<SysRole,String> implements 
   @Override
   public List<SysRole> selectListByPage(SysRole sysRole) {
     return roleMapper.selectListByPage(sysRole);
+  }
+
+  @Override
+  public List<CurrentRole> getUserRoles(String userId) {
+    return roleMapper.getUserRoles(userId);
   }
 }

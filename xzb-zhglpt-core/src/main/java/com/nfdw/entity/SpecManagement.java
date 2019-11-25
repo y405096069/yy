@@ -67,6 +67,83 @@ public class SpecManagement {
     @Column(name = "collect_id")
     private int collect_id;
 
+    public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getSub_limit() {
+        return sub_limit;
+    }
+
+    public void setSub_limit(int sub_limit) {
+        this.sub_limit = sub_limit;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
+    public int getRes_status() {
+        return res_status;
+    }
+
+    public void setRes_status(int res_status) {
+        this.res_status = res_status;
+    }
+
+    public String getZs_content() {
+        return zs_content;
+    }
+
+    public void setZs_content(String zs_content) {
+        this.zs_content = zs_content;
+    }
+
+    public String getTicket_id() {
+        return ticket_id;
+    }
+
+    public void setTicket_id(String ticket_id) {
+        this.ticket_id = ticket_id;
+    }
+
+    public Date getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
+    }
+
+    public String getUpdate_people() {
+        return update_people;
+    }
+
+    public void setUpdate_people(String update_people) {
+        this.update_people = update_people;
+    }
+
+    public int getCollect_id() {
+        return collect_id;
+    }
+
+    public void setCollect_id(int collect_id) {
+        this.collect_id = collect_id;
+    }
 }

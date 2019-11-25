@@ -9,44 +9,17 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.servlet.http.HttpServletRequest;
 
-public abstract class BaseLoginController {
+public interface BaseLoginController {
+
+    @GetMapping(value = "/login")
+    String goLogin(Model model);
+
     @PostMapping(value = "/login")
-    public String login(SysUser user, String code, Model model, HttpServletRequest request,String type) {
-        System.out.println(user.getUser_type());
-        String codeMsg = (String) request.getSession().getAttribute("_code");
-        if (null != code && !code.toLowerCase().equals(codeMsg)) {
-            model.addAttribute("message", "验证码错误");
-            return "/login";
-        }
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername().trim(),
-                user.getPassword());
-        Subject subject = SecurityUtils.getSubject();
-        String msg = null;
-        try {
-            subject.login(token);
-            if (subject.isAuthenticated()) {
-                if(user.getUser_type().equals("0")){
-                    return "redirect:/main";
-                }if(user.getUser_type().equals("1")){
-                    return "redirect:/studentIndex";
-                }else{
-                    return "/addStudentUser";
-                }
-            }
-        } catch (UnknownAccountException e) {
-            msg = e.getMessage();
-        } catch (IncorrectCredentialsException e) {
-            msg = "用户名/密码错误";
-        } catch (ExcessiveAttemptsException e) {
-            msg = e.getMessage();
-        }
-        if (msg != null) {
-            model.addAttribute("message", msg);
-        }
-        return "/login";
-    }
+    String login(SysUser user, String code, Model model, HttpServletRequest request);
 }

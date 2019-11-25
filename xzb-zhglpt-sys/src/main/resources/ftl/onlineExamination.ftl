@@ -570,8 +570,7 @@
             <div>
                 <div style="display: flex;justify-content: center;align-items: center;min-height: 80px;">
                     <button style="width: 150px;height: 40px;" type="submit" class="layui-btn" lay-submit="" lay-filter="submits" <#if studentInformation.student_id ??>
-                        disabled="disabled"
-                            </#if>>新增</button>
+                    </#if>>新增</button>
                     <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-normal" onclick="location.href='${re.contextPath}/studentInformation/getSelectExam';">下一步</button>
                 </div>
             </div>

@@ -16,16 +16,15 @@ import com.nfdw.util.Checkbox;
 import com.nfdw.util.JsonUtil;
 import com.nfdw.util.Md5Util;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
+ *
  */
 @Service
 public class SysUserServiceImpl extends BaseServiceImpl<SysUser, String> implements SysUserService {
@@ -246,8 +245,8 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser, String> impleme
 
     @Override
     public void updateByIdStatus(String id, int status) {
-        int count=sysUserMapper.updateStatus(id, status);
-        if(count>0) {
+        int count = sysUserMapper.updateStatus(id, status);
+        if (count <= 0) {
             try {
                 throw new Exception("修改状态失败");
             } catch (Exception e) {
@@ -259,13 +258,57 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUser, String> impleme
 
     @Override
     public CurrentUser selectUser(String username) {
-        CurrentUser  user =sysUserMapper.selectUser(username);
+        CurrentUser user = sysUserMapper.selectUser(username);
         return user;
     }
 
     @Override
-    public int addSysUser(SysUser sysUser) {
-        return 0;
+    @Transactional(rollbackFor = Exception.class)
+    public void addStudent(SysUser sysUser) {
+        try {
+            String md5 = Md5Util.getMD5(sysUser.getPassword().trim(), sysUser.getUsername().trim());
+            sysUser.setPassword(md5);
+
+            sysUser.setEmail(sysUser.getUsername());
+            sysUser.setRealName(sysUser.getUsername());
+            sysUser.setAge(0);
+            sysUser.setCreateDate(new Date());
+            sysUser.setUpdateDate(new Date());
+
+            int count = sysUserMapper.add(sysUser);
+
+            SysRole role = new SysRole();
+            role.setRoleName("student");
+            role = roleService.selectOne(role);
+            if (null == role) {
+                throw new RuntimeException("注册失败");
+            }
+
+            SysRoleUser roleUser = new SysRoleUser();
+            roleUser.setUserId(sysUser.getId());
+            roleUser.setRoleId(role.getId());
+            //绑定到用户管理角色表
+            count = sysRoleUserMapper.insertSelective(roleUser);
+
+            if (count <= 0) {
+                throw new RuntimeException("注册失败");
+            }
+
+        } catch (RuntimeException ex) {
+            throw new RuntimeException("注册失败");
+        }
+    }
+
+    @Override
+    public void addUser(SysUser sysUser) {
+        try {
+            String md5 = Md5Util.getMD5(sysUser.getPassword().trim(), sysUser.getUsername().trim());
+            sysUser.setPassword(md5);
+            sysUserMapper.addSysUser(sysUser);
+        } catch (Exception ex) {
+            throw new RuntimeException("添加失败");
+        }
+
     }
 
     @Override

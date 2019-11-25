@@ -55,4 +55,67 @@ public class Subject {
     @Column(name = "spec_name")
     private String spec_name;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getSubject_name() {
+        return subject_name;
+    }
+
+    public void setSubject_name(String subject_name) {
+        this.subject_name = subject_name;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+    public Date getUpdate_time() {
+        return update_time;
+    }
+
+    public void setUpdate_time(Date update_time) {
+        this.update_time = update_time;
+    }
+
+    public String getUpdate_name() {
+        return update_name;
+    }
+
+    public void setUpdate_name(String update_name) {
+        this.update_name = update_name;
+    }
+
+    public Integer getSpec_id() {
+        return spec_id;
+    }
+
+    public void setSpec_id(Integer spec_id) {
+        this.spec_id = spec_id;
+    }
+
+    public String getSpec_name() {
+        return spec_name;
+    }
+
+    public void setSpec_name(String spec_name) {
+        this.spec_name = spec_name;
+    }
 }

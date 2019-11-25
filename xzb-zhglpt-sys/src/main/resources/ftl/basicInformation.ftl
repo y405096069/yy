@@ -124,9 +124,9 @@
         </div>
         <form class="layui-form" method="post" action="${re.contextPath}/studentInformation/addStudentInformations" enctype="multipart/form-data">
             <input id="start" type="hidden" data-method="setTop" class="layui-btn" value="${certificate_type}"
-            <#if studentInformation.certificate_type ??>
+                    <#if studentInformation.certificate_type ??>
                 disabled="disabled"
-            </#if>></input>
+                    </#if>></input>
             <div class="layui-header">
                 <p>提示:</p>
                 <p>(注：带*符号的项必填)</p>
@@ -144,7 +144,7 @@
                         <select name="certificate_type" id="departmentId" lay-verify="departmentId"
                                 lay-filter="departmentId"  <#if studentInformation.certificate_type ??>
                             disabled="disabled"
-                        </#if>>
+                                </#if>>
                             <#if studentInformation.certificate_type ??>
                                 <option value="${studentInformation.certificate_type}">${studentInformation.certificate_type}</option>
                             </#if>
@@ -538,7 +538,7 @@
                 </fieldset>
                 <div class="layui-input-inline">
                     <div id="demo2" style="margin-top: 20px;margin-left: 50px">
-                        <img src="C:/Users/Administrator/AppData/Local/Temp/tomcat-docbase.6614518231621164549.4430/app/weixin_20191121104932.jpg" width="100px" height="100px"
+                        <img src="${studentInformation.photograph}" width="100px" height="100px"
                              class="layui-upload-img layui-circle">
                     </div>
                 </div>

@@ -12,11 +12,10 @@ import javax.validation.constraints.NotEmpty;
 import java.util.Date;
 
 @Table(name = "sys_user")
-@Data
-@ToString
 public class SysUser {
+
     @Id
-    @GeneratedValue(generator = "JDBC")
+    @GeneratedValue(generator = "JDBC",strategy = GenerationType.AUTO)
     private String id;
 
     @NotEmpty(message = "用户名不能为空", groups = {AddGroup.class, UpdateGroup.class})
@@ -25,15 +24,8 @@ public class SysUser {
     @NotEmpty(message = "密码不能为空", groups = {AddGroup.class, UpdateGroup.class})
     private String password;
 
+    @Transient
     private String verifyPassword;
-
-    public String getVerifyPassword() {
-        return verifyPassword;
-    }
-
-    public void setVerifyPassword(String verifyPassword) {
-        this.verifyPassword = verifyPassword;
-    }
 
     private Integer age;
 
@@ -95,14 +87,10 @@ public class SysUser {
 
     @Transient
     private String gzarea;
-    private String user_type;
 
-    public String getUser_type() {
-        return user_type;
-    }
+    private String userType;
 
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
+    public SysUser() {
     }
 
     public String getId() {
@@ -127,6 +115,14 @@ public class SysUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getVerifyPassword() {
+        return verifyPassword;
+    }
+
+    public void setVerifyPassword(String verifyPassword) {
+        this.verifyPassword = verifyPassword;
     }
 
     public Integer getAge() {
@@ -263,5 +259,41 @@ public class SysUser {
 
     public void setGzarea(String gzarea) {
         this.gzarea = gzarea;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
+    }
+
+    @Override
+    public String toString() {
+        return "SysUser{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", verifyPassword='" + verifyPassword + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", photo='" + photo + '\'' +
+                ", realName='" + realName + '\'' +
+                ", createBy='" + createBy + '\'' +
+                ", updateBy='" + updateBy + '\'' +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", delFlag=" + delFlag +
+                ", status=" + status +
+                ", lockingDate=" + lockingDate +
+                ", sort=" + sort +
+                ", departmentId=" + departmentId +
+                ", positionId=" + positionId +
+                ", departmentName='" + departmentName + '\'' +
+                ", positionName='" + positionName + '\'' +
+                ", gzarea='" + gzarea + '\'' +
+                ", userType='" + userType + '\'' +
+                '}';
     }
 }

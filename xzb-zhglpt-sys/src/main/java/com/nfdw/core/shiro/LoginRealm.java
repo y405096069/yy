@@ -1,10 +1,9 @@
 package com.nfdw.core.shiro;
 
 import com.alibaba.fastjson.JSONArray;
-import com.nfdw.entity.SysMenu;
-import com.nfdw.entity.SysRole;
-import com.nfdw.entity.SysUser;
+import com.nfdw.entity.*;
 import com.nfdw.service.MenuService;
+import com.nfdw.service.RoleService;
 import com.nfdw.service.SysUserService;
 import com.nfdw.util.LoginUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -24,10 +23,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
-import com.nfdw.entity.CurrentMenu;
-import com.nfdw.entity.CurrentRole;
-import com.nfdw.entity.CurrentUser;
-
 /**
  *
  */
@@ -39,6 +34,9 @@ public class LoginRealm extends AuthorizingRealm {
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private RoleService roleService;
 
     /**
      * 获取认证
@@ -54,7 +52,7 @@ public class LoginRealm extends AuthorizingRealm {
 
         CurrentUser cUser = (CurrentUser) ShiroUtil.getSession().getAttribute("curentUser");
         for (CurrentRole cRole : cUser.getCurrentRoleList()) {
-            info.addRole(cRole.getId());
+            info.addRole(cRole.getRoleName());
         }
         for (CurrentMenu cMenu : cUser.getCurrentMenuList()) {
             if (!StringUtils.isEmpty(cMenu.getPermission()))
@@ -109,7 +107,13 @@ public class LoginRealm extends AuthorizingRealm {
                 role = new CurrentRole(r.getId(), r.getRoleName(), r.getRemark());
                 currentRoleList.add(role);
             }
-            currentUser.setCurrentRoleList(currentRoleList);
+            System.out.println(roleService.getUserRoles(currentUser.getId()));
+            if (currentRoleList.size() > 0) {
+                currentUser.setCurrentRoleList(currentRoleList);
+            } else {
+                currentUser.setCurrentRoleList(roleService.getUserRoles(currentUser.getId()));
+            }
+
             currentUser.setCurrentMenuList(currentMenuList);
             session.setAttribute("user", s);
             session.setAttribute("curentUser", currentUser);

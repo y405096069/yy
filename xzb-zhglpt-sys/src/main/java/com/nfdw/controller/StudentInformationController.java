@@ -3,12 +3,11 @@ package com.nfdw.controller;
 import com.nfdw.ConverVideoTest;
 import com.nfdw.core.annotation.Log;
 import com.nfdw.core.shiro.ShiroUtil;
-import com.nfdw.entity.CurrentUser;
-import com.nfdw.entity.Examination;
-import com.nfdw.entity.StudentInformation;
-import com.nfdw.entity.SysUser;
+import com.nfdw.entity.*;
 import com.nfdw.service.StudentInformationService;
 import com.nfdw.service.SysUserService;
+import com.nfdw.util.UploadUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +20,8 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
+import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
@@ -113,26 +114,20 @@ public class StudentInformationController {
     }
     @Log(desc = "跳转到选择报考")
     @RequestMapping(value="/getSelectExam")
-    public String getSelectExam(String exam,String name,Date create_start_time,Model model){
+    @PostMapping
+    public String getSelectExam(String exam,String name,String create_start_time,Model model) throws ParseException {
+         Date date =new Date();
         CurrentUser user = ShiroUtil.getCurrentUse();
-
         StudentInformation studentInformation=studentInformationService.getUserIDByStudentInformation(user.getUsername());
-        System.out.print(studentInformation.getExaminee_province()+"111111111111");
+//        if (null!=studentInformation) {
+//            throw new RuntimeException("已经存在当前考生信息");
+//        }
 //        Date currentTime = new Date();
-////改变输出格式（自己想要的格式）
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-////得到字符串时间
-//        String s8 = formatter.format(currentTime);
-        studentInformation.setCurrentDate(new Date());
-        if(!"".equals(studentInformation.getExamName())&&null!=studentInformation.getExamName()){
-            studentInformation.setExamName(exam);
-        }
-        if(!"".equals(studentInformation.getSubjectName())&&null!=studentInformation.getSubjectName()){
-            studentInformation.setSubjectName(name);
-        }
-        if(!"".equals(studentInformation.getCreate_start_time())&&null!=studentInformation.getCreate_start_time()){
-            studentInformation.setCreate_start_time(create_start_time);
-        }
+//改变输出格式（自己想要的格式）
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//得到字符串时间
+        String s8 = formatter.format(date);
+        studentInformation.setCurrentDate(s8);
         List<Examination> examinationList=studentInformationService.getListExamination(studentInformation.getCurrentDate(),studentInformation.getExaminee_province(),
                 studentInformation.getSubject_type(),exam,name,create_start_time);
         for (Examination e:examinationList
@@ -143,14 +138,34 @@ public class StudentInformationController {
         model.addAttribute("exam",exam);
         model.addAttribute("name",name);
         model.addAttribute("create_start_time",create_start_time);
-
         return "selectExam";
+    }
+
+    @Autowired
+    UploadUtil uploadUtil;
+
+    @RequestMapping(value="/getSelectExams", produces={"application/json; charset=UTF-8"})
+    @ResponseBody
+    public List<Examination> getSelectExams(String exam,String name,String create_start_time) {
+        Date date =new Date();
+        CurrentUser user = ShiroUtil.getCurrentUse();
+        StudentInformation studentInformation=studentInformationService.getUserIDByStudentInformation(user.getUsername());
+        System.out.print(studentInformation.getExaminee_province()+"111111111111");
+//        Date currentTime = new Date();
+//改变输出格式（自己想要的格式）
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+//得到字符串时间
+        String s8 = formatter.format(date);
+        studentInformation.setCurrentDate(s8);
+        List<Examination> examinationList=studentInformationService.getListExamination(studentInformation.getCurrentDate(),studentInformation.getExaminee_province(),
+                studentInformation.getSubject_type(),exam,name,create_start_time);
+        return examinationList;
     }
     @PostMapping(value= "addStudentInformations")
     public String addStudentInformations(HttpSession session, StudentInformation studentInformation, @RequestParam("file")MultipartFile file,Model model, HttpServletRequest request) throws IOException {
         studentInformation.setStudent_id(UUID.randomUUID().toString().replaceAll("\\-", ""));
         CurrentUser user = ShiroUtil.getCurrentUse();
-        if(studentInformationService.getStudentInfoConunt(user.getUsername())>1){
+        if(studentInformationService.getStudentInfoConunt(user.getUsername())==0){
         if("".equals(studentInformation.getCertificate_type())||null==studentInformation.getCertificate_type()){
             model.addAttribute("rel","证件类型不能为空!");
             return "basicInformation";
@@ -232,56 +247,9 @@ public class StudentInformationController {
             return "basicInformation";
         }
 
-        //获取存储app文件夹的路径
-        String appPath = session.getServletContext().getRealPath("/app");
-        File appRootDir = new File(appPath);
-        if (!appRootDir.exists()) {
-            System.out.println("存储app的文件夹不存在 appPath= " + appPath);
-            appRootDir.mkdirs();
-        } else {
-            System.out.println("存储app的文件夹存在 appPath= " + appPath);
-        }
-        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver(request.getSession().getServletContext());
 
-        if (multipartResolver.isMultipart(request)) {
-            MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
-
-            Iterator<String> names = multiRequest.getFileNames();
-            while (names.hasNext()) {
-                MultipartFile file1 = multiRequest.getFile(names.next().toString());
-                if (file1 != null) {
-                    File appFile = new File(appRootDir, file1.getOriginalFilename());
-                    file1.transferTo(appFile);
-                    String fileName = file.getOriginalFilename();
-                    // 获取文件的后缀名
-                    //String suffixName = fileName.substring(fileName.lastIndexOf("."));
-                    studentInformation.setPhotograph(appFile.getPath());
-                    System.out.println(appFile.getPath());
-                }
-
-            }
-        }
-
-//        if (file.isEmpty()) {
-//            System.out.println("文件为空空");
-//        }
-//        String fileName = file.getOriginalFilename();  // 文件名
-//        String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
-//        String filePath = "D://temp-rainy//"; // 上传后的路径
-//        fileName = UUID.randomUUID() + suffixName; // 新文件名
-//        File dest = new File(filePath + fileName);
-//        if (!dest.getParentFile().exists()) {
-//            dest.getParentFile().mkdirs();
-//        }
-//        try {
-//            file.transferTo(dest);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        String filename = "/temp-rainy/" + fileName;
-//        studentInformation.setPhotograph(filename);
-
-
+        String upload = uploadUtil.upload(file);
+        studentInformation.setPhotograph(upload);
 
             SysUser sysUser=userService.getSysUserByUsername(user.getUsername());
             studentInformation.setStudent_userid(sysUser.getId());
@@ -303,7 +271,7 @@ public class StudentInformationController {
     public String addStudentInformationss(HttpSession session, StudentInformation studentInformation, @RequestParam("file")MultipartFile file,Model model, HttpServletRequest request) throws IOException {
         studentInformation.setStudent_id(UUID.randomUUID().toString().replaceAll("\\-", ""));
         CurrentUser user = ShiroUtil.getCurrentUse();
-        if(studentInformationService.getStudentInfoConunt(user.getUsername())>1){
+        if(studentInformationService.getStudentInfoConunt(user.getUsername())==0){
             if("".equals(studentInformation.getCertificate_type())||null==studentInformation.getCertificate_type()){
                 model.addAttribute("rel","证件类型不能为空!");
                 return "onlineExamination";
@@ -602,5 +570,41 @@ public class StudentInformationController {
 //            }
         }
         return null;
+    }
+    @PostMapping(value = "/addStudent_examAudit")
+    public String addStudent_examAudit(String exam,String aname,String build,String create_start_time,Model model){
+        CurrentUser user = ShiroUtil.getCurrentUse();
+        StudentInformation studentInformation=studentInformationService.getUserIDByStudentInformation(user.getUsername());
+        if("".equals(exam)||null==exam){
+            model.addAttribute("rel","考试名称不能为空!");
+            return "selectExams";
+        }
+//        if("".equals(name)||null==name){
+//            model.addAttribute("rel","专业不能为空！");
+//            return "selectExams";
+//        }
+        if("".equals(build)||null==build){
+            model.addAttribute("rel","考试地点不能为空!");
+            return "selectExams";
+        }
+        if("".equals(create_start_time)||null==create_start_time){
+            model.addAttribute("rel","家庭联络员工作单位不能为空!");
+            return "selectExams";
+        }
+        StudentExamAudit studentExamAudit=new StudentExamAudit();
+        Date date =new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//得到字符串时间
+        String s8 = formatter.format(date);
+        studentExamAudit.setInformationId(studentInformation.getStudent_id());
+        studentExamAudit.setExamId(exam);
+        studentExamAudit.setManagementId(aname);
+        studentExamAudit.setExamTime(create_start_time);
+        studentExamAudit.setKaoChangId(build);
+        studentExamAudit.setAgreement(0);
+        studentExamAudit.setTime(s8);
+
+        studentInformationService.addStudentExamAudit(studentExamAudit);
+        return "informationGather";
     }
 }

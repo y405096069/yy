@@ -136,7 +136,8 @@
                 <div class="step-list"></div>
             </div>
         </div>
-        <form class="layui-form" action="">
+        <form class="layui-form" method="post" action="${re.contextPath}/studentInformation/addStudent_examAudit">
+            <input id="start" type="hidden" data-method="setTop" class="layui-btn" value="${rel}"></input>
             <div class="layui-com">
                 <p>提示:</p>
                 <p>(注：带*符号的项必填)</p>
@@ -148,11 +149,11 @@
                     </label>
                     <div class="layui-input-inline">
                         <select name="exam" id="exam" lay-verify="departmentId"
-                                lay-filter="departmentId" value="${examination.exam}">
+                                lay-filter="exam">
                             <option value="">请选择考试名称</option>
-<#--                            <#list examinationList as examination>-->
-<#--                                <option value="${examination.exam}">${examination.exam}</option>-->
-<#--                            </#list>-->
+                            <#list examinationList as examination>
+                                <option value="${examination.exam}">${examination.exam}</option>
+                            </#list>
 <#--                            <option th:each="list1:${typeList1}" th:value="${list1.exam}" th:text="${list1.exam }"></option>-->
                         </select>
                     </div>
@@ -162,12 +163,12 @@
                         <span class="x-red">*</span>专业名称
                     </label>
                     <div class="layui-input-inline">
-                        <select name="name" id="name" lay-verify="departmentId"
-                                lay-filter="departmentId"  value="${examination.name}">
+                        <select name="aname" id="aname" lay-verify="departmentId"
+                                lay-filter="aname">
                             <option value="">请选择专业名称</option>
-<#--                            <#list examinationList as examination>-->
-<#--                                <option value="${examination.name}">${examination.name}</option>-->
-<#--                            </#list>-->
+                            <#list examinationList as examination>
+                                <option value="${examination.name}">${examination.name}</option>
+                            </#list>
                         </select>
                     </div>
                 </div>
@@ -178,11 +179,11 @@
                         </label>
                         <div class="layui-input-inline">
                             <select name="create_start_time" id="create_start_time" lay-verify="departmentId"
-                                    lay-filter="departmentId" value="${examination.create_start_time}">
+                                    lay-filter="create_start_time">
                                 <option value="">请选择考试时间</option>
-<#--                                <#list examinationList as examination>-->
-<#--                                    <option value="${examination.create_start_time?string("yyyy-MM-dd HH:mm:ss")}">${examination.create_start_time?string("yyyy-MM-dd HH:mm:ss")}</option>-->
-<#--                                </#list>-->
+                                <#list examinationList as examination>
+                                    <option value="${examination.create_start_time}">${examination.create_start_time}</option>
+                                </#list>
                             </select>
                         </div>
                     </div>
@@ -192,7 +193,7 @@
                         </label>
                         <div class="layui-input-inline">
                             <select name="build" id="build" lay-verify="departmentId"
-                                    lay-filter="departmentId" value="${examination.build}">
+                                    lay-filter="build">
                                 <option value="">请选择考试地点</option>
                                 <#list examinationList as examination>
                                     <option value="${examination.build}">${examination.build}</option>
@@ -209,7 +210,7 @@
                 </p>
             </div>
             <div style="display: flex;justify-content: center;align-items: center;min-height: 80px;">
-                <button style="width: 150px;height: 40px;" type="button" class="layui-btn">确认</button>
+                <input style="width: 150px;height: 40px;" type="submit" class="layui-btn"></input>
                 <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-normal" onclick="openAction()">下一步</button>
             </div>
         </form>
@@ -262,6 +263,12 @@
     </form>
 </div>
 <script>
+    $( function rel(){
+        var rel=$("#start").val();
+        if(rel!=""&&rel!=null){
+            alert(rel);
+        }
+    });
     layui.use(['jquery', 'steps', 'form', 'laydate', 'upload'], function(){
 
         var $ = layui.$;
@@ -379,97 +386,164 @@
             });
         });
     }
-    layui.use(['form','layer','jquery'],function(){
-        var WEB_ROOT="https://localhost:4430/xzb-zhglpt/";
-        var form = layui.form,
-            layer = parent.layer === undefined ? layui.layer : parent.layer,
-            $ = layui.jquery;
+    // layui.use(['form','layer','jquery'],function(){
+    //     var WEB_ROOT="https://localhost:4430/xzb-zhglpt/";
+    //     var form = layui.form,
+    //         layer = parent.layer === undefined ? layui.layer : parent.layer,
+    //         $ = layui.jquery;
+    //
+    //     var provinceText = "";
+    //     var cityText = "";
+    //     var areaText = "";
+    //     //异步加载下拉框数据
+    //     $.post(WEB_ROOT+"studentInformation/getSelectExams",{"exam":provinceText,"name":cityText,"create_start_time":areaText},function (data) {
+    //         if(!data.success){
+    //             layer.msg(data.msg)
+    //         }else{
+    //             var $html = "";
+    //             if(data.data != null) {
+    //                 $.each(data.data, function (index, item) {
+    //                     $html += "<option value='" + item.exam + "'>" + item.exam + "</option>";
+    //                 });
+    //                 $("#exam").append($html);
+    //                 //append后必须从新渲染
+    //                 form.render('select');
+    //             }
+    //         }
+    //
+    //     });
+    //     var value1 = $("#exam").val();
+    //     var value2 = $("#aname").val();
+    //     var value3 = $("#create_start_time").val();
+    //     console.log(value1)
+    //     console.log(value2)
+    //     console.log(value3)
+    //     //监听省下拉框
+    //     form.on('select(exam)', function(dataObj){
+    //         //移除城市下拉框所有选项
+    //         console.log(111)
+    //         $("#name").empty();
+    //         var cityHtml = '<option value="">请选择专业名称</option>';
+    //         $("#aname").html(cityHtml);
+    //         var areaHtml = '<option value="">请选择考试时间</option>';
+    //
+    //         $("#create_start_time").html(areaHtml);
+    //         value1 = $("#exam").val();
+    //
+    //         provinceText = $("#exam").find("option:selected").text();
+    //
+    //         //异步加载下拉框数据
+    //         $.post(WEB_ROOT+"studentInformation/getSelectExams",{"exam":value1,"name":value2,"create_start_time":value3},function (data) {
+    //             if(!data.success){
+    //                 layer.msg(data.msg)
+    //             }else{
+    //                 var $html = "";
+    //                 if(data.data != null) {
+    //                     $.each(data.data, function (index, item) {
+    //                         $html += "<option value='" + item.exam + "'>" + item.exam + "</option>";
+    //                     });
+    //                     $("#aname").append($html);
+    //                     //append后必须从新渲染
+    //                     form.render('select');
+    //                 }
+    //             }
+    //
+    //         });
+    //
+    //     });
+    //
+    //     //监听市下拉框
+    //     form.on('select(aname)', function(dataObj){
+    //         //移除县区下拉框所有选项
+    //         console.log(111)
+    //
+    //         $("#create_start_time").empty();
+    //         var html = '<option value="">请选择考试时间</option>';
+    //         $("#create_start_time").html(html);
+    //
+    //         cityText = $("#exam").find("option:selected").text();
+    //
+    //         value2 = dataObj.value;
+    //         console.log(dataObj.value)
+    //         //异步加载下拉框数据
+    //         $.post(WEB_ROOT+"studentInformation/getSelectExams",{"exam":value1,"name":value2,"create_start_time":value3},function (data) {
+    //             if(!data.success){
+    //                 layer.msg(data.msg)
+    //             }else{
+    //                 var $html = "";
+    //                 if(data.data != null) {
+    //                     $.each(data.data, function (index, item) {
+    //                         $html += "<option value='" + item.name + "'>" + item.name + "</option>";
+    //                     });
+    //                     $("#create_start_time").append($html);
+    //                     //append后必须从新渲染
+    //                     form.render('select');
+    //                 }
+    //             }
+    //
+    //         });
+    //
+    //     });
+    //     //监听市下拉框
+    //     form.on('select(create_start_time)', function(dataObj){
+    //         //移除县区下拉框所有选项
+    //         console.log(111)
+    //
+    //         $("#build").empty();
+    //         var html = '<option value="">请选择考试时间</option>';
+    //         $("#build").html(html);
+    //
+    //         cityText = $("#create_start_time").find("option:selected").text();
+    //
+    //         value3 = dataObj.value;
+    //         console.log(dataObj.value)
+    //         //异步加载下拉框数据
+    //         $.post(WEB_ROOT+"studentInformation/getSelectExams",{"exam":value1,"name":value2,"create_start_time":value3},function (data) {
+    //             if(!data.success){
+    //                 layer.msg(data.msg)
+    //             }else{
+    //                 var $html = "";
+    //                 if(data.data != null) {
+    //                     $.each(data.data, function (index, item) {
+    //                         $html += "<option value='" + item.create_start_time + "'>" + item.create_start_time + "</option>";
+    //                     });
+    //                     $("#build").append($html);
+    //                     //append后必须从新渲染
+    //                     form.render('select');
+    //                 }
+    //             }
+    //
+    //         });
+    //
+    //     });
+    //     //监听县区下拉框
+    //     form.on('select(create_start_time)', function(dataObj){
+    //
+    //         console.log(value1)
+    //         console.log(value2)
+    //         console.log(dataObj.value)
+    //         areaText = $("#create_start_time").find("option:selected").text();
+    //     });
+    // });
 
-        var provinceText = "";
-        var cityText = "";
-        var areaText = "";
-        //异步加载下拉框数据
-        $.post(WEB_ROOT+"studentInformation/getSelectExam",{"exam":null,"name":null,"create_start_time":null},function (data) {
-            if(!data.success){
-                layer.msg(data.msg)
-            }else{
-                var $html = "";
-                if(data.data != null) {
-                    $.each(data.data, function (index, item) {
-                        $html += "<option value='" + item.exam + "'>" + item.exam + "</option>";
-                    });
-                    $("#exam").append($html);
-                    //append后必须从新渲染
-                    form.render('select');
-                }
-            }
 
-        });
-
-        //监听省下拉框
-        form.on('select(exam)', function(dataObj){
-            //移除城市下拉框所有选项
-            $("#name").empty();
-            var cityHtml = '<option value="">请选择专业名称</option>';
-            $("#name").html(cityHtml);
-            var areaHtml = '<option value="">请选择考试时间</option>';
-            $("#create_start_time").html(areaHtml);
-            provinceText = $("#exam").find("option:selected").text();
-            var value = $("#exam").val();
-            //异步加载下拉框数据
-            $.post(WEB_ROOT+"studentInformation/getSelectExam",{"exam":value,"name":null,"create_start_time":null},function (data) {
-                if(!data.success){
-                    layer.msg(data.msg)
-                }else{
-                    var $html = "";
-                    if(data.data != null) {
-                        $.each(data.data, function (index, item) {
-                            $html += "<option value='" + item.exam + "'>" + item.exam + "</option>";
-                        });
-                        $("#name").append($html);
-                        //append后必须从新渲染
-                        form.render('select');
-                    }
-                }
-
-            });
-
-        });
-
-        //监听市下拉框
-        form.on('select(name)', function(dataObj){
-            //移除县区下拉框所有选项
-            $("#create_start_time").empty();
-            var html = '<option value="">请选择考试时间</option>';
-            $("#create_start_time").html(html);
-
-            cityText = $("#city").find("option:selected").text();
-            var value = $("#city").val();
-            //异步加载下拉框数据
-            $.post(WEB_ROOT+"dtArea/queryByParentId",{"exam":null,"name":value,"create_start_time":null},function (data) {
-                if(!data.success){
-                    layer.msg(data.msg)
-                }else{
-                    var $html = "";
-                    if(data.data != null) {
-                        $.each(data.data, function (index, item) {
-                            $html += "<option value='" + item.name + "'>" + item.name + "</option>";
-                        });
-                        $("#create_start_time").append($html);
-                        //append后必须从新渲染
-                        form.render('select');
-                    }
-                }
-
-            });
-
-        });
-
-        //监听县区下拉框
-        form.on('select(create_start_time)', function(dataObj){
-            areaText = $("#create_start_time").find("option:selected").text();
-        });
-    });
+    // layui.use(['form', 'upload', 'layer'], function () {
+    //
+    //     var form = layui.form;
+    //
+    //
+    //     $.ajax({
+    //         url: '../hwjg_App/hwjgApp_ashx/GetXm.ashx',
+    //         dataType: 'json',
+    //         type: 'get',
+    //         success: function (data) {
+    //             $.each(data, function (index, item) {
+    //                 $('#exam').append(new Option(item.name, item.name));// 下拉菜单里添加元素
+    //             });
+    //             layui.form.render("select");
+    //         }
+    //     })
+    // })
 
     <#--form.on('select()', function (data) {-->
 
@@ -508,28 +582,28 @@
     <#--        form.render('select');//  注意：数据赋值完成之后必须调用该方法，进行layui的渲染，否则数据出不来-->
     <#--    });-->
     <#--});-->
-    layui.use(['layer', 'form'], function(){
-        var layer = layui.layer
-            ,form = layui.form;
-        form.on('select(myselect)', function(data){
-            var areaId=(data.value).replaceAll(",","");
-            $.ajax({
-                type: 'POST',
-                url: '${re.contextPath}/studentInformation/getSelectExam',
-                data: {exam:exam},
-                dataType: 'json',
-                success: function(data){
-                    $("#exam").html("");
-                    $.each(data, function(key, val) {
-                        var option1 = $("<option>").val(val.exam).text(val.exam);
-                        $("#exam").append(option1);
-                        form.render('select');
-                    });
-                    $("#exam").get(0).selectedIndex=0;
-                }
-            });
-        });
-    });
+    <#--layui.use(['layer', 'form'], function(){-->
+    <#--    var layer = layui.layer-->
+    <#--        ,form = layui.form;-->
+    <#--    form.on('select(myselect)', function(data){-->
+    <#--        var areaId=(data.value).replaceAll(",","");-->
+    <#--        $.ajax({-->
+    <#--            type: 'POST',-->
+    <#--            url: '${re.contextPath}/studentInformation/getSelectExam',-->
+    <#--            data: {exam:exam},-->
+    <#--            dataType: 'json',-->
+    <#--            success: function(data){-->
+    <#--                $("#exam").html("");-->
+    <#--                $.each(data, function(key, val) {-->
+    <#--                    var option1 = $("<option>").val(val.exam).text(val.exam);-->
+    <#--                    $("#exam").append(option1);-->
+    <#--                    form.render('select');-->
+    <#--                });-->
+    <#--                $("#exam").get(0).selectedIndex=0;-->
+    <#--            }-->
+    <#--        });-->
+    <#--    });-->
+    <#--});-->
 </script>
 </body>
 

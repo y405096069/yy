@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.util.Date;
 
 /**
  * @author JiangXiaYang
@@ -78,27 +77,27 @@ public class StudentInformation {
 
 
     //当天时间
-    private Date currentDate;
+    private String currentDate;
     //考试时间
-    private Date create_start_time;
+    private String create_start_time;
     //考试名称
     private String examName;
     //科目名称
     private String subjectName;
 
-    public Date getCurrentDate() {
+    public String getCurrentDate() {
         return currentDate;
     }
 
-    public void setCurrentDate(Date currentDate) {
+    public void setCurrentDate(String currentDate) {
         this.currentDate = currentDate;
     }
 
-    public Date getCreate_start_time() {
+    public String getCreate_start_time() {
         return create_start_time;
     }
 
-    public void setCreate_start_time(Date create_start_time) {
+    public void setCreate_start_time(String create_start_time) {
         this.create_start_time = create_start_time;
     }
 

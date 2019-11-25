@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.Page;
 import com.google.common.collect.Maps;
 import com.nfdw.common.Constants;
+import com.nfdw.entity.CurrentRole;
 import com.nfdw.entity.CurrentUser;
 import com.nfdw.entity.PageData;
 import com.nfdw.pojo.ResuleBean;
@@ -39,12 +40,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
-
+ *
  */
 @Slf4j
 public abstract class BaseController<T> {
 
-    private PageData pd =null;
+    private PageData pd = null;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -77,127 +78,139 @@ public abstract class BaseController<T> {
         String requestedWith = request.getHeader("x-requested-with");
         return requestedWith != null && requestedWith.equalsIgnoreCase("XMLHttpRequest");
     }
+
     /**
      * 得到PageData
      */
-    public PageData getPageData(){
+    public PageData getPageData() {
         String urseid = getCurrentUserId();
-        String regionid  =getDepartmentId();
-        String username =getUserName();
+        String regionid = getDepartmentId();
+        String username = getUserName();
         pd = new PageData(this.getRequest());
         pd.put(Constants.LASTUDATE, DateUtils.getCurDate());
-        pd.put(Constants.DayOfDate,DateUtils.getDayOfDate());
-        pd.put(Constants.LOGIN_RECORD_ID,urseid);
-        pd.put(Constants.LOGIN_REGION_ID,regionid);
+        pd.put(Constants.DayOfDate, DateUtils.getDayOfDate());
+        pd.put(Constants.LOGIN_RECORD_ID, urseid);
+        pd.put(Constants.LOGIN_REGION_ID, regionid);
 
         if (!"0".equals(regionid)) {
             // 不是市级登录的用户，则默认只查该用户所在区的数据
-            pd.put(Constants.LOGIN_USER_REGION_ID,regionid);
+            pd.put(Constants.LOGIN_USER_REGION_ID, regionid);
         }
 
-        pd.put(Constants.USRE_NAME,username);
+        pd.put(Constants.USRE_NAME, username);
         return pd;
     }
-    
+
     /**
      * 得到PageData(分页查询使用)
      */
-    public PageData getPageData(String page, String limit){
+    public PageData getPageData(String page, String limit) {
 
         this.getPageData();
 
         if (StringUtils.isNotBlank(page) && StringUtils.isNotBlank(limit)) {
-        	pd.put("page", page);
-        	pd.put("limit", limit);
+            pd.put("page", page);
+            pd.put("limit", limit);
         }
-    	
+
         return pd;
     }
-    
+
     /**
      * 得到分页列表的信息
      */
-    public Page getPage(){
+    public Page getPage() {
         return new Page();
     }
+
     public HttpServletRequest getRequest() {
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         return request;
     }
+
     protected String generateJsonPageData(Page<PageData> data) throws JSONException {
-        JSONArray jsonArray =new JSONArray();
+        JSONArray jsonArray = new JSONArray();
         String json = jsonArray.put(data).get(0).toString();
         return json;
     }
+
     protected String generateJson(PageData data) throws JSONException {
         com.alibaba.fastjson.JSONArray jsonArray = new com.alibaba.fastjson.JSONArray();
         jsonArray.add(data);
         String json = jsonArray.toString();
         return json;
     }
+
     protected String generateJsonlist(List<PageData> data) throws JSONException {
-        JSONArray jsonArray =new JSONArray();
+        JSONArray jsonArray = new JSONArray();
         String json = jsonArray.put(data).get(0).toString();
         return json;
     }
-    public String getCurrentUserId(){
-        PageData pd= new PageData();
-        HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+
+    public String getCurrentUserId() {
+        PageData pd = new PageData();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         CurrentUser user = ServiceUtil.getCurrentUser();
-        if(user != null){
+        if (user != null) {
             return user.getId();
         }
         return null;
     }
-    public String getDepartmentId(){
-        PageData pd= new PageData();
+
+    public String getDepartmentId() {
+        PageData pd = new PageData();
         CurrentUser user = ServiceUtil.getCurrentUser();
-        if(user != null){
+        if (user != null) {
             return user.getGzarea();
         }
         return null;
     }
-    public String getUserName(){
-        PageData pd= new PageData();
-        HttpServletRequest request = ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
-        SysUser user = (SysUser)request.getSession().getAttribute("user");
-        if(user != null){
+
+    public String getUserName() {
+        PageData pd = new PageData();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        SysUser user = (SysUser) request.getSession().getAttribute("user");
+        if (user != null) {
             return user.getUsername();
         }
         return null;
     }
-    public Session getSession(){
+
+    public Session getSession() {
         Subject currentSubject = SecurityUtils.getSubject();
         Session session = null;
-        if(currentSubject != null){
+        if (currentSubject != null) {
             session = currentSubject.getSession();
         }
         return session;
     }
-    public Object getFromSession(Object key){
+
+    public Object getFromSession(Object key) {
         Session session = getSession();
         Object value = null;
-        if(session != null){
+        if (session != null) {
             value = session.getAttribute(key);
         }
         return value;
     }
+
     public <T> void writeJson(HttpServletResponse response, List<T> beans) {
         writePlainText(response, JSONUtils.listToJsonString(beans, ""));
     }
 
-    public void writeJson(HttpServletResponse response,Object obj) {
-        writePlainText(response,JSONUtils.objectToDateFormatJson(obj));
+    public void writeJson(HttpServletResponse response, Object obj) {
+        writePlainText(response, JSONUtils.objectToDateFormatJson(obj));
     }
 
     /**
      * 带状态码的返回结果
+     *
      * @param response
      * @param data
      * @param resultCode
      * @param message
      */
-    public void writeJson(HttpServletResponse response,Object data, String resultCode, String message) {
+    public void writeJson(HttpServletResponse response, Object data, String resultCode, String message) {
         ResuleBean resuleBean = new ResuleBean();
         resuleBean.setCode(resultCode);
         resuleBean.setMessage(message);
@@ -208,8 +221,7 @@ public abstract class BaseController<T> {
     /**
      * 功能：输出文本流到页面
      *
-     * @param text
-     *            <code>String</code>
+     * @param text <code>String</code>
      */
     protected void writePlainText(HttpServletResponse response, String text) {
         WebUtils.writeText(response, text);

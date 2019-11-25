@@ -59,8 +59,14 @@ public interface SysUserMapper extends com.nfdw.base.BaseMapper<SysUser, String>
     List<SysUser> queryUserByRoleIdAndDepartmentId(@Param("roleId") String roleId, @Param("departmentId") Integer departmentId);
 
     CurrentUser selectUser(String username);
-    //新学生注册
+
+    /**
+     * 新增用户
+     * @param sysUser
+     * @return
+     */
     int addSysUser(SysUser sysUser);
+
     //查询账户验证码状态
     int getPhoneStatus(@Param("phone") String phone);
     //激活学生账号验证码，修改状态

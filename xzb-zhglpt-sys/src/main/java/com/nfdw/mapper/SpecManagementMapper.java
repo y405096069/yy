@@ -1,11 +1,11 @@
 package com.nfdw.mapper;
 
-import com.nfdw.base.BaseMapper;
-import com.nfdw.entity.SpecCollect;
-import com.nfdw.entity.SpecManagement;
-import org.apache.ibatis.annotations.Param;
+        import com.nfdw.base.BaseMapper;
+        import com.nfdw.entity.SpecCollect;
+        import com.nfdw.entity.SpecManagement;
+        import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
+        import java.util.List;
 
 public interface SpecManagementMapper extends BaseMapper<SpecManagement,String> {
 

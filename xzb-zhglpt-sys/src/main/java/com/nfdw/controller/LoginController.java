@@ -1,18 +1,24 @@
 package com.nfdw.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
+import com.nfdw.base.controller.BaseController;
 import com.nfdw.common.SendSms;
 import com.nfdw.core.annotation.Log;
 import com.nfdw.core.shiro.ShiroUtil;
 import com.nfdw.entity.*;
 import com.nfdw.service.MenuService;
 import com.nfdw.service.SysUserService;
+import com.nfdw.util.EhcacheUtil;
+import com.nfdw.util.JSONUtils;
 import com.nfdw.util.JsonUtil;
 import com.nfdw.util.VerifyCodeUtils;
 import com.nfdw.utils.ShiroKitUtils;
 import com.nfdw.utils.ToolUtil;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang3.StringUtils;
@@ -21,16 +27,21 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
+import org.apache.shiro.cache.ehcache.EhCache;
+import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletRequest;
@@ -49,7 +60,9 @@ import java.util.UUID;
  */
 @Controller
 @Slf4j
-public class LoginController extends BaseLoginController {
+public class LoginController extends BaseController implements BaseLoginController {
+
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     private SysUserService userService;
@@ -57,141 +70,96 @@ public class LoginController extends BaseLoginController {
     @Autowired
     private MenuService menuService;
 
-    @GetMapping(value = "")
-    public String loginInit(String sysUser,String type) {
-        return loginCheck(sysUser,type);
+    @Autowired
+    private CacheManager cacheManager;
+
+    @GetMapping(value = "/register")
+    public String goRegister() {
+        return "/register";
     }
 
-    @GetMapping(value = "goLogin")
-    public String goLogin(Model model, ServletRequest request) {
-        System.out.println("333333333333333333333333333");
-        Subject sub = SecurityUtils.getSubject();
-        if (sub.isAuthenticated()) {
-            return "/main/main";
+    @PostMapping(value = "/register")
+    public String register(SysUser sysUser, String code, Model model) {
+        if (sysUser == null) {
+            model.addAttribute("message", "获取数据失败");
+        }
+        if (StringUtils.isBlank(sysUser.getUsername())) {
+            model.addAttribute("message", "用户名不能为空");
+        }
+        if (StringUtils.isBlank(sysUser.getVerifyPassword())) {
+            model.addAttribute("message", "密码不能为空");
+        }
+        String username = sysUser.getUsername();
+        SysUser user = userService.login(username);
+        try {
+            if (null != user) {
+                model.addAttribute("message", "该手机号码已经绑定");
+            } else {
+                Object cache = EhcacheUtil.getCache(cacheManager, username);
+                if (cache == null || code == null) {
+                    model.addAttribute("message", "验证码有误");
+                } else {
+                    if (code.equals(cache)) {
+                        user = new SysUser();
+                        user.setUsername(username);
+                        user.setPassword(sysUser.getVerifyPassword());
+                        userService.addStudent(user);
+                        model.addAttribute("message", "注册成功,可以跳转登录");
+                        return "redirect:/login";
+                    } else {
+                        model.addAttribute("message", "验证码有误");
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            model.addAttribute("message", "注册失败");
+        }
+        return "/register";
+    }
+
+    @PostMapping(value = "/sendSms")
+    @ResponseBody
+    public JsonUtil sendSms(@RequestBody JSONObject body, HttpServletRequest request) throws MalformedURLException, UnsupportedEncodingException {
+        String username = body.getString("username");
+        int count = userService.checkUser(username);
+        if (count > 0) {
+            return JsonUtil.sucess("该手机号码已经绑定");
         } else {
-            model.addAttribute("message", "请重新登录");
-            return "/login";
+            return send(username);
         }
     }
-//    @GetMapping(value = "/addStudentUser")
-//    public String addStudentUser() {
-//        System.out.println("4");
-//        return "/system/user/add-student-user";
-//    }
 
-    @GetMapping(value = "/login")
-    public String loginCheck(String username,String type) {
-
-        SysUser user=new SysUser();
-        user.setUsername(username);
-        System.out.println("11111111111111111111");
-        if(null==type||("").equals(type)){
-            System.out.println("1111111222221111111111");
-            Subject sub = SecurityUtils.getSubject();
-            Boolean flag2 = sub.isRemembered();
-            boolean flag = sub.isAuthenticated() || flag2;
-            Session session = sub.getSession();
-            if (flag) {
-                return "/main/main";
-            }
-        }else if("1".equals(type)){
-            return "addStudentUser";
-        }else if("2".equals(type)){
-            return "/login";
-        }else if(("3").equals(type)){
-            String vertifyCode = ToolUtil.getRandomNumString(4);
-            //发送短信
+    private synchronized JsonUtil send(String username) throws MalformedURLException, UnsupportedEncodingException {
+        Object cache = EhcacheUtil.getCache(cacheManager, username);
+        if (null == cache) {
             SendSms sendSms = new SendSms();
-            try {
-                System.out.println(vertifyCode);
-                sendSms.sendSMS(user.getUsername(),vertifyCode);
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-            ShiroKitUtils.setSessionAttr(user.getUsername(),vertifyCode,"60000");
-            if(user.getUsername()!=null){
-                return "1";
-            }else{
-                return "1";
-            }
-        }
-        return "/login";
-    }
+            String vertifyCode = ToolUtil.getRandomNumString(4);
 
-    /**
-     * 登录动作
-     *
-     * @param user
-     * @param model
-     * @param request
-     * @return
-            */
-    @ApiOperation(value = "/login", httpMethod = "POST", notes = "登录method")
-    @PostMapping(value = "/login")
-    @Log(desc = "登录用户")
-    @Override
-    public String login(SysUser user, String code, Model model, HttpServletRequest request,String type) {
-        if(("1").equals(type)){
-             return "/login";
-        }else if(("2").equals(type)){
-            if (user == null) {
-                return "1";
-            }
-            if (StringUtils.isBlank(user.getUsername())) {
-                return "1";
-            }
-            if (StringUtils.isBlank(user.getPassword())) {
-                return "1";
-            }
-            if (StringUtils.isBlank(user.getVerifyPassword())) {
-                return "1";
-            }
-            int result = userService.checkUser(user.getUsername());
-            if (result > 0) {
-                return "2";
-            }
-            JsonUtil j = new JsonUtil();
-            user.setId(UUID.randomUUID().toString().replaceAll("\\-", ""));
-//            user.setPhoto("".equals(user.getPhoto()) ? null : user.getPhoto());
-//            if (StringUtils.isNotEmpty(user.getPhoto())) {
-//                user.setPhoto(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/images/" + user.getPhoto());
-//            }
-
-            user.setUser_type("1");
-            user.setStatus(1);
-            if (userService.addSysUser(user)>0){
-                return "3";
-            }else{
-                return "4";
-            }
-        }else{
-            user.setUser_type(userService.getStudentType(user.getUsername()));
-            System.out.println(user.getUser_type());
-            return super.login(user, code, model, request,type);
+            String msg = sendSms.sendSMS(username, vertifyCode);
+            EhcacheUtil.setCache(cacheManager, username, vertifyCode, 300);
+            return JsonUtil.sucess(msg);
+        } else {
+            return JsonUtil.sucess("短信已经发送");
         }
     }
 
     @GetMapping("/main")
+    @RequiresRoles("teacher")
     public String main() {
         return "main/main";
     }
-    @GetMapping("/studentIndex")
+
+    @GetMapping("/index")
+    @RequiresRoles("student")
     public String studentIndex() {
         return "studentIndex";
     }
+
     @GetMapping("/getStudentUser")
-    public String getStudentUser(){
+    public String getStudentUser() {
         return "addStudentUser";
     }
-    @PostMapping("/addStudentUser")
-    public String addStudentUser(SysUser user){
-        if(userService.addSysUser(user)>0){
-            return "login";
-        }
-        return "addStudentUser";
-    }
+
     @Log(desc = "用户退出平台")
     @GetMapping(value = "/out")
     public String logout() throws IOException {
@@ -290,5 +258,69 @@ public class LoginController extends BaseLoginController {
         mv.addObject("name", name);
         return mv;
 
+    }
+
+    @Override
+    public String goLogin(Model model) {
+        Subject sub = SecurityUtils.getSubject();
+        if (sub.isAuthenticated()) {
+            CurrentUser auth = (CurrentUser) sub.getSession().getAttribute("curentUser");
+            if (null != auth.getCurrentRoleList() && auth.getCurrentRoleList().size() > 0) {
+                for (CurrentRole currentRole : auth.getCurrentRoleList()) {
+                    if ("teacher".equals(currentRole.getRoleName())) {
+                        return "redirect:/main";
+                    } else if ("student".equals(currentRole.getRoleName())) {
+                        return "redirect:/index";
+                    } else {
+                        logger.debug("缺乏角色对应teacher或student");
+                        sub.logout();
+                        throw new UnknownAccountException("登录失败,请联系管理员");
+                    }
+                }
+            }
+        }
+        return "/login";
+    }
+
+    @Override
+    public String login(SysUser user, String code, Model model, HttpServletRequest request) {
+        String codeMsg = (String) request.getSession().getAttribute("_code");
+        if (null != code && !code.toLowerCase().equals(codeMsg)) {
+            model.addAttribute("message", "验证码错误");
+            return "/login";
+        }
+        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername().trim(),
+                user.getPassword());
+        Subject subject = SecurityUtils.getSubject();
+        String msg = null;
+        try {
+            subject.login(token);
+            if (subject.isAuthenticated()) {
+                CurrentUser auth = (CurrentUser) subject.getSession().getAttribute("curentUser");
+                if (null != auth.getCurrentRoleList() && auth.getCurrentRoleList().size() > 0) {
+                    for (CurrentRole currentRole : auth.getCurrentRoleList()) {
+                        if ("teacher".equals(currentRole.getRoleName())) {
+                            return "redirect:/main";
+                        } else if ("student".equals(currentRole.getRoleName())) {
+                            return "redirect:/index";
+                        } else {
+                            logger.debug("缺乏角色对应teacher或student");
+                            subject.logout();
+                            throw new UnknownAccountException("登录失败,请联系管理员");
+                        }
+                    }
+                }
+            }
+        } catch (UnknownAccountException e) {
+            msg = e.getMessage();
+        } catch (IncorrectCredentialsException e) {
+            msg = "用户名/密码错误";
+        } catch (ExcessiveAttemptsException e) {
+            msg = e.getMessage();
+        }
+        if (msg != null) {
+            model.addAttribute("message", msg);
+        }
+        return "/login";
     }
 }

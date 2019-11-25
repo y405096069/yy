@@ -3,13 +3,11 @@ package com.nfdw.service.impl;
 import com.nfdw.entity.Examination;
 import com.nfdw.entity.StudentExamAudit;
 import com.nfdw.entity.StudentInformation;
-import com.nfdw.entity.SysUser;
 import com.nfdw.mapper.StudentInformationMapper;
 import com.nfdw.service.StudentInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
@@ -27,7 +25,7 @@ public class StudentInformationServiceImpl implements StudentInformationService 
     }
 
     @Override
-    public List<Examination> getListExamination(Date currentDate, String examinee_province, String subject_type, String examName, String subjectName, Date create_start_time) {
+    public List<Examination> getListExamination(String currentDate,String examinee_province,String subject_type,String examName,String subjectName,String create_start_time) {
         return studentInformationMapper.getListExamination(currentDate,examinee_province,subject_type,examName,subjectName,create_start_time);
     }
 

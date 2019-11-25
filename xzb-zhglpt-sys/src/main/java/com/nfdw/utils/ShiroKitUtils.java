@@ -16,6 +16,7 @@ public class ShiroKitUtils {
             session.setTimeout(Long.parseLong(timeout));
         }
         session.setAttribute(key, value);
+
     }
 
     /**

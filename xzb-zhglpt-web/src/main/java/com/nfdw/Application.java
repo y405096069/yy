@@ -72,6 +72,4 @@ public class Application extends SpringBootServletInitializer {
         tomcat.addAdditionalTomcatConnectors(connector);
         return tomcat;
     }
-
-
 }

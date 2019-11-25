@@ -17,12 +17,18 @@ public class StudentExamAudit {
     private int id;
     //学生信息id
     private String informationId;
+    //考试名称id
+    private String examId;
+    //专业id
+    private String managementId;
+    //场次id
+    private String kaoChangId;
     //考试时间
-    private int managemnetId;
+    private String examTime;
     //学生协议同意状态
     private int agreement;
     //照片
-    private String view;
+    private String fileAddress;
 //    //自拍视屏
 //    private String viewScreen;
 //    //文件
@@ -32,7 +38,7 @@ public class StudentExamAudit {
     //上传描述
     private String description;
     //审核状态
-    private String audutType;
+    private String auditType;
     //处理意见
     private String handlingSuggestion;
     //上传时间
@@ -62,13 +68,38 @@ public class StudentExamAudit {
         this.informationId = informationId;
     }
 
-    public int getManagemnetId() {
-        return managemnetId;
+    public String getExamId() {
+        return examId;
     }
 
-    public void setManagemnetId(int managemnetId) {
-        this.managemnetId = managemnetId;
+    public void setExamId(String examId) {
+        this.examId = examId;
     }
+
+    public String getManagementId() {
+        return managementId;
+    }
+
+    public void setManagementId(String managementId) {
+        this.managementId = managementId;
+    }
+
+    public String getKaoChangId() {
+        return kaoChangId;
+    }
+
+    public void setKaoChangId(String kaoChangId) {
+        this.kaoChangId = kaoChangId;
+    }
+
+    public String getExamTime() {
+        return examTime;
+    }
+
+    public void setExamTime(String examTime) {
+        this.examTime = examTime;
+    }
+
 
     public int getAgreement() {
         return agreement;
@@ -78,8 +109,12 @@ public class StudentExamAudit {
         this.agreement = agreement;
     }
 
-    public String getView() {
-        return view;
+    public String getFileAddress() {
+        return fileAddress;
+    }
+
+    public void setFileAddress(String fileAddress) {
+        this.fileAddress = fileAddress;
     }
 
 //    public void setView(String view) {
@@ -118,12 +153,12 @@ public class StudentExamAudit {
         this.description = description;
     }
 
-    public String getAudutType() {
-        return audutType;
+    public String getAuditType() {
+        return auditType;
     }
 
-    public void setAudutType(String audutType) {
-        this.audutType = audutType;
+    public void setAuditType(String auditType) {
+        this.auditType = auditType;
     }
 
     public String getHandlingSuggestion() {

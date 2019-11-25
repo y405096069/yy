@@ -7,14 +7,13 @@ import com.nfdw.entity.SysRoleUser;
 import com.nfdw.entity.SysUser;
 import com.nfdw.util.Checkbox;
 import com.nfdw.util.JsonUtil;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
-
+ *
  */
-public interface SysUserService extends BaseService<SysUser,String> {
+public interface SysUserService extends BaseService<SysUser, String> {
 
   SysUser login(String username);
 
@@ -23,6 +22,7 @@ public interface SysUserService extends BaseService<SysUser,String> {
 
   /**
    * 分页查询
+   *
    * @param
    * @return
    */
@@ -33,6 +33,7 @@ public interface SysUserService extends BaseService<SysUser,String> {
 
   /**
    * 新增
+   *
    * @param user
    * @return
    */
@@ -40,10 +41,11 @@ public interface SysUserService extends BaseService<SysUser,String> {
 
   /**
    * 删除
+   *
    * @param id
    * @return
    */
-  JsonUtil delById(String id,boolean flag);
+  JsonUtil delById(String id, boolean flag);
 
   int checkUser(String username);
 
@@ -57,6 +59,7 @@ public interface SysUserService extends BaseService<SysUser,String> {
 
   /**
    * 更新密码
+   *
    * @param user
    * @return
    */
@@ -64,32 +67,36 @@ public interface SysUserService extends BaseService<SysUser,String> {
 
   JsonUtil rePass(String id);
 
-  List<SysUser> getUserByRoleId(String roleId,int page,int limit);
+  List<SysUser> getUserByRoleId(String roleId, int page, int limit);
 
-  int countUserByRoleId(String roleId,int page,int limit);
+  int countUserByRoleId(String roleId, int page, int limit);
 
-    List<SysUser> findBydepartmentId(Integer departmentId);
+  List<SysUser> findBydepartmentId(Integer departmentId);
 
-    int whileAddUser(SysUser sysUser);
+  int whileAddUser(SysUser sysUser);
 
-    int whileUpdateUser(SysUser user);
+  int whileUpdateUser(SysUser user);
 
-    int onLine();
+  int onLine();
 
-    void updateByIdStatus(String id,int status);
+  void updateByIdStatus(String id, int status);
 
 
-    CurrentUser selectUser(String username);
+  CurrentUser selectUser(String username);
 
-    //新学生注册
-    int addSysUser(SysUser sysUser);
+  //新学生注册
+  void addStudent(SysUser sysUser);
 
-    //查询账户验证码状态
-    int getPhoneStatus(String phone);
+  void addUser(SysUser sysUser);
 
-    //激活学生账号验证码，修改状态
-    int updatePhoneStatus(String phone,int status);
-    String getStudentType(String phone);
-    //用户名查询用户
-    SysUser getSysUserByUsername(String name);
+  //查询账户验证码状态
+  int getPhoneStatus(String phone);
+
+  //激活学生账号验证码，修改状态
+  int updatePhoneStatus(String phone, int status);
+
+  String getStudentType(String phone);
+
+  //用户名查询用户
+  SysUser getSysUserByUsername(String name);
 }

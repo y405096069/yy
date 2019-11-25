@@ -22,4 +22,13 @@
            statistics="true">
     </cache>
 
+    <cache name="smsRetryCache"
+           maxEntriesLocalHeap="2000"
+           eternal="false"
+           timeToIdleSeconds="600"
+           timeToLiveSeconds="0"
+           overflowToDisk="false"
+           statistics="true">
+    </cache>
+
 </ehcache>

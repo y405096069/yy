@@ -10,6 +10,15 @@
     ,#{graduate_type},#{graduate_middle},#{examinee_number},#{subject_type},#{member_name},#{member_relationship},#{member_relationship},
     #{member_work},#{member_phone},#{photograph})
   </insert>
+  <update id="updateStudentInformation" parameterType="com.nfdw.entity.StudentInformation">
+     UPDATE j_student_information SET certificate_type=#{certificate_type},certificate_number=#{certificate_number},
+     name=#{name},sex=#{sex},nation=#{nation},birthdate=#{birthdate},street=#{street},recipient=#{recipient},phone=#{phone},
+    postal_code=#{postal_code},email=#{email},examinee_type=#{examinee_type},examinee_education=#{examinee_education},
+    examinee_province=#{examinee_province},politics_status=#{politics_status},graduate_type=#{graduate_type},
+    graduate_middle=#{graduate_middle},examinee_number=#{examinee_number},subject_type=#{subject_type},
+    member_name=#{member_name},member_relationship=#{member_relationship},member_occupation=#{member_occupation},
+    member_work=#{member_work},member_phone=#{member_phone},photograph=#{photograph} WHERE student_userid=#{student_userid}
+  </update>
   <select id="getUserIDByStudentInformation" resultType="com.nfdw.entity.StudentInformation">
     select * from j_student_information j
     LEFT JOIN sys_user s ON j.student_userid=s.id
@@ -33,7 +42,9 @@
       AND c.create_start_time=#{create_start_time};
     </if>
   </select>
-  <insert id="addStudentExamAudit">
+  <insert id="addStudentExamAudit" parameterType="com.nfdw.entity.StudentExamAudit">
+     insert into j_student_examAudit(information_id,exam_time,exam_id,management_id,kaoChang_id,agreement,`time`)
+    values (#{informationId},#{examTime},#{examId},#{managementId},#{kaoChangId},#{agreement},#{time})
 
   </insert>
   <select id="getStudentInfoConunt" resultType="int">
@@ -42,5 +53,4 @@
 	  LEFT JOIN sys_user u on j.student_userid=u.id
 		WHERE u.username=#{username}
   </select>
-
 </mapper>

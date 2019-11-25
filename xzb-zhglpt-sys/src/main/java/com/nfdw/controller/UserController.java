@@ -18,6 +18,7 @@ import com.nfdw.utils.ShiroKitUtils;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,7 @@ import java.util.UUID;
 //@Api(value="user")
 @Controller
 @RequestMapping(value = "/user")
+@RequiresRoles(value = "teacher")
 public class UserController extends BaseController {
 
     //private static final Logger
@@ -57,20 +59,20 @@ public class UserController extends BaseController {
     PositionService positionService;
 
     @GetMapping(value = "mainTest")
-    @RequiresPermissions("user:show")
+    @RequiresRoles(value = "teacher")
     public String showTest() {
         return "system/user/mainTest";
     }
 
     @GetMapping(value = "showUser")
-    @RequiresPermissions("user:show")
+    @RequiresRoles(value = "teacher")
     public String showUser(Model model) {
         return "/system/user/userList";
     }
 
     @GetMapping(value = "showUserList")
     @ResponseBody
-    @RequiresPermissions("user:show")
+    @RequiresRoles(value = "teacher")
     public ReType showUser(Model model, SysUser user, String page, String limit) {
         return userService.show(user, Integer.valueOf(page), Integer.valueOf(limit));
     }
@@ -78,7 +80,7 @@ public class UserController extends BaseController {
     @ApiOperation(value = "/listByRoleId", httpMethod = "GET", notes = "展示角色")
     @GetMapping(value = "listByRoleId")
     @ResponseBody
-    @RequiresPermissions("user:show")
+    @RequiresRoles(value = "teacher")
     public String showUser(Model model, String roleId, int page, int limit) {
         JSONObject returnValue = new JSONObject();
         List<SysUser> users = userService.getUserByRoleId(roleId, page, limit);
@@ -90,6 +92,7 @@ public class UserController extends BaseController {
 
 
     @GetMapping(value = "showAddUser")
+    @RequiresRoles(value = "teacher")
     public String goAddUser(Model model) {
         List<Checkbox> checkboxList = userService.getUserRoleByJson(null);
         model.addAttribute("boxJson", checkboxList);
@@ -106,6 +109,7 @@ public class UserController extends BaseController {
     @Log(desc = "添加用户")
     @PostMapping(value = "addUser")
     @ResponseBody
+    @RequiresRoles(value = "teacher")
     public JsonUtil addUser(SysUser user, String[] role, HttpServletRequest request) {
         if (user == null) {
             return JsonUtil.error("获取数据失败");
@@ -134,7 +138,7 @@ public class UserController extends BaseController {
                 user.setPhoto(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/images/" + user.getPhoto());
             }
 
-            userService.whileAddUser(user);
+            userService.addUser(user);
             SysRoleUser sysRoleUser = new SysRoleUser();
             sysRoleUser.setUserId(user.getId());
             for (String r : role) {
@@ -149,10 +153,12 @@ public class UserController extends BaseController {
         }
         return j;
     }
-    @ApiOperation(value = "/addSysUser", httpMethod = "POST", notes = "添加新学生用户")
+
+    /*@ApiOperation(value = "/addSysUser", httpMethod = "POST", notes = "添加新学生用户")
     @Log(desc = "添加新学生用户")
     @PostMapping(value = "addSysUser")
     @ResponseBody
+    @RequiresRoles(value = "teacher")
     public JsonUtil addSysUser(SysUser user, String[] role, HttpServletRequest request) {
         if (user == null) {
             return JsonUtil.error("获取数据失败");
@@ -178,9 +184,9 @@ public class UserController extends BaseController {
 //                user.setPhoto(request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/images/" + user.getPhoto());
 //            }
 
-            user.setUser_type("1");
+            user.setUserType("1");
             user.setStatus(1);
-            userService.addSysUser(user);
+            userService.addStudent(user);
             SysRoleUser sysRoleUser = new SysRoleUser();
             sysRoleUser.setUserId(user.getId());
             for (String r : role) {
@@ -194,34 +200,37 @@ public class UserController extends BaseController {
             e.printStackTrace();
         }
         return j;
-    }
-    @ApiOperation(value = "/validateVerifyCode", httpMethod = "POST", notes = "校验手机验证码")
+    }*/
+
+    /*@ApiOperation(value = "/validateVerifyCode", httpMethod = "POST", notes = "校验手机验证码")
     @Log(desc = "校验手机验证码")
     @PostMapping(value = "validateVerifyCode")
     @ResponseBody
-    public JsonUtil validateVerifyCode(String verifyCode,String phone) {
+    //@RequiresRoles(value = "teacher")
+    public JsonUtil validateVerifyCode(String verifyCode, String phone) {
         if (StringUtils.isBlank(phone)) {
             return JsonUtil.error("手机号码不能为空");
         }
         //验证码不能为空
-        if(StringUtils.isBlank(verifyCode)){
+        if (StringUtils.isBlank(verifyCode)) {
             return JsonUtil.error("验证码不能为空");
         }
         //验证码是否失效
-        if(ShiroKitUtils.getSession().getAttribute(phone)==null){
+        if (ShiroKitUtils.getSession().getAttribute(phone) == null) {
             return JsonUtil.error("验证码已经失效，请重新发送短信");
         }
         //对比验证码
-        if(verifyCode.equals(ShiroKitUtils.getSession().getAttribute(phone))){
-            userService.updatePhoneStatus(phone,0);
+        if (verifyCode.equals(ShiroKitUtils.getSession().getAttribute(phone))) {
+            userService.updatePhoneStatus(phone, 0);
             return JsonUtil.sucess("激活成功！");
-        }else{
+        } else {
             return JsonUtil.error("验证码不匹配，请重新输入");
         }
 
-    }
+    }*/
 
     @GetMapping(value = "updateUser")
+    @RequiresRoles(value = "teacher")
     public String goUpdateUser(String id, Model model, boolean detail) {
         if (StringUtils.isNotEmpty(id)) {
             //用户-角色
@@ -245,6 +254,7 @@ public class UserController extends BaseController {
     @PostMapping(value = "updateUser")
     @ResponseBody
     @Transactional
+    @RequiresRoles(value = "teacher")
     public JsonUtil updateUser(SysUser user, String role[], HttpServletRequest request) {
         JsonUtil jsonUtil = new JsonUtil();
         jsonUtil.setFlag(false);
@@ -282,10 +292,10 @@ public class UserController extends BaseController {
     }
 
     @Log(desc = "删除用户", type = LOG_TYPE.DEL)
+    @RequiresRoles(value = "teacher")
     @ApiOperation(value = "/del", httpMethod = "POST", notes = "删除用户")
     @PostMapping(value = "/del")
     @ResponseBody
-    @RequiresPermissions("user:del")
     public JsonUtil del(SysUser user) {
         JsonUtil jsonUtil = new JsonUtil();
         SysUser oldUser = userService.selectByPrimaryKey(user.getId());
@@ -296,6 +306,7 @@ public class UserController extends BaseController {
     }
 
     @GetMapping(value = "goRePass")
+    @RequiresRoles(value = "teacher")
     public String goRePass(String id, Model model) {
         if (StringUtils.isEmpty(id)) {
             return "获取账户信息失败";
@@ -308,7 +319,7 @@ public class UserController extends BaseController {
     @Log(desc = "重置密码", type = LOG_TYPE.UPDATE)
     @GetMapping(value = "resetPassword")
     @ResponseBody
-    @RequiresPermissions("user:repass")
+    @RequiresRoles(value = "teacher")
     public JsonUtil resetPassword(String id) {
         return userService.rePass(id);
     }
@@ -325,7 +336,7 @@ public class UserController extends BaseController {
     @Log(desc = "修改密码", type = LOG_TYPE.UPDATE)
     @PostMapping(value = "rePass")
     @ResponseBody
-    @RequiresPermissions("user:repass")
+    @RequiresRoles(value = "teacher")
     public JsonUtil rePass(String id, String pass, String newPwd) {
         boolean flag = StringUtils.isEmpty(id) || StringUtils.isEmpty(pass) || StringUtils.isEmpty(newPwd);
         //boolean flag = StringUtils.isEmpty(pass) || StringUtils.isEmpty(newPwd);
@@ -366,6 +377,7 @@ public class UserController extends BaseController {
      */
     @PostMapping(value = "temp-rainy")
     @ResponseBody
+    @RequiresRoles(value = "teacher")
     public JsonUtil imgUpload(HttpServletRequest req, @RequestParam("file") MultipartFile file,
                               ModelMap model) {
         String fileName = uploadUtil.upload(file);
@@ -379,6 +391,7 @@ public class UserController extends BaseController {
      */
     @GetMapping(value = "checkUser")
     @ResponseBody
+    @RequiresRoles(value = "teacher")
     public JsonUtil checkUser(String uname, HttpServletRequest req) {
         JsonUtil j = new JsonUtil();
         j.setFlag(Boolean.FALSE);
@@ -400,6 +413,7 @@ public class UserController extends BaseController {
     BlackListService blackListService;
 
     @GetMapping("showBlack")
+    @RequiresRoles(value = "teacher")
     public String showBlackList(Model model) {
         return "/system/user/blackList";
     }
@@ -407,6 +421,7 @@ public class UserController extends BaseController {
     @GetMapping(value = "showBlackList")
     @ResponseBody
     @RequiresPermissions("blackList:show")
+    @RequiresRoles(value = "teacher")
     public ReType showBlackList(Model model, SysUser user, String page, String limit) {
         return blackListService.show(user, Integer.valueOf(page), Integer.valueOf(limit));
     }
@@ -420,7 +435,7 @@ public class UserController extends BaseController {
 
     @PostMapping(value = "/unlock")
     @ResponseBody
-    @RequiresPermissions("blackList:show")
+    @RequiresRoles(value = "teacher")
     public JsonUtil unlock(SysUser user) {
         retryLimitCredentialsMatcher.getLoginRetryCache().remove(user.getUsername());
         user.setLockingDate(null);

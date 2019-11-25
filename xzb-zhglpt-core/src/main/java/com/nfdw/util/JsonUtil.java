@@ -64,4 +64,5 @@ public JsonUtil() {
   public  static JsonUtil sucess(String msg){
     return new JsonUtil(true,msg);
   }
+
 }

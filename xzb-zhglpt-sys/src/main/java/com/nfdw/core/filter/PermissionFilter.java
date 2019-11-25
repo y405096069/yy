@@ -28,13 +28,13 @@ public class PermissionFilter extends AuthorizationFilter {
 
   @Override
   protected boolean isAccessAllowed(ServletRequest servletRequest, ServletResponse servletResponse,
-      Object o) throws Exception {
+                                    Object o) throws Exception {
     String[] roles=(String[])o;
 
     Subject sub = getSubject(servletRequest, servletResponse);
     Session session= sub.getSession();
     CurrentUser user= (CurrentUser) session.getAttribute("curentUser");
-    log.info("user:{}",user);
+    //log.info("user:{}",user);
     if(user==null) {
       return false;
     }
@@ -43,9 +43,9 @@ public class PermissionFilter extends AuthorizationFilter {
 
   @Override
   protected boolean onAccessDenied(ServletRequest request, ServletResponse response)
-      throws IOException {
-      saveRequest(request);
-      WebUtils.issueRedirect(request, response, "/goLogin");
+          throws IOException {
+    saveRequest(request);
+    WebUtils.issueRedirect(request, response, "/goLogin");
     return false;
   }
 }

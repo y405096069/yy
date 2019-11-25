@@ -91,34 +91,34 @@ public class Examination {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "create_time")
-    private Date create_time;//创建时间
+    private String create_time;//创建时间
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "update_time")
-    private Date update_time;//更新时间
+    private String update_time;//更新时间
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @Column(name = "exam_time")
-    private Date exam_time;//报名开始时间
+    private String exam_time;//报名开始时间
 
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     @Column(name = "end_time")
-    private Date end_time;//报名结束时间
+    private String end_time;//报名结束时间
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "create_start_time")
-    private Date create_start_time;//初试考试开始时间 list
+    private String create_start_time;//初试考试开始时间 list
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "create_end_time")
-    private Date create_end_time; //初试考试结束时间  list
+    private String create_end_time; //初试考试结束时间  list
 
     @Column(name = "people_num")
     private String people_num;         //考场人数限制      list
@@ -362,51 +362,51 @@ public class Examination {
         this.retest_type = retest_type;
     }
 
-    public Date getCreate_time() {
+    public String getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(Date create_time) {
+    public void setCreate_time(String create_time) {
         this.create_time = create_time;
     }
 
-    public Date getUpdate_time() {
+    public String getUpdate_time() {
         return update_time;
     }
 
-    public void setUpdate_time(Date update_time) {
+    public void setUpdate_time(String update_time) {
         this.update_time = update_time;
     }
 
-    public Date getExam_time() {
+    public String getExam_time() {
         return exam_time;
     }
 
-    public void setExam_time(Date exam_time) {
+    public void setExam_time(String exam_time) {
         this.exam_time = exam_time;
     }
 
-    public Date getEnd_time() {
+    public String getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(Date end_time) {
+    public void setEnd_time(String end_time) {
         this.end_time = end_time;
     }
 
-    public Date getCreate_start_time() {
+    public String getCreate_start_time() {
         return create_start_time;
     }
 
-    public void setCreate_start_time(Date create_start_time) {
+    public void setCreate_start_time(String create_start_time) {
         this.create_start_time = create_start_time;
     }
 
-    public Date getCreate_end_time() {
+    public String getCreate_end_time() {
         return create_end_time;
     }
 
-    public void setCreate_end_time(Date create_end_time) {
+    public void setCreate_end_time(String create_end_time) {
         this.create_end_time = create_end_time;
     }
 

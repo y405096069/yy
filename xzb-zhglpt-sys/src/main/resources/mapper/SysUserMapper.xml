@@ -123,11 +123,12 @@
     select count(*) from sys_user
   </select>
     <insert id="add" parameterType="com.nfdw.entity.SysUser">
-        insert into sys_user(
-        <include refid="userColumn"/>
-        ) values (
-        <include refid="userValue"/>
-        )
+        <selectKey keyProperty="id" resultType="String" order="BEFORE">
+            select replace(uuid(),'-','') from dual
+        </selectKey>
+        insert into sys_user(id,username,`password`,`age`,`real_name`,create_date,update_date)
+        values(#{id},#{username},#{password},#{age},#{realName}
+        ,#{createDate},#{updateDate})
     </insert>
     <insert id="addSysUser" parameterType="com.nfdw.entity.SysUser">
         insert into sys_user(

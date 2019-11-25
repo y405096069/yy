@@ -6,7 +6,6 @@ import com.nfdw.core.annotation.Log;
 import com.nfdw.core.annotation.Log.LOG_TYPE;
 import com.nfdw.entity.CurrentUser;
 import com.nfdw.entity.SysPosition;
-import com.nfdw.entity.SysUser;
 import com.nfdw.exception.MyException;
 import com.nfdw.service.PositionService;
 import com.nfdw.service.SysUserService;
@@ -45,7 +44,7 @@ public class PositionController extends BaseController {
 
     @GetMapping("/showPosition")
     public String showPosition(Model model) {
-        
+
         return "/system/position/positionList";
     }
 
@@ -72,14 +71,14 @@ public class PositionController extends BaseController {
     @PostMapping(value = "addPosition")
     @ResponseBody
     public JsonUtil addPosition(SysPosition sysPosition,HttpServletRequest request) {
-            if (StringUtils.isEmpty(sysPosition.getPositionName())) {
+        if (StringUtils.isEmpty(sysPosition.getPositionName())) {
             JsonUtil.error("职务名称不能为空");
         }
         JsonUtil j = new JsonUtil();
         CurrentUser user= (CurrentUser) request.getSession().getAttribute("currentUse");
         try {
-        	sysPosition.setCreateTime(new Date());
-        	sysPosition.setCreater(user.getRealName());
+            sysPosition.setCreateTime(new Date());
+            sysPosition.setCreater(user.getRealName());
             positionService.insertSelective(sysPosition);
             //操作role-menu data
             j.setMsg("保存成功");
@@ -174,7 +173,7 @@ public class PositionController extends BaseController {
         return j;
 
     }
-    
+
     /**
      * 获取职务列表
      * @param position
@@ -188,17 +187,17 @@ public class PositionController extends BaseController {
     public JsonUtil showPositionAllList() {
         JsonUtil jsonUtil = new JsonUtil();
         jsonUtil.setFlag(false);
-        
+
         try {
-        	List<SysPosition> positions = positionService.showMenuJsonList();
-            
+            List<SysPosition> positions = positionService.showMenuJsonList();
+
             jsonUtil.setFlag(true);
             jsonUtil.setMsg("查询职务 列表成功");
             jsonUtil.setData(positions);
         } catch (MyException e) {
             e.printStackTrace();
         }
-        
+
         return jsonUtil;
     }
 
