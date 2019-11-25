@@ -1,10 +1,8 @@
 package com.nfdw.mapper;
 
 import com.nfdw.base.BaseMapper;
-import com.nfdw.entity.Examination;
-import com.nfdw.entity.Infor_collection;
-import com.nfdw.entity.SpecManagement;
-import com.nfdw.entity.Subject;
+import com.nfdw.entity.*;
+import org.springframework.validation.BindingResult;
 
 import java.util.List;
 
@@ -17,7 +15,7 @@ public interface ExaminationMapper extends BaseMapper<Examination,String> {
 
     Examination queryInfoById(String id);
     int addExamination(Examination examination);
-    int uplateById(String id);
+    int uplateById(Examination examination);
 
     void deleteById(String id);
 
@@ -26,6 +24,17 @@ public interface ExaminationMapper extends BaseMapper<Examination,String> {
     List<Subject> selectBySubject();
 
     List<SpecManagement> selectBySpec();
+    List<Examination> selectpa();
 
+    List<Infor_collection> selectcollection();
 
+    Infor_collection selectmb(String id);
+
+    SpecManagement selectid(String id);
+    //考试场次
+    int addKc(Kc kc);
+   //初考科目权重
+   int addcskm(Cskmqz cskmqz);
+   //复试科目权重
+   int addfskm(Fskmqz fskmqz);
 }

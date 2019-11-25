@@ -48,8 +48,8 @@
                     <span class="x-red">*</span>考试名称
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" id="exam" name="exam" lay-verify="required" value="${myexam.exam}"
-                           autocomplete="off" class="layui-input" placeholder="请输入考试名称">
+                    <input type="text" id="exam" name="exam" lay-verify="username" value="${myexam.exam}"
+                           autocomplete="off" disabled="disabled" class="layui-input" placeholder="请输入考试名称">
                 </div>
             </div>
             <div class="layui-inline">
@@ -58,7 +58,7 @@
                 </label>
                 <div class="layui-input-inline">
 
-                    <input type="text" class="layui-input" id="exam_time" value="${myexam.exam_time?string('yyyy-MM-dd HH:mm:ss')}" lay-verify="required" name="exam_time" placeholder="请输入报名开始时间">
+                    <input type="text" class="layui-input" disabled="disabled" id="exam_time" value="${myexam.exam_time?string('yyyy-MM-dd HH:mm:ss')}" name="exam_time" placeholder="请输入报名开始时间">
                 </div>
             </div>
             <div class="layui-inline">
@@ -66,7 +66,7 @@
                     <span class="x-red">*</span>报名截止时间
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" class="layui-input"  value="${myexam.end_time?string('yyyy-MM-dd HH:mm:ss')}" lay-verify="required" id="end_time" name="end_time" placeholder="请输入报名截止时间">
+                    <input type="text" class="layui-input" disabled="disabled"  value="${myexam.end_time?string('yyyy-MM-dd HH:mm:ss')}" id="end_time" name="end_time" placeholder="请输入报名截止时间">
                 </div>
             </div>
         </div>
@@ -79,12 +79,9 @@
                     <span class="x-red">*</span>报考专业
                 </label>
                 <div class="layui-input-inline">
-                    <select name="specialty_id" id="specialty_id" lay-verify="required" class="spec_id" lay-verify="spec_id"
+                    <select name="specialty_id" disabled="disabled" id="specialty_id" class="spec_id" lay-verify="spec_id"
                             lay-filter="spec_id">
-                        <#list specList as spe>
-                            <option value="${spe.id}">${spe.name}</option>
-                        </#list>
-
+                        <option value="">${myst.name}</option>
                     </select>
                 </div>
 
@@ -101,20 +98,19 @@
                     <span class="x-red">*</span>考试场次
                 </label>
                 <div class="layui-input-inline">
-                    <input type="text" class="layui-input" id="create_time" name="create_time" value="${myexam.create_start_time?string('yyyy-MM-dd HH:mm:ss')}" placeholder="请输入考试开始时间">
+                    <input type="text" class="layui-input" disabled="disabled" id="create_time" name="create_time" value="${myexam.create_start_time?string('yyyy-MM-dd HH:mm:ss')}" placeholder="请输入考试开始时间">
                 </div>
                 <div class="layui-input-inline">
-                    <input type="text" class="layui-input" id="update_time" name="update_time" value="${myexam.create_end_time?string('yyyy-MM-dd HH:mm:ss')}" placeholder="请输入考试结束时间">
+                    <input type="text" class="layui-input" disabled="disabled" id="update_time" name="update_time" value="${myexam.create_end_time?string('yyyy-MM-dd HH:mm:ss')}" placeholder="请输入考试结束时间">
                 </div>
                 <div class="layui-input-inline">
                     <input type="text" id="number_limitation" name="number_limitation" lay-verify="username" value="${myexam.number_limitation}"
-                           autocomplete="off" class="layui-input" placeholder="请输入报考人数">
+                           autocomplete="off" class="layui-input" disabled="disabled" placeholder="请输入报考人数">
                 </div>
                 <div class="layui-input-inline">
                     <input type="text" id="build" name="build" lay-verify="username" value="${myexam.build}"
-                           autocomplete="off" class="layui-input" placeholder="请输入考场位置">
+                           autocomplete="off" class="layui-input" disabled="disabled" placeholder="请输入考场位置">
                 </div>
-                <button type="button" class="layui-btn" onclick="addAction()">新增</button>
             </div>
         </div>
         <div class="active" style="margin-left: 110px;">
@@ -137,11 +133,9 @@
                         <span class="x-red">*</span>兼报专业
                     </label>
                     <div class="layui-input-inline">
-                        <select name="zspecialty_id" id="zspecialty_id" class="spec_id" lay-verify="spec_id"
+                        <select name="zspecialty_id" id="zspecialty_id" disabled="disabled" class="spec_id" lay-verify="spec_id"
                                 lay-filter="spec_id">
-                            <#list specList as spe>
-                                <option value="${spe.id}">${spe.name}</option>
-                            </#list>
+                            <option value="">${myzst.name}</option>
 
                         </select>
                     </div>
@@ -154,22 +148,21 @@
                                   <option value="2">音乐</option>
                               </select>
                           </div>-->
-                    <button type="button" class="layui-btn" onclick="majorAcion()">新增</button>
                 </div>
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label w-16" "><span class="x-red" style="width:100px">*</span>审核环节</label>
             <div class="layui-input-inline" style="min-width: 300px">
-                <input type="radio" name="check_pay" value="交费后" title="交费后">
-                <input type="radio" name="check_pay" value="交费前" title="交费前">
+                <input type="radio" name="check_pay" value="1" title="交费后">
+                <input type="radio" name="check_pay" value="0" title="交费前">
             </div>
         </div>
         <div class="layui-inline">
             <label class="layui-form-label w-16">科类限制</label>
             <div class="layui-input-inline" style="min-width: 300px">
-                <input type="radio" name="subject_stint" value="文科" title="文科">
-                <input type="radio" name="subject_stint" value="理科" title="理科">
+                <input type="radio" name="subject_stint" value="1" title="文科">
+                <input type="radio" name="subject_stint" value="0" title="理科">
             </div>
         </div>
         <div class="layui-form-item">
@@ -178,7 +171,7 @@
             </label>
             <div class="layui-input-inline">
                 <input type="text" id="prcie" name="prcie" lay-verify="username" value="${myexam.prcie}"
-                       autocomplete="off" class="layui-input" placeholder="请输入报名费">
+                       autocomplete="off" class="layui-input" disabled="disabled" placeholder="请输入报名费">
             </div>
             <label for="uname" class="layui-form-label">
                 <span class="x-red" style="width:100px">*</span>复试报名费
@@ -188,7 +181,7 @@
             </div>
             <div class="layui-input-inline Fee show">
                 <input type="text" id="retestPrcie" name="retestPrcie" lay-verify="username" value="${myexam.retestPrcie}"
-                       autocomplete="off" class="layui-input" placeholder="请输入复试报名费">
+                       autocomplete="off" disabled="disabled" class="layui-input" placeholder="请输入复试报名费">
             </div>
         </div>
         <div class="layui-form-item">
@@ -206,8 +199,8 @@
                 <span class="x-red">*</span>初试
             </label>
             <div class="layui-input-inline">
-                <input type="text" id="preliminary" name="subject_q_fen" lay-verify="required" value="${myexam.subject_q_fen}"
-                       autocomplete="off" class="layui-input" placeholder="请输入初始科目权重分值">
+                <input type="text" id="preliminary" name="subject_q_fen" lay-verify="username" value="${myexam.subject_q_fen}"
+                       autocomplete="off" disabled="disabled" class="layui-input" placeholder="请输入初始科目权重分值">
             </div>
             <div id="ms" class="layui-form-mid layui-word-aux">
                 <span class="x-red">*</span><span id="ums">分值为0-100</span>
@@ -221,8 +214,8 @@
                 <span class="x-red">*</span>复试
             </label>
             <div class="layui-input-inline">
-                <input type="text" style="cursor: not-allowed;" disabled id="reexamine" name="father_q_fen" lay-verify="required" value="${myexam.father_q_fen}"
-                       autocomplete="off" class="layui-input" placeholder="请输入复试科目权重分值">
+                <input type="text" style="cursor: not-allowed;" disabled id="reexamine" name="father_q_fen" lay-verify="username" value="${myexam.father_q_fen}"
+                       autocomplete="off" disabled="disabled" class="layui-input" placeholder="请输入复试科目权重分值">
             </div>
             <div id="ms" class="layui-form-mid layui-word-aux">
                 <span class="x-red">*</span><span id="ums">与初试科目权重分值合计为100</span>
@@ -238,12 +231,9 @@
                     <span class="x-red">*</span>信息采集模板
                 </label>
                 <div class="layui-input-inline">
-                    <select name="gathering_id" id="gathering_id" class="spec_id" lay-verify="required"
-                            lay-filter="spec_id">
-                        <option value="">请选择信息采集模板</option>
-                        <#list info_list as spe>
-                            <option value="${spe.id}">${spe.template_name}</option>
-                        </#list>
+                    <select name="gathering_id"  id="gathering_id" lay-verify="departmentId"
+                            lay-filter="departmentId">
+                        <option value="无">${mymb.template_name}</option>
                     </select>
                 </div>
             </div>
@@ -272,10 +262,10 @@
                 <span class="x-red">*</span>准考证备注
             </label>
             <div class="layui-input-block">
-                <textarea   name="prologue_remarks"   placeholder="请输入准考证备注" id="bz" class="layui-textarea" ></textarea>
+                <textarea   name="prologue_remarks" disabled="disabled" placeholder="请输入准考证备注" id="bz" class="layui-textarea" >${myexam.prologue_remarks}</textarea>
             </div>
         </div>
-        <div class="layui-form-item">
+       <div class="layui-form-item">
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
                 <legend style="font-size:16px;font-weight: 700;">免责声明</legend>
             </fieldset>
@@ -289,6 +279,7 @@
                 <span class="x-red">*</span><span id="ums">仅支持pdf、word、txt
                     文件，大小不超过10M</span>
             </div>
+           <a href="${myexam.create_disclaimer}" download = "${myexam.create_disclaimer}">点击下载</a>
         </div>
         <div class="layui-form-item">
             <fieldset class="layui-elem-field layui-field-title" style="margin-top: 10px;">
@@ -304,14 +295,11 @@
                 <span class="x-red">*</span><span id="ums">仅支持pdf、word、txt
                     文件，大小不超过10M</span>
             </div>
+            <a href="${myexam.qtfj}" download = "${myexam.qtfj}">点击下载</a>
         </div>
         <div style="width: 100%;height: 55px;background-color: white;border-top:1px solid #e6e6e6;
   position: fixed;bottom: 0px;margin-left:-20px;">
             <div class="layui-form-item" style=" float: right;margin-right: 30px;margin-top: 8px">
-
-                <button class="layui-btn layui-btn-normal" lay-filter="add" lay-submit="">
-                    修改
-                </button>
                 <button class="layui-btn layui-btn-primary" id="close">
                     取消
                 </button>
@@ -343,12 +331,19 @@
 
         //监听提交
         form.on('submit(add)', function (data) {
+            var r = document.getElementsByName("role");
+            var role = [];
+            for (var i = 0; i < r.length; i++) {
+                if (r[i].checked) {
+                    console.info(r[i].value);
+                    role.push(r[i].value);
+                }
+            }
+            data.field.role = role;
+            layerAjax('addExamination', data.field, 'examinationList');
 
-
-            layerAjax('upExamination?id=${myexam.id}', data.field, 'examinationList');
             return false;
         });
-
         form.render();
         //基础效果
         transfer.render({
@@ -428,7 +423,13 @@
             }
             return false;
         });
-
+        form.verify({
+            zhun:function (value) {
+                if(value.length>4){
+                    return '准考证前序不能超过4位';
+                }
+            }
+        })
         form.on('select(majorId)', function (data) {
             if(data.value !== '') {
                 console.log(data)
@@ -436,7 +437,7 @@
             }
             if(data.value === '') {
                 $("input[name='switchTest']").removeAttr('checked');
-            }
+            }update-examination.ftl
             layui.use(['form', 'laydate'], function () {
                 var form = layui.form;
                 form.render('checkbox');
@@ -446,15 +447,33 @@
 
 
     $(function(){
-        $("input[name='subject_stint'][value=${myexam.subject_stint}]").prop("checked", 'checked');
-        $("input[name='check_pay'][value=${myexam.check_pay}]").prop("checked", 'checked');
-        $('#bz').html($(myexam.prologue_remarks))
 
         $("input[name='subject_q_fen']").change(function(){
             var text = $(this).val();
             var two = 100 - text;
             $("input[name='father_q_fen']").val(two);
         });
+        var one = ${myexam.check_pay}
+
+        $("input[name='check_pay'][value=${myexam.check_pay}]").prop("checked", 'checked');
+        layui.use('form',function(){
+            var form = layui.form;
+            form.render();
+        });
+        console.log(${myexam.retestPrcie});
+        console.log($("input[name='subject_stint'][value=0]"))
+
+        if(${myexam.retestPrcie}>0){
+            $(".Fee").show();
+            $("input[name='close']").prop("checked", 'checked');
+        }
+
+        $("input[name='subject_stint'][value=${myexam.subject_stint}]").prop("checked", 'checked');
+        layui.use('form',function(){
+            var form = layui.form;
+            form.render();
+        });
+
     })
 
     $(function(){
@@ -484,6 +503,7 @@
                     <button type="button" class="layui-btn layui-btn-danger" onclick="removeAction(this)">删除</button>
             </div>`)
         console.log(111)
+
     }
     function removeAction(obj) {
         $(obj).parent().remove();

@@ -27,16 +27,16 @@
     <div class="select">
         招生专业：
         <div class="layui-inline">
-            <input class="layui-input" height="20px" id="specialtyId" autocomplete="off">
+            <input class="layui-input" height="20px" id="specialtyId" autocomplete="off" >
         </div>
-        信息采集模板配置状态：
+       <#-- 信息采集模板配置状态：
         <div class="layui-inline">
             <input class="layui-input" height="20px" id="gatheringId" autocomplete="off">
         </div>
         考试发布状态：
         <div class="layui-inline">
-            <input class="layui-input" height="20px" id="status" autocomplete="off">
-        </div>
+            <input class="layui-input" height="20px" id="kstype" autocomplete="off">
+        </div>-->
         <button class="select-on layui-btn layui-btn-sm" data-type="select"><i class="layui-icon"></i>
         </button>
         <button class="layui-btn layui-btn-sm icon-position-button" id="refresh" style="float: right;"
@@ -109,7 +109,7 @@
                 , {field: 'specialty_name', title: '招生专业', width: '10%', sort: true}
                 , {field: 'exam_time', title: '报名开始时间', width: '13%'}
                 , {field: 'end_time', title: '报名截止时间', width: '13%'}
-                , {field: 'gathering_id', title: '信息采集模板', width: '13%'}
+                , {field: 'template_name', title: '信息采集模板', width: '13%'}
                 , {field: 'create_time', title: '考试开始时间', width: '10%'}
                 , {field: 'update_time', title: '考试结束时间', width: '10%'}
                 , {fixed: 'right', field: 'right', title: '操作', toolbar: "#barDemo"}
@@ -119,13 +119,15 @@
 
         var $ = layui.$, active = {
             select: function () {
-                var uname = $('#specialtyId').val();
-                var email = $('#gatheringId').val();
-                console.info(uname);
+                var specialty_name = $('#specialtyId').val();
+                /*var gathering_type = $('#gatheringId').val();
+                var kstype = $('#kstype').val();*/
+                console.info(specialty_name);
                 table.reload('examinationList', {
                     where: {
-                        examinationname: uname,
-                        email: email
+                        specialty_name: specialty_name,
+                    /*    gathering_type: gathering_type
+                        kstype:kstype;*/
                     }
                 });
             },
@@ -158,6 +160,7 @@
                     layer.msg('请选择一行查看,已选[' + data.length + ']行', {icon: 5});
                     return false;
                 }
+
                 detail('查看用户信息', 'updateExamination?id=' + data[0].id, 700, 450);
             },
             /*changePwd:function(){
@@ -204,16 +207,19 @@
         table.on('tool(examination)', function (obj) {
             var data = obj.data;
             if (obj.event === 'detail') {
-                detail('查看用户', 'updateExamination?id=' + data.id, 700, 600);
+                detail('查看用户', 'selectExamination?id=' + data.id, 700, 600);
             } else if (obj.event === 'del') {
-                layer.confirm('确定删除用户[<label style="color: #00AA91;">' + data.examinationname + '</label>]?', {
-                    btn: ['逻辑删除', '物理删除']
+                layer.confirm('确定删除?', {
+                    btn: ['删除', '取消']
                 }, function (index) {
                     layer.close(index);
-                    toolDelByFlag(data.id, '', false, 'examinationList');
+                    toolDelByFlag(data.id, 'del', false, 'examinationList');
+                    layui.table.reload('examinationList');
+                    /*layerAjax('del', data.id, 'examinationList')*/;
                 }, function (index) {
-                    layer.close(index);
-                    toolDelByFlag(data.id, '', true, 'examinationList');
+                   /* layer.close(index);
+                    toolDelByFlag(data.id, 'del', true, 'examinationList');*/
+                   /* layerAjax('del', data.id, 'examinationList');*/
                 });
             } else if (obj.event === 'edit') {
                 update('编辑用户', 'updateExamination?id=' + data.id, 700, 600);
@@ -345,7 +351,7 @@
             w = ($(window).width() * 0.9);
         }
         ;
-        if (h == null || h == '') {
+        if (h !== null || h !== '') {
             h = ($(window).height() - 50);
         }
         ;

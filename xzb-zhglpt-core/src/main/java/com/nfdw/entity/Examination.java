@@ -4,11 +4,10 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: EagleJunBin
@@ -33,8 +32,8 @@ public class Examination {
     @Column(name = "specialty_id")
     private String specialty_id;//兼职专业id
 
-    @Column(name = "name")
-    private String name;//专业名称
+    @Column(name = "zspecialty_id")
+    private String zspecialty_id;//专业名称
 
     @Column(name = "province_id")
     private String province_id;//生源地限制 省ID 多个用逗号隔开 <list>
@@ -99,14 +98,14 @@ public class Examination {
     private String update_time;//更新时间
 
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "exam_time")
     private String exam_time;//报名开始时间
 
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @Column(name = "end_time")
     private String end_time;//报名结束时间
 
@@ -148,7 +147,76 @@ public class Examination {
     @Column(name = "college_id")
     private Integer college_id;//学院ID
 
+    public String getSpecialty_name() {
+        return specialty_name;
+    }
 
+    public void setSpecialty_name(String specialty_name) {
+        this.specialty_name = specialty_name;
+    }
+
+    //专业名称
+    private String specialty_name;
+
+    //信息采集模板状态
+    private String gathering_type;
+
+    //考试状态
+    private String kstype;
+    //初试科目
+    private String cskm;
+    //复试科目
+    private String fskm;
+    //准考证title
+    @Column(name = "prologue_title")
+    private String prologue_title;
+
+    public String getPrologue_title() {
+
+        return prologue_title;
+    }
+
+    public void setPrologue_title(String prologue_title) {
+        this.prologue_title = prologue_title;
+    }
+
+    public String getFskm() {
+        return fskm;
+    }
+
+    public void setFskm(String fskm) {
+        this.fskm = fskm;
+    }
+
+    public String getCskm() {
+        return cskm;
+    }
+
+    public void setCskm(String cskm) {
+        this.cskm = cskm;
+    }
+
+    @Transient
+    private List<Kc> list;
+
+    public String getProvince_id() {
+        return province_id;
+    }
+
+    public void setProvince_id(String province_id) {
+        this.province_id = province_id;
+    }
+
+    public String getKca() {
+        return kca;
+    }
+
+    public void setKca(String kca) {
+        this.kca = kca;
+    }
+
+    //考场信息
+    private String kca;
 /*@Column(name = "crade_id")
     private Integer crade_id;//成绩ID
 
@@ -172,10 +240,51 @@ public class Examination {
     @Column(name = "check_pay")
     private Integer check_pay;//审核费用 0:交费钱 1：交费后
 
+    private  String template_name; //信息模板name
 
+    public String getGathering_type() {
+        return gathering_type;
+    }
 
+    public void setGathering_type(String gathering_type) {
+        this.gathering_type = gathering_type;
+    }
 
+    public String getKstype() {
+        return kstype;
+    }
 
+    public void setKstype(String kstype) {
+        this.kstype = kstype;
+    }
+
+    public List<Kc> getList() {
+        return list;
+    }
+
+    public void setList(List<Kc> list) {
+        this.list = list;
+    }
+
+    public String getTemplate_name() {
+        return template_name;
+    }
+
+    public void setTemplate_name(String template_name) {
+        this.template_name = template_name;
+    }
+
+    public String getQtfj() {
+        return qtfj;
+    }
+
+    public void setQtfj(String qtfj) {
+        this.qtfj = qtfj;
+    }
+
+    //其他附件
+    @Column(name = "qtfj")
+    private String qtfj;
 
     //初试科目权重分值
     @Column(name = "subject_q_fen")
@@ -206,6 +315,9 @@ public class Examination {
         return id;
     }
 
+
+
+
     public void setId(Integer id) {
         this.id = id;
     }
@@ -234,21 +346,16 @@ public class Examination {
         this.specialty_id = specialty_id;
     }
 
-    public String getName() {
-        return name;
+    public String getZspecialty_id() {
+        return zspecialty_id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setZspecialty_id(String zspecialty_id) {
+        this.zspecialty_id = zspecialty_id;
     }
 
-    public String getProvince_id() {
-        return province_id;
-    }
 
-    public void setProvince_id(String province_id) {
-        this.province_id = province_id;
-    }
+
 
     public String getGathering_id() {
         return gathering_id;

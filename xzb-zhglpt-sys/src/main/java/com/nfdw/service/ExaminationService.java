@@ -2,7 +2,6 @@ package com.nfdw.service;
 
 import com.nfdw.base.service.BaseService;
 import com.nfdw.entity.*;
-import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -24,11 +23,24 @@ public interface ExaminationService extends BaseService<Examination,String> {
     void deleteById(String id);
 
     //根据id修改
-    void uplateById(String id);
+    void uplateById(Examination examination);
     List<Infor_collection> selectInforById();
 
     List<Subject> selectBySubject();
 
     List<SpecManagement> selectBySpec();
 
+    List<Examination> selectpa();
+   //信息采集模板
+    List<Infor_collection> selectcollection();
+
+    Infor_collection selectmb(String id);
+
+
+    SpecManagement selectid(String id);
+
+    //考试场次
+    int addkc(Kc kc);
+    int addcskm(Cskmqz cskmqz);
+    int addfskm(Fskmqz fskmqz);
 }

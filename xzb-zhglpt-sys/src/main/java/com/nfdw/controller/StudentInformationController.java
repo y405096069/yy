@@ -49,14 +49,14 @@ public class StudentInformationController {
     AchievementService acService;
     @Autowired
     AuditService auditService;
-     @Log(desc = "用户退出平台")
-     @GetMapping(value = "/out")
-     public String out() throws IOException {
-         CurrentUser user = ShiroUtil.getCurrentUse();
-         if (user != null) {
-             userService.updateByIdStatus(user.getId(), 0);
-         }
-             return "redirect:logout";
+    @Log(desc = "用户退出平台")
+    @GetMapping(value = "/out")
+    public String out() throws IOException {
+        CurrentUser user = ShiroUtil.getCurrentUse();
+        if (user != null) {
+            userService.updateByIdStatus(user.getId(), 0);
+        }
+        return "redirect:logout";
     }
     @Log(desc = "查询学生基本信息并显示添加页面")
     @GetMapping(value = "/getBasicInformation")
@@ -86,6 +86,9 @@ public class StudentInformationController {
     @Log(desc = "跳转到准考证")
     @GetMapping(value = "/getAdmissionTicket")
     public String getAdmissionTicket(Model model){
+        SysUser user= (SysUser) ShiroUtil.getSession().getAttribute("user");
+        StudentInformation studentInfo = studentInformationService.getStudentInfoByUserId(user.getId());
+        model.addAttribute("student", studentInfo);
         return "admissionTicket";
     }
     @Log(desc = "跳转到合格证")
@@ -122,7 +125,7 @@ public class StudentInformationController {
     @RequestMapping(value="/getSelectExam")
     @PostMapping
     public String getSelectExam(String exam,String name,String create_start_time,Model model) throws ParseException {
-         Date date =new Date();
+        Date date =new Date();
         CurrentUser user = ShiroUtil.getCurrentUse();
         StudentInformation studentInformation=studentInformationService.getUserIDByStudentInformation(user.getUsername());
 //        if (null!=studentInformation) {
@@ -137,8 +140,8 @@ public class StudentInformationController {
         List<Examination> examinationList=studentInformationService.getListExamination(studentInformation.getCurrentDate(),studentInformation.getExaminee_province(),
                 studentInformation.getSubject_type(),exam,name,create_start_time);
         for (Examination e:examinationList
-             ) {
-            System.out.print(e.getName()+","+e.getCreate_start_time()+"111111111111");
+        ) {
+            //System.out.print(e.getName()+","+e.getCreate_start_time()+"111111111111");
         }
         model.addAttribute("examinationList",examinationList);
         model.addAttribute("exam",exam);
@@ -172,90 +175,90 @@ public class StudentInformationController {
         studentInformation.setStudent_id(UUID.randomUUID().toString().replaceAll("\\-", ""));
         CurrentUser user = ShiroUtil.getCurrentUse();
         if(studentInformationService.getStudentInfoConunt(user.getUsername())==0){
-        if("".equals(studentInformation.getCertificate_type())||null==studentInformation.getCertificate_type()){
-            model.addAttribute("rel","证件类型不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getCertificate_number())||null==studentInformation.getCertificate_number()){
-            model.addAttribute("rel","证件号码不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getNation())||null==studentInformation.getNation()){
-            model.addAttribute("rel","民族不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getName())||null==studentInformation.getName()){
-            model.addAttribute("rel","姓名不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getBirthdate())||null==studentInformation.getBirthdate()){
-            model.addAttribute("rel","出生日期不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getSex())||null==studentInformation.getSex()){
-            model.addAttribute("rel","性别不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getPostal_code())||null==studentInformation.getPostal_code()){
-            model.addAttribute("rel","邮政编码不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getExaminee_type())||null==studentInformation.getExaminee_type()){
-            model.addAttribute("rel","考生类型不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getExaminee_education())||null==studentInformation.getExaminee_education()){
-            model.addAttribute("rel","考生学历不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getExaminee_province())||null==studentInformation.getExaminee_province()){
-            model.addAttribute("rel","考生省份不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getPolitics_status())||null==studentInformation.getPolitics_status()){
-            model.addAttribute("rel","政治面貌不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getGraduate_type())||null==studentInformation.getGraduate_type()){
-            model.addAttribute("1","应往届不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getGraduate_middle())||null==studentInformation.getGraduate_middle()){
-            model.addAttribute("rel","毕业中学不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getExaminee_number())||null==studentInformation.getExaminee_number()){
-            model.addAttribute("rel","考生号码不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getSubject_type())||null==studentInformation.getSubject_type()){
-            model.addAttribute("rel","文理科不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getMember_name())||null==studentInformation.getMember_name()){
-            model.addAttribute("rel","家庭联络员姓名不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getMember_relationship())||null==studentInformation.getMember_relationship()){
-            model.addAttribute("rel","家庭联络员关系不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getMember_occupation())||null==studentInformation.getMember_occupation()){
-            model.addAttribute("rel","家庭联络员职业不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getMember_work())||null==studentInformation.getMember_work()){
-            model.addAttribute("1","家庭联络员工作单位不能为空!");
-            return "basicInformation";
-        }
-        if("".equals(studentInformation.getMember_phone())||null==studentInformation.getMember_phone()){
-            model.addAttribute("rel","主键不能为空!");
-            return "basicInformation";
-        }
+            if("".equals(studentInformation.getCertificate_type())||null==studentInformation.getCertificate_type()){
+                model.addAttribute("rel","证件类型不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getCertificate_number())||null==studentInformation.getCertificate_number()){
+                model.addAttribute("rel","证件号码不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getNation())||null==studentInformation.getNation()){
+                model.addAttribute("rel","民族不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getName())||null==studentInformation.getName()){
+                model.addAttribute("rel","姓名不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getBirthdate())||null==studentInformation.getBirthdate()){
+                model.addAttribute("rel","出生日期不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getSex())||null==studentInformation.getSex()){
+                model.addAttribute("rel","性别不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getPostal_code())||null==studentInformation.getPostal_code()){
+                model.addAttribute("rel","邮政编码不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getExaminee_type())||null==studentInformation.getExaminee_type()){
+                model.addAttribute("rel","考生类型不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getExaminee_education())||null==studentInformation.getExaminee_education()){
+                model.addAttribute("rel","考生学历不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getExaminee_province())||null==studentInformation.getExaminee_province()){
+                model.addAttribute("rel","考生省份不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getPolitics_status())||null==studentInformation.getPolitics_status()){
+                model.addAttribute("rel","政治面貌不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getGraduate_type())||null==studentInformation.getGraduate_type()){
+                model.addAttribute("1","应往届不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getGraduate_middle())||null==studentInformation.getGraduate_middle()){
+                model.addAttribute("rel","毕业中学不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getExaminee_number())||null==studentInformation.getExaminee_number()){
+                model.addAttribute("rel","考生号码不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getSubject_type())||null==studentInformation.getSubject_type()){
+                model.addAttribute("rel","文理科不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getMember_name())||null==studentInformation.getMember_name()){
+                model.addAttribute("rel","家庭联络员姓名不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getMember_relationship())||null==studentInformation.getMember_relationship()){
+                model.addAttribute("rel","家庭联络员关系不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getMember_occupation())||null==studentInformation.getMember_occupation()){
+                model.addAttribute("rel","家庭联络员职业不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getMember_work())||null==studentInformation.getMember_work()){
+                model.addAttribute("1","家庭联络员工作单位不能为空!");
+                return "basicInformation";
+            }
+            if("".equals(studentInformation.getMember_phone())||null==studentInformation.getMember_phone()){
+                model.addAttribute("rel","主键不能为空!");
+                return "basicInformation";
+            }
 
 
-        String upload = uploadUtil.upload(file);
-        studentInformation.setPhotograph(upload);
+            String upload = uploadUtil.upload(file);
+            studentInformation.setPhotograph(upload);
 
             SysUser sysUser=userService.getSysUserByUsername(user.getUsername());
             studentInformation.setStudent_userid(sysUser.getId());
@@ -428,7 +431,7 @@ public class StudentInformationController {
     }
     @RequestMapping(value = "/addVideo")
     public String uploadflie_Video(@RequestParam("file") CommonsMultipartFile file,
-            HttpServletRequest req, HttpServletRequest request,Model model) {
+                                   HttpServletRequest req, HttpServletRequest request,Model model) {
         System.out.println("进入addVideo视频上传控制层");
 
         if (file.getSize() != 0) {

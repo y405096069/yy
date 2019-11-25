@@ -2,10 +2,7 @@ package com.nfdw.service.impl;
 
 import com.nfdw.base.BaseMapper;
 import com.nfdw.base.service.impl.BaseServiceImpl;
-import com.nfdw.entity.Examination;
-import com.nfdw.entity.Infor_collection;
-import com.nfdw.entity.SpecManagement;
-import com.nfdw.entity.Subject;
+import com.nfdw.entity.*;
 import com.nfdw.mapper.ExaminationMapper;
 import com.nfdw.service.ExaminationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,8 +46,8 @@ public class ExaminationServiceImpl extends BaseServiceImpl<Examination,String> 
     }
 
     @Override
-    public void uplateById(String id) {
-      examinationMapper.uplateById(id);
+    public void uplateById(Examination examination) {
+      examinationMapper.uplateById(examination);
     }
 
     @Override
@@ -67,4 +64,41 @@ public class ExaminationServiceImpl extends BaseServiceImpl<Examination,String> 
     public List<SpecManagement> selectBySpec() {
         return examinationMapper.selectBySpec();
     }
+
+    @Override
+    public List<Examination> selectpa() {
+        return examinationMapper.selectpa();
+    }
+
+    @Override
+    public List<Infor_collection> selectcollection() {
+        return examinationMapper.selectcollection();
+    }
+
+    @Override
+    public Infor_collection selectmb(String id) {
+        return examinationMapper.selectmb(id);
+    }
+
+    @Override
+    public SpecManagement selectid(String id) {
+        return examinationMapper.selectid(id);
+    }
+
+    @Override
+    public int addkc(Kc kc) {
+        return examinationMapper.addKc(kc);
+    }
+
+    @Override
+    public int addcskm(Cskmqz cskmqz) {
+        return examinationMapper.addcskm(cskmqz);
+    }
+
+    @Override
+    public int addfskm(Fskmqz fskmqz) {
+        return examinationMapper.addfskm(fskmqz);
+    }
+
+
 }
