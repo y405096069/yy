@@ -17,4 +17,6 @@ public interface ImportExcelService {
      * @return 返回集合
      */
     public List<Achievement_Summary> importExcelWithSimple(MultipartFile file, HttpServletRequest req, HttpServletResponse resp);
+
+    public List<Achievement_Summary> importExcelWithSimple2(MultipartFile file, HttpServletRequest req, HttpServletResponse resp);//复试
 }

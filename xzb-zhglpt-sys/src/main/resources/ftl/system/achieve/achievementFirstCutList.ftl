@@ -89,8 +89,8 @@
             <i class="layui-icon">&#xe605;</i>确认输出
         </button>
 
-        <button class="layui-btn layui-btn-normal" data-type="sadsasda" lay-filter="sadsa">
-            <i class="layui-icon">&#xe605;</i>导出
+        <button class="layui-btn layui-btn-normal" data-type="daochu" lay-filter="daochu">
+            <i class="layui-icon">&#xe605;</i>导出全部
         </button>
 
         <#--<button class="layui-btn layui-btn-normal" data-type="batch">
@@ -158,7 +158,6 @@
         var table = layui.table,upload = layui.upload;
 
 
-
         //方法级渲染
         table.render({
             id: 'achievementFirstCut',
@@ -184,8 +183,6 @@
                 , {field: 'national_same_name', title: '全国同名次', width: '10%'}
                 , {field: 'provincial_ranking', title: '省排名', width: '8%'}
                 , {field: 'provincial_same_name', title: '省同名次', width: '8%'}
-                , {field: 'qualified_mark', title: '合格标志Y/N', width: '10%'}
-                , {field: 'qualified_line', title: '合格线', width: '8%'}
                 , {field: 'first_subjects_name1', title: '科目1名称', width: '8%'}
                 , {field: 'first_subjects_achieve1', title: '科目1成绩', width: '6%'}
                 //, {field: 'first_subjects_achieve_ex1', title: '科目1成绩说明', width: '10%'}
@@ -204,17 +201,60 @@
                 , {field: 'first_subjects_name6', title: '科目6名称', width: '8%'}
                 , {field: 'first_subjects_achieve6', title: '科目6成绩', width: '6%'}
                 //, {field: 'first_subjects_achieve_ex6', title: '科目6成绩说明', width: '10%'}
-                , {field: 'first_subjects_total', title: '总分', width: '8%'}
                 , {field: 'remarks', title: '备注', width: '10%'}
+                , {field: 'qualified_mark', title: '合格标志Y/N', width: '7%',fixed: 'right'}
+                , {field: 'qualified_line', title: '合格线', width: '6%',fixed: 'right'}
+                , {field: 'first_subjects_total', title: '总分', width: '6%',fixed: 'right'}
             ]],
             done: function(res, curr, count) {
-                 /*$("[data-field='grade']").children().each(function () {
-                     if ($(this).text() == "1") {
-                         $(this).text("开启");
-                     } else if($(this).text() == "0") {
-                         $(this).text("关闭");
-                     }
-                 });*/
+                $("[data-field='national_rankings']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='national_same_name']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='provincial_ranking']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='provincial_same_name']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='qualified_line']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve1']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve2']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve3']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve4']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve5']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve6']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_total']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
             }
             , page: true
         });
@@ -234,7 +274,8 @@
                         cut_num: null,
                         high_provinces: null,
                         cut_score: null,
-                        cut_rank: null
+                        cut_rank: null,
+                        isOutput: null
                     }
                 });
             },
@@ -263,7 +304,7 @@
                 }
             },
             high_prov_qk: function () {                 //清空省份
-                $("#high_province").val('');
+                $("#high_provinces").val('');
             },
             rank: function () {                 //排名
                 var exam_id = $("#exam_id").val();
@@ -276,7 +317,8 @@
                         exam_id: exam_id,
                         professional_name: professional_name,
                         cut_num: cut_num,
-                        high_provinces: high_provinces
+                        high_provinces: high_provinces,
+                        isOutput: null
                     }
                 });
             },
@@ -289,6 +331,10 @@
                 var cut_rank = $("#cut_rank").val();
                 if(cut_score !="" && cut_rank !=""){
                     layer.msg('不能同时填写 [入围分数线] 和 [入围排名] ', {icon: 5});
+                }else if(cut_score =="" && cut_rank =="") {
+                    layer.msg('请填写 [入围分数线] 和 [入围排名] 其中一项', {icon: 5});
+                /*}else if(high_provinces!="" || high_provinces.indexOf(',')>0){
+                    layer.msg(' 输出时 [高考省份] 有且仅有一项', {icon: 5});*/
                 }else{
                     table.reload('achievementFirstCut', {
                         where: {
@@ -297,7 +343,8 @@
                             cut_num: cut_num,
                             high_provinces: high_provinces,
                             cut_score: cut_score,
-                            cut_rank: cut_rank
+                            cut_rank: cut_rank,
+                            isOutput: null
                         }
                     });
                 }
@@ -314,19 +361,42 @@
                     var high_provinces = $("#high_provinces").val();
                     var cut_score = $("#cut_score").val();
                     var cut_rank = $("#cut_rank").val();
-                    table.reload('achievementFirstCut', {
-                        where: {
-                            exam_id: exam_id,
-                            professional_name: professional_name,
-                            cut_num: cut_num,
-                            high_provinces: high_provinces,
-                            cut_score: cut_score,
-                            cut_rank: cut_rank
-                        }
-                    });
+                    if(exam_id=="0") {
+                        layer.msg(' 请选择 [考试] ', {icon: 5});
+                    }else if(professional_name==""){
+                        layer.msg(' 请选择 [专业]  ', {icon: 5});
+                    }else if(high_provinces=="" || high_provinces.indexOf(',')>=0){
+                        layer.msg(' 输出时必填 [高考省份] ，且仅有一项', {icon: 5});
+                    }else{
+                        table.reload('achievementFirstCut', {
+                            where: {
+                                exam_id: exam_id,
+                                professional_name: professional_name,
+                                cut_num: cut_num,
+                                high_provinces: high_provinces,
+                                cut_score: cut_score,
+                                cut_rank: cut_rank,
+                                isOutput: '1'
+                            }
+                        });
+                    }
                 });
             },
-
+            daochu: function () {
+                var exam_id = $("#exam_id").val();
+                var professional_name = $("#professional_name").val();
+                var cut_num = $("#cut_num").val();
+                var high_provinces = $("#high_provinces").val();
+                var cut_score = $("#cut_score").val();
+                var cut_rank = $("#cut_rank").val();
+                layer.confirm('确认导出入围信息表?', {
+                    btn: ['确认', '取消']
+                }, function (index) {
+                    layer.close(index);
+                    location.href="inout_achieveFirstCutGrade?exam_id="+exam_id+"&professional_name="+professional_name
+                    +"&cut_num="+cut_num+"&high_provinces="+high_provinces+"&cut_score="+cut_score +"&cut_rank="+cut_rank;
+                });
+            },
             add: function () {
                 add('新建信息采集模板', 'achievementFirstGradeList',900, 680);
             },

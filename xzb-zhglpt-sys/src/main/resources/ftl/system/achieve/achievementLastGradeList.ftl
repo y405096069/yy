@@ -25,35 +25,23 @@
 <body>
 <div class="lenos-search">
     <div class="select">
-        <#--专业：
+        高考省份：
         <div class="layui-inline">
-            <select class="layui-input" height="20px" id="specialty_id" autocomplete="off">
+            <select class="layui-input" height="20px" id="high_province" autocomplete="off">
                 <option value="">全部</option>
-                <option value="1">音乐</option>
-                <option value="2">体育</option>
+                <#list list as list>
+                    <option value="${list}">${list}</option>
+                </#list>
             </select>
-        </div>-->
-        <#--生源地：
-        <div class="layui-inline">
-            <select class="layui-input" height="20px" id="province_id" autocomplete="off">
-                <option value="0">全部</option>
-                <option value="1">北京</option>
-                <option value="2">上海</option>
-                <option value="3">深圳</option>
-            </select>
-        </div>-->
-       <#-- 考试搜索：
-        <div class="layui-inline">
-            <input class="layui-input" height="20px" id="exam" autocomplete="off">
-        </div>-->
-        <#--考试：
-        <div class="layui-inline">
-            <input class="layui-input" height="20px" id="uname" autocomplete="off">
         </div>
-        电话：
+        考生姓名：
         <div class="layui-inline">
-            <input class="layui-input" height="20px" id="email" autocomplete="off">
-        </div>-->
+            <input class="layui-input" height="20px" id="name" autocomplete="off">
+        </div>
+        考生号：
+        <div class="layui-inline">
+            <input class="layui-input" height="20px" id="examinee_num" autocomplete="off">
+        </div>
         <button class="select-on layui-btn layui-btn-sm" data-type="select"><i class="layui-icon"></i>
         </button>
         <button class="layui-btn layui-btn-sm icon-position-button" id="refresh" style="float: right;"
@@ -103,7 +91,7 @@
     </@shiro.hasPermission>-->
     </div>
 </div>
-<table id="achievementFirstGradeList" class="layui-hide" lay-filter="achieveFirst"></table>
+<table id="achievementLastGradeList" class="layui-hide" lay-filter="achieveFirst"></table>
 
 
 <script type="text/html" id="barDemo">
@@ -124,8 +112,8 @@
 
         //方法级渲染
         table.render({
-            id: 'achievementFirstGradeList',
-            elem: '#achievementFirstGradeList'
+            id: 'achievementLastGradeList',
+            elem: '#achievementLastGradeList'
             , url: 'show_achievementLastGradeList'
             , cols: [[
                 {checkbox: true, fixed: true, width: 50}
@@ -139,24 +127,10 @@
                 , {field: 'wl_subject', title: '文理科',width:80}
                 , {field: 'professional_code', title: '专业代码',width:130}
                 , {field: 'professional_name', title: '专业名称', width:160}
-                , {field: 'national_rankings', title: '全国排名', width: 100}
-                , {field: 'national_same_name', title: '全国同名次', width: 100}
-                , {field: 'provincial_ranking', title: '省排名', width: 100}
-                , {field: 'provincial_same_name', title: '省同名次', width: 100}
-                , {field: 'qualified_mark', title: '合格Y/N', width: 100}
-                , {field: 'qualified_line', title: '合格线', width: 100}
-                , {field: 'first_subjects_name1', title: '科目1名称', width: 100}
-                , {field: 'first_subjects_achieve1', title: '科目1成绩', width: 100}
-                , {field: 'first_subjects_name2', title: '科目2名称', width: 100}
-                , {field: 'first_subjects_achieve2', title: '科目2成绩', width: 100}
-                , {field: 'first_subjects_name3', title: '科目3名称', width: 100}
-                , {field: 'first_subjects_achieve3', title: '科目3成绩', width: 100}
-                , {field: 'first_subjects_name4', title: '科目4名称', width: 100}
-                , {field: 'first_subjects_achieve4', title: '科目4成绩', width: 100}
-                , {field: 'first_subjects_name5', title: '科目5名称', width: 100}
-                , {field: 'first_subjects_achieve5', title: '科目5成绩', width: 100}
-                , {field: 'first_subjects_name6', title: '科目6名称', width: 100}
-                , {field: 'first_subjects_achieve6', title: '科目6成绩', width: 100}
+                , {field: 're_national_rankings', title: '全国排名', width: 100}
+                , {field: 're_national_same_name', title: '全国同名次', width: 100}
+                , {field: 're_provincial_ranking', title: '省排名', width: 100}
+                , {field: 're_provincial_same_name', title: '省同名次', width: 100}
                 , {field: 'complex_subjects_name1', title: '科目1名称', width: 100}
                 , {field: 'complex_subjects_achieve1', title: '科目1成绩', width: 100}
                 , {field: 'complex_subjects_name2', title: '科目2名称', width: 100}
@@ -169,29 +143,93 @@
                 , {field: 'complex_subjects_achieve5', title: '科目5成绩', width: 100}
                 , {field: 'complex_subjects_name6', title: '科目6名称', width: 100}
                 , {field: 'complex_subjects_achieve6', title: '科目6成绩', width: 100}
-                , {field: 'first_subjects_total', title: '初试总分', width: 100}
-                , {field: 'complex_subjects_total', title: '复试总分', width: 100}
-                , {field: 'total_score', title: '总分', width: 100}
+                , {field: 'first_subjects_total', title: '初试总分', width: '6%'}
+                , {field: 'complex_subjects_total', title: '复试总分', width: '6%'}
+                , {field: 're_qualified_mark', title: '合格Y/N', width: 100,fixed: 'right'}
+                , {field: 're_qualified_line', title: '合格线', width: 100,fixed: 'right'}
+                , {field: 'total_score', title: '总分', width: 100,fixed: 'right'}
                 //, {fixed: 'right', field: 'right', title: '操作', toolbar: "#barDemo",width: '6%'}
-            ]]
+            ]],
+            done: function(res, curr, count) {
+                $("[data-field='national_rankings']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='national_same_name']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='provincial_ranking']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='provincial_same_name']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='re_qualified_line']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='complex_subjects_achieve1']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='complex_subjects_achieve2']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='complex_subjects_achieve3']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='complex_subjects_achieve4']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='complex_subjects_achieve5']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='complex_subjects_achieve6']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='complex_subjects_total']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='total_score']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+            }
             , page: true
 
         });
         var flagqx = 1;
         var $ = layui.$, active = {
             select: function () {
-
-                table.reload('achievementFirstGradeList', {
+                var high_province = $('#high_province').val();
+                var name = $('#name').val();
+                var examinee_num = $('#examinee_num').val();
+                table.reload('achievementLastGradeList', {
                     where: {
-
+                        high_province:high_province,
+                        name:name,
+                        examinee_num:examinee_num
                     }
                 });
             },
             reload: function () {
-
-                table.reload('achievementFirstGradeList', {
+                $('#high_province').val('');
+                $('#name').val('');
+                $('#examinee_num').val('');
+                table.reload('achievementLastGradeList', {
                     where: {
-
+                        high_province:null,
+                        name:null,
+                        examinee_num:null
                     }
                 });
             },
@@ -214,7 +252,7 @@
             },
 
             batch: function () {
-                var checkStatus = table.checkStatus('achievementFirstList')
+                var checkStatus = table.checkStatus('achievementLastGradeList')
                     , data = checkStatus.data;
                 if (data.length == 0) {
                     layer.msg('请至少选择一行编辑,已选[' + data.length + ']行', {icon: 5});
@@ -236,13 +274,13 @@
                         }
                         status.push(num);
                     }
-                    batchUpdateAudit(id,status, 'achievementFirstGradeList');  //批量审核
+                    batchUpdateAudit(id,status, 'achievementLastGradeList');  //批量审核
                 });
 
                 //layerAjax('batchUpdateAudit', data.field, 'auditList');
             },
             update: function () {
-                var checkStatus = table.checkStatus('achievementFirstGradeList')
+                var checkStatus = table.checkStatus('achievementLastGradeList')
                         , data = checkStatus.data;
                 if (data.length != 1) {
                     layer.msg('请选择一行编辑,已选[' + data.length + ']行', {icon: 5});
@@ -251,7 +289,7 @@
                 update('编辑用户', 'updateUser?id=' + data[0].id, 700, 450);
             },
             detail: function () {
-                var checkStatus = table.checkStatus('achievementFirstGradeList')
+                var checkStatus = table.checkStatus('achievementLastGradeList')
                         , data = checkStatus.data;
                 if (data.length != 1) {
                     layer.msg('请选择一行查看,已选[' + data.length + ']行', {icon: 5});
@@ -283,7 +321,7 @@
                             data: {"id":data.id,"status":"1"},
                             success: function (d) {
                                 if (d.flag) {
-                                    window.layui.table.reload('achievementFirstGradeList');
+                                    window.layui.table.reload('achievementLastGradeList');
                                     window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                                 } else {
                                     window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
@@ -309,7 +347,7 @@
                             data: {"id":data.id,"status":"0"},
                             success: function (d) {
                                 if (d.flag) {
-                                    window.layui.table.reload('achievementFirstGradeList');
+                                    window.layui.table.reload('achievementLastGradeList');
                                     window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                                 } else {
                                     window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
@@ -333,7 +371,7 @@
                         data: {"id":data.id},
                         success: function (d) {
                             if (d.flag) {
-                                window.layui.table.reload('achievementFirstGradeList');
+                                window.layui.table.reload('achievementLastGradeList');
                                 window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});
                             } else {
                                 window.top.layer.msg(d.msg, {icon: 6, offset: 'rb', area: ['120px', '80px'], anim: 2});

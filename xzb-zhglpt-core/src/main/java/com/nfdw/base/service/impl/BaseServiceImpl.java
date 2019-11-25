@@ -149,10 +149,16 @@ public abstract class BaseServiceImpl<T, E extends Serializable> implements Base
         return getMappser().selectListByPage(record,exam_id);
     }
 
-    @Override                   //入围管理select
+    @Override                   //初试入围管理select
     public List<Achievement_Summary> selectListByTerm(Integer exam_id,String professional_name, Integer cut_num, String high_provinces,
                                                       Integer cut_score,Integer cut_rank) {
         return getMappser().selectListByTerm(exam_id, professional_name, cut_num,  high_provinces,cut_score,cut_rank);
+    }
+
+    @Override                   //复试入围管理select
+    public List<Achievement_Summary> selectListByTerm2(Integer exam_id,String professional_name, Integer cut_num, String high_provinces,
+                                                      Integer cut_score,Integer cut_rank) {
+        return getMappser().selectListByTerm2(exam_id, professional_name, cut_num,  high_provinces,cut_score,cut_rank);
     }
 
     @Override

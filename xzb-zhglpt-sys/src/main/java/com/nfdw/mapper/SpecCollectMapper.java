@@ -9,4 +9,5 @@ import java.util.List;
 
 public interface SpecCollectMapper extends BaseMapper<SpecCollect,String> {
 
+    int add(SpecCollect entity);
 }

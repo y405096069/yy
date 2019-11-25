@@ -36,7 +36,7 @@ public class SpecManagement {
 
     //专业代码
     @Column(name = "code")
-    private int code;
+    private String code;
 
 
     @Column(name = "res_status")
@@ -66,6 +66,11 @@ public class SpecManagement {
     //学院id
     @Column(name = "collect_id")
     private int collect_id;
+
+     //是否停用
+    @Column(name = "sfty")
+    private int sfty;
+
 
 
 

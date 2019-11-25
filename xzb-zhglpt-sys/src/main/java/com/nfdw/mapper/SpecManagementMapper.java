@@ -13,4 +13,9 @@ public interface SpecManagementMapper extends BaseMapper<SpecManagement,String> 
 
     SpecCollect selectIdByName(@Param("collect_id") String id);
 
+
+    int add(SpecManagement entity);
+
+    List<SpecManagement> selectSpecManagement();
+
 }

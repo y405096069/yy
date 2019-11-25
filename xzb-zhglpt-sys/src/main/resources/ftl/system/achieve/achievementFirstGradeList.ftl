@@ -25,35 +25,23 @@
 <body>
 <div class="lenos-search">
     <div class="select">
-        <#--专业：
+        高考省份：
         <div class="layui-inline">
-            <select class="layui-input" height="20px" id="specialty_id" autocomplete="off">
+            <select class="layui-input" height="20px" id="high_province" autocomplete="off">
                 <option value="">全部</option>
-                <option value="1">音乐</option>
-                <option value="2">体育</option>
+                <#list list as list>
+                    <option value="${list}">${list}</option>
+                </#list>
             </select>
-        </div>-->
-        <#--生源地：
-        <div class="layui-inline">
-            <select class="layui-input" height="20px" id="province_id" autocomplete="off">
-                <option value="0">全部</option>
-                <option value="1">北京</option>
-                <option value="2">上海</option>
-                <option value="3">深圳</option>
-            </select>
-        </div>-->
-       <#-- 考试搜索：
-        <div class="layui-inline">
-            <input class="layui-input" height="20px" id="exam" autocomplete="off">
-        </div>-->
-        <#--考试：
-        <div class="layui-inline">
-            <input class="layui-input" height="20px" id="uname" autocomplete="off">
         </div>
-        电话：
+        考生姓名：
         <div class="layui-inline">
-            <input class="layui-input" height="20px" id="email" autocomplete="off">
-        </div>-->
+            <input class="layui-input" height="20px" id="name" autocomplete="off">
+        </div>
+        考生号：
+        <div class="layui-inline">
+            <input class="layui-input" height="20px" id="examinee_num" autocomplete="off">
+        </div>
         <button class="select-on layui-btn layui-btn-sm" data-type="select"><i class="layui-icon"></i>
         </button>
         <button class="layui-btn layui-btn-sm icon-position-button" id="refresh" style="float: right;"
@@ -157,27 +145,85 @@
                 , {field: 'first_subjects_achieve5', title: '科目5成绩', width: 100}
                 , {field: 'first_subjects_name6', title: '科目6名称', width: 100}
                 , {field: 'first_subjects_achieve6', title: '科目6成绩', width: 100}
-                , {field: 'first_subjects_total', title: '总分', width: 100}
+                , {field: 'first_subjects_total', title: '总分', width: 100,fixed: 'right'}
                 //, {fixed: 'right', field: 'right', title: '操作', toolbar: "#barDemo",width: '6%'}
-            ]]
+            ]],
+            done: function(res, curr, count) {
+                $("[data-field='national_rankings']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='national_same_name']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='provincial_ranking']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='provincial_same_name']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='qualified_line']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve1']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve2']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve3']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve4']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve5']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_achieve6']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+                $("[data-field='first_subjects_total']").children().each(function () {
+                    if ($(this).text() == "0")
+                        $(this).text("");
+                });
+            }
             , page: true
 
         });
         var flagqx = 1;
         var $ = layui.$, active = {
             select: function () {
-
+                var high_province = $('#high_province').val();
+                var name = $('#name').val();
+                var examinee_num = $('#examinee_num').val();
                 table.reload('achievementFirstGradeList', {
                     where: {
-
+                        high_province:high_province,
+                        name:name,
+                        examinee_num:examinee_num
                     }
                 });
             },
             reload: function () {
-
+                $('#high_province').val('');
+                $('#name').val('');
+                $('#examinee_num').val('');
                 table.reload('achievementFirstGradeList', {
                     where: {
-
+                        high_province:null,
+                        name:null,
+                        examinee_num:null
                     }
                 });
             },

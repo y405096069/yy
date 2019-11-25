@@ -37,4 +37,14 @@ public class SpecManagementServiceImpl extends BaseServiceImpl<SpecManagement,St
     public SpecCollect selectIdByName(String id) {
         return specManagementMapper.selectIdByName(id);
     }
+
+    @Override
+    public int add(SpecManagement entity) {
+        return specManagementMapper.add(entity);
+    }
+
+    @Override
+    public List<SpecManagement> selectSpecManagement() {
+        return specManagementMapper.selectSpecManagement();
+    }
 }

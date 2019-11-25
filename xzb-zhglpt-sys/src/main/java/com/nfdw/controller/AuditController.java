@@ -87,16 +87,17 @@ public class AuditController {          ////审核管理
         try {
             Date date = new Date();
             audit.setAudit_time(date);
-            audit.setInfo_collect_status("已审核");
             boolean flag = false;
             if (audit.getAudit_link().equals("交费前")){                     //资料环节
                 //（已审核）审核失败过的考生
                 if (audit.getAudit_status().equals("待审核") || audit.getAudit_status().equals("已审核") || audit.getAudit_status().equals("待缴费")){
                     if (audit.getEnroll_status().equals("审核通过")){
                         audit.setAudit_status("待缴费");
+                        audit.setInfo_collect_status("审核成功");
                         flag=true;
                     }else if (audit.getEnroll_status().equals("审核不通过")){
                         audit.setAudit_status("已审核");
+                        audit.setInfo_collect_status("审核不成功");
                         flag=true;
                     }
                 }
@@ -104,9 +105,11 @@ public class AuditController {          ////审核管理
                 if (audit.getAudit_status().equals("待审核") || audit.getAudit_status().equals("已审核")){     //已缴费
                     if (audit.getEnroll_status().equals("审核通过")){
                         audit.setAudit_status("报名完成");
+                        audit.setInfo_collect_status("审核成功");
                         flag=true;
                     }else if (audit.getEnroll_status().equals("审核不通过")){
                         audit.setAudit_status("已审核");
+                        audit.setInfo_collect_status("审核不成功");
                         flag=true;
                     }
                 }
@@ -140,7 +143,7 @@ public class AuditController {          ////审核管理
                     if (audit_status[i].equals("待审核") || audit_status[i].equals("已审核")){
                         Audit audit = new Audit();
                         audit.setId(Integer.valueOf(id[i]));
-                        audit.setInfo_collect_status("已审核");
+                        audit.setInfo_collect_status("审核成功");
                         audit.setAudit_status("待缴费");
                         audit.setAudit_time(date);
                         auditService.updAudit(audit);
@@ -150,7 +153,7 @@ public class AuditController {          ////审核管理
                     if (audit_status[i].equals("待审核") || audit_status[i].equals("已审核")){
                         Audit audit = new Audit();
                         audit.setId(Integer.valueOf(id[i]));
-                        audit.setInfo_collect_status("已审核");
+                        audit.setInfo_collect_status("审核成功");
                         audit.setAudit_status("报名完成");
                         audit.setAudit_time(date);
                         auditService.updAudit(audit);

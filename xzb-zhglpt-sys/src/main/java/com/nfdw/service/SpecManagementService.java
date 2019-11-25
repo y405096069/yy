@@ -16,4 +16,8 @@ public interface SpecManagementService extends BaseService<SpecManagement,String
     List<SpecCollect> selectSpecCollect();
 
     SpecCollect selectIdByName(String id);
+
+    int add(SpecManagement entity);
+
+    List<SpecManagement> selectSpecManagement();
 }
