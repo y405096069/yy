@@ -46,4 +46,9 @@ public class AchievementServiceImpl extends BaseServiceImpl<Examination, String>
     public boolean updateGrade_Hgswitch(int id, int certificate) {
         return acMapper.updateGrade_Hgswitch(id,certificate)>0;
     }
+
+    @Override
+    public Examination selectExamination(String exam, String specialty_name) {
+        return acMapper.selectExamination(exam,specialty_name);
+    }
 }

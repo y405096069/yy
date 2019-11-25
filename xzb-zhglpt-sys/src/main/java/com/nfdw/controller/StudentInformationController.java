@@ -4,6 +4,8 @@ import com.nfdw.ConverVideoTest;
 import com.nfdw.core.annotation.Log;
 import com.nfdw.core.shiro.ShiroUtil;
 import com.nfdw.entity.*;
+import com.nfdw.service.AchievementService;
+import com.nfdw.service.AuditService;
 import com.nfdw.service.StudentInformationService;
 import com.nfdw.service.SysUserService;
 import com.nfdw.util.UploadUtil;
@@ -43,6 +45,10 @@ public class StudentInformationController {
     StudentInformationService studentInformationService;
     @Autowired
     private SysUserService userService;
+    @Autowired
+    AchievementService acService;
+    @Autowired
+    AuditService auditService;
      @Log(desc = "用户退出平台")
      @GetMapping(value = "/out")
      public String out() throws IOException {
@@ -610,18 +616,22 @@ public class StudentInformationController {
         audit.setName(studentInformation.getName());
         audit.setBiog_land(studentInformation.getExaminee_province());
         audit.setExaminee_number(studentInformation.getExaminee_number());
-        audit.setExam_id(0);
+        Examination eax2 = acService.selectExamination(exam,aname);
+        audit.setExam_id(Integer.valueOf(eax2.getId()));
         audit.setExam_name(exam);
-        audit.setMajor_id(0);
+        audit.setMajor_id(Integer.valueOf(eax2.getSpecialty_id()));
         audit.setMajor(aname);
         audit.setSub_time(date);
         audit.setEnd_time(date);
+        audit.setInfo_collect_status("待审核");
+        if(eax2.getCheck_pay()==0)
+            audit.setAudit_link("交费前");
+        else
+            audit.setAudit_link("交费后");
+        audit.setPay_status("已缴费");
 
-
-
-
-
-
+        if (auditService.addAudit(audit))
+            System.out.println("向审核送出一条数据-----------");
         return "informationGather";
     }
 }

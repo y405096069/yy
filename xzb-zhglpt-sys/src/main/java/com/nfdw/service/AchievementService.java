@@ -17,4 +17,6 @@ public interface AchievementService extends BaseService<Examination, String> {
 
     boolean updateGrade_Hgswitch( int id, int certificate);
 
+    Examination selectExamination(String exam,String specialty_name);
+
 }

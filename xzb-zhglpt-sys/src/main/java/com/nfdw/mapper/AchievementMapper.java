@@ -19,4 +19,6 @@ public interface AchievementMapper extends BaseMapper<Examination,String> {
 
     int updateGrade_Hgswitch(@Param("id") int id, @Param("certificate") int certificate);
 
+    Examination selectExamination(@Param("exam") String exam,@Param("specialty_name")String specialty_name);
+
 }

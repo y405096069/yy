@@ -127,4 +127,10 @@
         update crea_exam set certificate=#{certificate} where id=#{id}
     </update>
 
+
+    <select id="selectExamination" resultType="com.nfdw.entity.Examination">
+        select * from crea_exam where exam=#{exam}
+        and specialty_id = (select id from spec_management where name = #{specialty_name})
+    </select>
+
 </mapper>
