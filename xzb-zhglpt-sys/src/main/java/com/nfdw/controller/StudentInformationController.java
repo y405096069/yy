@@ -603,8 +603,25 @@ public class StudentInformationController {
         studentExamAudit.setKaoChangId(build);
         studentExamAudit.setAgreement(0);
         studentExamAudit.setTime(s8);
-
         studentInformationService.addStudentExamAudit(studentExamAudit);
+
+        Audit audit = new Audit();
+        audit.setU_id(studentInformation.getStudent_userid());
+        audit.setName(studentInformation.getName());
+        audit.setBiog_land(studentInformation.getExaminee_province());
+        audit.setExaminee_number(studentInformation.getExaminee_number());
+        audit.setExam_id(0);
+        audit.setExam_name(exam);
+        audit.setMajor_id(0);
+        audit.setMajor(aname);
+        audit.setSub_time(date);
+        audit.setEnd_time(date);
+
+
+
+
+
+
         return "informationGather";
     }
 }

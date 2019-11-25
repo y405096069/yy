@@ -67,6 +67,10 @@ public class SpecManagement {
     @Column(name = "collect_id")
     private int collect_id;
 
+    //是否停用
+    @Column(name = "sfty")
+    private  int sfty;
+
 
 
 }
