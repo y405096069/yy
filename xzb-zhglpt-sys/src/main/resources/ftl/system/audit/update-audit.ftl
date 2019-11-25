@@ -181,7 +181,7 @@ To change this template use File | Settings | File Templates.-->
                         <span class="x-red">*</span>正面照
                     </label>
                     <div id="demo2" style="margin-top: 20px;margin-left: 50px;float: right">
-                        <img src="${servletPath+'/'+e_user.photograph}/" width="100px" height="100px"
+                        <img src="${re.contextPath}/" width="100px" height="100px"
                              class="layui-upload-img layui-circle">
                     </div>
                 </div>

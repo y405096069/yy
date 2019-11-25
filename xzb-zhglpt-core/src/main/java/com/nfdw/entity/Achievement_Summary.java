@@ -61,19 +61,40 @@ public class Achievement_Summary {
     private int national_rankings;
 
     @Column(name = "national_same_name")        //全国同名次
-    private String national_same_name;
+    private int national_same_name;
 
     @Column(name = "provincial_ranking")        //省排名
     private int provincial_ranking;
 
     @Column(name = "provincial_same_name")      //省同名次
-    private String provincial_same_name;
+    private int provincial_same_name;
 
-    @Column(name = "qualified_mark")      //合格标志 Y/N
+    @Column(name = "re_national_rankings")         //总全国排名
+    private int re_national_rankings;
+
+    @Column(name = "re_national_same_name")        //总全国同名次
+    private int re_national_same_name;
+
+    @Column(name = "re_provincial_ranking")        //总省排名
+    private int re_provincial_ranking;
+
+    @Column(name = "re_provincial_same_name")      //总省同名次
+    private int re_provincial_same_name;
+
+
+
+    @Column(name = "qualified_mark")      //初试合格标志 Y/N
     private String qualified_mark;
 
-    @Column(name = "qualified_line")      //合格线
-    private String qualified_line;
+    @Column(name = "qualified_line")      //初试合格线
+    private double qualified_line;
+
+    @Column(name = "re_qualified_mark")      //复试合格标志 Y/N（总）
+    private String re_qualified_mark;
+
+    @Column(name = "re_qualified_line")      //复试合格线
+    private double re_qualified_line;
+
 
     @Column(name = "first_subjects_total")
     private double first_subjects_total;             //初试科目总分
@@ -87,6 +108,8 @@ public class Achievement_Summary {
     @Column(name = "remarks")      //备注
     private String remarks;
 
+    @Column(name = "re_remarks")      //复试备注
+    private String re_remarks;
 
 
     @Column(name = "first_subjects_id1")      //初试科目1   id
@@ -235,6 +258,61 @@ public class Achievement_Summary {
     @Column(name = "complex_subjects_achieve_ex6")      //成绩说明
     private String complex_subjects_achieve_ex6;
 
+    public String getRe_remarks() {
+        return re_remarks;
+    }
+
+    public void setRe_remarks(String re_remarks) {
+        this.re_remarks = re_remarks;
+    }
+
+    public int getRe_national_rankings() {
+        return re_national_rankings;
+    }
+
+    public void setRe_national_rankings(int re_national_rankings) {
+        this.re_national_rankings = re_national_rankings;
+    }
+
+    public int getRe_national_same_name() {
+        return re_national_same_name;
+    }
+
+    public void setRe_national_same_name(int re_national_same_name) {
+        this.re_national_same_name = re_national_same_name;
+    }
+
+    public int getRe_provincial_ranking() {
+        return re_provincial_ranking;
+    }
+
+    public void setRe_provincial_ranking(int re_provincial_ranking) {
+        this.re_provincial_ranking = re_provincial_ranking;
+    }
+
+    public int getRe_provincial_same_name() {
+        return re_provincial_same_name;
+    }
+
+    public void setRe_provincial_same_name(int re_provincial_same_name) {
+        this.re_provincial_same_name = re_provincial_same_name;
+    }
+
+    public String getRe_qualified_mark() {
+        return re_qualified_mark;
+    }
+
+    public void setRe_qualified_mark(String re_qualified_mark) {
+        this.re_qualified_mark = re_qualified_mark;
+    }
+
+    public double getRe_qualified_line() {
+        return re_qualified_line;
+    }
+
+    public void setRe_qualified_line(double re_qualified_line) {
+        this.re_qualified_line = re_qualified_line;
+    }
 
     public int getId() {
         return id;
@@ -332,11 +410,11 @@ public class Achievement_Summary {
         this.national_rankings = national_rankings;
     }
 
-    public String getNational_same_name() {
+    public int getNational_same_name() {
         return national_same_name;
     }
 
-    public void setNational_same_name(String national_same_name) {
+    public void setNational_same_name(int national_same_name) {
         this.national_same_name = national_same_name;
     }
 
@@ -348,11 +426,11 @@ public class Achievement_Summary {
         this.provincial_ranking = provincial_ranking;
     }
 
-    public String getProvincial_same_name() {
+    public int getProvincial_same_name() {
         return provincial_same_name;
     }
 
-    public void setProvincial_same_name(String provincial_same_name) {
+    public void setProvincial_same_name(int provincial_same_name) {
         this.provincial_same_name = provincial_same_name;
     }
 
@@ -364,11 +442,11 @@ public class Achievement_Summary {
         this.qualified_mark = qualified_mark;
     }
 
-    public String getQualified_line() {
+    public double getQualified_line() {
         return qualified_line;
     }
 
-    public void setQualified_line(String qualified_line) {
+    public void setQualified_line(double qualified_line) {
         this.qualified_line = qualified_line;
     }
 

@@ -17,5 +17,6 @@ public interface AchievementMapper extends BaseMapper<Examination,String> {
 
     int updateGrade_switch2(@Param("id") int id, @Param("grade2") int grade2);
 
+    int updateGrade_Hgswitch(@Param("id") int id, @Param("certificate") int certificate);
 
 }

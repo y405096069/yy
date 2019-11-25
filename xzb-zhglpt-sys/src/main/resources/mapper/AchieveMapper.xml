@@ -18,16 +18,27 @@
         <id column="wl_subject" jdbcType="VARCHAR" property="wl_subject" />
         <id column="professional_code" jdbcType="VARCHAR" property="professional_code" />
         <id column="professional_name" jdbcType="VARCHAR" property="professional_name" />
+
         <id column="national_rankings" jdbcType="INTEGER" property="national_rankings" />
-        <id column="national_same_name" jdbcType="VARCHAR" property="national_same_name" />
+        <id column="national_same_name" jdbcType="INTEGER" property="national_same_name" />
         <id column="provincial_ranking" jdbcType="INTEGER" property="provincial_ranking" />
-        <id column="provincial_same_name" jdbcType="VARCHAR" property="provincial_same_name" />
+        <id column="provincial_same_name" jdbcType="INTEGER" property="provincial_same_name" />
+        <id column="re_national_rankings" jdbcType="INTEGER" property="re_national_rankings" />
+        <id column="re_national_same_name" jdbcType="INTEGER" property="re_national_same_name" />
+        <id column="re_provincial_ranking" jdbcType="INTEGER" property="re_provincial_ranking" />
+        <id column="re_provincial_same_name" jdbcType="INTEGER" property="re_provincial_same_name" />
+
         <id column="qualified_mark" jdbcType="VARCHAR" property="qualified_mark" />
-        <id column="qualified_line" jdbcType="VARCHAR" property="qualified_line" />
+        <id column="qualified_line" jdbcType="DOUBLE" property="qualified_line" />
+        <id column="re_qualified_mark" jdbcType="VARCHAR" property="re_qualified_mark" />
+        <id column="re_qualified_line" jdbcType="DOUBLE" property="re_qualified_line" />
+
         <id column="first_subjects_total" jdbcType="DOUBLE" property="first_subjects_total" />
         <id column="complex_subjects_total" jdbcType="DOUBLE" property="complex_subjects_total" />
         <id column="total_score" jdbcType="DOUBLE" property="total_score" />
+
         <id column="remarks" jdbcType="VARCHAR" property="remarks" />
+        <id column="re_remarks" jdbcType="VARCHAR" property="re_remarks" />
 
 
         <id column="first_subjects_id1" jdbcType="INTEGER" property="first_subjects_id1" />
@@ -94,24 +105,18 @@
         <if test="exam_id !=null and exam_id != 0">
             and exam_id=#{exam_id}
         </if>
-        <!--<if test="qualified_mark !=null and qualified_mark != ''">
-            and qualified_mark=#{qualified_mark}
-        </if>-->
-        <!--<if test="id !=null and id != 0">
-            and id = #{id}
+        <if test="high_province !=null and high_province != ''">
+            and high_province=#{high_province}
         </if>
-        <if test="specialty_id !=null and specialty_id != 0">
-            and specialty_id = #{specialty_id}
+        <if test="name != null and name != ''">
+            and name like CONCAT('%',#{name},'%')
         </if>
-        <if test="grade !=null and grade != ''">
-            and grade = #{grade}
+        <if test="examinee_num != null and examinee_num != ''">
+            and examinee_num like CONCAT('%',#{examinee_num},'%')
         </if>
-        <if test="province_id!=null and province_id !='0'">
-            and grade = #{grade}
+        <if test="qualified_mark != null and qualified_mark != ''">
+            and qualified_mark = #{qualified_mark}
         </if>
-        <if test="exam != null and exam != ''">
-            and exam like CONCAT('%',#{exam},'%')
-        </if>-->
     </select>
 
     <select id="selectListByPage2" parameterType="com.nfdw.entity.Achievement_Summary" resultMap="BaseResultMap">
@@ -119,11 +124,18 @@
         <if test="exam_id !=null and exam_id != 0">
             and exam_id=#{exam_id}
         </if>
+        <if test="qualified_mark !=null and qualified_mark != ''">
+            and qualified_mark=#{qualified_mark}
+        </if>
     </select>
-
 
     <select id="selectAllHigh_province" resultType="java.lang.String">
         select high_province from achievement_summary GROUP BY high_province
+    </select>
+    <select id="selectAllHigh_provinceByEId" resultType="java.lang.String">
+        select high_province from achievement_summary
+        where exam_id = #{eid}
+        GROUP BY high_province
     </select>
 
     <select id="selectListByTerm" parameterType="com.nfdw.entity.Achievement_Summary" resultMap="BaseResultMap">
@@ -146,29 +158,331 @@
                     and first_subjects_total &gt;= #{cut_score}
                 </if>
                 <if test="cut_num !=null and cut_num != 0">
-                    GROUP BY first_subjects_total DESC
+                    order by first_subjects_total DESC
                     limit #{cut_num}
                 </if>
                 <if test="cut_rank !=null and cut_rank != 0">
-                    GROUP BY first_subjects_total DESC
+                    order by first_subjects_total DESC
                     limit #{cut_rank}
                 </if>
             )  as  a
         )
+        order by first_subjects_total DESC
+    </select>
+
+    <select id="selectListByTerm2" parameterType="com.nfdw.entity.Achievement_Summary" resultMap="BaseResultMap">
+        select * from achievement_summary where id in (
+        select a.id from (
+        select * from achievement_summary where 1=1
+        <if test="exam_id !=null and exam_id != 0">
+            and exam_id=#{exam_id}
+        </if>
+        <if test="professional_name !=null and professional_name !=''">
+            and professional_name=#{professional_name}
+        </if>
+        <if test="high_provinces !=null and high_provinces != ''">
+            and high_province in
+            <foreach item="item" index="index" collection="high_provinces.split(',')"  open="(" separator="," close=")">
+                '${item}'
+            </foreach>
+        </if>
+        <if test="cut_score !=null and cut_score != 0">
+            and total_score &gt;= #{cut_score}
+        </if>
         <if test="cut_num !=null and cut_num != 0">
-            GROUP BY first_subjects_total DESC
+            order by total_score DESC
+            limit #{cut_num}
         </if>
         <if test="cut_rank !=null and cut_rank != 0">
-            GROUP BY first_subjects_total DESC
+            order by total_score DESC
+            limit #{cut_rank}
         </if>
-
+        )  as  a
+        )
+        order by total_score DESC
     </select>
+
 
     <select id="getIdByExam_num" parameterType="java.lang.String" resultMap="BaseResultMap">
         select * from achievement_summary where 1=1
         <if test="exe_num !=null and exe_num!=''">
             and examinee_num=#{exe_num}
         </if>
+    </select>
+
+    <select id="getAchieveById_Card" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select * from achievement_summary where 1=1
+        <if test="id_card !=null and id_card!=''">
+            and id_card=#{id_card}
+        </if>
+    </select>
+
+    <select id="selectSpecialty_NameById" resultType="java.lang.String">
+        select name FROM spec_management WHERE id =#{id}
+    </select>
+
+    <update id="updFirst_GradeByEId">
+        update achievement_summary set national_rankings=0,national_same_name=0,provincial_ranking=0,provincial_same_name=0,
+        qualified_mark=null,qualified_line=0,first_subjects_total=0,remarks=null,
+        first_subjects_achieve1=0,first_subjects_achieve_ex1=null,
+        first_subjects_achieve2=0,first_subjects_achieve_ex2=null,
+        first_subjects_achieve3=0,first_subjects_achieve_ex3=null,
+        first_subjects_achieve4=0,first_subjects_achieve_ex4=null,
+        first_subjects_achieve5=0,first_subjects_achieve_ex5=null,
+        first_subjects_achieve6=0,first_subjects_achieve_ex6=null
+        where exam_id=#{eid}
+    </update>
+
+    <update id="updComplex_GradeByEId">
+        update achievement_summary set complex_subjects_total=0,total_score=0,re_remarks=null,
+        complex_subjects_achieve1=0,complex_subjects_achieve_ex1=null,
+        complex_subjects_achieve2=0,complex_subjects_achieve_ex2=null,
+        complex_subjects_achieve3=0,complex_subjects_achieve_ex3=null,
+        complex_subjects_achieve4=0,complex_subjects_achieve_ex4=null,
+        complex_subjects_achieve5=0,complex_subjects_achieve_ex5=null,
+        complex_subjects_achieve6=0,complex_subjects_achieve_ex6=null,
+        re_qualified_mark=null ,re_qualified_line=0,re_national_rankings=0,re_national_same_name=0,
+        re_provincial_ranking=0,re_provincial_same_name=0
+        where exam_id=#{eid}
+    </update>
+
+    <sql id="achiValue">
+        <trim suffix="" suffixOverrides=",">
+            <if test="national_rankings!=0">
+                national_rankings=#{national_rankings},
+            </if>
+            <if test="national_same_name!=0">
+                national_same_name=#{national_same_name},
+            </if>
+            <if test="provincial_ranking!=0">
+                provincial_ranking=#{provincial_ranking},
+            </if>
+            <if test="provincial_same_name!=0">
+                provincial_same_name=#{provincial_same_name},
+            </if>
+            <if test="qualified_mark!=null">
+                qualified_mark=#{qualified_mark},
+            </if>
+            <if test="qualified_line!=0">
+                qualified_line=#{qualified_line},
+            </if>
+            <if test="first_subjects_total!=0">
+                first_subjects_total=#{first_subjects_total},
+            </if>
+            <if test="complex_subjects_total!=0">
+                complex_subjects_total=#{complex_subjects_total},
+            </if>
+            <if test="total_score!=0">
+                total_score=#{total_score},
+            </if>
+            <if test="remarks!=null">
+                remarks=#{remarks},
+            </if>
+
+            <if test="first_subjects_id1!=0">
+                first_subjects_id1=#{first_subjects_id1},
+            </if>
+            <if test="first_subjects_name1!=null">
+                first_subjects_name1=#{first_subjects_name1},
+            </if>
+            <if test="first_subjects_achieve1!=0">
+                first_subjects_achieve1=#{first_subjects_achieve1},
+            </if>
+            <if test="first_subjects_achieve_ex1!=null">
+                first_subjects_achieve_ex1=#{first_subjects_achieve_ex1},
+            </if>
+
+            <if test="first_subjects_id2!=0">
+                first_subjects_id2=#{first_subjects_id2},
+            </if>
+            <if test="first_subjects_name2!=null">
+                first_subjects_name2=#{first_subjects_name2},
+            </if>
+            <if test="first_subjects_achieve2!=0">
+                first_subjects_achieve2=#{first_subjects_achieve2},
+            </if>
+            <if test="first_subjects_achieve_ex2!=null">
+                first_subjects_achieve_ex2=#{first_subjects_achieve_ex2},
+            </if>
+
+            <if test="first_subjects_id3!=0">
+                first_subjects_id3=#{first_subjects_id3},
+            </if>
+            <if test="first_subjects_name3!=null">
+                first_subjects_name3=#{first_subjects_name3},
+            </if>
+            <if test="first_subjects_achieve3!=0">
+                first_subjects_achieve3=#{first_subjects_achieve3},
+            </if>
+            <if test="first_subjects_achieve_ex3!=null">
+                first_subjects_achieve_ex3=#{first_subjects_achieve_ex3},
+            </if>
+
+            <if test="first_subjects_id4!=0">
+                first_subjects_id4=#{first_subjects_id4},
+            </if>
+            <if test="first_subjects_name4!=null">
+                first_subjects_name4=#{first_subjects_name4},
+            </if>
+            <if test="first_subjects_achieve4!=0">
+                first_subjects_achieve4=#{first_subjects_achieve4},
+            </if>
+            <if test="first_subjects_achieve_ex4!=null">
+                first_subjects_achieve_ex4=#{first_subjects_achieve_ex4},
+            </if>
+
+            <if test="first_subjects_id5!=0">
+                first_subjects_id5=#{first_subjects_id5},
+            </if>
+            <if test="first_subjects_name5!=null">
+                first_subjects_name5=#{first_subjects_name5},
+            </if>
+            <if test="first_subjects_achieve5!=0">
+                first_subjects_achieve5=#{first_subjects_achieve5},
+            </if>
+            <if test="first_subjects_achieve_ex5!=null">
+                first_subjects_achieve_ex5=#{first_subjects_achieve_ex5},
+            </if>
+
+            <if test="first_subjects_id6!=0">
+                first_subjects_id6=#{first_subjects_id6},
+            </if>
+            <if test="first_subjects_name6!=null">
+                first_subjects_name6=#{first_subjects_name6},
+            </if>
+            <if test="first_subjects_achieve5!=0">
+                first_subjects_achieve6=#{first_subjects_achieve6},
+            </if>
+            <if test="first_subjects_achieve_ex6!=null">
+                first_subjects_achieve_ex6=#{first_subjects_achieve_ex6},
+            </if>
+
+            <if test="complex_subjects_id1!=0">
+                complex_subjects_id1=#{complex_subjects_id1},
+            </if>
+            <if test="complex_subjects_name1!=null">
+                complex_subjects_name1=#{complex_subjects_name1},
+            </if>
+            <if test="complex_subjects_achieve1!=0">
+                complex_subjects_achieve1=#{complex_subjects_achieve1},
+            </if>
+            <if test="complex_subjects_achieve_ex1!=null">
+                complex_subjects_achieve_ex1=#{complex_subjects_achieve_ex1},
+            </if>
+
+            <if test="complex_subjects_id2!=0">
+                complex_subjects_id2=#{complex_subjects_id2},
+            </if>
+            <if test="complex_subjects_name2!=null">
+                complex_subjects_name2=#{complex_subjects_name2},
+            </if>
+            <if test="complex_subjects_achieve2!=0">
+                complex_subjects_achieve2=#{complex_subjects_achieve2},
+            </if>
+            <if test="complex_subjects_achieve_ex2!=null">
+                complex_subjects_achieve_ex2=#{complex_subjects_achieve_ex2},
+            </if>
+
+
+            <if test="complex_subjects_id3!=0">
+                complex_subjects_id3=#{complex_subjects_id3},
+            </if>
+            <if test="complex_subjects_name3!=null">
+                complex_subjects_name3=#{complex_subjects_name3},
+            </if>
+            <if test="complex_subjects_achieve3!=0">
+                complex_subjects_achieve3=#{complex_subjects_achieve3},
+            </if>
+            <if test="complex_subjects_achieve_ex3!=null">
+                complex_subjects_achieve_ex3=#{complex_subjects_achieve_ex3},
+            </if>
+
+            <if test="complex_subjects_id4!=0">
+                complex_subjects_id4=#{complex_subjects_id4},
+            </if>
+            <if test="complex_subjects_name4!=null">
+                complex_subjects_name4=#{complex_subjects_name4},
+            </if>
+            <if test="complex_subjects_achieve4!=0">
+                complex_subjects_achieve4=#{complex_subjects_achieve4},
+            </if>
+            <if test="complex_subjects_achieve_ex4!=null">
+                complex_subjects_achieve_ex4=#{complex_subjects_achieve_ex4},
+            </if>
+
+            <if test="complex_subjects_id5!=0">
+                complex_subjects_id5=#{complex_subjects_id5},
+            </if>
+            <if test="complex_subjects_name5!=null">
+                complex_subjects_name5=#{complex_subjects_name5},
+            </if>
+            <if test="complex_subjects_achieve5!=0">
+                complex_subjects_achieve5=#{complex_subjects_achieve5},
+            </if>
+            <if test="complex_subjects_achieve_ex5!=null">
+                complex_subjects_achieve_ex5=#{complex_subjects_achieve_ex5},
+            </if>
+
+            <if test="complex_subjects_id6!=0">
+                complex_subjects_id6=#{complex_subjects_id6},
+            </if>
+            <if test="complex_subjects_name6!=null">
+                complex_subjects_name6=#{complex_subjects_name6},
+            </if>
+            <if test="complex_subjects_achieve6!=0">
+                complex_subjects_achieve6=#{complex_subjects_achieve6},
+            </if>
+            <if test="complex_subjects_achieve_ex6!=null">
+                complex_subjects_achieve_ex6=#{complex_subjects_achieve_ex6},
+            </if>
+
+            <if test="re_qualified_mark!=null">
+                re_qualified_mark=#{re_qualified_mark},
+            </if>
+            <if test="re_qualified_line!=0">
+                re_qualified_line=#{re_qualified_line},
+            </if>
+            <if test="re_national_rankings!=0">
+                re_national_rankings=#{re_national_rankings},
+            </if>
+            <if test="re_national_same_name!=0">
+                re_national_same_name=#{re_national_same_name},
+            </if>
+            <if test="re_provincial_ranking!=0">
+                re_provincial_ranking=#{re_provincial_ranking},
+            </if>
+            <if test="re_provincial_same_name!=0">
+                re_provincial_same_name=#{re_provincial_same_name},
+            </if>
+            <if test="re_remarks!=null">
+                re_remarks=#{re_remarks},
+            </if>
+        </trim>
+    </sql>
+
+    <update id="updAchieve_Grade">
+        update achievement_summary set
+        <include refid="achiValue"/>
+        where id=#{id}
+    </update>
+
+
+    <select id="selectFirstNational_same_name" resultType="java.lang.Integer">
+        	SELECT count(1) FROM achievement_summary WHERE exam_id=#{exam_id}
+                    AND professional_name=#{professional_name}
+					<if test="high_province!=null">
+                        AND high_province=#{high_province}
+                    </if>
+					AND first_subjects_total = #{first_subjects_total}
+    </select>
+
+    <select id="selectLastNational_same_name" resultType="java.lang.Integer">
+        SELECT count(1) FROM achievement_summary WHERE exam_id=#{exam_id}
+        AND professional_name=#{professional_name}
+        <if test="high_province!=null">
+            AND high_province=#{high_province}
+        </if>
+        AND total_score = #{total_score}
     </select>
 
 </mapper>

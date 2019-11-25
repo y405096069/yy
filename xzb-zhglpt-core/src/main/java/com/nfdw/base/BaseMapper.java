@@ -70,10 +70,16 @@ public interface BaseMapper<T, E extends Serializable> extends tk.mybatis.mapper
 
     List<T> selectListByPage(T record, int exam_id);
 
-    /*  param
+    /*
+        初试
+        param
         考试id  专业id  初步入围人数  高考省份  入围分数线    入围排名
      */
     List<Achievement_Summary> selectListByTerm(Integer exam_id, String professional_name, Integer cut_num, String high_provinces,
+                                               Integer cut_score, Integer cut_rank);
+
+    //复试
+    List<Achievement_Summary> selectListByTerm2(Integer exam_id, String professional_name, Integer cut_num, String high_provinces,
                                                Integer cut_score, Integer cut_rank);
 
 }
