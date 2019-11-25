@@ -1,11 +1,15 @@
 package com.nfdw.controller;
 
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.nfdw.base.controller.BaseController;
 import com.nfdw.core.annotation.Log;
 import com.nfdw.core.annotation.Log.LOG_TYPE;
 import com.nfdw.entity.SpecCollect;
+import com.nfdw.entity.SpecCollectEntity;
 import com.nfdw.exception.MyException;
+import com.nfdw.service.SpecCollectEntityService;
 import com.nfdw.service.SpecCollectService;
 import com.nfdw.util.BeanUtil;
 import com.nfdw.util.JsonUtil;
@@ -21,7 +25,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
+import java.util.List;
 
 @RequestMapping("/specCollect")
 @Controller
@@ -29,6 +40,9 @@ public class SpecCollectController extends BaseController {
 
     @Autowired
     private SpecCollectService specCollectService;
+
+    @Autowired
+    private SpecCollectEntityService specCollectEntityService;
 
     /**
      * 2019/1/3
@@ -68,9 +82,11 @@ public class SpecCollectController extends BaseController {
             JsonUtil.error("学院名称不能为空");
         }
         JsonUtil j = new JsonUtil();
+
         try {
             specCollect.setUpdateTime(new Date());
             specCollectService.insertSelective(specCollect);
+
             //操作role-menu data
             j.setMsg("保存成功");
 
@@ -169,5 +185,9 @@ public class SpecCollectController extends BaseController {
         
         return jsonUtil;
     }
+
+
+
+
 
 }

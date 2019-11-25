@@ -26,4 +26,8 @@ public class SpecCollectServiceImpl extends BaseServiceImpl<SpecCollect, String>
     }
 
 
+    @Override
+    public int add(SpecCollect entity) {
+        return specCollectMapper.add(entity);
+    }
 }
