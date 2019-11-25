@@ -20,4 +20,6 @@ public interface StudentInformationMapper {
     int addStudentExamAudit(StudentExamAudit studentExamAudit);
     //根据用戶账号查询学生信息总数
     int getStudentInfoConunt(@Param("username")String username);
+
+    StudentInformation getStudentInfoByUserId(@Param("id") String id);
 }

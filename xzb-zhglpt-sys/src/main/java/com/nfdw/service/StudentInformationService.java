@@ -26,4 +26,6 @@ public interface StudentInformationService {
     int addStudentExamAudit(StudentExamAudit studentExamAudit);
     //根据用戶账号查询学生信息总数
     int getStudentInfoConunt(String username);
+
+    StudentInformation getStudentInfoByUserId(String id);
 }

@@ -53,4 +53,7 @@
 	  LEFT JOIN sys_user u on j.student_userid=u.id
 		WHERE u.username=#{username}
   </select>
+  <select id="getStudentInfoByUserId" resultType="com.nfdw.entity.StudentInformation">
+    select * from j_student_information where student_userid=#{id}
+  </select>
 </mapper>

@@ -46,7 +46,7 @@ public class Application extends SpringBootServletInitializer {
         return builder.sources(Application.class);
     }
 
-    @Bean
+    /*@Bean
     public Connector httpConnector(){
         Connector connector=new Connector("org.apache.coyote.http11.Http11NioProtocol");
         connector.setScheme("http");
@@ -71,5 +71,5 @@ public class Application extends SpringBootServletInitializer {
         };
         tomcat.addAdditionalTomcatConnectors(connector);
         return tomcat;
-    }
+    }*/
 }

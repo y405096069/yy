@@ -8,6 +8,7 @@ import com.nfdw.core.annotation.Log;
 import com.nfdw.core.shiro.ShiroUtil;
 import com.nfdw.entity.*;
 import com.nfdw.service.MenuService;
+import com.nfdw.service.StudentInformationService;
 import com.nfdw.service.SysUserService;
 import com.nfdw.util.EhcacheUtil;
 import com.nfdw.util.JSONUtils;
@@ -66,6 +67,9 @@ public class LoginController extends BaseController implements BaseLoginControll
 
     @Autowired
     private SysUserService userService;
+
+    @Autowired
+    StudentInformationService studentInformationService;
 
     @Autowired
     private MenuService menuService;
@@ -322,5 +326,12 @@ public class LoginController extends BaseController implements BaseLoginControll
             model.addAttribute("message", msg);
         }
         return "/login";
+    }
+
+    @GetMapping(value = "/sweep/{id}")
+    public String sweep(Model model, @PathVariable String id) {
+        StudentInformation studentInfo = studentInformationService.getStudentInfoByUserId(id);
+        model.addAttribute("student", studentInfo);
+        return "sweep";
     }
 }

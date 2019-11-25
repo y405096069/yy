@@ -38,4 +38,9 @@ public class StudentInformationServiceImpl implements StudentInformationService 
     public int getStudentInfoConunt(String username) {
         return studentInformationMapper.getStudentInfoConunt(username);
     }
+
+    @Override
+    public StudentInformation getStudentInfoByUserId(String id) {
+        return studentInformationMapper.getStudentInfoByUserId(id);
+    }
 }

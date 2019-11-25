@@ -79,6 +79,7 @@ public class ShiroConfig extends BaseShiroConfig {
     filterMap.put("/login", "verCode,anon");
     filterMap.put("/sendSms", "verCode,anon");
     filterMap.put("/register", "verCode,anon");
+    filterMap.put("/sweep/**", "verCode,anon");
     //filterMap.put("/login","anon");
     filterMap.put("/getCode", "anon");
     filterMap.put("/blog/**", "anon");

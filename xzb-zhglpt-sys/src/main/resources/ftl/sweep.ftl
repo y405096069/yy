@@ -19,7 +19,6 @@
     <script type="text/javascript" src="${re.contextPath}/plugin/layui/layui.all.js" charset="utf-8"></script>
     <script type="text/javascript" src="${re.contextPath}/plugin/tools/tool.js"></script>
     <script type="text/javascript" src="${re.contextPath}/plugin/layui/config.js"></script>
-    <script type="text/javascript" src="${re.contextPath}/plugin/jquery/jquery.qrcode.min.js"></script>
     <style>
         html, body {
             height: 100%;
@@ -154,9 +153,6 @@
                     <div class="content_right_top">
                         <p>正面照</p>
                     </div>
-                    <div class="content_right_bottom" style="margin-top: 10px;margin-bottom: 10px;">
-                        <!--<p> 二维码</p>-->
-                    </div>
                 </div>
             </div>
             <table class="layui-table"
@@ -201,46 +197,19 @@
 
     </div>
     <div style="display: flex;justify-content: center;align-items: center;min-height: 60px;">
-        <button id="test10" style="width: 150px;height: 40px;margin-right: 10px;" type="file"
-                class="layui-btn layui-btn-primary">上传水印
-        </button>
-        <button id="btn" style="width: 150px;height: 40px;margin-left: 0px;" type="button"
-                class="layui-btn layui-btn-danger">撤销水印
-        </button>
-        <button id="btn2" style="width: 150px;height: 40px;" type="button" class="layui-btn" onclick="window.print()">
-            提交
-        </button>
-        <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-primary"
-                onclick="location.href='${re.contextPath}/studentInformation/getExamQuary';">返回
+        <button id="btn" style="width: 150px;height: 40px;margin-right: 10px;" type="file"
+                class="layui-btn layui-btn-primary">签到
         </button>
     </div>
 </div>
 <script>
     $(function () {
-        $('.content_right_bottom').qrcode({
-            width: 102,
-            height: 102,
-            text: this.location.protocol + "//" + this.location.host + "${re.contextPath}/sweep/${user.id}"
-        });
         layui.use('upload', function () {
-            var form = layui.form
-                , upload = layui.upload
+            var form = layui.form;
             form.render();
-
-            upload.render({
-                elem: '#test10'
-                , url: ''
-                , success: function (res) { //上传成功后的回调
-                    console.log(res)
-                },
-                error: function (res) {
-                    console.log(res)
-                }
-            });
-
-        })
+        });
         $("#btn").on("click", function () {
-            $(".pupop").addClass('new-pupop');
+            alert('签到成功');
             return false;
         })
     });
