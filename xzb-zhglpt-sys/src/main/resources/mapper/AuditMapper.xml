@@ -82,7 +82,81 @@
 
     <sql id="auditColumn">
         <trim suffix="" suffixOverrides=",">
-
+            <if test="u_id!=null">
+                u_id,
+            </if>
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="biog_land!=null">
+                biog_land,
+            </if>
+            <if test="examinee_number!=null">
+                examinee_number,
+            </if>
+            <if test="exam_id!=null">
+                exam_id,
+            </if>
+            <if test="exam_name!=null">
+                exam_name,
+            </if>
+            <if test="major_id!=null">
+                major_id,
+            </if>
+            <if test="major!=null">
+                major,
+            </if>
+            <if test="exam_room_startTime!=null">
+                exam_room_startTime,
+            </if>
+            <if test="exam_room_endTime!=null">
+                exam_room_endTime,
+            </if>
+            <if test="exam_room_site!=null">
+                exam_room_site,
+            </if>
+            <if test="sub_time!=null">
+                sub_time,
+            </if>
+            <if test="end_time!=null">
+                end_time,
+            </if>
+            <if test="audit_status!=null">
+                audit_status,
+            </if>
+            <if test="audit_time!=null">
+                audit_time,
+            </if>
+            <if test="info_collect_status != null">
+                info_collect_status,
+            </if>
+            <if test="enroll_status!=null">
+                enroll_status,
+            </if>
+            <if test="audit_reason != null">
+                audit_reason,
+            </if>
+            <if test="audit_link != null">
+                audit_link,
+            </if>
+            <if test="pay_status != null">
+                pay_status,
+            </if>
+            <if test="re_pay_status != null">
+                re_pay_status,
+            </if>
+            <if test="re_enroll_status != null">
+                re_enroll_status,
+            </if>
+            <if test="re_audit_status != null">
+                re_audit_status,
+            </if>
+            <if test="re_audit_time != null">
+                re_audit_time,
+            </if>
+            <if test="re_end_time != null">
+                re_end_time
+            </if>
         </trim>
     </sql>
 
