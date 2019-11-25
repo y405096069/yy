@@ -629,7 +629,7 @@ public class StudentInformationController {
         else
             audit.setAudit_link("交费后");
         audit.setPay_status("已缴费");
-
+        audit.setAudit_status("待审核");
         if (auditService.addAudit(audit))
             System.out.println("向审核送出一条数据-----------");
         return "informationGather";
