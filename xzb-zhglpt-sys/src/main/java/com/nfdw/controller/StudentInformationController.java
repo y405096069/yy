@@ -25,10 +25,8 @@ import java.io.*;
 import java.io.File;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+
 @Controller
 @RequestMapping(value = "/studentInformation")
 public class StudentInformationController {
@@ -134,19 +132,24 @@ public class StudentInformationController {
 //        Date currentTime = new Date();
 //改变输出格式（自己想要的格式）
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat formatter1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //得到字符串时间
         String s8 = formatter.format(date);
         studentInformation.setCurrentDate(s8);
         List<Examination> examinationList=studentInformationService.getListExamination(studentInformation.getCurrentDate(),studentInformation.getExaminee_province(),
                 studentInformation.getSubject_type(),exam,name,create_start_time);
+        List<String> date1=new ArrayList<String>();
         for (Examination e:examinationList
         ) {
+            String dateString = formatter1.format(e.getCreate_start_time());
+            date1.add(dateString);
             //System.out.print(e.getName()+","+e.getCreate_start_time()+"111111111111");
         }
         model.addAttribute("examinationList",examinationList);
         model.addAttribute("exam",exam);
         model.addAttribute("name",name);
         model.addAttribute("create_start_time",create_start_time);
+        model.addAttribute("date1",date1);
         return "selectExam";
     }
 
@@ -625,7 +628,7 @@ public class StudentInformationController {
         audit.setMajor_id(Integer.valueOf(eax2.getSpecialty_id()));
         audit.setMajor(aname);
         audit.setSub_time(date);
-        audit.setEnd_time(date);
+        audit.setEnd_time(eax2.getEnd_time());
         audit.setInfo_collect_status("待审核");
         if(eax2.getCheck_pay()==0)
             audit.setAudit_link("交费前");

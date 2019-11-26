@@ -181,8 +181,8 @@
                             <select name="create_start_time" id="create_start_time" lay-verify="departmentId"
                                     lay-filter="create_start_time">
                                 <option value="">请选择考试时间</option>
-                                <#list examinationList as examination>
-                                    <option value="${examination.create_start_time}">${examination.create_start_time}</option>
+                                <#list date1 as a>
+                                    <option value="${a}">${a}</option>
                                 </#list>
                             </select>
                         </div>

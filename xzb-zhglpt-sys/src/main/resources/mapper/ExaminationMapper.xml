@@ -18,7 +18,7 @@
         <id column="exam" jdbcType="VARCHAR" property="exam"/>
         <id column="number_limitation" jdbcType="VARCHAR" property="number_limitation"/>
         <id column="specialty_id" jdbcType="VARCHAR" property="specialty_id"/>
-        <id column="specialty_name" jdbcType="VARCHAR" property="specialty_name"/>
+        <id column="zspecialty_id" jdbcType="VARCHAR" property="zspecialty_id"/>
         <id column="subject_id" jdbcType="VARCHAR" property="subject_id"/>
         <id column="father_id" jdbcType="VARCHAR" property="father_id"/>
         <id column="province_id" jdbcType="VARCHAR" property="province_id"/>
@@ -63,10 +63,167 @@
         <id column="grade2" jdbcType="INTEGER" property="grade2"/>
         <id column="prologue_tem" jdbcType="VARCHAR" property="prologue_tem"/>
         <id column="prologue_remarks" jdbcType="VARCHAR" property="prologue_remarks"/>
+        <id column="qtfj" jdbcType="VARCHAR" property="qtfj"/>
+        <id column="specialty_name" jdbcType="VARCHAR" property="specialty_name"/>
+        <id column="template_name" jdbcType="VARCHAR" property="template_name"/>
+
 
 
     </resultMap>
+    <resultMap id="ManagementMap" type="com.nfdw.entity.SpecManagement">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="name" jdbcType="VARCHAR" property="name"/>
+        <id column="sub_limit" jdbcType="INTEGER" property="sub_limit"/>
+        <id column="code" jdbcType="VARCHAR" property="code"/>
+        <id column="res_status" jdbcType="INTEGER" property="res_status"/>
+        <id column="zs_content" jdbcType="VARCHAR" property="zs_content"/>
+        <id column="ticket_id" jdbcType="VARCHAR" property="ticket_id"/>
+        <id column="update_time" jdbcType="TIMESTAMP" property="update_time"/>
+        <id column="update_people" jdbcType="VARCHAR" property="update_people"/>
+        <id column="collect_id" jdbcType="INTEGER" property="collect_id"/>
+        <id column="introduction" jdbcType="VARCHAR" property="introduction"/>
+        <id column="spcname" jdbcType="VARCHAR" property="spcname"/>
 
+    </resultMap>
+    <resultMap id="Kc" type="com.nfdw.entity.Kc">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="kcreate_start_time" jdbcType="VARCHAR" property="kcreate_start_time"/>
+        <id column="kcreate_end_time" jdbcType="VARCHAR" property="kcreate_end_time"/>
+        <id column="bkrs" jdbcType="VARCHAR" property="bkrs"/>
+        <id column="kcwz" jdbcType="VARCHAR" property="kcwz"/>
+        <id column="exam_id" jdbcType="VARCHAR" property="exam_id"/>
+        <id column="spec_id" jdbcType="VARCHAR" property="spec_id"/>
+
+    </resultMap>
+    <resultMap id="cskm" type="com.nfdw.entity.Cskmqz">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <id column="kmid" jdbcType="VARCHAR" property="kmid"/>
+        <id column="kmqz" jdbcType="VARCHAR" property="kmqz"/>
+        <id column="exam_id" jdbcType="INTEGER" property="exam_id"/>
+
+    </resultMap>
+
+
+    <sql id="fskmValue">
+    <trim suffix="" suffixOverrides=",">
+
+        <if test="fskmid!=null">
+            #{fskmid} ,
+        </if>
+        <if test="fskmqz!=null">
+            #{fskmqz} ,
+        </if>
+        <if test="exam_id!=null">
+            #{exam_id} ,
+        </if>
+        <if test="fskmzf!=null">
+            #{fskmzf} ,
+        </if>
+    </trim>
+    </sql>
+    <sql id="fskm">
+        <trim suffix="" suffixOverrides=",">
+
+            <if test="fskmid!=null">
+                fskmid,
+            </if>
+            <if test="fskmqz!=null">
+                fskmqz,
+            </if>
+
+            <if test="exam_id!=null">
+                exam_id,
+            </if>
+            <if test="fskmzf!=null">
+                fskmzf,
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="cskm">
+        <trim suffix="" suffixOverrides=",">
+
+            <if test="kmid!=null">
+                kmid,
+            </if>
+            <if test="kmqz!=null">
+                kmqz,
+            </if>
+
+            <if test="exam_id!=null">
+                exam_id,
+            </if>
+            <if test="kmzf!=null">
+                kmzf,
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="cskmValue">
+        <trim suffix="" suffixOverrides=",">
+
+            <if test="kmid!=null">
+                #{kmid} ,
+            </if>
+            <if test="kmqz!=null">
+                #{kmqz} ,
+            </if>
+            <if test="exam_id!=null">
+                #{exam_id} ,
+            </if>
+            <if test="kmzf!=null">
+                #{kmzf} ,
+            </if>
+        </trim>
+    </sql>
+    <sql id="kmkc">
+        <trim suffix="" suffixOverrides=",">
+
+            <if test="kcreate_start_time!=null">
+                kcreate_start_time,
+            </if>
+            <if test="kcreate_end_time!=null">
+                kcreate_end_time,
+            </if>
+
+            <if test="bkrs!=null">
+                bkrs,
+            </if>
+            <if test="kcwz!=null">
+                kcwz,
+            </if>
+            <if test="exam_id!=null">
+                exam_id,
+            </if>
+            <if test="spec_id!=null">
+                spec_id,
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="kmkcValue">
+        <trim suffix="" suffixOverrides=",">
+
+            <if test="kcreate_start_time!=null">
+                #{kcreate_start_time} ,
+            </if>
+            <if test="kcreate_end_time!=null">
+                #{kcreate_end_time} ,
+            </if>
+            <if test="bkrs!=null">
+                #{bkrs} ,
+            </if>
+            <if test="kcwz!=null">
+                #{kcwz} ,
+            </if>
+            <if test="exam_id!=null">
+                #{exam_id},
+            </if>
+            <if test="spec_id!=null">
+                #{spec_id},
+            </if>
+        </trim>
+    </sql>
     <sql id="examColumn">
         <trim suffix="" suffixOverrides=",">
             <if test="id!=null">
@@ -75,6 +232,10 @@
             <if test="certificate!=null">
                 certificate,
             </if>
+            <if test="qtfj!=null">
+                qtfj,
+            </if>
+
             <if test="grade!=null">
                 grade,
             </if>
@@ -105,8 +266,8 @@
             <if test="specialty_id != null">
                 specialty_id,
             </if>
-            <if test="specialty_name != null">
-                specialty_name,
+            <if test="zspecialty_id != null">
+                zspecialty_id,
             </if>
             <if test="subject_id != null">
                 subject_id,
@@ -221,7 +382,9 @@
             <if test="prologue_remarks != null">
                 prologue_remarks,
             </if>
-
+            <if test="prologue_title != null">
+                prologue_title,
+            </if>
         </trim>
     </sql>
 
@@ -232,6 +395,11 @@
             </if>
             <if test="certificate!=null">
                 #{certificate} ,
+            </if>
+
+
+            <if test="qtfj!=null">
+                #{qtfj} ,
             </if>
             <if test="grade!=null">
                 #{grade} ,
@@ -263,8 +431,8 @@
             <if test="specialty_id != null">
                 #{specialty_id},
             </if>
-            <if test="specialty_name != null">
-                #{specialty_name} ,
+            <if test="zspecialty_id != null">
+                #{zspecialty_id} ,
             </if>
             <if test="subject_id != null">
                 #{subject_id},
@@ -380,38 +548,150 @@
             <if test="prologue_remarks != null">
                 #{prologue_remarks},
             </if>
+            <if test="prologue_title!=null">
+                #{prologue_title} ,
+            </if>
         </trim>
     </sql>
 
     <select id="selectListByPage" parameterType="com.nfdw.entity.Examination" resultMap="BaseResultMap">
-        SELECT *
-        from crea_exam where 1 = 1
-        <!--   <where>
-               del_flag=0
-               <if test="username!=null and username!=''">and username like '%${username}%'</if>
-               <if test="email!=null and email!=''">and email like '%${email}%'</if>
-           </where>-->
-    </select>
+        select c.*,a.name as specialty_name,i.template_name as template_name from spec_management a,crea_exam c,infor_collection i where a.id=c.specialty_id and c.gathering_id=i.id
+               <if test="specialty_name !=null and specialty_name!=''">and a.name like '%${specialty_name}%'</if>
+               <if test="kstype!=null and kstype!=''">and kstype like '%${kstype}%'</if>
+               <if test="gathering_type!=null and gathering_type!=''">and gathering_type like '%${gathering_type}%'</if>
 
+    </select>
+     <select id="selectcollection" resultType="com.nfdw.entity.Infor_collection">
+                select * from infor_collection
+     </select>
     <select id="count" resultType="java.lang.Integer">
     select count(*) from crea_exam
     </select>
-
-    <insert id="addExamination" parameterType="com.nfdw.entity.Examination">
+    <select id="selectpa" resultMap="BaseResultMap">
+    select * from crea_exam
+    </select>
+    <insert id="addExamination" parameterType="com.nfdw.entity.Examination"  useGeneratedKeys="true" keyProperty="id">
         insert into crea_exam(
         <include refid="examColumn"/>
         ) values (
         <include refid="examValue"/>
         )
     </insert>
+    <select id="selectmb" resultType="com.nfdw.entity.Infor_collection">
+         select * from infor_collection where id = #{id}
+    </select>
+    <select id="selectid" resultType="com.nfdw.entity.SpecManagement">
+          select * from spec_management where id = #{id}
+    </select>
 
     <select id="queryInfoById" parameterType="java.lang.String" resultMap="BaseResultMap">
     select * from crea_exam where id=#{id,javaType=String,jdbcType=VARCHAR};
   </select>
-    <!--
-        <update id="uplateById" parameterType="java.lang.String">
-            update crea_exam set <include refid="examColumn"/><include refid="examValue"/> where id = #{id};
-        </update>-->
+
+    <update id="uplateById" parameterType="com.nfdw.entity.Examination">
+
+        update crea_exam
+        <set>
+        <if test="exam!=null">
+            exam=#{exam},
+        </if>
+        <if test="number_limitation!=null">
+            number_limitation=#{number_limitation},
+        </if>
+        <if test="specialty_id!=null">
+            specialty_id=#{specialty_id},
+        </if>
+        <if test="zspecialty_id!=null">
+            zspecialty_id=#{zspecialty_id},
+        </if>
+        <if test="province_id!=null">
+            province_id=#{province_id},
+        </if>
+        <if test="gathering_id!=null">
+            gathering_id=#{gathering_id},
+        </if>
+        <if test="crade!=null">
+            crade=#{crade},
+        </if>
+        <if test="subject_stint!=null">
+            subject_stint=#{subject_stint},
+        </if>
+        <if test="prologue!=null">
+            prologue=#{prologue},
+        </if>
+        <if test="prologue_remarks!=null">
+            prologue_remarks=#{prologue_remarks},
+        </if>
+        <if test="build!=null">
+            build=#{build},
+        </if>
+        <if test="create_time!=null">
+            create_time=#{create_time},
+        </if>
+        <if test="update_time!=null">
+            update_time=#{update_time},
+        </if>
+        <if test="exam_time!=null">
+            exam_time=#{exam_time},
+        </if>
+        <if test="end_time!=null">
+            end_time=#{end_time},
+        </if>
+        <if test="prcie!=null">
+            prcie=#{prcie},
+        </if>
+        <if test="retestPrcie!=null">
+            retestPrcie=#{retestPrcie},
+        </if>
+        <if test="subject_q_fen!=null">
+            subject_q_fen=#{subject_q_fen},
+        </if>
+        <if test="father_q_fen!=null">
+            father_q_fen=#{father_q_fen},
+        </if>
+        <if test="retest_type!=null">
+            retest_type=#{retest_type},
+        </if>
+        <if test="create_start_time!=null">
+            create_start_time=#{create_start_time},
+        </if>
+        <if test="create_end_time!=null">
+            create_end_time=#{create_end_time},
+        </if>
+        <if test="people_num!=null">
+            people_num=#{people_num},
+        </if>
+        <if test="create_disclaimer!=null">
+            create_disclaimer=#{create_disclaimer},
+        </if>
+        <if test="remarks!=null">
+            remarks=#{remarks},
+        </if>
+        <if test="report_setting!=null">
+            report_setting=#{report_setting},
+        </if>
+        <if test="check_pay!=null">
+            check_pay=#{check_pay},
+        </if>
+        <if test="subject_q_fen_child!=null">
+            subject_q_fen_child=#{subject_q_fen_child},
+        </if>
+        <if test="father_q_fen_child!=null">
+            father_q_fen_child=#{father_q_fen_child},
+        </if>
+        <if test="prologue_title!=null">
+            prologue_title=#{prologue_title},
+        </if>
+        <if test="kstype!=null">
+            kstype=#{kstype},
+        </if>
+        <if test="gathering_type!=null">
+            gathering_type=#{gathering_type},
+        </if>
+        </set>
+        where id = #{id}
+
+    </update>
 
 
     <delete id="deleteById" parameterType="java.lang.String">
@@ -433,5 +713,26 @@
     <select id="selectBySubject" resultType="com.nfdw.entity.Subject">
         select * from subject
     </select>
+    <insert id="addKc" parameterType="com.nfdw.entity.Kc"  useGeneratedKeys="true" keyProperty="id">
+        insert into crea_kc(
+        <include refid="kmkc"/>
+        ) values (
+        <include refid="kmkcValue"/>
+        )
+    </insert>
 
+    <insert id="addcskm" parameterType="com.nfdw.entity.Cskmqz"  useGeneratedKeys="true" keyProperty="id">
+        insert into crea_cskmqz(
+        <include refid="cskm"/>
+        ) values (
+        <include refid="cskmValue"/>
+        )
+    </insert>
+    <insert id="addfskm" parameterType="com.nfdw.entity.Fskmqz"  useGeneratedKeys="true" keyProperty="id">
+        insert into crea_fskmqz(
+        <include refid="fskm"/>
+        ) values (
+        <include refid="fskmValue"/>
+        )
+    </insert>
 </mapper>

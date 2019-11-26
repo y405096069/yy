@@ -104,7 +104,7 @@ public class ExaminationController {
         JsonUtil j = new JsonUtil();
 
         try {
-           /* if(null==examination.getCreate_end_time()){
+            if(null==examination.getCreate_end_time()){
                 examination.setCreate_end_time(new Date());
             }
             if(null==examination.getCreate_time()){
@@ -120,7 +120,7 @@ public class ExaminationController {
             }
             if(null==examination.getCreate_start_time()){
                 examination.setCreate_start_time(new Date());
-            }*/
+            }
 
 
             if(examination.getPrologue().length()<8) {

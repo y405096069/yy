@@ -1,6 +1,6 @@
 server:
   port: 8080
-  servlet: 
+  servlet:
     context-path: /nfdw-admin
 spring:
   devtools:
@@ -8,7 +8,7 @@ spring:
       enabled: true
   datasource:
     druid:
-      url: jdbc:mysql://172.31.50.45:3306/guangzhou?useUnicode=true&characterEncoding=UTF-8	  
+      url: jdbc:mysql://172.31.50.45:3306/guangzhou?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
       username: root
       password: nfdw123456
       # 使用druid数据源
@@ -40,7 +40,7 @@ spring:
         url-pattern: /druid/*
         reset-enable: false
       aop-patterns: com.nfdw.service.impl.*
-      
+
   http:
     encoding:
       force: true
@@ -49,21 +49,21 @@ spring:
       client:
         prefer-ip: true
       url: http://localhost:8082
-  freemarker: 
+  freemarker:
     allow-session-override: true
 
 mybatis:
   type-aliases-package: com.nfdw.entity
   mapper-locations: classpath*:mapper/*.xml
   check-config-location: true
-  configuration: 
-    cache-enabled: false 
-    aggressive-lazy-loading: false 
-    multiple-result-sets-enabled: true 
-    map-underscore-to-camel-case: true 
-    use-generated-keys: true 
-    default-executor-type: BATCH 
-    default-statement-timeout: 600 
+  configuration:
+    cache-enabled: false
+    aggressive-lazy-loading: false
+    multiple-result-sets-enabled: true
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+    default-executor-type: BATCH
+    default-statement-timeout: 600
     log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
 mapper:
   mappers:
@@ -76,10 +76,10 @@ mapper:
 # PageHelperConfig 可以替代此方案
 pagehelper:
   helperDialect: mysql
-  offsetAsPageNum: true 
+  offsetAsPageNum: true
   rowBoundsWithCount: true
-  pageSizeZero: true 
-  reasonable: false 
+  pageSizeZero: true
+  reasonable: false
   supportMethodsArguments: true
   params: count=countSql
 
@@ -96,26 +96,25 @@ logging:
 
 dataType: mysql
 
-nfdw: 
-  card: 
-    getCarInfo: 
+nfdw:
+  card:
+    getCarInfo:
       url: http://172.31.50.43:8080/guizhouPowercon/service/devicesUsed.do
-    startOrShutCard: 
+    startOrShutCard:
       url: http://172.31.50.43:8080/guizhouPowercon/service/devicesEdit.do
-  terminal: 
+  terminal:
     # 设备升级
-    deviceUpdate: 
+    deviceUpdate:
       url: http://172.31.50.23:8081/scheduleTaskSys/updatedrivice
     # 设备重启
-    deviceReboot: 
+    deviceReboot:
       url: http://172.31.50.23:8081/scheduleTaskSys/drivicereboot
     # 设备采集
-    collect: 
+    collect:
       url: http://172.31.50.23:8081/scheduleTaskSys/autoselect
     # 设备采集
-    infosetInterface: 
+    infosetInterface:
       url: http://172.31.50.23:8081/scheduleTaskSys/preset
-  equipment: 
-    startUpDetection: 
+  equipment:
+    startUpDetection:
       url: http://172.31.50.23:8081/scheduleTaskSys/deviceNetDetection
-      
