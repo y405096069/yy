@@ -485,4 +485,530 @@
         AND total_score = #{total_score}
     </select>
 
+
+    <select id="selectStudentByUid" resultType="com.nfdw.entity.StudentInformation">
+        select * from j_student_information where student_userid=#{student_userid}
+    </select>
+
+
+
+
+    <sql id="achiCol2">
+        <trim suffix="" suffixOverrides=",">
+            <if test="exam_id!=0">
+                exam_id,
+            </if>
+            <if test="exam_name!=null">
+                exam_name,
+            </if>
+            <if test="id_card!=null">
+                id_card,
+            </if>
+            <if test="name!=null">
+                name,
+            </if>
+            <if test="gender!=null">
+                gender,
+            </if>
+            <if test="high_province!=null">
+                high_province,
+            </if>
+            <if test="examinee_num!=null">
+                examinee_num,
+            </if>
+            <if test="ticket_num!=null">
+                ticket_num,
+            </if>
+            <if test="wl_subject!=null">
+                wl_subject,
+            </if>
+            <if test="professional_code!=null">
+                professional_code,
+            </if>
+            <if test="professional_name!=null">
+                professional_name,
+            </if>
+            <if test="national_rankings!=0">
+                national_rankings,
+            </if>
+            <if test="national_same_name!=0">
+                national_same_name,
+            </if>
+            <if test="provincial_ranking!=0">
+                provincial_ranking,
+            </if>
+            <if test="provincial_same_name!=0">
+                provincial_same_name,
+            </if>
+            <if test="qualified_mark!=null">
+                qualified_mark,
+            </if>
+            <if test="qualified_line!=0">
+                qualified_line,
+            </if>
+            <if test="first_subjects_total!=0">
+                first_subjects_total,
+            </if>
+            <if test="complex_subjects_total!=0">
+                complex_subjects_total,
+            </if>
+            <if test="total_score!=0">
+                total_score,
+            </if>
+            <if test="remarks!=null">
+                remarks,
+            </if>
+            <if test="first_subjects_id1!=0">
+                first_subjects_id1,
+            </if>
+            <if test="first_subjects_name1!=null">
+                first_subjects_name1,
+            </if>
+            <if test="first_subjects_achieve1!=0">
+                first_subjects_achieve1,
+            </if>
+            <if test="first_subjects_achieve_ex1!=null">
+                first_subjects_achieve_ex1,
+            </if>
+
+            <if test="first_subjects_id2!=0">
+                first_subjects_id2,
+            </if>
+            <if test="first_subjects_name2!=null">
+                first_subjects_name2,
+            </if>
+            <if test="first_subjects_achieve2!=0">
+                first_subjects_achieve2,
+            </if>
+            <if test="first_subjects_achieve_ex2!=null">
+                first_subjects_achieve_ex2,
+            </if>
+
+            <if test="first_subjects_id3!=0">
+                first_subjects_id3,
+            </if>
+            <if test="first_subjects_name3!=null">
+                first_subjects_name3,
+            </if>
+            <if test="first_subjects_achieve3!=0">
+                first_subjects_achieve3,
+            </if>
+            <if test="first_subjects_achieve_ex3!=null">
+                first_subjects_achieve_ex3,
+            </if>
+
+            <if test="first_subjects_id4!=0">
+                first_subjects_id4,
+            </if>
+            <if test="first_subjects_name4!=null">
+                first_subjects_name4,
+            </if>
+            <if test="first_subjects_achieve4!=0">
+                first_subjects_achieve4,
+            </if>
+            <if test="first_subjects_achieve_ex4!=null">
+                first_subjects_achieve_ex4,
+            </if>
+
+            <if test="first_subjects_id5!=0">
+                first_subjects_id5,
+            </if>
+            <if test="first_subjects_name5!=null">
+                first_subjects_name5,
+            </if>
+            <if test="first_subjects_achieve5!=0">
+                first_subjects_achieve5,
+            </if>
+            <if test="first_subjects_achieve_ex5!=null">
+                first_subjects_achieve_ex5,
+            </if>
+
+            <if test="first_subjects_id6!=0">
+                first_subjects_id6,
+            </if>
+            <if test="first_subjects_name6!=null">
+                first_subjects_name6,
+            </if>
+            <if test="first_subjects_achieve5!=0">
+                first_subjects_achieve6,
+            </if>
+            <if test="first_subjects_achieve_ex6!=null">
+                first_subjects_achieve_ex6,
+            </if>
+
+            <if test="complex_subjects_id1!=0">
+                complex_subjects_id1,
+            </if>
+            <if test="complex_subjects_name1!=null">
+                complex_subjects_name1,
+            </if>
+            <if test="complex_subjects_achieve1!=0">
+                complex_subjects_achieve1,
+            </if>
+            <if test="complex_subjects_achieve_ex1!=null">
+                complex_subjects_achieve_ex1,
+            </if>
+
+            <if test="complex_subjects_id2!=0">
+                complex_subjects_id2,
+            </if>
+            <if test="complex_subjects_name2!=null">
+                complex_subjects_name2,
+            </if>
+            <if test="complex_subjects_achieve2!=0">
+                complex_subjects_achieve2,
+            </if>
+            <if test="complex_subjects_achieve_ex2!=null">
+                complex_subjects_achieve_ex2,
+            </if>
+
+
+            <if test="complex_subjects_id3!=0">
+                complex_subjects_id3,
+            </if>
+            <if test="complex_subjects_name3!=null">
+                complex_subjects_name3,
+            </if>
+            <if test="complex_subjects_achieve3!=0">
+                complex_subjects_achieve3,
+            </if>
+            <if test="complex_subjects_achieve_ex3!=null">
+                complex_subjects_achieve_ex3,
+            </if>
+
+            <if test="complex_subjects_id4!=0">
+                complex_subjects_id4,
+            </if>
+            <if test="complex_subjects_name4!=null">
+                complex_subjects_name4,
+            </if>
+            <if test="complex_subjects_achieve4!=0">
+                complex_subjects_achieve4,
+            </if>
+            <if test="complex_subjects_achieve_ex4!=null">
+                complex_subjects_achieve_ex4,
+            </if>
+
+            <if test="complex_subjects_id5!=0">
+                complex_subjects_id5,
+            </if>
+            <if test="complex_subjects_name5!=null">
+                complex_subjects_name5,
+            </if>
+            <if test="complex_subjects_achieve5!=0">
+                complex_subjects_achieve5,
+            </if>
+            <if test="complex_subjects_achieve_ex5!=null">
+                complex_subjects_achieve_ex5,
+            </if>
+
+            <if test="complex_subjects_id6!=0">
+                complex_subjects_id6,
+            </if>
+            <if test="complex_subjects_name6!=null">
+                complex_subjects_name6,
+            </if>
+            <if test="complex_subjects_achieve6!=0">
+                complex_subjects_achieve6,
+            </if>
+            <if test="complex_subjects_achieve_ex6!=null">
+                complex_subjects_achieve_ex6,
+            </if>
+
+            <if test="re_qualified_mark!=null">
+                re_qualified_mark,
+            </if>
+            <if test="re_qualified_line!=0">
+                re_qualified_line,
+            </if>
+            <if test="re_national_rankings!=0">
+                re_national_rankings,
+            </if>
+            <if test="re_national_same_name!=0">
+                re_national_same_name,
+            </if>
+            <if test="re_provincial_ranking!=0">
+                re_provincial_ranking,
+            </if>
+            <if test="re_provincial_same_name!=0">
+                re_provincial_same_name,
+            </if>
+            <if test="re_remarks!=null">
+                re_remarks
+            </if>
+        </trim>
+    </sql>
+
+    <sql id="achiValue2">
+        <trim suffix="" suffixOverrides=",">
+            <if test="exam_id!=0">
+                #{exam_id},
+            </if>
+            <if test="exam_name!=null">
+                #{exam_name},
+            </if>
+            <if test="id_card!=null">
+                #{id_card},
+            </if>
+            <if test="name!=null">
+                #{name},
+            </if>
+            <if test="gender!=null">
+                #{gender},
+            </if>
+            <if test="high_province!=null">
+                #{high_province},
+            </if>
+            <if test="examinee_num!=null">
+                #{examinee_num},
+            </if>
+            <if test="ticket_num!=null">
+                #{ticket_num},
+            </if>
+            <if test="wl_subject!=null">
+                #{wl_subject},
+            </if>
+            <if test="professional_code!=null">
+                #{professional_code},
+            </if>
+            <if test="professional_name!=null">
+                #{professional_name},
+            </if>
+            <if test="national_rankings!=0">
+                #{national_rankings},
+            </if>
+            <if test="national_same_name!=0">
+                #{national_same_name},
+            </if>
+            <if test="provincial_ranking!=0">
+                #{provincial_ranking},
+            </if>
+            <if test="provincial_same_name!=0">
+                #{provincial_same_name},
+            </if>
+            <if test="qualified_mark!=null">
+                #{qualified_mark},
+            </if>
+            <if test="qualified_line!=0">
+                #{qualified_line},
+            </if>
+            <if test="first_subjects_total!=0">
+                #{first_subjects_total},
+            </if>
+            <if test="complex_subjects_total!=0">
+                #{complex_subjects_total},
+            </if>
+            <if test="total_score!=0">
+                #{total_score},
+            </if>
+            <if test="remarks!=null">
+                #{remarks},
+            </if>
+
+            <if test="first_subjects_id1!=0">
+                #{first_subjects_id1},
+            </if>
+            <if test="first_subjects_name1!=null">
+                #{first_subjects_name1},
+            </if>
+            <if test="first_subjects_achieve1!=0">
+                #{first_subjects_achieve1},
+            </if>
+            <if test="first_subjects_achieve_ex1!=null">
+                #{first_subjects_achieve_ex1},
+            </if>
+
+            <if test="first_subjects_id2!=0">
+                #{first_subjects_id2},
+            </if>
+            <if test="first_subjects_name2!=null">
+                #{first_subjects_name2},
+            </if>
+            <if test="first_subjects_achieve2!=0">
+                #{first_subjects_achieve2},
+            </if>
+            <if test="first_subjects_achieve_ex2!=null">
+                #{first_subjects_achieve_ex2},
+            </if>
+
+            <if test="first_subjects_id3!=0">
+                #{first_subjects_id3},
+            </if>
+            <if test="first_subjects_name3!=null">
+                #{first_subjects_name3},
+            </if>
+            <if test="first_subjects_achieve3!=0">
+                #{first_subjects_achieve3},
+            </if>
+            <if test="first_subjects_achieve_ex3!=null">
+                #{first_subjects_achieve_ex3},
+            </if>
+
+            <if test="first_subjects_id4!=0">
+                #{first_subjects_id4},
+            </if>
+            <if test="first_subjects_name4!=null">
+                #{first_subjects_name4},
+            </if>
+            <if test="first_subjects_achieve4!=0">
+                #{first_subjects_achieve4},
+            </if>
+            <if test="first_subjects_achieve_ex4!=null">
+                #{first_subjects_achieve_ex4},
+            </if>
+
+            <if test="first_subjects_id5!=0">
+                #{first_subjects_id5},
+            </if>
+            <if test="first_subjects_name5!=null">
+                #{first_subjects_name5},
+            </if>
+            <if test="first_subjects_achieve5!=0">
+                #{first_subjects_achieve5},
+            </if>
+            <if test="first_subjects_achieve_ex5!=null">
+                #{first_subjects_achieve_ex5},
+            </if>
+
+            <if test="first_subjects_id6!=0">
+                #{first_subjects_id6},
+            </if>
+            <if test="first_subjects_name6!=null">
+                #{first_subjects_name6},
+            </if>
+            <if test="first_subjects_achieve5!=0">
+                #{first_subjects_achieve6},
+            </if>
+            <if test="first_subjects_achieve_ex6!=null">
+                #{first_subjects_achieve_ex6},
+            </if>
+
+            <if test="complex_subjects_id1!=0">
+                #{complex_subjects_id1},
+            </if>
+            <if test="complex_subjects_name1!=null">
+                #{complex_subjects_name1},
+            </if>
+            <if test="complex_subjects_achieve1!=0">
+                #{complex_subjects_achieve1},
+            </if>
+            <if test="complex_subjects_achieve_ex1!=null">
+                #{complex_subjects_achieve_ex1},
+            </if>
+
+            <if test="complex_subjects_id2!=0">
+                #{complex_subjects_id2},
+            </if>
+            <if test="complex_subjects_name2!=null">
+                #{complex_subjects_name2},
+            </if>
+            <if test="complex_subjects_achieve2!=0">
+                #{complex_subjects_achieve2},
+            </if>
+            <if test="complex_subjects_achieve_ex2!=null">
+                #{complex_subjects_achieve_ex2},
+            </if>
+
+
+            <if test="complex_subjects_id3!=0">
+                #{complex_subjects_id3},
+            </if>
+            <if test="complex_subjects_name3!=null">
+                #{complex_subjects_name3},
+            </if>
+            <if test="complex_subjects_achieve3!=0">
+                #{complex_subjects_achieve3},
+            </if>
+            <if test="complex_subjects_achieve_ex3!=null">
+                #{complex_subjects_achieve_ex3},
+            </if>
+
+            <if test="complex_subjects_id4!=0">
+                #{complex_subjects_id4},
+            </if>
+            <if test="complex_subjects_name4!=null">
+                #{complex_subjects_name4},
+            </if>
+            <if test="complex_subjects_achieve4!=0">
+                #{complex_subjects_achieve4},
+            </if>
+            <if test="complex_subjects_achieve_ex4!=null">
+                #{complex_subjects_achieve_ex4},
+            </if>
+
+            <if test="complex_subjects_id5!=0">
+                #{complex_subjects_id5},
+            </if>
+            <if test="complex_subjects_name5!=null">
+                #{complex_subjects_name5},
+            </if>
+            <if test="complex_subjects_achieve5!=0">
+                #{complex_subjects_achieve5},
+            </if>
+            <if test="complex_subjects_achieve_ex5!=null">
+                #{complex_subjects_achieve_ex5},
+            </if>
+
+            <if test="complex_subjects_id6!=0">
+                #{complex_subjects_id6},
+            </if>
+            <if test="complex_subjects_name6!=null">
+                #{complex_subjects_name6},
+            </if>
+            <if test="complex_subjects_achieve6!=0">
+                #{complex_subjects_achieve6},
+            </if>
+            <if test="complex_subjects_achieve_ex6!=null">
+                #{complex_subjects_achieve_ex6},
+            </if>
+
+            <if test="re_qualified_mark!=null">
+                #{re_qualified_mark},
+            </if>
+            <if test="re_qualified_line!=0">
+                #{re_qualified_line},
+            </if>
+            <if test="re_national_rankings!=0">
+                #{re_national_rankings},
+            </if>
+            <if test="re_national_same_name!=0">
+                #{re_national_same_name},
+            </if>
+            <if test="re_provincial_ranking!=0">
+                #{re_provincial_ranking},
+            </if>
+            <if test="re_provincial_same_name!=0">
+                #{re_provincial_same_name},
+            </if>
+            <if test="re_remarks!=null">
+                #{re_remarks},
+            </if>
+        </trim>
+    </sql>
+
+    <insert id="addAchieve">
+        insert into achievement_summary(
+        <include refid="achiCol2"/>
+        ) values (
+        <include refid="achiValue2"/>
+        )
+    </insert>
+
+
+    <select id="getExamByEid" resultType="com.nfdw.entity.Examination">
+        select * from crea_exam where id=#{exam_id}
+    </select>
+
+    <select id="getSpcById" resultType="com.nfdw.entity.SpecManagement">
+        select * from spec_management where id=#{id}
+    </select>
+
+
+    <select id="getByEid" resultType="com.nfdw.entity.Cskmqz">
+        select * from crea_cskmqz where exam_id=#{exam_id}
+    </select>
+    <select id="getByEid2" resultType="com.nfdw.entity.Fskmqz">
+        select * from crea_fskmqz where exam_id=#{exam_id}
+    </select>
+
 </mapper>

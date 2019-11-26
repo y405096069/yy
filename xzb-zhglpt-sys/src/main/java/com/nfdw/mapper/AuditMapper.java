@@ -25,4 +25,5 @@ public interface AuditMapper extends BaseMapper<Audit,String> {
 
     String[] selectAllBiog_land();
 
+    Audit getAuditByUId(@Param("uid") String uid);
 }

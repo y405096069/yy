@@ -2,7 +2,7 @@ package com.nfdw.mapper;
 
 
 import com.nfdw.base.BaseMapper;
-import com.nfdw.entity.Achievement_Summary;
+import com.nfdw.entity.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -38,7 +38,17 @@ public interface AchieveMapper extends BaseMapper<Achievement_Summary,String> {
                                       @Param("high_province") String high_province,
                                       @Param("total_score") double total_score);
 
+    StudentInformation selectStudentByUid(@Param("student_userid") String student_userid);
 
+    int addAchieve(Achievement_Summary a_sum);
+
+    Examination getExamByEid(@Param("exam_id") int exam_id);
+
+    SpecManagement getSpcById(@Param("id") int id);
+
+    List<Cskmqz> getByEid(@Param("exam_id") int exam_id);
+
+    List<Fskmqz> getByEid2(@Param("exam_id") int exam_id);
 
 
 }

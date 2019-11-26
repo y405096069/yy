@@ -27,7 +27,7 @@ public class AuditServiceImpl extends BaseServiceImpl<Audit, String> implements 
     }
 
     @Override
-    public Audit getAuditById(String id) {
+    public Audit getAuditById(int id) {
         return auditMapper.getAuditById(Integer.valueOf(id));
     }
 
@@ -54,5 +54,10 @@ public class AuditServiceImpl extends BaseServiceImpl<Audit, String> implements 
     @Override
     public String[] selectAllBiog_land() {
         return auditMapper.selectAllBiog_land();
+    }
+
+    @Override
+    public Audit getAuditByUId(String uid) {
+        return auditMapper.getAuditByUId(uid);
     }
 }

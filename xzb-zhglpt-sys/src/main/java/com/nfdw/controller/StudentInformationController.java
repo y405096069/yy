@@ -4,10 +4,7 @@ import com.nfdw.ConverVideoTest;
 import com.nfdw.core.annotation.Log;
 import com.nfdw.core.shiro.ShiroUtil;
 import com.nfdw.entity.*;
-import com.nfdw.service.AchievementService;
-import com.nfdw.service.AuditService;
-import com.nfdw.service.StudentInformationService;
-import com.nfdw.service.SysUserService;
+import com.nfdw.service.*;
 import com.nfdw.util.UploadUtil;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +44,8 @@ public class StudentInformationController {
     AchievementService acService;
     @Autowired
     AuditService auditService;
+    @Autowired
+    AchieveService achieveService;
     @Log(desc = "用户退出平台")
     @GetMapping(value = "/out")
     public String out() throws IOException {
@@ -78,7 +77,38 @@ public class StudentInformationController {
     }
     @Log(desc = "跳转到报考查询")
     @GetMapping(value = "/getExamQuary")
-    public String getExamQuary(Model model){
+    public String getExamQuary(Model model,HttpSession session){
+        //Audit audit = (Audit)session.getAttribute("userAudit");
+        CurrentUser cuer = (CurrentUser)session.getAttribute("curentUser");
+        Audit audit = auditService.getAuditByUId(cuer.getId());
+        if (audit!=null){
+            Date currentTime = audit.getSub_time();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String dateString = formatter.format(currentTime);
+
+
+            model.addAttribute("DQtime",dateString);
+            Examination ex2 =achieveService.getExamByEid(audit.getExam_id());
+            StudentInformation stu = achieveService.selectStudentByUid(audit.getU_id());
+            Achievement_Summary a_sum = achieveService.getAchieveById_Card(stu.getCertificate_number());
+            if (a_sum.getQualified_mark()!=null){
+                if (a_sum.getQualified_mark().equals("Y"))
+                    a_sum.setQualified_mark("合格");
+                else
+                    a_sum.setQualified_mark("不合格");
+            }
+            if (a_sum.getRe_qualified_mark()!=null){
+                if (a_sum.getRe_qualified_mark().equals("Y"))
+                    a_sum.setRe_qualified_mark("合格");
+                else
+                    a_sum.setRe_qualified_mark("不合格");
+            }
+            model.addAttribute("audit",audit);
+            model.addAttribute("ex2",ex2);
+            model.addAttribute("stu",stu);
+            model.addAttribute("a_sum",a_sum);
+        }
+
         return "examQuary";
     }
     @Log(desc = "跳转到准考证")
@@ -584,7 +614,7 @@ public class StudentInformationController {
         return null;
     }
     @PostMapping(value = "/addStudent_examAudit")
-    public String addStudent_examAudit(String exam,String aname,String build,String create_start_time,Model model){
+    public String addStudent_examAudit(String exam,String aname,String build,String create_start_time,Model model,HttpSession session){
         CurrentUser user = ShiroUtil.getCurrentUse();
         StudentInformation studentInformation=studentInformationService.getUserIDByStudentInformation(user.getUsername());
         if("".equals(exam)||null==exam){
@@ -636,8 +666,11 @@ public class StudentInformationController {
             audit.setAudit_link("交费后");
         audit.setPay_status("已缴费");
         audit.setAudit_status("待审核");
-        if (auditService.addAudit(audit))
+        if (auditService.addAudit(audit)){
             System.out.println("向审核送出一条数据-----------");
+            session.setAttribute("userAudit",audit);
+        }
+
         return "informationGather";
     }
 }

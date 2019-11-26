@@ -3,10 +3,7 @@ package com.nfdw.controller;
 import com.nfdw.core.annotation.Log;
 import com.nfdw.entity.*;
 import com.nfdw.exception.MyException;
-import com.nfdw.service.AchievementService;
-import com.nfdw.service.AuditService;
-import com.nfdw.service.Infor_CollectionService;
-import com.nfdw.service.SpecManagementService;
+import com.nfdw.service.*;
 import com.nfdw.util.JsonUtil;
 import com.nfdw.util.ReType;
 import com.nfdw.utils.ExportAuditToExcel;
@@ -27,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 @RequestMapping(value = "/audit")
@@ -43,6 +41,9 @@ public class AuditController {          ////审核管理
 
     @Autowired
     SpecManagementService specService;
+
+    @Autowired
+    AchieveService achieveService;
 
     @GetMapping(value = "auditList")
     public String showUser(Model model) {
@@ -64,7 +65,7 @@ public class AuditController {          ////审核管理
     @GetMapping(value = "updateAudit")
     public String updateAudit(String id, Model model) {
         if (StringUtils.isNotEmpty(id)) {
-            Audit audit = auditService.getAuditById(id);
+            Audit audit = auditService.getAuditById(Integer.valueOf(id));
             StudentInformation stin =auditService.getUserInfoById(audit.getU_id());
             //Examinee_User e_user = auditService.getExaminee_UserById(audit.getU_id());
             model.addAttribute("audit", audit);
@@ -92,8 +93,76 @@ public class AuditController {          ////审核管理
                 //（已审核）审核失败过的考生
                 if (audit.getAudit_status().equals("待审核") || audit.getAudit_status().equals("已审核") || audit.getAudit_status().equals("待缴费")){
                     if (audit.getEnroll_status().equals("审核通过")){
-                        audit.setAudit_status("待缴费");
+                        //audit.setAudit_status("待缴费");
+                        audit.setAudit_status("报名完成");
                         audit.setInfo_collect_status("审核成功");
+
+                        /*
+                            插入成绩表
+                         */
+                        StudentInformation stu = achieveService.selectStudentByUid(audit.getU_id());
+                        Audit aud = auditService.getAuditById(audit.getId());
+
+                        Examination ex2 =achieveService.getExamByEid(aud.getExam_id());
+                        SpecManagement spec = achieveService.getSpcById(Integer.valueOf(ex2.getSpecialty_id()));
+
+                        Achievement_Summary a_sum = new Achievement_Summary();
+                        a_sum.setExam_id(aud.getExam_id());
+                        a_sum.setExam_name(aud.getExam_name());
+                        a_sum.setId_card(stu.getCertificate_number());
+                        a_sum.setName(aud.getName());
+                        a_sum.setGender(stu.getSex());
+                        a_sum.setHigh_province(aud.getBiog_land());
+                        a_sum.setExaminee_num(aud.getExaminee_number());
+                        String ks_num = ex2.getPrologue();
+                        int num = 8-ks_num.length();
+                        for(int i = 0; i < num; i++) {      //生成8位准考证
+                            int N = 10;
+                            Random rand1 = new Random ();
+                            int a = rand1.nextInt(N);           //生成0,1,2,3中间的某一个数
+                            ks_num=ks_num+String.valueOf(a);
+                        }
+                        a_sum.setTicket_num(ks_num);
+                        if(ex2.getSubject_stint().equals("1"))
+                            a_sum.setWl_subject("文科");
+                        else
+                            a_sum.setWl_subject("理科");
+                        a_sum.setProfessional_code(spec.getCode());
+                        a_sum.setProfessional_name(spec.getName());
+                        List<Cskmqz> cskm = achieveService.getByEid(aud.getExam_id());
+                        List<Fskmqz> fskm = achieveService.getByEid2(aud.getExam_id());
+                        for ( int i = 0; i<cskm.size();i++){
+                            if (i==0)
+                                a_sum.setFirst_subjects_name1(cskm.get(i).getKmid());
+                            if (i==1)
+                                a_sum.setFirst_subjects_name2(cskm.get(i).getKmid());
+                            if (i==2)
+                                a_sum.setFirst_subjects_name3(cskm.get(i).getKmid());
+                            if (i==3)
+                                a_sum.setFirst_subjects_name4(cskm.get(i).getKmid());
+                            if (i==4)
+                                a_sum.setFirst_subjects_name5(cskm.get(i).getKmid());
+                            if (i==5)
+                                a_sum.setFirst_subjects_name6(cskm.get(i).getKmid());
+                        }
+                        for ( int i = 0; i<fskm.size();i++){
+                            if (i==0)
+                                a_sum.setComplex_subjects_name1(fskm.get(i).getFskmid());
+                            if (i==1)
+                                a_sum.setComplex_subjects_name2(fskm.get(i).getFskmid());
+                            if (i==2)
+                                a_sum.setComplex_subjects_name3(fskm.get(i).getFskmid());
+                            if (i==3)
+                                a_sum.setComplex_subjects_name4(fskm.get(i).getFskmid());
+                            if (i==4)
+                                a_sum.setComplex_subjects_name5(fskm.get(i).getFskmid());
+                            if (i==5)
+                                a_sum.setComplex_subjects_name6(fskm.get(i).getFskmid());
+                        }
+                        achieveService.addAchieve(a_sum);
+
+
+
                         flag=true;
                     }else if (audit.getEnroll_status().equals("审核不通过")){
                         audit.setAudit_status("已审核");
@@ -106,6 +175,75 @@ public class AuditController {          ////审核管理
                     if (audit.getEnroll_status().equals("审核通过")){
                         audit.setAudit_status("报名完成");
                         audit.setInfo_collect_status("审核成功");
+
+                        /*
+                            插入成绩表
+                         */
+                        StudentInformation stu = achieveService.selectStudentByUid(audit.getU_id());
+                        Audit aud = auditService.getAuditById(audit.getId());
+
+                        Examination ex2 =achieveService.getExamByEid(aud.getExam_id());
+                        System.out.println(aud.getExam_id());
+                        SpecManagement spec = achieveService.getSpcById(Integer.valueOf(ex2.getSpecialty_id()));
+
+                        Achievement_Summary a_sum = new Achievement_Summary();
+                        a_sum.setExam_id(aud.getExam_id());
+                        a_sum.setExam_name(aud.getExam_name());
+                        a_sum.setId_card(stu.getCertificate_number());
+                        a_sum.setName(aud.getName());
+                        a_sum.setGender(stu.getSex());
+                        a_sum.setHigh_province(aud.getBiog_land());
+                        a_sum.setExaminee_num(aud.getExaminee_number());
+                        String ks_num = ex2.getPrologue();
+                        int num = 8-ks_num.length();
+                        for(int i = 0; i < num; i++) {      //生成8位准考证
+                            int N = 10;
+                            Random rand1 = new Random ();
+                            int a = rand1.nextInt(N);           //生成0,1,2,3中间的某一个数
+                            ks_num=ks_num+String.valueOf(a);
+                        }
+                        a_sum.setTicket_num(ks_num);
+                        if(ex2.getSubject_stint().equals("1"))
+                            a_sum.setWl_subject("文科");
+                        else
+                            a_sum.setWl_subject("理科");
+                        a_sum.setProfessional_code(spec.getCode());
+                        a_sum.setProfessional_name(spec.getName());
+                        List<Cskmqz> cskm = achieveService.getByEid(aud.getExam_id());
+                        List<Fskmqz> fskm = achieveService.getByEid2(aud.getExam_id());
+                        for ( int i = 0; i<cskm.size();i++){
+                            if (i==0)
+                                a_sum.setFirst_subjects_name1(cskm.get(i).getKmid());
+                            if (i==1)
+                                a_sum.setFirst_subjects_name2(cskm.get(i).getKmid());
+                            if (i==2)
+                                a_sum.setFirst_subjects_name3(cskm.get(i).getKmid());
+                            if (i==3)
+                                a_sum.setFirst_subjects_name4(cskm.get(i).getKmid());
+                            if (i==4)
+                                a_sum.setFirst_subjects_name5(cskm.get(i).getKmid());
+                            if (i==5)
+                                a_sum.setFirst_subjects_name6(cskm.get(i).getKmid());
+                        }
+                        for ( int i = 0; i<fskm.size();i++){
+                            if (i==0)
+                                a_sum.setComplex_subjects_name1(fskm.get(i).getFskmid());
+                            if (i==1)
+                                a_sum.setComplex_subjects_name2(fskm.get(i).getFskmid());
+                            if (i==2)
+                                a_sum.setComplex_subjects_name3(fskm.get(i).getFskmid());
+                            if (i==3)
+                                a_sum.setComplex_subjects_name4(fskm.get(i).getFskmid());
+                            if (i==4)
+                                a_sum.setComplex_subjects_name5(fskm.get(i).getFskmid());
+                            if (i==5)
+                                a_sum.setComplex_subjects_name6(fskm.get(i).getFskmid());
+                        }
+                        System.out.println(cskm);
+                        System.out.println(fskm);
+                        System.out.println(a_sum);
+                        achieveService.addAchieve(a_sum);
+
                         flag=true;
                     }else if (audit.getEnroll_status().equals("审核不通过")){
                         audit.setAudit_status("已审核");

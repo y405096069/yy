@@ -255,13 +255,13 @@
             <if test="examinee_number!=null">
                 examinee_number=#{examinee_number},
             </if>
-            <if test="exam_id!=null">
+            <if test="exam_id!=0">
                 exam_id=#{exam_id},
             </if>
             <if test="exam_name!=null">
                 exam_name=#{exam_name},
             </if>
-            <if test="major_id!=null">
+            <if test="major_id!=0">
                 major_id=#{major_id},
             </if>
             <if test="major!=null">
@@ -345,6 +345,10 @@
 
     <select id="selectAllBiog_land" resultType="java.lang.String">
         select biog_land from t_audit GROUP BY biog_land
+    </select>
+
+    <select id="getAuditByUId" resultType="com.nfdw.entity.Audit">
+        select * from t_audit where u_id=#{uid}
     </select>
 
 </mapper>

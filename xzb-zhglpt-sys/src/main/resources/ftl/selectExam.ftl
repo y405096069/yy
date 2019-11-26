@@ -210,8 +210,8 @@
                 </p>
             </div>
             <div style="display: flex;justify-content: center;align-items: center;min-height: 80px;">
-                <input style="width: 150px;height: 40px;" type="submit" class="layui-btn"></input>
-                <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-normal" onclick="openAction()">下一步</button>
+                <input style="width: 150px;height: 40px;" type="submit" class="layui-btn" value="提交">
+                <button style="width: 150px;height: 40px;" type="button" class="layui-btn layui-btn-normal" onclick="openAction()">查看免责声明</button>
             </div>
         </form>
     </div>
@@ -330,7 +330,7 @@
                     var check = document.getElementById("checkboxID").checked;
                     if(check == true) {
                         layer.closeAll();
-                        location.href='${re.contextPath}/studentInformation/getInformationGather';
+                        //location.href='${re.contextPath}/studentInformation/getInformationGather';
                     } else {
                         layer.alert('请勾选免责声明', {
                             closeBtn: 0

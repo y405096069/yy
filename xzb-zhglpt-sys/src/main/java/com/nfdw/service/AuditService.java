@@ -12,7 +12,7 @@ public interface AuditService extends BaseService<Audit, String> {
 
     List<Audit> getAudit();
 
-    Audit getAuditById(String id);
+    Audit getAuditById(int id);
 
     boolean updAudit(Audit audit);
 
@@ -23,4 +23,6 @@ public interface AuditService extends BaseService<Audit, String> {
     StudentInformation getUserInfoById(String student_userid);
 
     String[] selectAllBiog_land();
+
+    Audit getAuditByUId(String uid);
 }

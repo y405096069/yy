@@ -147,22 +147,22 @@
                     <th>复试报名状态</th>
                     <th>准考证</th>
                     <th>合格证</th>
-                    <th>初试入围名单查询</th>
-                    <th>复试入围名单查询</th>
+                    <th>初试入围状态查询</th>
+                    <th>复试入围状态查询</th>
                     </tr> 
                 </thead>
                 <tbody>
                     <tr>
-                    <td>2019/01/01/ 14:59:00</td>
-                    <td>审核成功</td>
-                    <td class="blue" onclick="location.href='${re.contextPath}/studentInformation/getPayFees';">待支付</td>
-                    <td class="black">待审核</td>
-                    <td class="black">等待缴费</td>
-                        <td class="black">待审核</td>
+                    <td>${DQtime}</td>
+                    <td>${audit.info_collect_status}</td>
+                    <td class="blue" onclick="location.href='${re.contextPath}/studentInformation/getPayFees';">${audit.pay_status}</td>
+                    <td class="black">${audit.re_pay_status}</td>
+                    <td class="black">${audit.audit_status}</td>
+                        <td class="black">${audit.re_audit_status}</td>
                     <td class="link" onclick="location.href='${re.contextPath}/studentInformation/getAdmissionTicket';">查看</td>
                     <td class="link" onclick="location.href='${re.contextPath}/studentInformation/getCertificateQualification';">查看</td>
-                    <td class="link">查看</td>
-                    <td class="link">查看</td>
+                    <td class="link">${audit.qualified_mark}</td>
+                    <td class="link">${audit.re_qualified_mark}</td>
                     </tr>
                 </tbody>
                 <thead>
@@ -181,15 +181,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                    <td>艺术考试</td>
-                    <td>钢琴</td>
-                    <td>500</td>
-                    <td>1000</td>
-                    <td>8866</td>
-                    <td class="link">显示成绩</td>
-                    <td class="link">显示排名</td>
-                    <td class="link">显示成绩</td>
-                    <td class="link">显示排名</td>
+                    <td>${a_sum.exam_name}</td>
+                    <td>${a_sum.professional_name}</td>
+                    <td>${ex2.prcie}</td>
+                    <td>${ex2.retestPrcie}</td>
+                    <td>${a_sum.professional_code}</td>
+                    <td class="link">${a_sum.first_subjects_total}</td>
+                    <td class="link">${a_sum.provincial_ranking}</td>
+                    <td class="link">${a_sum.total_score}</td>
+                    <td class="link">${a_sum.re_provincial_ranking}</td>
                         <td class="link"></td>
                     </tr>
                 </tbody>
